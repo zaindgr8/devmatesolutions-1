@@ -1,0 +1,106 @@
+.modalOverlay {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.modalContent {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  width: 400px; /* Reduced from 600px for a better widget feel */
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.supportHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.supportHeader h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 5px;
+}
+
+.supportRoom {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+}
+
+.connectingStatus {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.errorStatus {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.cancelButton {
+  background-color: #eee;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+/* Floating Button Styles */
+.aiAvatarWidgetButton {
+  position: fixed;
+  bottom: 100px; /* Moved up to make room for chatbot widget below */
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #BD2120 0%, #BE2221 100%);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(189, 33, 32, 0.4);
+  z-index: 9998;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.aiAvatarWidgetButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(189, 33, 32, 0.6);
+}
+
+.aiAvatarWidgetButton:active {
+  transform: scale(0.95);
+}
+
+.aiAvatarWidgetButton svg {
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
