@@ -320,7 +320,7 @@ const service_data = [
     id: 23,
     icon: "flaticon-computer",
     link: "#",
-    img: "/assets/img/services/icon/web.svg",
+    img: "/assets/img/services/icon/web2.png",
     im2: "/assets/img/services/icon/logo.svg",
     title: "Web Development",
     des: (
