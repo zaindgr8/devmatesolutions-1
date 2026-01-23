@@ -13,7 +13,7 @@ const portfolio_data = [
   {
     id: 2,
     title: "Finaxe 🇬🇧",
-    hover_img: "/assets/img/portfolio/1.svg",
+    hover_img: "/assets/img/portfolio/finaxe.png",
     cls: "mp-portfolio-btn",
     link: "https://finaxe.com/",
   },
