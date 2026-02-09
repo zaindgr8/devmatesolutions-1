@@ -182,26 +182,16 @@ const ConsultationPayment = () => {
       )}
 
       {/* Pay Button - Minimalist */}
-      <button
-        onClick={handlePaymentClick}
-        disabled={isPaymentLoading}
-        className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#B91C1B] hover:bg-[#991B1B] disabled:bg-gray-400 text-white font-medium rounded-lg transition-all duration-200 disabled:cursor-not-allowed"
+      <Link
+        href={BOOKING_URL}
+        target="_blank"
+        className="group relative inline-flex items-center justify-center px-12 py-4 font-bold text-white transition-all duration-300 bg-[#B91C1B] rounded-2xl hover:bg-black overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1"
       >
-        {isPaymentLoading ? (
-          <>
-            <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            Processing...
-          </>
-        ) : (
-          <>
-            Pay $286 & Unlock
-            <i className="fal fa-arrow-right text-sm"></i>
-          </>
-        )}
-      </button>
+        <span className="relative flex items-center gap-3">
+          Book Your 1:1 Session 
+          <i className="fal fa-calendar-check text-lg transition-transform group-hover:rotate-12"></i>
+        </span>
+      </Link>
     </div>
   );
 };

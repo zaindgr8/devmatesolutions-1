@@ -56,7 +56,7 @@ const HeroAboutMe = () => {
                     <br />
                     <b>
                       Offering 1:1 Discovery Session for Business Owners, Entrepreneurs,
-                      and Students seeking expert consultancy. (286 $ for 45 Minutes)
+                      and Students seeking expert consultancy. 
                     </b>
                   </p>
                 </div>
