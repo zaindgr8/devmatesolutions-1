@@ -3,7 +3,6 @@ import HeaderThree from "@/src/layout/headers/header-3";
 import FooterThree from "@/src/layout/footers/footer-3";
 import BreadcrumbArea from "@/src/common/breadcrumb-area";
 import SocialLinks from "@/src/common/social-links";
-import ConsultationPayment from "../consultation/ConsultationPayment";
 import Link from "next/link";
 import {
   FaGlobe,
@@ -48,7 +47,7 @@ const CeoPage = () => {
                       href="#booking"
                       className="tp-grd-btn text-white px-10 py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 hover:translate-x-2"
                     >
-                      Book 1:1 Discovery Session with CEO (286 $)
+                      Book 1:1 Discovery Session with CEO
                       <i className="fal fa-long-arrow-right"></i>
                     </a>
                     <a
@@ -273,7 +272,7 @@ const CeoPage = () => {
                       Strategic 1:1 Discovery Session
                     </h2>
                     <p className="text-gray-500 text-lg">
-                      (45 Minutes of High-Level Strategy | $286)
+                      (45 Minutes of Strategy & Discovery Session with CEO for 45 Minutes)
                     </p>
                   </div>
 
@@ -345,26 +344,19 @@ const CeoPage = () => {
                     </div>
                   </div>
 
-                  <div className="payment-area-wrapped bg-white p-6 lg:p-10 rounded-2xl border border-red-100 shadow-xl mb-30 transform hover:scale-[1.01] transition-transform duration-300">
-                    <div className="flex items-center justify-between mb-30 border-b border-gray-100 pb-20">
-                      <div>
-                        <span className="text-xs font-black text-gray-400 block mb-1 uppercase tracking-widest">
-                          Session Type
-                        </span>
-                        <span className="text-sm font-medium text-gray-600">
-                          High-Level Strategy & Discovery
-                        </span>
-                      </div>
-                      <div className="text-right">
-                        <span className="text-3xl font-black text-red-600 block leading-none mb-1">
-                          $286
-                        </span>
-                        <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">
-                          Secure Payment via Ziina
-                        </span>
-                      </div>
-                    </div>
-                    <ConsultationPayment />
+                  {/* Final CTA Section */}
+                  <div className="booking-cta-area mt-10 pt-20 border-t border-gray-100 flex flex-col items-center">
+                    <a
+                      href="https://cal.com/devmate-solutions/secret"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative inline-flex items-center justify-center px-12 py-4 font-bold text-white transition-all duration-300 bg-[#B91C1B] rounded-2xl hover:bg-black overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1"
+                    >
+                      <span className="relative flex items-center gap-3">
+                        Book Your 1:1 Session 
+                        <i className="fal fa-calendar-check text-lg transition-transform group-hover:rotate-12"></i>
+                      </span>
+                    </a>
                   </div>
                 </div>
               </div>
