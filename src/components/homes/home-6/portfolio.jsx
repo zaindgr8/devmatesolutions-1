@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Tilt from 'react-parallax-tilt';
 
 import Link  from "next/link";
@@ -19,22 +19,38 @@ const portfolio_data = [
   },
   {
     id: 3,
-    title: "Shift- Application🇴🇲",
+    title: "Shift Application🇴🇲",
     hover_img: "/assets/img/portfolio/shift.png",
     cls: "mp-portfolio-btn",
     link: "/",
   },
- 
   {
     id: 4,
-    title: "Refurbly- Vodafone🇶🇦",
+    title: "Revio Store 🇶🇦",
+    hover_img: "/assets/img/portfolio/revio.png",
+    cls: "mp-portfolio-btn",
+    link: "/",
+  },
+  {
+    id: 5,
+    title: "Refurbly CRM🇶🇦",
     hover_img: "/assets/img/portfolio/vf.png",
+    cls: "mp-portfolio-btn",
+    link: "/",
+  },
+  {
+    id: 6,
+    title: "Alwalaa Real Estate 🇴🇲",
+    hover_img: "/assets/img/portfolio/alwala.png",
     cls: "mp-portfolio-btn",
     link: "/",
   },
 ];
 
 const Portfolio = () => {
+    const [showAll, setShowAll] = useState(false);
+    const displayedItems = showAll ? portfolio_data : portfolio_data.slice(0, 3);
+
     return (
       <>
         <div className="mp-portfolio fix">
@@ -42,7 +58,7 @@ const Portfolio = () => {
             <span className="tp-section__subtitle mb-5 shadow-none text-grey p-0 mt-20">
               Our Success Stories
             </span>
-            {portfolio_data.map((item, i) => (
+            {displayedItems.map((item, i) => (
               <div
                 key={i}
                 className="mp-portfolio-item d-flex justify-content-between align-items-center p-relative"
@@ -83,19 +99,33 @@ const Portfolio = () => {
               </div>
             ))}
             <div className="mp-pt-btn-wrapper text-center pt-60 wow tpfadeUp">
-              <a
-                href="https://drive.google.com/drive/folders/1oSJwZW1FWlV75pywC__V61oxpHDN7Nu3?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="tp-border-btn br-btn-bg-dark border-radious-none tp-btn-hover alt-black-color"
-              >
-                More Works
-                <span className="ml-10">
-                  <i className="fal fa-long-arrow-right"></i>
-                  <i className="fal fa-long-arrow-right"></i>
-                </span>
-                <b></b>
-              </a>
+              {!showAll ? (
+                <button
+                  onClick={() => setShowAll(true)}
+                  className="tp-border-btn br-btn-bg-dark border-radious-none tp-btn-hover alt-black-color"
+                >
+                  More
+                  <span className="ml-10">
+                    <i className="fal fa-long-arrow-right"></i>
+                    <i className="fal fa-long-arrow-right"></i>
+                  </span>
+                  <b></b>
+                </button>
+              ) : (
+                <a
+                  href="https://drive.google.com/drive/folders/1oSJwZW1FWlV75pywC__V61oxpHDN7Nu3?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="tp-border-btn br-btn-bg-dark border-radious-none tp-btn-hover alt-black-color"
+                >
+                  More Works
+                  <span className="ml-10">
+                    <i className="fal fa-long-arrow-right"></i>
+                    <i className="fal fa-long-arrow-right"></i>
+                  </span>
+                  <b></b>
+                </a>
+              )}
             </div>
           </div>
         </div>
