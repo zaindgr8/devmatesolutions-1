@@ -25,10 +25,10 @@ const OurTeam = () => {
 
           <div className="row">
             {(() => {
-              const visibleMembers = team_data.slice(3, 14);
+              const visibleMembers = team_data.slice(3, 15);
               const reordered = [
                 ...visibleMembers.slice(-4),
-                ...visibleMembers.slice(0, 7),
+                ...visibleMembers.slice(0, 8),
               ];
               return reordered;
             })().map((item, i) => (

@@ -8,7 +8,7 @@ const TeamArea = () => {
       <div className="da-team-area pt-120 pb-90">
         <div className="container">
           <div className="row">
-            {team_data.slice(3, 13).map((item, i) => (
+            {team_data.slice(3, 15).map((item, i) => (
               <div key={i} className="col-md-6 col-lg-4 col-xl-3">
                 <div className="ca-team-item mb-30 wow tpfadeUp">
                   <div className="ca-team-item__img ca-team-item-after w-img mb-35 fix">

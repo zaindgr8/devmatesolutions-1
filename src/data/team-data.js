@@ -103,6 +103,13 @@ const team_data = [
     title: "Social Media Manager",
     delay: ".6s",
   },
+  {
+    id: 15,
+    img: "/assets/img/team/Noor.jpeg",
+    name: "Noor Khan",
+    title: "Creative Head",
+    delay: ".6s",
+  },
 
   // team page  01
   {
