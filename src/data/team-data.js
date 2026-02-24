@@ -110,7 +110,13 @@ const team_data = [
     title: "Creative Head",
     delay: ".6s",
   },
-
+  {
+    id: 16,
+    img: "/assets/img/team/alishba.png",
+    name: "Alishba",
+    title: "Figma Designer",
+    delay: ".6s",
+  },
   // team page  01
   {
     id: 8,
@@ -217,6 +223,13 @@ const team_data = [
     img: "/assets/img/team/Biya.png",
     name: "Biya Khan",
     title: "Project Manager",
+    delay: ".6s",
+  },
+  {
+    id: 23,
+    img: "/assets/img/team/alishba.png",
+    name: "Alishba",
+    title: "Figma Expert",
     delay: ".6s",
   },
 ];
