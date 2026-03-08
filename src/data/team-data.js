@@ -83,10 +83,10 @@ const team_data = [
     delay: ".6s",
   },
   {
-    id: 12,
-    img: "/assets/img/team/Biya.png",
-    name: "Biya Khan",
-    title: "Business Developer",
+    id: 14,
+    img: "/aniqa3.png",
+    name: "Aniqa Qureshi",
+    title: "Social Media Manager",
     delay: ".6s",
   },
   {
@@ -97,10 +97,10 @@ const team_data = [
     delay: ".6s",
   },
   {
-    id: 14,
-    img: "/aniqa3.png",
-    name: "Aniqa Qureshi",
-    title: "Social Media Manager",
+    id: 12,
+    img: "/assets/img/team/Biya.png",
+    name: "Biya Khan",
+    title: "Business Developer",
     delay: ".6s",
   },
   {
@@ -115,6 +115,13 @@ const team_data = [
     img: "/assets/img/team/alishba.png",
     name: "Alishba",
     title: "Figma Designer",
+    delay: ".6s",
+  },
+  {
+    id: 17,
+    img: "/assets/img/team/fatima.png",
+    name: "Fatima Khan",
+    title: "Project Manager",
     delay: ".6s",
   },
   // team page  01

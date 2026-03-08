@@ -78,7 +78,7 @@ const FooterThree = ({style_4}) => {
                           <Link href="/service-3">Services</Link>
                         </li>
                         <li>
-                          <Link href="/team-2">Team</Link>
+                          <Link href="/our-team">Team</Link>
                         </li>
                         <li>
                           <Link href="/job">Career</Link>

@@ -25,7 +25,7 @@ const menu_data = [
     mega_menu: false,
     has_dropdown: true,
     title: "Team",
-    link: "/team-2",
+    link: "/our-team",
   },
   {
     id: 5,

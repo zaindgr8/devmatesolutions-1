@@ -87,7 +87,7 @@ const menu_data = [
         title: "Layout 4",
         layout: [
           { link: "/team", title: "Team" },
-          { link: "/team-2", title: "Team v.2" },
+          { link: "/our-team", title: "Team v.2" },
           { link: "/team-details", title: "Team Details" },
           { link: "/job", title: "Job" },
           { link: "/job-details", title: "job details" },
