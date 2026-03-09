@@ -1,7 +1,7 @@
 const team_data = [
   {
     id: 1,
-    img: "/assets/img/team/1.svg",
+    img: "/assets/img/team/ay.png",
     name: "Ahmed Yahya Al Kindi",
     title: "Partner in Oman",
     delay: ".5s",

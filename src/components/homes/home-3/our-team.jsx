@@ -45,7 +45,7 @@ const OurTeam = () => {
             </div> */}
           </div>
           <div className="row">
-            {team_data.slice(0, 2).map((member, i) => (
+            {team_data.slice(0, 1).map((member, i) => (
               <div key={i} className="col-lg-4 col-md-6">
                 <div
                   className="da-team p-relative mb-30 wow tpfadeUp"
