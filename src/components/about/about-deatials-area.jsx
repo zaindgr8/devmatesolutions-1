@@ -4,27 +4,20 @@ import React from 'react';
 const about_details_content  = {
     title: <>With experience from top companies</>,
 
-    info_2000_title: <>We got featured from <span>Awwrds </span></>,
+    info_2000_title: <>Founded with <span>Excellence</span></>,
 
-    info_2000: <>Shall over firmament, above there won't image wherein winged moveth twoes
-    heaven green, the whose had so let evening forth together given form make. Red
-    moved years face our may male female.</>,
+    info_2000: <>DevMate Solutions began its journey with a clear mission: to provide world-class software development services and create digital products that drive real business growth and innovation.</>,
 
-    info_2010_title: <>We got featured from <span>Themeforest</span></>,
-    info_2010: <>Shall over firmament, above there won't image wherein winged moveth twoes
-    heaven green, the whose had so let evening forth together given form make. Red
-    moved years face our may male female.</>,
+    info_2010_title: <>Scaling <span>Operations</span></>,
+    info_2010: <>Over the years, we expanded our team of expert developers and designers, partnering with enterprise clients globally to deliver scalable, secure, and high-performance digital solutions.</>,
     
-    info_2018_title: <>We got featured from <span>buyers</span></>,
-    info_2018: <>Shall over firmament, above there won't image wherein winged moveth twoes
-    heaven green, the whose had so let evening forth together given form make. Red
-    moved years face our may male female.</>,
+    info_2018_title: <>Award-Winning <span>Solutions</span></>,
+    info_2018: <>Our commitment to quality and cutting-edge design has earned us recognition across the industry, maintaining a standard of excellence that keeps our clients ahead of the competition.</>,
 
 
-    info_2022_title: <>We got featured from <span>Your</span></>,
-    info_2022: <>Shall over firmament, above there won't image wherein winged moveth twoes
-    heaven green, the whose had so let evening forth together given form make. Red
-    moved years face our may male female.</>,
+    info_2022_title: <>Pioneering the <span>Future</span></>,
+    info_2022: <>Continuing to push the boundaries of technology, we integrate the latest advancements in modern web frameworks and cloud architectures to deliver next-generation software.</>,
+
 
 }
 
