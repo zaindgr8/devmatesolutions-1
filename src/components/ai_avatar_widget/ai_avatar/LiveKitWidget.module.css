@@ -73,7 +73,7 @@
 /* Floating Button Styles */
 .aiAvatarWidgetButton {
   position: fixed;
-  bottom: 100px; /* Moved up to make room for chatbot widget below */
+  bottom: 20px;
   right: 20px;
   width: 60px;
   height: 60px;
