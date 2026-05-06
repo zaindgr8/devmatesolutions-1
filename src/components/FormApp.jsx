@@ -19,7 +19,7 @@ const FormApp = () => {
     const contact = form.contact.value;
     try {
       const res = await fetch(
-        "https://devmate1.app.n8n.cloud/webhook/a5a1e258-1bbf-4708-91e5-2b146e1bb5ee",
+        "https://hook.eu2.make.com/1zy2xcx4j4twvg8f1gbjqbcxlstd2r6v",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
