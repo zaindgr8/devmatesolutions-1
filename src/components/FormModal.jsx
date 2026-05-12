@@ -1,67 +1,105 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import FormApp from "./FormApp";
 
 const FormModal = ({ isOpen, onClose }) => {
-  const [open, setOpen] = useState(isOpen !== undefined ? isOpen : true);
+  const portalRoot = useRef(null);
 
-  // Update internal state when prop changes
+  // Lock body scroll when modal is open
   useEffect(() => {
-    if (isOpen !== undefined) {
-      setOpen(isOpen);
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
     }
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isOpen]);
 
-  const handleClose = () => {
-    setOpen(false);
-    if (onClose) {
-      onClose();
-    }
-  };
+  // Create portal target lazily (SSR-safe)
+  useEffect(() => {
+    portalRoot.current = document.body;
+  }, []);
 
-  if (!open) return null;
+  if (!isOpen) return null;
 
-  return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center">
+  const modalContent = (
+    <>
+      {/* Full-screen backdrop — closes modal on click */}
       <div
-        className="relative bg-white dark:bg-[#18181b] rounded-2xl shadow-lg flex flex-col w-full max-w-xl max-h-[90vh] mx-2 p-0 pointer-events-auto max-h-[90vh] overflow-y-auto flex flex-col"
-        style={{ minWidth: 0 }}
+        onClick={onClose}
+        style={{
+          position: "fixed",
+          inset: 0,
+          zIndex: 99999,
+          background: "rgba(0,0,0,0.55)",
+          backdropFilter: "blur(3px)",
+          WebkitBackdropFilter: "blur(3px)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "16px",
+        }}
       >
-        {/* Header with Close Button */}
-        <div className="flex items-center justify-end p-4 pb-0 sticky top-0 bg-white dark:bg-[#18181b] rounded-t-2xl z-10">
-          <button
-            className="text-gray-400 hover:text-red-500 text-2xl font-bold focus:outline-none transition"
-            onClick={handleClose}
-            aria-label="Cancel lead form"
-          >
-            &times;
-          </button>
-        </div>
-        {/* Scrollable Form Content */}
+        {/* Modal card — stop propagation so clicks inside don't close */}
         <div
-          className="overflow-y-auto px-6 pb-6 pt-2"
-          style={{ maxHeight: "calc(90vh - 56px)" }}
+          onClick={(e) => e.stopPropagation()}
+          style={{
+            position: "relative",
+            background: "#ffffff",
+            borderRadius: "16px",
+            boxShadow: "0 24px 60px rgba(0,0,0,0.25)",
+            width: "100%",
+            maxWidth: "520px",
+            maxHeight: "90vh",
+            overflowY: "auto",
+            animation: "modalSlideIn 0.3s cubic-bezier(0.34,1.56,0.64,1)",
+          }}
         >
-          <FormApp />
+          {/* Close button */}
+          <button
+            onClick={onClose}
+            aria-label="Close"
+            style={{
+              position: "absolute",
+              top: "14px",
+              right: "16px",
+              background: "transparent",
+              border: "none",
+              fontSize: "22px",
+              lineHeight: 1,
+              cursor: "pointer",
+              color: "#9ca3af",
+              zIndex: 10,
+              padding: "4px 8px",
+              borderRadius: "6px",
+              transition: "color 0.2s ease",
+            }}
+            onMouseEnter={(e) => (e.target.style.color = "#e11d48")}
+            onMouseLeave={(e) => (e.target.style.color = "#9ca3af")}
+          >
+            ×
+          </button>
+
+          {/* Form */}
+          <div style={{ padding: "12px 4px 4px 4px" }}>
+            <FormApp />
+          </div>
         </div>
       </div>
-      {/* Animations */}
-      <style jsx global>{`
-        @keyframes slideDown {
-          from {
-            transform: translateY(-40px);
-            opacity: 0;
-          }
-          to {
-            transform: translateY(0);
-            opacity: 1;
-          }
-        }
-        .shadow-2xl {
-          box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+
+      {/* Keyframe animation */}
+      <style>{`
+        @keyframes modalSlideIn {
+          from { transform: translateY(-30px) scale(0.95); opacity: 0; }
+          to   { transform: translateY(0)    scale(1);    opacity: 1; }
         }
       `}</style>
-    </div>
+    </>
   );
+
+  // Portal: attach to document.body regardless of where this component is called
+  if (typeof document === "undefined") return null;
+  return createPortal(modalContent, document.body);
 };
 
 export default FormModal;
