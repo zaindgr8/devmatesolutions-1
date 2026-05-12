@@ -1,8 +1,10 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import MobileMenus from './mobile-menus';
+import FormModal from '@/src/components/FormModal';
 
 const Sidebar = ({isActive, setIsActive}) => {
+  const [showModal, setShowModal] = useState(false);
 
     return (
       <>
@@ -95,6 +97,40 @@ const Sidebar = ({isActive, setIsActive}) => {
                 <MobileMenus />
               </div>
             </div>
+
+            {/* Get Instant Call - Mobile */}
+            <div style={{ padding: '20px 0 10px 0' }}>
+              <button
+                onClick={() => setShowModal(true)}
+                style={{
+                  width: '100%',
+                  background: 'linear-gradient(135deg, #e11d48 0%, #be123c 100%)',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '8px',
+                  padding: '14px 20px',
+                  fontSize: '15px',
+                  fontWeight: '700',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '10px',
+                  letterSpacing: '0.5px',
+                  boxShadow: '0 4px 15px rgba(225,29,72,0.35)',
+                  transition: 'all 0.3s ease',
+                }}
+              >
+                <i className="fal fa-phone" style={{ fontSize: '16px' }}></i>
+                Get Instant Call
+                <i className="fal fa-long-arrow-right" style={{ fontSize: '14px', marginLeft: 'auto' }}></i>
+              </button>
+            </div>
+
+            {/* Modal - same as desktop */}
+            {showModal && (
+              <FormModal isOpen={showModal} onClose={() => setShowModal(false)} />
+            )}
 
             {/* <div className="tp-offcanvas__bottom mt-80 d-none d-lg-block">
               <p>
