@@ -124,6 +124,13 @@ const team_data = [
     title: "Project Manager",
     delay: ".6s",
   },
+  {
+    id: 18,
+    img: "/assets/img/team/ali.png",
+    name: "Ali",
+    title: "3JS & 3D Websites99",
+    delay: ".6s",
+  },
   // team page  01
   {
     id: 8,

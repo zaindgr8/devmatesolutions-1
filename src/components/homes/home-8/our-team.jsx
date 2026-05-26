@@ -25,9 +25,9 @@ const OurTeam = () => {
 
           <div className="row">
             {(() => {
-              const visibleMembers = team_data.slice(3, 17);
+              const visibleMembers = team_data.slice(3, 18);
               const reordered = [
-                ...visibleMembers.slice(-4),
+                ...visibleMembers.slice(-5),
                 ...visibleMembers.slice(0, 10),
               ];
               return reordered;
