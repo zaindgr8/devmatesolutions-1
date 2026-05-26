@@ -128,7 +128,7 @@ const team_data = [
     id: 18,
     img: "/assets/img/team/ali.png",
     name: "Ali",
-    title: "3JS & 3D Websites99",
+    title: "3JS & 3D Websites",
     delay: ".6s",
   },
   // team page  01
