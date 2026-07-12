@@ -39,7 +39,7 @@ const menu_data = [
     mega_menu: false,
     has_dropdown: false,
     title: "Book Meeting",
-    link: "/book-meeting",
+    link: "/#ceo",
   },
 ];
 export default menu_data;

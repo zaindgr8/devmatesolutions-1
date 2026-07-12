@@ -31,7 +31,7 @@ const BlogArea = () => {
                     className="tp-section__title mb-30 wow tpfadeUp"
                     data-wow-delay=".4s"
                   >
-                    Our <span> {sub_title}</span>
+                    Our <b className="text-red-700"> {sub_title}</b>
                   </h2>
                 </div>
               </div>

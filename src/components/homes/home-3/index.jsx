@@ -29,11 +29,11 @@ const HomeThree = () => {
       <Portfolio />
       <About />
       <Testimonial />
-      <ServiceArea />
+      <PricePlan />
       <CtaArea />
       <OurTeam />
       {/* <OurTeam1/> */}
-      <PricePlan />
+       {/* <ServiceArea /> */}
       <AboutMe />
       <FooterThree />
     </>

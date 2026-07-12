@@ -90,7 +90,7 @@ const ProjectArea = () => {
                   className="tp-section__title mb-55 wow tpfadeUp"
                   data-wow-delay=".3s"
                 >
-                  Company Case <span>Study</span>
+                  Company Case <b className="text-red-700">Study</b>
                 </h2>
               </div>
             </div>

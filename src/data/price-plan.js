@@ -1,31 +1,35 @@
+import React from "react";
+
 // price_plan_data
 const price_plan_data = [
   {
     id: 1,
-    price: "699",
-    title: "Web Development",
+    title: "Headless Ecommerce",
     active: "",
     des: (
       <>
-        Either 3D website or Full-Stack Application with modern design, We’ve
-        got you covered!
+        Shopify backend, Next.js frontend — built for speed, scale, and total
+        customization. No templates, no limits.
       </>
     ),
     price_list: [
       <>
-        <b>3D Experience Websites</b>
+        <b>Shopify Backend</b>
       </>,
       <>
-        <b>Full Stack Applications </b>
+        <b>Next.js Storefronts</b>
       </>,
       <>
-        <b>Ecommerce Stores</b>
+        <b>Custom Checkout Flows</b>
+      </>,
+      <>
+        <b>Lightning-Fast Load Speeds</b>
+      </>,
+      <>
+        <b>Fully Scalable Architecture</b>
       </>,
       <>
         <b>SEO Optimised</b>
-      </>,
-      <>
-        <b>Aesthetic Figma Designs</b>
       </>,
     ],
     bg_color: "catskill-white-bg",
@@ -33,27 +37,32 @@ const price_plan_data = [
   },
   {
     id: 2,
-    price: "1799",
-    title: "Social Media Marketing",
+    title: "Agentic AI",
     active: "active",
     des: (
       <>
-        Whether it's viral campaigns or targeted ads with custom content that
-        you want, you are at right place!
+        Autonomous AI agents that don't just respond — they think, decide, and
+        act on your business's behalf, 24/7.
       </>
     ),
     price_list: [
       <>
-        <b>Meta & Google Campaigns</b>
+        <b>Autonomous Task Execution</b>
       </>,
       <>
-        <b>Organic Followers</b>
+        <b>Multi-Step Decision Making</b>
       </>,
       <>
-        <b>Lead Generation</b>
+        <b>Voice & Chat Agents</b>
       </>,
       <>
-        <b>Branding & Viral Content</b>
+        <b>CRM & Workflow Integration</b>
+      </>,
+      <>
+        <b>Self-Learning Systems</b>
+      </>,
+      <>
+        <b>Human-Level Reasoning</b>
       </>,
     ],
     bg_color: "white-bg",
@@ -61,30 +70,32 @@ const price_plan_data = [
   },
   {
     id: 3,
-    price: "3899",
-    title: "App Development",
+    title: "Idea to Launch",
     active: "",
     des: (
       <>
-        We build all kinds of apps—whether it’s AI-powered solutions, startup
-        apps, or apps tailored to any niche. Lets bring your idea into life!
+        From concept to live product — we build, test, and ship your startup
+        MVP fast, so you can start validating with real users.
       </>
     ),
     price_list: [
       <>
-        <b>Android & IOS</b>
+        <b>MVP in Weeks, Not Months</b>
       </>,
       <>
-        <b>AI-Powered Apps</b>
+        <b>Full-Stack Development</b>
       </>,
       <>
-        <b>Blockchain & Web 3.0</b>
+        <b>Investor-Ready Product</b>
       </>,
       <>
-        <b>Flutter & IOS</b>
+        <b>Vibe-Coded & Production-Ready</b>
       </>,
       <>
-        <b>Cross-Platform</b>
+        <b>Scalable From Day One</b>
+      </>,
+      <>
+        <b>Launch & Iterate Support</b>
       </>,
     ],
     bg_color: "catskill-white-bg",
@@ -92,4 +103,4 @@ const price_plan_data = [
   },
 ];
 
-export default price_plan_data
+export default price_plan_data;

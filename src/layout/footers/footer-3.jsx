@@ -84,7 +84,7 @@ const FooterThree = ({style_4}) => {
                           <Link href="/job">Career</Link>
                         </li>
                         <li>
-                          <Link href="/book-meeting">Book Meeting with CEO</Link>
+                          <Link href="/#ceo">Book Meeting with CEO</Link>
                         </li>
                       </ul>
 
