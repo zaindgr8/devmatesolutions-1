@@ -1,7 +1,7 @@
 import { Resend } from 'resend';
 
 // API Route: Send chat lead notifications via Resend
-// Sends to: (1) management@devmatesolutions.com, (2) the user's email
+// Sends to: (1) contact@devmatesolutions.com, (2) the user's email
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -113,7 +113,7 @@ export default async function handler(req, res) {
             <td style="padding:28px 40px;text-align:center;">
               <p style="margin:0 0 8px;font-size:13px;color:#9ca3af;">
                 Need assistance? Contact us directly at
-                <a href="mailto:management@devmatesolutions.com" style="color:#c0392b;text-decoration:none;">management@devmatesolutions.com</a>
+                <a href="mailto:contact@devmatesolutions.com" style="color:#c0392b;text-decoration:none;">contact@devmatesolutions.com</a>
               </p>
               <p style="margin:0;font-size:12px;color:#d1d5db;">
                 © ${new Date().getFullYear()} Devmate Solutions. All rights reserved.
@@ -205,7 +205,7 @@ export default async function handler(req, res) {
 </html>
     `;
 
-    let fromAddress = 'Devmate Solutions <management@devmatesolutions.com>';
+    let fromAddress = 'Devmate Solutions <contact@devmatesolutions.com>';
 
     // Send email to User
     let userEmailResult = await resend.emails.send({
@@ -217,7 +217,7 @@ export default async function handler(req, res) {
 
     // Fallback if domain sender is unverified in test environment
     if (userEmailResult.error) {
-      console.warn('Failed sending from management@devmatesolutions.com. Fallback to onboarding@resend.dev. Error:', userEmailResult.error);
+      console.warn('Failed sending from contact@devmatesolutions.com. Fallback to onboarding@resend.dev. Error:', userEmailResult.error);
       fromAddress = 'Devmate Solutions <onboarding@resend.dev>';
       userEmailResult = await resend.emails.send({
         from: fromAddress,
@@ -237,7 +237,7 @@ export default async function handler(req, res) {
     // Send email to Management
     let mgmtEmailResult = await resend.emails.send({
       from: fromAddress,
-      to: ['management@devmatesolutions.com'],
+      to: ['contact@devmatesolutions.com'],
       subject: `🔔 New Website Lead — ${name} (Devmate Services Inquiry)`,
       html: managementEmailHtml,
     });

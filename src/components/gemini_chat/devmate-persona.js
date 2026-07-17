@@ -62,7 +62,7 @@ After any General Inquiry answer:
 - If No: "Would you like to book a meeting to discuss how we can help your business? [Book Meeting](https://cal.com/devmate-solutions/secret)"
 
 ### CLOSING / MEETING BOOKING (Trigger this when they agree to book)
-- Sarah: "Perfect! I've got you set up. You'll receive a confirmation email with the meeting link, time & date, and what to prepare. Looking forward to connecting! If you need anything before then, just email us at management@devmatesolutions.com"
+- Sarah: "Perfect! I've got you set up. You'll receive a confirmation email with the meeting link, time & date, and what to prepare. Looking forward to connecting! If you need anything before then, just email us at contact@devmatesolutions.com"
 `;
 
 // ─── 3. QUICK-REPLY SUGGESTION CHIPS ─────────────────────────────────────────

@@ -1,7 +1,7 @@
 import { Resend } from 'resend';
 
 // API Route: Send booking confirmation emails via Resend
-// Sends to: (1) the user who booked, (2) management@devmatesolutions.com
+// Sends to: (1) the user who booked, (2) contact@devmatesolutions.com
 // meetingType: 'ceo' (paid $299) | 'team' (free)
 
 export default async function handler(req, res) {
@@ -168,7 +168,7 @@ export default async function handler(req, res) {
             <td style="padding:28px 40px;text-align:center;">
               <p style="margin:0 0 8px;font-size:13px;color:#9ca3af;">
                 Questions? Reply to this email or reach us at
-                <a href="mailto:management@devmatesolutions.com" style="color:#c0392b;text-decoration:none;">management@devmatesolutions.com</a>
+                <a href="mailto:contact@devmatesolutions.com" style="color:#c0392b;text-decoration:none;">contact@devmatesolutions.com</a>
               </p>
               <p style="margin:0;font-size:12px;color:#d1d5db;">
                 © ${new Date().getFullYear()} DevMate Solutions. All rights reserved.
@@ -268,7 +268,7 @@ export default async function handler(req, res) {
 </html>
     `;
 
-    let fromAddress = 'DevMate Solutions <management@devmatesolutions.com>';
+    let fromAddress = 'DevMate Solutions <contact@devmatesolutions.com>';
 
     // Attempt sending user email
     let userEmailResult = await resend.emails.send({
@@ -282,7 +282,7 @@ export default async function handler(req, res) {
 
     // Check if it failed due to unverified sender domain
     if (userEmailResult.error) {
-      console.warn('Failed sending user email from management@devmatesolutions.com. Attempting fallback to onboarding@resend.dev. Error details:', userEmailResult.error);
+      console.warn('Failed sending user email from contact@devmatesolutions.com. Attempting fallback to onboarding@resend.dev. Error details:', userEmailResult.error);
       fromAddress = 'DevMate Solutions <onboarding@resend.dev>';
       userEmailResult = await resend.emails.send({
         from: fromAddress,
@@ -304,7 +304,7 @@ export default async function handler(req, res) {
     // Now send management notification email
     let mgmtEmailResult = await resend.emails.send({
       from: fromAddress,
-      to: ['management@devmatesolutions.com'],
+      to: ['contact@devmatesolutions.com'],
       subject: isTeam
         ? `🔔 New FREE Team Meeting Request — ${name}`
         : `🔔 New 1:1 CEO Session Booked — ${name}`,
