@@ -9,8 +9,19 @@ const TeamArea = () => {
         <div className="container">
           <div className="row">
             {team_data
-              .filter((item) => item.name !== "Mixlox D. Jhonson")
-              .slice(3, 18)
+              .filter((item) => 
+                !item.name.includes("Jhonson") && 
+                !item.name.includes("Samrat") && 
+                !item.name.includes("Berat") && 
+                !item.name.includes("Dowson") && 
+                !item.name.includes("Swanson") && 
+                !item.name.includes("Peters") && 
+                !item.name.includes("Watson") && 
+                !item.name.includes("Duncan") && 
+                !item.name.includes("Sullivan") && 
+                !item.name.includes("Mcdermott")
+              )
+              .slice(3)
               .map((item, i) => (
               <div key={i} className="col-md-6 col-lg-4 col-xl-3">
                 <div className="ca-team-item mb-30 wow tpfadeUp">

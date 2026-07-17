@@ -126,11 +126,11 @@ const team_data = [
   },
   // team page  01
   {
-    id: 9,
-    img: "/assets/img/team/da-team-2.jpg",
-    name: "Salim D. Jhonson",
-    title: "Head Of Idea",
-    delay: ".6s",
+    id: 4,
+    img: "/assets/img/team/1a.png",
+    name: "Fazal Khan",
+    title: "Full Stack Web Developer",
+    delay: ".3s",
   },
   {
     id: 10,
