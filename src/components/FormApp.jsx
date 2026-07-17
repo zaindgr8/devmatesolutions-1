@@ -63,7 +63,7 @@ const FormApp = () => {
             type="email"
             name="email"
             required
-            placeholder="you@email.com"
+            placeholder="ENTER YOUR EMAIL"
             className="px-3 py-2 rounded-md border border-gray-200 dark:border-gray-700 bg-transparent focus:outline-none focus:ring-2 focus:ring-[#e11d48]/30 transition w-full"
           />
         </label>
@@ -76,27 +76,27 @@ const FormApp = () => {
           <select
             name="country"
             aria-label="Country code"
-            className="px-2 py-2 rounded-md border border-gray-200 dark:border-gray-700 bg-transparent focus:outline-none max-h-48 overflow-y-auto w-32 sm:w-40"
-            defaultValue="971"
+            className="px-2 py-2 rounded-md border border-gray-200 dark:border-gray-700 bg-transparent focus:outline-none max-h-48 overflow-y-auto w-24 sm:w-28"
+            defaultValue="+971"
           >
-            <option value="973">🇧🇭 Bahrain (+973)</option>
-            <option value="32">🇧🇪 Belgium (+32)</option>
-            <option value="49">🇩🇪 Germany (+49)</option>
-            <option value="91">🇮🇳 India (+91)</option>
-            <option value="39">🇮🇹 Italy (+39)</option>
-            <option value="965">🇰🇼 Kuwait (+965)</option>
-            <option value="31">🇳🇱 Netherlands (+31)</option>
-            <option value="968">🇴🇲 Oman (+968)</option>
-            <option value="92">🇵🇰 Pakistan (+92)</option>
-            <option value="48">🇵🇱 Poland (+48)</option>
-            <option value="974">🇶🇦 Qatar (+974)</option>
-            <option value="966">🇸🇦 Saudi Arabia (+966)</option>
-            <option value="34">🇪🇸 Spain (+34)</option>
-            <option value="46">🇸🇪 Sweden (+46)</option>
-            <option value="41">🇨🇭 Switzerland (+41)</option>
-            <option value="971">🇦🇪 United Arab Emirates (+971)</option>
-            <option value="44">🇬🇧 UK (+44)</option>
-            <option value="1">🇺🇸 USA (+1)</option>
+            <option value="+973">🇧🇭 +973</option>
+            <option value="+32">🇧🇪 +32</option>
+            <option value="+49">🇩🇪 +49</option>
+            <option value="+91">🇮🇳 +91</option>
+            <option value="+39">🇮🇹 +39</option>
+            <option value="+965">🇰🇼 +965</option>
+            <option value="+31">🇳🇱 +31</option>
+            <option value="+968">🇴🇲 +968</option>
+            <option value="+92">🇵🇰 +92</option>
+            <option value="+48">🇵🇱 +48</option>
+            <option value="+974">🇶🇦 +974</option>
+            <option value="+966">🇸🇦 +966</option>
+            <option value="+34">🇪🇸 +34</option>
+            <option value="+46">🇸🇪 +46</option>
+            <option value="+41">🇨🇭 +41</option>
+            <option value="+971">🇦🇪 +971</option>
+            <option value="+44">🇬🇧 +44</option>
+            <option value="+1">🇺🇸 +1</option>
           </select>
           <input
             id="contact"
