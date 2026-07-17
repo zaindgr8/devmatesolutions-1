@@ -235,8 +235,19 @@ const Portfolio = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setFormStatus('sending');
-    // Simple mailto fallback — replace with your API if needed
-    await new Promise(r => setTimeout(r, 900));
+    try {
+      await fetch('/api/send-chat-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || 'Not provided',
+        }),
+      });
+    } catch (err) {
+      console.error('Portfolio lead send error:', err);
+    }
     setFormStatus('sent');
     setTimeout(() => { setShowPortfolioForm(false); setFormStatus(null); setFormData({ name: '', email: '', phone: '', message: '' }); }, 2400);
   };
