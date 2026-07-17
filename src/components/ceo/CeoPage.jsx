@@ -4,6 +4,7 @@ import FooterThree from "@/src/layout/footers/footer-3";
 import BreadcrumbArea from "@/src/common/breadcrumb-area";
 import SocialLinks from "@/src/common/social-links";
 import Link from "next/link";
+import ConsultationPayment from "@/src/components/consultation/ConsultationPayment";
 import {
   FaGlobe,
   FaUsers,
@@ -19,7 +20,7 @@ const CeoPage = () => {
       <HeaderThree />
       <BreadcrumbArea
         acive_menu="Book Meeting"
-        title="Book 1:1 Discovery Session"
+        title="Book 1:1 Discovery Session (299$)"
       />
       <main className="ceo-page-main bg-white">
         {/* 1. Hero Section (The Hook) */}
@@ -50,14 +51,13 @@ const CeoPage = () => {
                       Book 1:1 Discovery Session with CEO
                       <i className="fal fa-long-arrow-right"></i>
                     </a>
-                    <a
-                      href="https://cal.com/devmate-solutions/team"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
+                      type="button"
+                      onClick={() => window.dispatchEvent(new CustomEvent("open-free-consultation"))}
                       className="px-10 py-4 rounded-xl flex items-center justify-center gap-2 border-2 border-[#B91C1B] text-[#B91C1B] bg-white !hover:bg-[#B91C1B] !hover:text-white transition-all duration-300 hover:translate-x-2 font-bold"
                     >
                       Book Meeting With Team Expert (FREE)
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -344,19 +344,9 @@ const CeoPage = () => {
                     </div>
                   </div>
 
-                  {/* Final CTA Section */}
-                  <div className="booking-cta-area mt-10 pt-20 border-t border-gray-100 flex flex-col items-center">
-                    <a
-                      href="https://cal.com/devmate-solutions/secret"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group relative inline-flex items-center justify-center px-12 py-4 font-bold text-white transition-all duration-300 bg-[#B91C1B] rounded-2xl hover:bg-black overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1"
-                    >
-                      <span className="relative flex items-center gap-3">
-                        Book Your 1:1 Session 
-                        <i className="fal fa-calendar-check text-lg transition-transform group-hover:rotate-12"></i>
-                      </span>
-                    </a>
+                  {/* Final CTA Section — Booking Form */}
+                  <div className="booking-cta-area mt-10 pt-20 border-t border-gray-100">
+                    <ConsultationPayment />
                   </div>
                 </div>
               </div>

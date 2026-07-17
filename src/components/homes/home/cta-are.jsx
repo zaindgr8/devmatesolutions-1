@@ -45,14 +45,18 @@ const CtaArea = () => {
           </div>
           <div className="row">
             <div className="bs-cta-btns text-center">
-              <Link href="/contact" className="tp-btn tp-btn-hover mr-30 wow tpfadeRight">
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new CustomEvent("open-free-consultation"))}
+                className="tp-btn tp-btn-hover mr-30 wow tpfadeRight"
+              >
                 Schedule a meeting
                 <span>
                   <i className="fal fa-long-arrow-right"></i>
                   <i className="fal fa-long-arrow-right"></i>
                 </span>
                 <b></b>
-              </Link>
+              </button>
               <a
                 href="#"
                 className="tp-white-btn tp-btn-hover alt-color cronblue-g-color wow tpfadeLeft"

@@ -73,9 +73,9 @@ const BusinessJourney = ({ style_service }) => {
           </div>
           <div className="row">
             <div className="bs-cta-btns text-center">
-              <Link
-                target="_blank"
-                href="https://cal.com/devmate-solutions/team"
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new CustomEvent("open-free-consultation"))}
                 className={`${
                   style_service ? "tp-btn" : "tp-grd-btn"
                 } mr-30 wow tpfadeUp`}
@@ -85,7 +85,7 @@ const BusinessJourney = ({ style_service }) => {
                   <i className="fal fa-long-arrow-right"></i>
                   <i className="fal fa-long-arrow-right"></i>
                 </span>
-              </Link>{" "}
+              </button>{" "}
               <Link
                 href={`mailto:contact@devmatesolutions.com?subject=Business Journey Inquiry`}
                 className={`${
@@ -96,7 +96,7 @@ const BusinessJourney = ({ style_service }) => {
                   <SiMinutemailer />
                   <SiMinutemailer />
                 </span>
-                Contact Us
+                Email Us
               </Link>
             </div>
           </div>

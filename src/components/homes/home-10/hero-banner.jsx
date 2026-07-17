@@ -5,7 +5,7 @@ import React from 'react';
 const hero_content = {
     hero_img: "/assets/img/hero/seo-hero.png",
     title: <>We Bring <br /> You New <span>Customers</span> </>,
-    service_btn: "Our Services",
+    service_btn: "Book Free Consultation",
     learn_btn: "Learn more",
 }
 const {hero_img, title, service_btn, learn_btn}  = hero_content

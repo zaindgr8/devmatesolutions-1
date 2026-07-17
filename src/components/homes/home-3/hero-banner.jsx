@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Tilt from "react-parallax-tilt";
 import { TypeAnimation } from "react-type-animation";
 
 const HeroBanner = () => {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
   return (
     <>
       <style>{`
@@ -237,23 +239,27 @@ const HeroBanner = () => {
                 AI Powered<br />
                 Agency&nbsp;
                 <span className="dm-type-line">
-                  <TypeAnimation
-                    sequence={[
-                      "for Websites",
-                      1800,
-                      "for Mobile Apps",
-                      1800,
-                      "for Lead Gen",
-                      1800,
-                      "for AI Agents",
-                      1800,
-                      "for Brands",
-                      1800,
-                    ]}
-                    wrapper="span"
-                    cursor={true}
-                    repeat={Infinity}
-                  />
+                  {mounted ? (
+                    <TypeAnimation
+                      sequence={[
+                        "for Websites",
+                        1800,
+                        "for Mobile Apps",
+                        1800,
+                        "for Lead Gen",
+                        1800,
+                        "for AI Agents",
+                        1800,
+                        "for Brands",
+                        1800,
+                      ]}
+                      wrapper="span"
+                      cursor={true}
+                      repeat={Infinity}
+                    />
+                  ) : (
+                    <span>for Websites</span>
+                  )}
                 </span>
               </h1>
 
@@ -264,14 +270,21 @@ const HeroBanner = () => {
 
               {/* CTAs */}
               <div className="dm-hero-cta-row wow tpfadeUp" data-wow-delay=".3s">
-                <Link href="/service-3" className="tp-grd-btn">
-                  Our Services
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.dispatchEvent(new CustomEvent("open-free-consultation"));
+                  }}
+                  className="tp-grd-btn"
+                  style={{ border: 'none' }}
+                >
+                  Book Free Consultation
                   <span className="ml-10">
                     <i className="fal fa-long-arrow-right"></i>
                     <i className="fal fa-long-arrow-right"></i>
                   </span>
-                </Link>
-                <Link href="/#portfolio" className="dm-hero-secondary-cta">
+                </button>
+                <Link href="/#our-own-ventures" className="dm-hero-secondary-cta">
                   View Portfolio
                   <i className="fal fa-long-arrow-right"></i>
                 </Link>

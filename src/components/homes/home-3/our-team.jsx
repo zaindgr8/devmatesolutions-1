@@ -2,7 +2,7 @@ import team_data from "@/src/data/team-data";
 import Link from "next/link";
 import React from "react";
 
-const partners = team_data.slice(0, 3).filter(member => member.id !== 3); // Ahmed (Oman), Vanessa (Cyprus)
+const partners = team_data.filter(member => member.id === 1); // Ahmed (Oman)
 
 const flagMap = {
   "Oman": "🇴🇲",

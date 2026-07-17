@@ -28,6 +28,7 @@
     "react-type-animation": "^2.1.2",
     "react-use": "^17.4.0",
     "react-whatsapp-widget": "^2.2.0",
+    "resend": "^6.17.2",
     "sass": "^1.58.3",
     "swiper": "^9.0.5",
     "wowjs": "^1.1.3"

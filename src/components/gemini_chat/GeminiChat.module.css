@@ -148,6 +148,102 @@
   background: rgba(255,255,255,0.3);
 }
 
+/* ── Lead Collection Form ────────────────────────────────── */
+.leadFormContainer {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+  background: #1a1a1f;
+  flex: 1;
+}
+
+.leadFormHeader {
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.leadFormTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+}
+
+.leadFormSubtitle {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.formLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.formInput {
+  background: #2a2a33;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: #ffffff;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+}
+
+.formInput:focus {
+  border-color: #bd2120;
+  box-shadow: 0 0 0 2px rgba(189, 33, 32, 0.25);
+}
+
+.formInput::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.formErrorText {
+  color: #f87171;
+  font-size: 0.75rem;
+  margin: 0;
+  text-align: center;
+}
+
+.formSubmitBtn {
+  margin-top: 6px;
+  background: linear-gradient(135deg, #bd2120 0%, #e63939 100%);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  box-shadow: 0 4px 15px rgba(189, 33, 32, 0.4);
+}
+
+.formSubmitBtn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(189, 33, 32, 0.6);
+}
+
+.formSubmitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 /* ── Messages ────────────────────────────────────────────── */
 .messages {
   flex: 1;

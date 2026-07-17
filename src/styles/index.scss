@@ -7,3 +7,7 @@
 @import 'react-18-image-lightbox/style.css';
 @import "~bootstrap/scss/bootstrap";
 @import "/public//assets/scss/main.scss";
+
+html {
+  scroll-behavior: smooth;
+}

@@ -30,8 +30,8 @@ const CtaAre = () => {
             </div>
             <div className="row">
                <div className="bs-cta-btns text-center">
-                  <a href="#" className="tp-btn mr-30 wow tpfadeUp">Schedule a meeting<span><i className="fal fa-long-arrow-right"></i>
-                        <i className="fal fa-long-arrow-right"></i></span></a>
+                  <button type="button" onClick={() => window.dispatchEvent(new CustomEvent("open-free-consultation"))} className="tp-btn mr-30 wow tpfadeUp">Schedule a meeting<span><i className="fal fa-long-arrow-right"></i>
+                        <i className="fal fa-long-arrow-right"></i></span></button>
                   <a href="#" className="tp-white-btn cronblue-g-color wow tpfadeUp"><span><i className="fab fa-google"></i>
                         <i className="fab fa-google"></i></span> Google Calendar </a>
                </div>

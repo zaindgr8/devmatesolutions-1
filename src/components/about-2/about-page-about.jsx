@@ -35,13 +35,20 @@ const AboutPageAbout = () => {
                     </div>
                   </div>
                   <div className="about-page-ab-btn-wrapper mb-30 wow tpfadeUp">
-                    <Link href="/service" className="tp-btn">
-                      Our Services
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.dispatchEvent(new CustomEvent("open-free-consultation"));
+                      }}
+                      className="tp-btn"
+                      style={{ border: "none" }}
+                    >
+                      Book Free Consultation
                       <span>
                         <i className="fal fa-long-arrow-right"></i>
                         <i className="fal fa-long-arrow-right"></i>
                       </span>
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>

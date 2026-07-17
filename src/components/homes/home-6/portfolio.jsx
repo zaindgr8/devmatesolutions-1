@@ -161,10 +161,7 @@ const ClientCard = ({ item, index, isVenture }) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Background preview */}
-      <div className="dm-client-preview">
-        <img src={item.hover_img} alt={item.title} />
-      </div>
+
 
       {/* Card body */}
       <div className="dm-client-card-body">
@@ -417,12 +414,8 @@ const Portfolio = () => {
           background: #0d0d0d;
           box-shadow: 0 20px 60px rgba(0,0,0,0.12);
         }
-        .dm-client-card--venture .dm-client-preview img {
-          opacity: 0;
-        }
-        .dm-client-card--venture:hover .dm-client-preview img {
-          opacity: 0.12;
-        }
+        .dm-client-card--venture .dm-client-preview img { display: none; }
+        .dm-client-card--venture:hover .dm-client-preview img { display: none; }
         .dm-client-card--venture .dm-client-number { color: #d1d5db; }
         .dm-client-card--venture:hover .dm-client-number { color: #4b5563; }
         .dm-client-card--venture .dm-client-name { color: #0d0d0d; }
@@ -460,25 +453,8 @@ const Portfolio = () => {
         }
         .dm-venture-badge i { font-size: 9px; }
 
-        /* ─── Preview image overlay ─── */
-        .dm-client-preview {
-          position: absolute;
-          inset: 0;
-          overflow: hidden;
-          pointer-events: none;
-        }
-        .dm-client-preview img {
-          width: 100%; height: 100%;
-          object-fit: cover;
-          object-position: top;
-          opacity: 0;
-          transform: scale(1.05);
-          transition: opacity 0.35s ease, transform 0.35s ease;
-        }
-        .dm-client-card:hover .dm-client-preview img {
-          opacity: 0.12;
-          transform: scale(1);
-        }
+        /* ─── Preview image overlay (image hidden, overlay removed) ─── */
+        .dm-client-preview { display: none; }
 
         /* ─── Card body ─── */
         .dm-client-card-body {
@@ -900,7 +876,7 @@ const Portfolio = () => {
           </div>
 
           {/* ══ GROUP 1: Our Own Ventures ══ */}
-          <div className="dm-group-block">
+          <div className="dm-group-block" id="our-own-ventures">
             <SectionLabel
               number="01"
               label="Our Own Ventures"

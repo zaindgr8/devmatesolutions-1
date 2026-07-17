@@ -38,7 +38,7 @@ const menu_data = [
     id: 6,
     mega_menu: false,
     has_dropdown: false,
-    title: "Book Meeting",
+    title: "Book 1:1 Session",
     link: "/#ceo",
   },
 ];

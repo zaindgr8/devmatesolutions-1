@@ -78,23 +78,104 @@ const INITIAL_MESSAGES = [
 ];
 
 export default function GeminiChat() {
-  const [open, setOpen]       = useState(false);
-  const [messages, setMessages] = useState(INITIAL_MESSAGES);
-  const [input, setInput]     = useState("");
-  const [loading, setLoading] = useState(false);
+  const [open, setOpen]               = useState(false);
+  const [messages, setMessages]       = useState(INITIAL_MESSAGES);
+  const [input, setInput]             = useState("");
+  const [loading, setLoading]         = useState(false);
+
+  /* Lead collection state */
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [leadName, setLeadName]               = useState("");
+  const [leadEmail, setLeadEmail]             = useState("");
+  const [leadPhone, setLeadPhone]             = useState("");
+  const [formSubmitting, setFormSubmitting]   = useState(false);
+  const [formError, setFormError]             = useState("");
 
   const messagesEndRef = useRef(null);
   const inputRef       = useRef(null);
 
+  /* Check session storage for existing lead info */
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const saved = sessionStorage.getItem("devmate_chat_lead");
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed.name && parsed.email && parsed.phone) {
+            setLeadName(parsed.name);
+            setLeadEmail(parsed.email);
+            setLeadPhone(parsed.phone);
+            setIsFormSubmitted(true);
+          }
+        } catch (e) {
+          console.error("Error parsing saved chat lead:", e);
+        }
+      }
+    }
+  }, []);
+
   /* auto-scroll */
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, loading]);
+    if (isFormSubmitted) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages, loading, isFormSubmitted]);
 
-  /* focus input when opened */
+  /* focus input when opened and form is submitted */
   useEffect(() => {
-    if (open) setTimeout(() => inputRef.current?.focus(), 150);
-  }, [open]);
+    if (open && isFormSubmitted) {
+      setTimeout(() => inputRef.current?.focus(), 150);
+    }
+  }, [open, isFormSubmitted]);
+
+  /* Submit lead form */
+  const handleLeadSubmit = async (e) => {
+    e.preventDefault();
+    if (!leadName.trim() || !leadEmail.trim() || !leadPhone.trim()) {
+      setFormError("Please fill in all fields.");
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(leadEmail.trim())) {
+      setFormError("Please enter a valid email address.");
+      return;
+    }
+
+    setFormSubmitting(true);
+    setFormError("");
+
+    try {
+      const res = await fetch("/api/send-chat-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: leadName.trim(),
+          email: leadEmail.trim(),
+          phone: leadPhone.trim(),
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        console.warn("Lead email response warning:", data);
+      }
+
+      const leadData = {
+        name: leadName.trim(),
+        email: leadEmail.trim(),
+        phone: leadPhone.trim(),
+      };
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("devmate_chat_lead", JSON.stringify(leadData));
+      }
+      setIsFormSubmitted(true);
+    } catch (err) {
+      console.error("Lead submission error:", err);
+      setIsFormSubmitted(true);
+    } finally {
+      setFormSubmitting(false);
+    }
+  };
 
   const sendMessage = useCallback(async () => {
     const text = input.trim();
@@ -207,65 +288,126 @@ export default function GeminiChat() {
             </button>
           </div>
 
-          {/* Suggestion chips — only shown before user sends first message */}
-          {messages.length === 1 && !loading && (
-            <div className={styles.chips}>
-              {SUGGESTION_CHIPS.map((chip, i) => (
-                <button
-                  key={i}
-                  className={styles.chip}
-                  onClick={() => sendChip(chip)}
-                >
-                  {chip}
-                </button>
-              ))}
-            </div>
-          )}
+          {!isFormSubmitted ? (
+            /* ── Pre-Chat Lead Form ── */
+            <form className={styles.leadFormContainer} onSubmit={handleLeadSubmit}>
+              <div className={styles.leadFormHeader}>
+                <h3 className={styles.leadFormTitle}>Welcome to Devmate</h3>
+                <p className={styles.leadFormSubtitle}>
+                  Please enter your details below to start chatting with our team.
+                </p>
+              </div>
 
-          {/* Messages */}
-          <div className={styles.messages}>
-            {messages.map((msg, i) => (
-              <div
-                key={i}
-                className={`${styles.bubble} ${
-                  msg.role === "user" ? styles.bubbleUser : styles.bubbleBot
-                }`}
+              <div className={styles.formGroup}>
+                <label className={styles.formLabel}>Full Name *</label>
+                <input
+                  type="text"
+                  className={styles.formInput}
+                  placeholder="Enter Your Name"
+                  value={leadName}
+                  onChange={(e) => setLeadName(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className={styles.formGroup}>
+                <label className={styles.formLabel}>Email Address *</label>
+                <input
+                  type="email"
+                  className={styles.formInput}
+                  placeholder="Enter Your Email"
+                  value={leadEmail}
+                  onChange={(e) => setLeadEmail(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className={styles.formGroup}>
+                <label className={styles.formLabel}>Contact Number *</label>
+                <input
+                  type="tel"
+                  className={styles.formInput}
+                  placeholder="Enter Your Contact Number"
+                  value={leadPhone}
+                  onChange={(e) => setLeadPhone(e.target.value)}
+                  required
+                />
+              </div>
+
+              {formError && <p className={styles.formErrorText}>{formError}</p>}
+
+              <button
+                type="submit"
+                className={styles.formSubmitBtn}
+                disabled={formSubmitting}
               >
-                {renderMessage(msg.content)}
-              </div>
-            ))}
+                {formSubmitting ? "Starting Chat..." : "Start Chat"}
+              </button>
+            </form>
+          ) : (
+            /* ── Active Chat Window ── */
+            <>
+              {/* Suggestion chips — only shown before user sends first message */}
+              {messages.length === 1 && !loading && (
+                <div className={styles.chips}>
+                  {SUGGESTION_CHIPS.map((chip, i) => (
+                    <button
+                      key={i}
+                      className={styles.chip}
+                      onClick={() => sendChip(chip)}
+                    >
+                      {chip}
+                    </button>
+                  ))}
+                </div>
+              )}
 
-            {loading && (
-              <div className={styles.typing}>
-                <span className={styles.typingDot} />
-                <span className={styles.typingDot} />
-                <span className={styles.typingDot} />
-              </div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
+              {/* Messages */}
+              <div className={styles.messages}>
+                {messages.map((msg, i) => (
+                  <div
+                    key={i}
+                    className={`${styles.bubble} ${
+                      msg.role === "user" ? styles.bubbleUser : styles.bubbleBot
+                    }`}
+                  >
+                    {renderMessage(msg.content)}
+                  </div>
+                ))}
 
-          {/* Input */}
-          <div className={styles.inputArea}>
-            <textarea
-              ref={inputRef}
-              className={styles.inputField}
-              placeholder="Type a message..."
-              value={input}
-              rows={1}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKey}
-              disabled={loading}
-            />
-            <button
-              className={styles.sendBtn}
-              onClick={sendMessage}
-              disabled={!input.trim() || loading}
-              aria-label="Send message"
-            >
-              <SendIcon />
-            </button>
-          </div>
+                {loading && (
+                  <div className={styles.typing}>
+                    <span className={styles.typingDot} />
+                    <span className={styles.typingDot} />
+                    <span className={styles.typingDot} />
+                  </div>
+                )}
+                <div ref={messagesEndRef} />
+              </div>
+
+              {/* Input */}
+              <div className={styles.inputArea}>
+                <textarea
+                  ref={inputRef}
+                  className={styles.inputField}
+                  placeholder="Type a message..."
+                  value={input}
+                  rows={1}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleKey}
+                  disabled={loading}
+                />
+                <button
+                  className={styles.sendBtn}
+                  onClick={sendMessage}
+                  disabled={!input.trim() || loading}
+                  aria-label="Send message"
+                >
+                  <SendIcon />
+                </button>
+              </div>
+            </>
+          )}
 
           <div className={styles.footer}>
             Powered by AI · <a href="https://devmatesolutions.com" target="_blank" rel="noopener noreferrer">devmatesolutions.com</a>
@@ -275,3 +417,4 @@ export default function GeminiChat() {
     </>
   );
 }
+

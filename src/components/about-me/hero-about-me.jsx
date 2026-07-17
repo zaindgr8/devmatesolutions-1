@@ -204,7 +204,7 @@ const HeroAboutMe = () => {
               <div className="dm-ceo-content">
                 <span className="dm-ceo-eyebrow">Message from the CEO</span>
                 <h2 className="dm-ceo-name">Zain Ul Abideen<br />Baloch</h2>
-                <p className="dm-ceo-title">Founder & CEO — DevMate Solutions</p>
+                <p className="dm-ceo-title">Founder & CEO — DEVMATE SOLUTIONS</p>
                 <div className="dm-ceo-divider"></div>
                 <p className="dm-ceo-message">
                   I am honored to lead an exceptional team committed to delivering outstanding services

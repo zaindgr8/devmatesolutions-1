@@ -85,9 +85,9 @@ const PricePlan = () => {
                     <span>{item.des}</span>
                   </div>
                   <div className="tp-purcase-btn--wrapper mb-25">
-                    <Link
-                      target="_blank"
-                      href="https://cal.com/devmate-solutions/team"
+                    <button
+                      type="button"
+                      onClick={() => window.dispatchEvent(new CustomEvent("open-free-consultation"))}
                       className="tp-grd-border-btn"
                     >
                       <span className="mr-5">
@@ -95,7 +95,7 @@ const PricePlan = () => {
                         <i className="fas fa-rocket"></i>
                       </span>
                       Get Started
-                    </Link>
+                    </button>
                   </div>
                   <div className="tp-price-fea-list">
                     <ul>

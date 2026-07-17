@@ -8,14 +8,6 @@ const team_data = [
     link: "https://www.linkedin.com/in/ahmedyahyak/",
   },
   {
-    id: 2,
-    img: "/assets/img/team/2.svg",
-    name: "Vanessa Corpuz-Baiceanu",
-    title: "Partner in Cyrpus ",
-    delay: ".6s",
-    link: "https://www.linkedin.com/in/vanessa-joyce-c-15815684/",
-  },
-  {
     id: 3,
     img: "/assets/img/team/3.svg",
     name: "Ayaz Momin",
