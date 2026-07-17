@@ -8,7 +8,10 @@ const TeamArea = () => {
       <div className="da-team-area pt-120 pb-90">
         <div className="container">
           <div className="row">
-            {team_data.slice(3, 16).map((item, i) => (
+            {team_data
+              .filter((item) => item.name !== "Mixlox D. Jhonson")
+              .slice(3, 18)
+              .map((item, i) => (
               <div key={i} className="col-md-6 col-lg-4 col-xl-3">
                 <div className="ca-team-item mb-30 wow tpfadeUp">
                   <div className="ca-team-item__img ca-team-item-after w-img mb-35 fix">
