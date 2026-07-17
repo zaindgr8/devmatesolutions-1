@@ -54,52 +54,54 @@ const OurTeam = () => {
           line-height: 1.65;
         }
 
-        /* ── Partner Cards Grid ── */
+        /* ── Partner Card Layout ── */
         .dm-partner-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 24px;
-          max-width: 800px;
+          display: flex;
+          justify-content: center;
+          max-width: 460px;
           margin: 0 auto;
         }
-        @media (max-width: 575px) { .dm-partner-grid { grid-template-columns: 1fr; } }
 
         .dm-partner-card {
-          background: #fff;
-          border: 1px solid #f0f0f0;
-          border-radius: 14px;
-          padding: 36px 28px 28px;
+          width: 100%;
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
+          border-radius: 16px;
+          padding: 32px 28px;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          transition: box-shadow 0.25s ease, transform 0.25s ease;
+          transition: all 0.25s ease;
           position: relative;
           overflow: hidden;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
         }
+
         .dm-partner-card::after {
           content: '';
           position: absolute;
           top: 0; left: 0; right: 0;
           height: 3px;
-          background: linear-gradient(90deg, #c0392b, #e74c3c);
-          opacity: 0;
-          transition: opacity 0.25s ease;
+          background: linear-gradient(90deg, #bd2120, #e63939);
+          opacity: 0.9;
         }
+
         .dm-partner-card:hover {
-          box-shadow: 0 16px 48px rgba(0,0,0,0.08);
-          transform: translateY(-4px);
+          box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+          transform: translateY(-3px);
         }
-        .dm-partner-card:hover::after { opacity: 1; }
 
         .dm-partner-photo-wrap {
-          width: 80px;
-          height: 80px;
+          width: 84px;
+          height: 84px;
           border-radius: 50%;
           overflow: hidden;
-          margin-bottom: 20px;
+          margin-bottom: 18px;
           border: 3px solid #f3f4f6;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
           flex-shrink: 0;
         }
+
         .dm-partner-photo-wrap img {
           width: 100%;
           height: 100%;
@@ -108,7 +110,8 @@ const OurTeam = () => {
 
         .dm-partner-flag {
           position: absolute;
-          top: 24px; right: 24px;
+          top: 24px;
+          right: 24px;
           font-size: 28px;
           line-height: 1;
         }
@@ -116,10 +119,10 @@ const OurTeam = () => {
         .dm-partner-role {
           font-size: 11px;
           font-weight: 700;
-          letter-spacing: 1.8px;
+          letter-spacing: 1.6px;
           text-transform: uppercase;
-          color: #c0392b;
-          margin-bottom: 6px;
+          color: #bd2120;
+          margin-bottom: 4px;
         }
 
         .dm-partner-name {
@@ -127,63 +130,54 @@ const OurTeam = () => {
           font-weight: 800;
           color: #0d0d0d;
           letter-spacing: -0.3px;
-          margin-bottom: 8px;
+          margin-bottom: 6px;
         }
 
         .dm-partner-location {
           font-size: 13px;
-          color: #9ca3af;
+          color: #6b7280;
           display: flex;
           align-items: center;
-          gap: 5px;
+          gap: 6px;
           margin-bottom: 20px;
+        }
+
         .dm-partner-links {
           display: flex;
           align-items: center;
-          gap: 10px;
-          flex-wrap: wrap;
+          gap: 12px;
           margin-top: auto;
         }
 
-        .dm-partner-linkedin {
+        .dm-partner-icon-btn {
+          width: 42px;
+          height: 42px;
+          border-radius: 10px;
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
+          color: #334155;
           display: inline-flex;
           align-items: center;
-          gap: 7px;
-          font-size: 12.5px;
-          font-weight: 700;
-          color: #0d0d0d;
+          justify-content: center;
+          font-size: 17px;
           text-decoration: none;
-          border: 1.5px solid #e5e7eb;
-          padding: 7px 14px;
-          border-radius: 6px;
           transition: all 0.2s ease;
         }
-        .dm-partner-linkedin:hover {
-          background: #0d0d0d;
-          color: #fff;
-          border-color: #0d0d0d;
+
+        .dm-partner-icon-btn.dm-linkedin:hover {
+          background: #0077b5;
+          border-color: #0077b5;
+          color: #ffffff;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 119, 181, 0.3);
         }
 
-        /* ── Bottom trust bar ── */
-        .dm-partners-trust {
-          margin-top: 56px;
-          padding-top: 40px;
-          border-top: 1px solid #f0f0f0;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          flex-wrap: wrap;
-          gap: 20px;
-        }
-        .dm-partners-trust-text {
-          font-size: 13.5px;
-          color: #9ca3af;
-          font-weight: 500;
-        }
-        .dm-partners-trust-flags {
-          display: flex;
-          gap: 8px;
-          font-size: 22px;
+        .dm-partner-icon-btn.dm-website:hover {
+          background: #bd2120;
+          border-color: #bd2120;
+          color: #ffffff;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(189, 33, 32, 0.3);
         }
       `}</style>
 
@@ -205,7 +199,7 @@ const OurTeam = () => {
             </p>
           </div>
 
-          {/* Partner Cards */}
+          {/* Partner Card */}
           <div className="dm-partner-grid">
             {partners.map((member) => {
               const flag = getFlag(member.title);
@@ -218,21 +212,19 @@ const OurTeam = () => {
                   </div>
                   <span className="dm-partner-role">Regional Partner</span>
                   <h3 className="dm-partner-name">{member.name}</h3>
-                  <span className="dm-partner-location">
-                    <i className="fal fa-map-marker-alt" style={{ fontSize: 11 }}></i>
+                  <div className="dm-partner-location">
+                    <i className="fal fa-map-marker-alt" style={{ fontSize: 12, color: "#bd2120" }}></i>
                     {country}
-                  </span>
+                  </div>
                   <div className="dm-partner-links">
                     {member.link && (
-                      <Link href={member.link} target="_blank" className="dm-partner-linkedin">
-                        <i className="fab fa-linkedin"></i>
-                        View Profile
+                      <Link href={member.link} target="_blank" className="dm-partner-icon-btn dm-linkedin" title="LinkedIn Profile">
+                        <i className="fab fa-linkedin-in"></i>
                       </Link>
                     )}
                     {member.website && (
-                      <Link href={member.website} target="_blank" className="dm-partner-linkedin">
+                      <Link href={member.website} target="_blank" className="dm-partner-icon-btn dm-website" title="Personal Website">
                         <i className="fal fa-globe"></i>
-                        Website
                       </Link>
                     )}
                   </div>
@@ -240,20 +232,6 @@ const OurTeam = () => {
               );
             })}
           </div>
-
-          {/* Trust bar */}
-          {/* <div className="dm-partners-trust">
-            <span className="dm-partners-trust-text">Active presence across 4+ continents</span>
-            <div className="dm-partners-trust-flags">
-              <span title="Oman">🇴🇲</span>
-              <span title="Cyprus">🇨🇾</span>
-              <span title="USA">🇺🇸</span>
-              <span title="UAE">🇦🇪</span>
-              <span title="UK">🇬🇧</span>
-              <span title="Poland">🇵🇱</span>
-              <span title="Qatar">🇶🇦</span>
-            </div>
-          </div> */}
 
         </div>
       </div>

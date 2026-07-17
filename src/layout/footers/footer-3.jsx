@@ -267,8 +267,8 @@ const FooterThree = () => {
 
         .dm-modal-header {
           padding: 20px 24px;
-          background: linear-gradient(135deg, #1f1f2a 0%, #16161e 100%);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          background: #ffffff !important;
+          border-bottom: 1px solid #e2e8f0 !important;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -285,9 +285,9 @@ const FooterThree = () => {
           width: 40px;
           height: 40px;
           border-radius: 10px;
-          background: rgba(189, 33, 32, 0.15);
-          border: 1px solid rgba(189, 33, 32, 0.35);
-          color: #f87171;
+          background: rgba(189, 33, 32, 0.1);
+          border: 1px solid rgba(189, 33, 32, 0.25);
+          color: #bd2120;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -296,22 +296,23 @@ const FooterThree = () => {
         }
 
         .dm-modal-title {
-          font-size: 1.15rem;
-          font-weight: 700;
-          color: #ffffff;
-          margin: 0;
+          font-size: 1.2rem !important;
+          font-weight: 800 !important;
+          color: #0f172a !important;
+          margin: 0 !important;
         }
 
         .dm-modal-subtitle {
-          font-size: 0.78rem;
-          color: #9ca3af;
-          margin: 2px 0 0;
+          font-size: 0.82rem !important;
+          color: #334155 !important;
+          font-weight: 600 !important;
+          margin: 2px 0 0 !important;
         }
 
         .dm-modal-close-btn {
-          background: rgba(255, 255, 255, 0.08);
+          background: #f1f5f9 !important;
           border: none;
-          color: #ffffff;
+          color: #0f172a !important;
           width: 34px;
           height: 34px;
           border-radius: 50%;
@@ -324,17 +325,27 @@ const FooterThree = () => {
         }
 
         .dm-modal-close-btn:hover {
-          background: #bd2120;
+          background: #bd2120 !important;
+          color: #ffffff !important;
           transform: rotate(90deg);
         }
 
         .dm-modal-body {
           padding: 24px 28px;
           overflow-y: auto;
-          color: #d1d5db;
-          font-size: 0.88rem;
+          color: #f1f5f9 !important;
+          font-size: 0.92rem;
           line-height: 1.7;
           flex: 1;
+        }
+
+        .dm-modal-card p,
+        .dm-modal-card .dm-legal-section p,
+        .dm-modal-card .dm-faq-answer {
+          color: #e2e8f0 !important;
+          font-size: 0.92rem !important;
+          line-height: 1.7 !important;
+          margin-bottom: 12px !important;
         }
 
         .dm-modal-body::-webkit-scrollbar {
@@ -350,32 +361,32 @@ const FooterThree = () => {
         }
 
         .dm-legal-section-title {
-          font-size: 0.95rem;
-          font-weight: 700;
-          color: #ffffff;
-          margin-bottom: 8px;
-          display: flex;
-          align-items: center;
-          gap: 8px;
+          font-size: 1rem !important;
+          font-weight: 700 !important;
+          color: #ffffff !important;
+          margin-bottom: 10px !important;
+          display: flex !important;
+          align-items: center !important;
+          gap: 8px !important;
         }
 
         .dm-legal-section-title span {
-          color: #bd2120;
+          color: #f87171 !important;
         }
 
         .dm-faq-item {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.07);
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 12px;
-          padding: 16px;
-          margin-bottom: 12px;
+          padding: 18px;
+          margin-bottom: 14px;
         }
 
         .dm-faq-question {
-          font-weight: 700;
-          color: #ffffff;
-          margin-bottom: 6px;
-          font-size: 0.9rem;
+          font-weight: 700 !important;
+          color: #ffffff !important;
+          margin-bottom: 8px !important;
+          font-size: 0.95rem !important;
         }
 
         .dm-faq-answer {
@@ -480,8 +491,8 @@ const FooterThree = () => {
                 <h3 className="dm-footer-widget-title">Quick Links</h3>
                 <ul className="dm-footer-links">
                   <li><Link href="/service-3">Services</Link></li>
-                  <li><Link href="/team-2">Our Team</Link></li>
-                  <li><Link href="/portfolio-2">Portfolio</Link></li>
+                  <li><Link href="/our-team">Our Team</Link></li>
+                  <li><Link href="/#startups-helped-build">Portfolio</Link></li>
                   <li><Link href="/job">Careers</Link></li>
                   <li><Link href="/#ceo">Book 1:1 Session</Link></li>
                 </ul>
@@ -491,7 +502,6 @@ const FooterThree = () => {
               <div className="col-xl-2 col-lg-2 col-md-6">
                 <h3 className="dm-footer-widget-title">Support</h3>
                 <ul className="dm-footer-links">
-                  <li><Link href="/contact">Contact Us</Link></li>
                   <li>
                     <button type="button" className="dm-footer-modal-btn" onClick={() => setActiveModal('faq')}>
                       FAQ

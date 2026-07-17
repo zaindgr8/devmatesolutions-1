@@ -907,7 +907,7 @@ const Portfolio = () => {
           </div> */}
 
           {/* ══ GROUP 2: Startups We've Helped Build ══ */}
-          <div className="dm-group-block">
+          <div className="dm-group-block" id="startups-helped-build">
             <SectionLabel
               number="02"
               label="Startups We've Helped Build"
