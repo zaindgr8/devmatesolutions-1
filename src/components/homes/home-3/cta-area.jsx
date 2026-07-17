@@ -22,7 +22,7 @@ const CtaArea = () => {
               <div className="col-lg-8 col-12">
                 <div className="da-cta-info ml-160">
                   <h4>Do You Want Us To Checkmate Your Software Challenges?</h4>
-                  <p
+                  {/* <p
                     style={{
                       fontSize: "20px",
                       fontWeight: "bold",
@@ -32,7 +32,7 @@ const CtaArea = () => {
                     className="text-gray-600"
                   >
                     Get Call from FREYA our AI Assistant Now Within 60 Seconds!!
-                  </p>
+                  </p> */}
                 </div>
               </div>
               <div className="col-xl-4 d-none d-lg-block">
