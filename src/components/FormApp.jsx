@@ -52,7 +52,7 @@ const FormApp = () => {
             type="text"
             name="name"
             required
-            placeholder="Your name"
+            placeholder="YOUR FULL NAME"
             className="px-3 py-2 rounded-md border border-gray-200 dark:border-gray-700 bg-transparent focus:outline-none focus:ring-2 focus:ring-[#e11d48]/30 transition w-full"
           />
         </label>
@@ -103,7 +103,7 @@ const FormApp = () => {
             type="tel"
             name="contact"
             required
-            placeholder="Phone Number"
+            placeholder="ENTER YOUR CONTACT NUMBER"
             className="flex-1 px-3 py-2 rounded-md border border-gray-200 dark:border-gray-700 bg-transparent focus:outline-none focus:ring-2 focus:ring-[#e11d48]/30 transition w-full"
           />
         </div>

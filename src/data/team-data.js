@@ -6,6 +6,7 @@ const team_data = [
     title: "Partner in Oman",
     delay: ".5s",
     link: "https://www.linkedin.com/in/ahmedyahyak/",
+    website: "https://www.ahmedyahyak.com/",
   },
   {
     id: 3,

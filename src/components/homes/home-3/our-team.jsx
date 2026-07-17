@@ -137,10 +137,15 @@ const OurTeam = () => {
           align-items: center;
           gap: 5px;
           margin-bottom: 20px;
+        .dm-partner-links {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          flex-wrap: wrap;
+          margin-top: auto;
         }
 
         .dm-partner-linkedin {
-          margin-top: auto;
           display: inline-flex;
           align-items: center;
           gap: 7px;
@@ -217,12 +222,20 @@ const OurTeam = () => {
                     <i className="fal fa-map-marker-alt" style={{ fontSize: 11 }}></i>
                     {country}
                   </span>
-                  {member.link && (
-                    <Link href={member.link} target="_blank" className="dm-partner-linkedin">
-                      <i className="fab fa-linkedin"></i>
-                      View Profile
-                    </Link>
-                  )}
+                  <div className="dm-partner-links">
+                    {member.link && (
+                      <Link href={member.link} target="_blank" className="dm-partner-linkedin">
+                        <i className="fab fa-linkedin"></i>
+                        View Profile
+                      </Link>
+                    )}
+                    {member.website && (
+                      <Link href={member.website} target="_blank" className="dm-partner-linkedin">
+                        <i className="fal fa-globe"></i>
+                        Website
+                      </Link>
+                    )}
+                  </div>
                 </div>
               );
             })}
