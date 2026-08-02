@@ -8,7 +8,7 @@ const HeroBanner = () => {
   useEffect(() => { setMounted(true); }, []);
   return (
     <>
-      <style>{`
+      <style suppressHydrationWarning>{`
         /* ── Hero Section ── */
         .dm-hero {
           padding: 72px 0 80px;
