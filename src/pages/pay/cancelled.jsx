@@ -3,6 +3,9 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
+const _INLINE_CSS_1 = "\n          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');\n          @keyframes orbFloat {\n            0%, 100% { transform: translateY(0) scale(1); }\n            50%       { transform: translateY(-30px) scale(1.05); }\n          }\n          @keyframes fadeIn {\n            from { opacity: 0; transform: translateY(20px); }\n            to   { opacity: 1; transform: translateY(0); }\n          }\n          @keyframes scaleIn {\n            from { transform: scale(0.5); opacity: 0; }\n            to   { transform: scale(1); opacity: 1; }\n          }\n        ";
+
+
 export default function PayCancelledPage() {
   const router  = useRouter();
   const orderId = router.query.order || "";
@@ -60,21 +63,7 @@ export default function PayCancelledPage() {
           </div>
         </div>
 
-        <style dangerouslySetInnerHTML={{ __html: `
-          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-          @keyframes orbFloat {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50%       { transform: translateY(-30px) scale(1.05); }
-          }
-          @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to   { opacity: 1; transform: translateY(0); }
-          }
-          @keyframes scaleIn {
-            from { transform: scale(0.5); opacity: 0; }
-            to   { transform: scale(1); opacity: 1; }
-          }
-        ` }} />
+        <style dangerouslySetInnerHTML={{ __html: _INLINE_CSS_1 }} />
       </div>
     </>
   );

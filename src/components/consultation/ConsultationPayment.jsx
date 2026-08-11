@@ -356,6 +356,26 @@ const CSS = `
   }
   .dm-book-trigger-btn:hover i { transform: rotate(12deg); }
 
+  /* ── Ziina variant (card / Apple Pay) ── */
+  .dm-ziina-btn {
+    background: #059669;
+    box-shadow: 0 8px 28px rgba(5,150,105,0.3);
+  }
+  .dm-ziina-btn:hover {
+    background: #047857;
+    box-shadow: 0 16px 40px rgba(5,150,105,0.22);
+  }
+
+  /* ── NOWPayments variant (crypto) ── */
+  .dm-crypto-btn {
+    background: #6D28D9;
+    box-shadow: 0 8px 28px rgba(109,40,217,0.3);
+  }
+  .dm-crypto-btn:hover {
+    background: #5B21B6;
+    box-shadow: 0 16px 40px rgba(109,40,217,0.22);
+  }
+
   /* ── Trigger button (free — outline) ── */
   .dm-book-free-btn {
     display: inline-flex;
@@ -765,11 +785,34 @@ const ConsultationPayment = ({ mode = "buttons" }) => {
       {/* ── Buttons row ── */}
       {mode === "buttons" && (
         <div className="dm-btn-row">
-          {/* Paid CEO session → /pay */}
-          <a href="/pay" className="dm-book-trigger-btn" style={{ textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "8px" }}>
-            Book Your 1:1 Session (299$)
-            <i className="fal fa-calendar-check" />
-          </a>
+          {/* ── Payment gateway choice ── */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%" }}>
+            <span style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.5px", color: "#888", textTransform: "uppercase" }}>
+              Book Your 1:1 Session — $299
+            </span>
+            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+              {/* Ziina — card / Apple Pay / local wallets */}
+              <button
+                className="dm-book-trigger-btn dm-ziina-btn"
+                onClick={() => window.dispatchEvent(new CustomEvent("open-paid-consultation"))}
+                title="Pay by card, Apple Pay, or UAE wallets"
+              >
+                <span style={{ fontSize: "18px", lineHeight: 1 }}>💳</span>
+                Ziina — Card / Apple Pay
+              </button>
+
+              {/* NOWPayments — crypto */}
+              <a
+                href="/pay"
+                className="dm-book-trigger-btn dm-crypto-btn"
+                style={{ textDecoration: "none" }}
+                title="Pay with Bitcoin, ETH, USDT & 300+ cryptocurrencies"
+              >
+                <span style={{ fontSize: "18px", lineHeight: 1 }}>₿</span>
+                NOWPayments — Crypto
+              </a>
+            </div>
+          </div>
 
           {/* Crypto accepted badge */}
           <div style={{

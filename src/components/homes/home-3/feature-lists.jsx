@@ -97,7 +97,8 @@ const FeatureLists = () => {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .dm-stats-section {
           background: #0d0d0d;
           position: relative;

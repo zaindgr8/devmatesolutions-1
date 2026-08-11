@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 
+const _INLINE_CSS_1 = "\n        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');\n        @keyframes tickerScroll {\n          from { transform: translateX(0); }\n          to   { transform: translateX(-50%); }\n        }\n        @keyframes spin {\n          to { transform: rotate(360deg); }\n        }\n        @keyframes fadeIn {\n          from { opacity: 0; transform: translateY(16px); }\n          to   { opacity: 1; transform: translateY(0); }\n        }\n        @keyframes orbFloat {\n          0%, 100% { transform: translateY(0) scale(1); }\n          50%       { transform: translateY(-30px) scale(1.05); }\n        }\n        * { box-sizing: border-box; }\n      ";
+
+
 // ─── Product catalogue (mirrors the server-side PRODUCTS list) ───────────────
 const PRODUCTS = [
   {
@@ -287,25 +290,7 @@ export default function PayPage() {
         </p>
       </div>
 
-      <style dangerouslySetInnerHTML={{ __html: `
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-        @keyframes tickerScroll {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
-        }
-        @keyframes spin {
-          to { transform: rotate(360deg); }
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(16px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes orbFloat {
-          0%, 100% { transform: translateY(0) scale(1); }
-          50%       { transform: translateY(-30px) scale(1.05); }
-        }
-        * { box-sizing: border-box; }
-      ` }} />
+      <style dangerouslySetInnerHTML={{ __html: _INLINE_CSS_1 }} />
     </>
   );
 }
