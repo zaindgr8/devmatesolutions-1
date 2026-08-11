@@ -1,16 +1,16 @@
 import BreadcrumbArea from "@/src/common/breadcrumb-area";
-import Footer from "@/src/layout/footers/footer";
-import Header from "@/src/layout/headers/header";
+import FooterThree from "@/src/layout/footers/footer-3";
+import HeaderThree from "@/src/layout/headers/header-3";
 import React from "react";
 import TermsArea from "./terms-area";
 
 const Terms = () => {
   return (
     <>
-      <Header />
+      <HeaderThree />
       <BreadcrumbArea acive_menu="Terms" title="Terms of Service" />
       <TermsArea />
-      <Footer tp_border={true} />
+      <FooterThree />
     </>
   );
 };

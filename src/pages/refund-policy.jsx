@@ -1,7 +1,7 @@
 import React from "react";
 import SEO from "../common/seo";
-import Header from "../layout/headers/header";
-import Footer from "../layout/footers/footer";
+import HeaderThree from "../layout/headers/header-3";
+import FooterThree from "../layout/footers/footer-3";
 import BreadcrumbArea from "../common/breadcrumb-area";
 
 const UPDATED = "August 11, 2025";
@@ -17,7 +17,7 @@ export default function RefundPolicyPage() {
         pageTitle="Refund Policy — DevMate Solutions"
         description={`Refund and cancellation policy for ${TRADING}. Understand how we handle refunds for strategy sessions, SEO retainers, and web development projects.`}
       />
-      <Header />
+      <HeaderThree />
       <BreadcrumbArea acive_menu="Refund Policy" title="Refund Policy" />
 
       <div className="tp-job-details pt-120 pb-60">
@@ -138,7 +138,7 @@ export default function RefundPolicyPage() {
         </div>
       </div>
 
-      <Footer tp_border={true} />
+      <FooterThree />
     </>
   );
 }

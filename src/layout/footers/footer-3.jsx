@@ -124,19 +124,16 @@ const FooterThree = () => {
                 <h3 className="dm-footer-widget-title">Support</h3>
                 <ul className="dm-footer-links">
                   <li>
-                    <button type="button" className="dm-footer-modal-btn" onClick={() => setActiveModal('faq')}>
-                      FAQ
-                    </button>
+                    <Link href="/faq">FAQ</Link>
                   </li>
                   <li>
-                    <button type="button" className="dm-footer-modal-btn" onClick={() => setActiveModal('privacy')}>
-                      Privacy Policy
-                    </button>
+                    <Link href="/privacy-policy">Privacy Policy</Link>
                   </li>
                   <li>
-                    <button type="button" className="dm-footer-modal-btn" onClick={() => setActiveModal('terms')}>
-                      Terms of Service
-                    </button>
+                    <Link href="/terms">Terms of Service</Link>
+                  </li>
+                  <li>
+                    <Link href="/refund-policy">Refund Policy</Link>
                   </li>
                 </ul>
               </div>

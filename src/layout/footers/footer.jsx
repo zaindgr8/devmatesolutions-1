@@ -16,7 +16,7 @@ const footer_links = [
          {title: "Careers", link: "/job"},
          {title: "Legal & Privacy", link: "/privacy-policy"},
          {title: "Our Team", link: "/team"},
-         {title: "Refund Policy", link: "/privacy-policy"},
+         {title: "Refund Policy", link: "/refund-policy"},
          {title: "Terms & Rules", link: "/terms"},
          {title: "Get In Touch", link: "/contact"},
          {title: "other", link: "/"},
