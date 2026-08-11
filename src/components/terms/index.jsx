@@ -8,7 +8,7 @@ const Terms = () => {
   return (
     <>
       <Header />
-      <BreadcrumbArea acive_menu="Terms"  title="Terms & Conditions"/>
+      <BreadcrumbArea acive_menu="Terms" title="Terms of Service" />
       <TermsArea />
       <Footer tp_border={true} />
     </>

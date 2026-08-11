@@ -4,34 +4,38 @@ import React from "react";
 // footer_links data
 const footer_links = [
   {
-    id: 1,
+    id: "company",
     title: "Company",
     col: "col-xl-3",
-    id: "company",
     links: [
-      { title: "About", link: "/about" },
-      { title: "Affiliates", link: "/faq" },
+      { title: "About Us", link: "/about" },
+      { title: "Our Team", link: "/our-team" },
       { title: "Careers", link: "/job" },
-      { title: "Legal & Privacy", link: "/privacy-policy" },
-      { title: "Our Team", link: "/team" },
-      { title: "Refund Policy", link: "/privacy-policy" },
-      { title: "Terms & Rules", link: "/terms" },
+      { title: "FAQ", link: "/faq" },
       { title: "Get In Touch", link: "/contact" },
-      { title: "other", link: "/" },
+      { title: "Pay an Invoice →", link: "/pay" },
     ],
   },
   {
-    id: 2,
+    id: "legal",
+    title: "Legal",
+    col: "col-xl-2",
+    links: [
+      { title: "Privacy Policy", link: "/privacy-policy" },
+      { title: "Terms of Service", link: "/terms" },
+      { title: "Refund Policy", link: "/refund-policy" },
+    ],
+  },
+  {
+    id: "services",
     title: "Services",
     col: "col-xl-2",
-    id: "",
     links: [
-      { title: "Business Consultancy", link: "/" },
-      { title: "Web Development", link: "/" },
-      { title: "UI & UX Design", link: "/" },
-      { title: "Legal & Privacy", link: "/privacy-policy" },
-      { title: "Engine Optimization", link: "/" },
-      { title: "Digital marketing", link: "/" },
+      { title: "Business Consultancy", link: "/service-3" },
+      { title: "Web Development", link: "/service-3" },
+      { title: "UI & UX Design", link: "/service-3" },
+      { title: "SEO Optimization", link: "/service-3" },
+      { title: "Digital Marketing", link: "/service-3" },
     ],
   },
 ];
@@ -46,7 +50,9 @@ const CommonFooter = () => {
             <ul id={item.id}>
               {item.links?.map((link, id) => (
                 <li key={id}>
-                  <a href={link.link}>{link.title}</a>
+                  <Link href={link.link} style={link.title.includes("Pay an Invoice") ? { fontWeight: 600, color: "#B91C1B" } : {}}>
+                    {link.title}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -67,7 +73,7 @@ export default CommonFooter;
 
 // copy right text
 const footer_content = {
-  copy_right_info:  <> Copyright & Design By <a href="#">@DEVMATE Solutions</a> - {new Date().getFullYear()} </>,
+  copy_right_info: <> Copyright &amp; Design By <a href="#">@DEVMATE Solutions</a> — TechMate Solutions FZ LLC — {new Date().getFullYear()} </>,
 };
 
 const { copy_right_info } = footer_content;
@@ -84,14 +90,11 @@ export const FooterCopyRight = ({style_3, style_7, style_9}) => {
           </div>
           <div className="col-md-4 d-none d-md-block">
             <div className="tp-footer-menu text-end">
-              {/* <ul>
-                <li>
-                  <Link href="/faq">FAQ</Link>
-                </li>
-                <li>
-                  <Link href="/about">Insights</Link>
-                </li>
-              </ul> */}
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", justifyContent: "flex-end", gap: "20px" }}>
+                <li><Link href="/privacy-policy" style={{ fontSize: "13px" }}>Privacy</Link></li>
+                <li><Link href="/terms" style={{ fontSize: "13px" }}>Terms</Link></li>
+                <li><Link href="/refund-policy" style={{ fontSize: "13px" }}>Refunds</Link></li>
+              </ul>
             </div>
           </div>
         </div>

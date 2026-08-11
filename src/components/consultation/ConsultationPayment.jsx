@@ -765,11 +765,44 @@ const ConsultationPayment = ({ mode = "buttons" }) => {
       {/* ── Buttons row ── */}
       {mode === "buttons" && (
         <div className="dm-btn-row">
-          {/* Paid CEO session */}
-          <button className="dm-book-trigger-btn" onClick={() => window.dispatchEvent(new CustomEvent("open-paid-consultation"))}>
+          {/* Paid CEO session → /pay */}
+          <a href="/pay" className="dm-book-trigger-btn" style={{ textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "8px" }}>
             Book Your 1:1 Session (299$)
             <i className="fal fa-calendar-check" />
-          </button>
+          </a>
+
+          {/* Crypto accepted badge */}
+          <div style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            marginTop: "10px",
+            padding: "8px 14px",
+            background: "rgba(0,0,0,0.06)",
+            borderRadius: "10px",
+            width: "fit-content",
+            fontSize: "12px",
+            color: "#555",
+            fontWeight: 600,
+            letterSpacing: "0.3px",
+          }}>
+            <span>Crypto accepted:</span>
+            {["₿", "Ξ", "◎", "₮"].map((sym, i) => (
+              <span key={i} style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "24px",
+                height: "24px",
+                borderRadius: "50%",
+                background: ["#F7931A","#627EEA","#9945FF","#26A17B"][i],
+                color: "#fff",
+                fontSize: "11px",
+                fontWeight: 700,
+              }}>{sym}</span>
+            ))}
+            <span style={{ color: "#888", fontWeight: 400 }}>& 300+ more via NOWPayments</span>
+          </div>
 
           {/* Free team meeting */}
           <button className="dm-book-free-btn" onClick={() => window.dispatchEvent(new CustomEvent("open-free-consultation"))}>

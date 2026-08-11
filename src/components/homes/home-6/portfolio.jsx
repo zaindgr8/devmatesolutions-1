@@ -69,8 +69,8 @@ const client_ventures = [
   {
     id: 5,
     title: "Vodafone Oman- Refurbly",
-    flag: "🇴🇲",
-    country: "Oman",
+    flag: "🇶🇦 ",
+    country: "Qatar",
     category: "SaaS / CRM",
     hover_img: "/assets/img/portfolio/vf.png",
     link: "https://www.vodafone.om/",
@@ -144,16 +144,6 @@ const client_ventures = [
     category: "Senior Care Platform",
     hover_img: "/assets/img/portfolio/senioriser.png",
     link: "https://www.seniorisers.com/",
-    hasLink: true,
-  },
-  {
-    id: 13,
-    title: "Be A Masterpiece",
-    flag: "🇦🇪",
-    country: "UAE",
-    category: "Beauty & Wellness",
-    hover_img: "/assets/img/portfolio/beamasterpiece.png",
-    link: "https://beamasterpiece.ae/",
     hasLink: true,
   },
 ];
@@ -1008,7 +998,7 @@ const Portfolio = () => {
                     />
                   </div>
                   <div className="dm-modal-field">
-                    <label>Message <span style={{fontWeight:400,color:'#9ca3af'}}>(optional)</span></label>
+                    <label>Message <span style={{ fontWeight: 400, color: '#9ca3af' }}>(optional)</span></label>
                     <textarea
                       name="message"
                       rows={3}
@@ -1019,7 +1009,7 @@ const Portfolio = () => {
                   </div>
                   <button type="submit" className="dm-modal-submit" disabled={formStatus === 'sending'}>
                     {formStatus === 'sending' ? 'Sending...' : 'Send Request'}
-                    {formStatus !== 'sending' && <i className="fal fa-long-arrow-right" style={{marginLeft:10}}></i>}
+                    {formStatus !== 'sending' && <i className="fal fa-long-arrow-right" style={{ marginLeft: 10 }}></i>}
                   </button>
                 </form>
               </>

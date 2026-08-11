@@ -42,11 +42,11 @@ const footer_links = [
 const footer_content ={
    footer_logo: "/assets/img/logo/black-logo.png",
    about: "About Us",
-   about_des: <>Your goals are individual. We believe business advice should be too, so we have to help your business thrive in this work
-   environment situation.</>,
+   about_des: <>TechMate Solutions FZ LLC — empowering businesses worldwide with AI automation, web development, and digital growth strategies.
+   </>,
    phone_icon: "/assets/img/footer/call-icon.png",
-   address: <>1300 Don City, NYC</>,
-   phone: <>000-222-9090</>,
+   address: <>Business Bay, Dubai, UAE</>,
+   phone: <>contact@devmatesolutions.com</>,
    
 }
 
@@ -88,12 +88,12 @@ const Footer = ({tp_border}) => {
                       <span className="call-icon">
                         <img src={phone_icon} alt="" />
                       </span>
-                      <span>
-                        <span className="d-block mb-0">{address}</span>
-                        <b>
-                          <a href={`callto: ${phone}`}> Call Us: {phone}</a>
-                        </b>
-                      </span>
+                       <span>
+                         <span className="d-block mb-0">{address}</span>
+                         <b>
+                           <a href="mailto:contact@devmatesolutions.com">{phone}</a>
+                         </b>
+                       </span>
                     </div>
                   </div>
                   {/* Coommon Footer start */}
