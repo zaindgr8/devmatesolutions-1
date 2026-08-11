@@ -6,7 +6,7 @@ import ConsultationPayment from "../consultation/ConsultationPayment";
 const HeroAboutMe = () => {
   return (
     <>
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         /* ── CEO Section ── */
         .dm-ceo-section {
           padding: 100px 0 110px;
@@ -43,35 +43,19 @@ const HeroAboutMe = () => {
           padding: 16px 22px;
           border-radius: 12px;
           font-size: 13px;
-          font-weight: 700;
-          text-align: center;
-          line-height: 1.4;
-          box-shadow: 0 12px 32px rgba(192,57,43,0.25);
-          z-index: 2;
+          font-weight: 600;
+          box-shadow: 0 10px 30px rgba(192,57,43,0.35);
+          display: flex;
+          align-items: center;
+          gap: 12px;
         }
-        .dm-ceo-badge strong {
-          display: block;
-          font-size: 24px;
-          font-weight: 900;
-          letter-spacing: -0.5px;
-        }
-        @media (max-width: 767px) {
-          .dm-ceo-badge { right: 12px; bottom: 16px; }
-          .dm-ceo-img-wrap { max-width: 100%; }
+        .dm-ceo-badge-num {
+          font-size: 26px;
+          font-weight: 800;
+          line-height: 1;
         }
 
         /* ── Right: Content ── */
-        .dm-ceo-content {
-          padding-left: 48px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-        }
-        @media (max-width: 991px) { .dm-ceo-content { padding-left: 0; padding-top: 40px; } }
-
-        .dm-ceo-eyebrow {
-          display: inline-flex;
-          align-items: center;
           gap: 8px;
           font-size: 11px;
           font-weight: 700;

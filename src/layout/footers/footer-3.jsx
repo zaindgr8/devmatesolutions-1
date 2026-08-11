@@ -43,7 +43,7 @@ const FooterThree = () => {
 
   return (
     <>
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .dm-footer-section {
           background: #0d0d11;
           color: #9ca3af;
@@ -58,20 +58,6 @@ const FooterThree = () => {
           padding: 70px 0 45px;
         }
 
-        .dm-footer-widget-title {
-          font-size: 0.95rem;
-          font-weight: 700;
-          color: #ffffff;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          margin-bottom: 24px;
-          position: relative;
-          display: inline-block;
-        }
-
-        .dm-footer-widget-title::after {
-          content: '';
-          position: absolute;
           left: 0;
           bottom: -6px;
           width: 24px;

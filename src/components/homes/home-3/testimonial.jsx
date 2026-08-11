@@ -163,7 +163,7 @@ const Testimonial = () => {
 
   return (
     <>
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         /* ── Testimonial Dark Overrides ── */
         .dm-testimonial-section {
           background: #0d0d0d;
@@ -178,14 +178,12 @@ const Testimonial = () => {
           position: absolute;
           inset: 0;
           background-image:
-            linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
           background-size: 40px 40px;
           pointer-events: none;
         }
 
-        /* Glowing red radial highlight */
-        .dm-testimonial-section::after {
           content: '';
           position: absolute;
           bottom: -150px; left: -150px;

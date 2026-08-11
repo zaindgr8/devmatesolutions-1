@@ -287,8 +287,7 @@ export default function PayPage() {
         </p>
       </div>
 
-      {/* Ticker animation */}
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         @keyframes tickerScroll {
           from { transform: translateX(0); }
@@ -306,7 +305,7 @@ export default function PayPage() {
           50%       { transform: translateY(-30px) scale(1.05); }
         }
         * { box-sizing: border-box; }
-      `}</style>
+      ` }} />
     </>
   );
 }

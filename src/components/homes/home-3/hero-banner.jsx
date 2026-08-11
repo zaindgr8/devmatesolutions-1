@@ -8,7 +8,7 @@ const HeroBanner = () => {
   useEffect(() => { setMounted(true); }, []);
   return (
     <>
-      <style suppressHydrationWarning>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         /* ── Hero Section ── */
         .dm-hero {
           padding: 72px 0 80px;
@@ -29,72 +29,70 @@ const HeroBanner = () => {
         .dm-hero::after {
           content: '';
           position: absolute;
-          top: -60px; left: 30%;
-          width: 400px; height: 400px;
+          top: -80px; left: -80px;
+          width: 350px; height: 350px;
           background: radial-gradient(circle, rgba(192,57,43,0.03) 0%, transparent 70%);
           pointer-events: none;
         }
 
-        /* ── Location badge ── */
-        .dm-hero-location {
+        /* ── Left Column ── */
+        .dm-hero-badge {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          background: #f8f8f8;
-          border: 1px solid #e5e7eb;
-          border-radius: 24px;
-          padding: 7px 16px 7px 10px;
-          font-size: 12.5px;
-          font-weight: 600;
-          color: #374151;
-          margin-bottom: 24px;
-        }
-        .dm-hero-location-dot {
-          width: 7px; height: 7px;
-          background: #22c55e;
-          border-radius: 50%;
-          box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
-          animation: dm-pulse 2s ease-in-out infinite;
-          flex-shrink: 0;
-        }
-        @keyframes dm-pulse {
-          0%, 100% { box-shadow: 0 0 0 3px rgba(34,197,94,0.2); }
-          50% { box-shadow: 0 0 0 6px rgba(34,197,94,0.1); }
-        }
-        .dm-hero-location b { color: #0d0d0d; }
-
-        /* ── Headline ── */
-        .dm-hero-headline {
-          font-size: clamp(44px, 5.5vw, 72px);
-          font-weight: 900;
-          line-height: 1.08;
-          letter-spacing: -2px;
-          color: #0d0d0d;
-          margin-bottom: 16px;
-        }
-        .dm-hero-headline .dm-type-line {
+          padding: 6px 16px;
+          border-radius: 20px;
+          background: rgba(192,57,43,0.08);
+          border: 1px solid rgba(192,57,43,0.2);
           color: #c0392b;
-          display: block;
-          min-height: 1.1em;
+          font-size: 12.5px;
+          font-weight: 700;
+          letter-spacing: 0.3px;
+          margin-bottom: 22px;
+          text-transform: uppercase;
         }
-        @media (max-width: 767px) {
-          .dm-hero-headline { font-size: 38px; letter-spacing: -1px; }
+        .dm-hero-badge-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: #c0392b;
+          animation: pulseDot 2s infinite;
+        }
+        @keyframes pulseDot {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.5); opacity: 0.6; }
         }
 
-        /* ── Subtext ── */
-        .dm-hero-subtext {
-          font-size: 16px;
+        .dm-hero-title {
+          font-size: clamp(34px, 4.5vw, 56px);
+          font-weight: 900;
+          color: #0d0d0d;
+          line-height: 1.15;
+          letter-spacing: -1.5px;
+          margin-bottom: 20px;
+        }
+        .dm-hero-title .highlight {
+          color: #c0392b;
+          position: relative;
+          white-space: nowrap;
+        }
+
+        .dm-hero-subtitle {
+          font-size: 16.5px;
           color: #4b5563;
-          line-height: 1.7;
-          max-width: 420px;
+          line-height: 1.65;
+          margin-bottom: 32px;
+          max-width: 530px;
+        }
+
+        .dm-hero-ctas {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          flex-wrap: wrap;
           margin-bottom: 36px;
         }
 
-        /* ── CTA row ── */
-        .dm-hero-cta-row {
-          display: flex;
-          align-items: center;
-          flex-wrap: wrap;
           gap: 14px;
           margin-bottom: 44px;
         }

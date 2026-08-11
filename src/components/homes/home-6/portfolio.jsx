@@ -254,7 +254,7 @@ const Portfolio = () => {
 
   return (
     <>
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         /* ─── Section wrapper ─── */
         .dm-clients-section {
           padding: 100px 0 110px;
@@ -804,46 +804,37 @@ const Portfolio = () => {
         }
         .dm-modal-field input,
         .dm-modal-field textarea {
-          border: 1.5px solid #e5e7eb;
-          border-radius: 6px;
-          padding: 11px 14px;
+          width: 100%;
+          padding: 12px 16px;
+          border-radius: 10px;
+          border: 1px solid #d1d5db;
           font-size: 14px;
           color: #0d0d0d;
-          font-family: inherit;
           outline: none;
-          transition: border-color 0.2s ease;
-          resize: none;
+          transition: border-color 0.2s, box-shadow 0.2s;
+          font-family: inherit;
         }
         .dm-modal-field input:focus,
         .dm-modal-field textarea:focus {
           border-color: #c0392b;
-          box-shadow: 0 0 0 3px rgba(192,57,43,0.08);
+          box-shadow: 0 0 0 3px rgba(192,57,43,0.12);
         }
-        .dm-modal-field input::placeholder,
-        .dm-modal-field textarea::placeholder { color: #9ca3af; }
 
         .dm-modal-submit {
-          margin-top: 8px;
-          background: #0d0d0d;
-          color: #fff;
-          border: none;
-          padding: 14px 24px;
-          border-radius: 6px;
-          font-size: 14px;
-          font-weight: 700;
-          cursor: pointer;
-          display: flex; align-items: center; justify-content: center;
-          transition: all 0.25s ease;
-          font-family: inherit;
-        }
-        .dm-modal-submit:hover:not(:disabled) {
+          width: 100%;
           background: #c0392b;
-          transform: translateY(-1px);
-          box-shadow: 0 8px 20px rgba(192,57,43,0.2);
+          color: #ffffff;
+          padding: 14px;
+          border-radius: 10px;
+          font-size: 15px;
+          font-weight: 700;
+          border: none;
+          cursor: pointer;
+          transition: background 0.2s;
+          margin-top: 8px;
         }
-        .dm-modal-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+        .dm-modal-submit:hover { background: #e74c3c; }
 
-        /* ─── Success State ─── */
         .dm-modal-success {
           text-align: center;
           padding: 20px 0;
@@ -859,7 +850,7 @@ const Portfolio = () => {
         }
         .dm-modal-success h3 { font-size: 22px; font-weight: 800; color: #0d0d0d; margin-bottom: 8px; }
         .dm-modal-success p { font-size: 14px; color: #6b7280; }
-      `}</style>
+      ` }} />
 
       <div className="dm-clients-section" id="portfolio">
         <div className="container">

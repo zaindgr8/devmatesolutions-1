@@ -87,13 +87,12 @@ const FormModal = ({ isOpen, onClose }) => {
         </div>
       </div>
 
-      {/* Keyframe animation */}
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @keyframes modalSlideIn {
           from { transform: translateY(-30px) scale(0.95); opacity: 0; }
           to   { transform: translateY(0)    scale(1);    opacity: 1; }
         }
-      `}</style>
+      ` }} />
     </>
   );
 

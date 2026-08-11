@@ -19,7 +19,7 @@ const getFlag = (title) => {
 const OurTeam = () => {
   return (
     <>
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         /* ── Global Partners Section ── */
         .dm-partners-section {
           padding: 100px 0 110px;
@@ -38,80 +38,57 @@ const OurTeam = () => {
         }
 
         .dm-partners-subtitle-text {
-          font-size: 11px;
+          font-size: 12.5px;
           font-weight: 700;
-          letter-spacing: 2.5px;
+          letter-spacing: 1.5px;
           text-transform: uppercase;
-          color: #9ca3af;
+          color: #c0392b;
+          margin-bottom: 8px;
           display: block;
-          margin-bottom: 12px;
         }
 
-        .dm-partners-tagline {
-          font-size: 15px;
-          color: #6b7280;
-          max-width: 360px;
-          line-height: 1.65;
+        .dm-partners-title {
+          font-size: clamp(28px, 4vw, 42px);
+          font-weight: 800;
+          color: #0d0d0d;
+          line-height: 1.2;
+          margin: 0;
         }
 
-        /* ── Partner Card Layout ── */
-        .dm-partner-grid {
-          display: flex;
-          justify-content: center;
-          max-width: 460px;
-          margin: 0 auto;
+        .dm-partners-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 24px;
         }
 
+        @media (max-width: 991px) {
+          .dm-partners-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        }
+        @media (max-width: 575px) {
+          .dm-partners-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Card design */
         .dm-partner-card {
-          width: 100%;
           background: #ffffff;
-          border: 1px solid #e5e7eb;
           border-radius: 16px;
-          padding: 32px 28px;
+          border: 1px solid #e5e7eb;
+          padding: 32px 24px;
           display: flex;
           flex-direction: column;
-          align-items: flex-start;
-          transition: all 0.25s ease;
+          align-items: center;
+          text-align: center;
+          transition: all 0.3s ease;
           position: relative;
-          overflow: hidden;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-        }
-
-        .dm-partner-card::after {
-          content: '';
-          position: absolute;
-          top: 0; left: 0; right: 0;
-          height: 3px;
-          background: linear-gradient(90deg, #bd2120, #e63939);
-          opacity: 0.9;
         }
 
         .dm-partner-card:hover {
-          box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
-          transform: translateY(-3px);
-        }
-
-        .dm-partner-photo-wrap {
-          width: 84px;
-          height: 84px;
-          border-radius: 50%;
-          overflow: hidden;
-          margin-bottom: 18px;
-          border: 3px solid #f3f4f6;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-          flex-shrink: 0;
-        }
-
-        .dm-partner-photo-wrap img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
+          transform: translateY(-4px);
+          border-color: rgba(192,57,43,0.3);
+          box-shadow: 0 16px 36px rgba(0,0,0,0.08);
         }
 
         .dm-partner-flag {
-          position: absolute;
-          top: 24px;
-          right: 24px;
           font-size: 28px;
           line-height: 1;
         }

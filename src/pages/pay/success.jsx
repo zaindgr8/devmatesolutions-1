@@ -89,7 +89,7 @@ export default function PaySuccessPage() {
           </p>
         </div>
 
-        <style>{`
+        <style dangerouslySetInnerHTML={{ __html: `
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
           @keyframes orbFloat {
             0%, 100% { transform: translateY(0) scale(1); }
@@ -107,7 +107,7 @@ export default function PaySuccessPage() {
             0%, 100% { box-shadow: 0 0 30px rgba(99,102,241,0.4); }
             50%       { box-shadow: 0 0 60px rgba(99,102,241,0.7); }
           }
-        `}</style>
+        ` }} />
       </div>
     </>
   );

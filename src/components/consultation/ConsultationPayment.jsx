@@ -760,7 +760,7 @@ const ConsultationPayment = ({ mode = "buttons" }) => {
   // ── Render ─────────────────────────────────────────────────────
   return (
     <>
-      <style>{CSS}</style>
+      <style dangerouslySetInnerHTML={{ __html: CSS }} />
 
       {/* ── Buttons row ── */}
       {mode === "buttons" && (

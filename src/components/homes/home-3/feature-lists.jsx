@@ -97,7 +97,7 @@ const FeatureLists = () => {
 
   return (
     <>
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .dm-stats-section {
           background: #0d0d0d;
           position: relative;
@@ -239,7 +239,7 @@ const FeatureLists = () => {
           }
           .dm-stat-sub { display: none; }
         }
-      `}</style>
+      ` }} />
 
       <div className="dm-stats-section" ref={ref}>
         <div className="dm-stats-inner">

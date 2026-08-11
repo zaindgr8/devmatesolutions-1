@@ -23,7 +23,7 @@ const About = () => {
   return (
     <>
       {showModal && <FormModal />}
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         /* ── About Section ── */
         .dm-about-section {
           padding: 100px 0 110px;
@@ -43,72 +43,74 @@ const About = () => {
         }
 
         /* ── Left image col ── */
-        .dm-about-img-col {
+        .dm-about-media {
           position: relative;
         }
+
         .dm-about-img-wrap {
-          position: relative;
-          display: inline-block;
-          width: 100%;
+          border-radius: 16px;
+          overflow: hidden;
+          box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+          border: 1px solid #f0f0f0;
+          aspect-ratio: 4/3;
+          background: #f8fafc;
         }
         .dm-about-img-wrap img {
           width: 100%;
-          max-width: 520px;
+          height: 100%;
+          object-fit: cover;
           display: block;
         }
 
-        /* Floating year badge */
-        .dm-about-year-badge {
+        /* Floating experience card */
+        .dm-about-exp-card {
           position: absolute;
-          bottom: 40px;
-          right: 0px;
+          bottom: -24px;
+          right: -20px;
           background: #0d0d0d;
           color: #fff;
-          padding: 18px 24px;
-          border-radius: 12px;
-          text-align: center;
-          box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+          padding: 22px 28px;
+          border-radius: 14px;
+          box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          border: 1px solid rgba(255,255,255,0.08);
+          z-index: 2;
         }
-        .dm-about-year-badge strong {
-          display: block;
-          font-size: 32px;
+        .dm-about-exp-num {
+          font-size: 40px;
           font-weight: 900;
+          color: #c0392b;
           line-height: 1;
-          color: #e74c3c;
+          letter-spacing: -1px;
         }
-        .dm-about-year-badge span {
-          font-size: 11px;
-          font-weight: 600;
-          letter-spacing: 1.5px;
-          text-transform: uppercase;
-          opacity: 0.7;
-          margin-top: 4px;
+        .dm-about-exp-text {
+          font-size: 13px;
+          color: #9ca3af;
+          font-weight: 500;
+          line-height: 1.4;
+        }
+        .dm-about-exp-text strong {
+          color: #fff;
           display: block;
+          font-size: 14px;
         }
 
-        /* ── Right content col ── */
+        @media (max-width: 991px) {
+          .dm-about-media { margin-bottom: 56px; }
+          .dm-about-exp-card { right: 16px; bottom: -16px; }
+        }
+
+        /* ── Right text col ── */
         .dm-about-content {
-          padding-left: 40px;
+          padding-left: 24px;
         }
         @media (max-width: 991px) {
-          .dm-about-content { padding-left: 0; margin-top: 48px; }
+          .dm-about-content { padding-left: 0; }
         }
 
         .dm-about-eyebrow {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 2.5px;
-          text-transform: uppercase;
-          color: #c0392b;
-          margin-bottom: 16px;
-        }
-        .dm-about-eyebrow::before {
-          content: '';
-          width: 20px; height: 2px;
-          background: #c0392b;
           border-radius: 2px;
         }
 
