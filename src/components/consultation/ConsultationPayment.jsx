@@ -801,20 +801,20 @@ const ConsultationPayment = ({ mode = "buttons" }) => {
                 Ziina — Card / Apple Pay
               </button>
 
-              {/* NOWPayments — crypto */}
+              {/* NOWPayments — Fiat On-Ramp & Crypto */}
               <a
                 href="/pay"
                 className="dm-book-trigger-btn dm-crypto-btn"
                 style={{ textDecoration: "none" }}
-                title="Pay with Bitcoin, ETH, USDT & 300+ cryptocurrencies"
+                title="Pay in USD (Card / Apple Pay) or 300+ Cryptocurrencies via NOWPayments"
               >
-                <span style={{ fontSize: "18px", lineHeight: 1 }}>₿</span>
-                NOWPayments — Crypto
+                <span style={{ fontSize: "18px", lineHeight: 1 }}>⚡</span>
+                NOWPayments — Card / Crypto
               </a>
             </div>
           </div>
 
-          {/* Crypto accepted badge */}
+          {/* Crypto & Fiat accepted badge */}
           <div style={{
             display: "flex",
             alignItems: "center",
@@ -829,8 +829,8 @@ const ConsultationPayment = ({ mode = "buttons" }) => {
             fontWeight: 600,
             letterSpacing: "0.3px",
           }}>
-            <span>Crypto accepted:</span>
-            {["₿", "Ξ", "◎", "₮"].map((sym, i) => (
+            <span>Fiat On-Ramp & Crypto:</span>
+            {["💳", "₿", "Ξ", "₮"].map((sym, i) => (
               <span key={i} style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -838,13 +838,13 @@ const ConsultationPayment = ({ mode = "buttons" }) => {
                 width: "24px",
                 height: "24px",
                 borderRadius: "50%",
-                background: ["#F7931A","#627EEA","#9945FF","#26A17B"][i],
+                background: ["#2563EB","#F7931A","#627EEA","#26A17B"][i],
                 color: "#fff",
                 fontSize: "11px",
                 fontWeight: 700,
               }}>{sym}</span>
             ))}
-            <span style={{ color: "#888", fontWeight: 400 }}>& 300+ more via NOWPayments</span>
+            <span style={{ color: "#888", fontWeight: 400 }}>Card, USD & 300+ Cryptos via NOWPayments</span>
           </div>
 
           {/* Free team meeting */}

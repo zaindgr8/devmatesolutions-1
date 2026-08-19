@@ -37,8 +37,8 @@ const PRODUCTS = [
   },
 ];
 
-// ─── Popular crypto icons (decorative) ───────────────────────────────────────
-const CRYPTO_ICONS = ["BTC", "ETH", "USDT", "SOL", "BNB", "USDC", "TON", "XRP"];
+// ─── Popular payment methods (decorative ticker) ───────────────────────────────
+const PAYMENT_ICONS = ["💳 Card (USD)", " Apple Pay", "BTC", "ETH", "USDT", "SOL", "BNB", "USDC", "🏦 Bank Transfer"];
 
 export default function PayPage() {
   const [selectedId, setSelectedId] = useState("session-1on1");
@@ -104,10 +104,10 @@ export default function PayPage() {
   return (
     <>
       <Head>
-        <title>Pay with Crypto — DevMate Solutions</title>
+        <title>Pay in USD or Crypto — DevMate Solutions</title>
         <meta
           name="description"
-          content="Securely pay for DevMate Solutions services using cryptocurrency. Powered by NOWPayments."
+          content="Pay for DevMate Solutions services using Credit Card, Apple Pay (USD Fiat-to-Crypto On-Ramp) or Cryptocurrency. Powered by NOWPayments."
         />
       </Head>
 
@@ -128,17 +128,17 @@ export default function PayPage() {
         <div style={styles.heroWrap}>
           <div style={styles.badge}>
             <span style={styles.badgeDot} />
-            Powered by NOWPayments
+            Powered by NOWPayments — Fiat & Crypto On-Ramp
           </div>
           <h1 style={styles.hero}>Pay DevMate Solutions</h1>
           <p style={styles.heroSub}>
-            Secure checkout. Pay by card, Apple Pay, or crypto.
+            Secure checkout. Pay USD via Card, Apple Pay, Bank Transfer, or Crypto.
           </p>
 
-          {/* Scrolling crypto ticker */}
+          {/* Scrolling payment ticker */}
           <div style={styles.tickerWrap}>
             <div style={styles.tickerTrack}>
-              {[...CRYPTO_ICONS, ...CRYPTO_ICONS].map((c, i) => (
+              {[...PAYMENT_ICONS, ...PAYMENT_ICONS].map((c, i) => (
                 <span key={i} style={styles.tickerChip}>
                   {c}
                 </span>

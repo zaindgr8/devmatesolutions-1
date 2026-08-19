@@ -1,12 +1,29 @@
 const team_data = [
   {
     id: 1,
-    img: "/assets/img/team/ay.png",
+    img: "/assets/img/team/ahmed-alkindi.png",
     name: "Ahmed Yahya Al Kindi",
     title: "Partner in Oman",
-    delay: ".5s",
+    delay: ".3s",
     link: "https://www.linkedin.com/in/ahmedyahyak/",
     website: "https://www.ahmedyahyak.com/",
+  },
+  {
+    id: 101,
+    img: "/assets/img/team/elvira.png",
+    name: "Elvira",
+    title: "Partner in UAE",
+    delay: ".5s",
+    instagram: "https://www.instagram.com/elvira_in_dubai/",
+  },
+  {
+    id: 102,
+    img: "/assets/img/team/aya-ferhat.png",
+    name: "Aya Ferhat",
+    title: "Partner in UAE",
+    delay: ".7s",
+    link: "https://www.linkedin.com/in/ayaferhat93/",
+    instagram: "https://www.instagram.com/aya_.ferhat/",
   },
   {
     id: 3,

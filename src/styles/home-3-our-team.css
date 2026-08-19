@@ -159,3 +159,11 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(189, 33, 32, 0.3);
 }
+
+.dm-partner-icon-btn.dm-instagram:hover {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  border-color: #dc2743;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 39, 67, 0.35);
+}
