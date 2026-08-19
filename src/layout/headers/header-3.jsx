@@ -25,7 +25,7 @@ const HeaderThree = () => {
           <div className="container-fluid">
             <div className="tp-da-header__main">
               <div className="row align-items-center">
-                <div className="col-xl-3 col-3">
+                <div className="col-xl-2 col-3">
                   <div className="logo">
                     <Link href="/">
                       <img src="/red-logo.png" className="w-20" alt="logo" />
@@ -41,8 +41,8 @@ const HeaderThree = () => {
                   </div>
                 </div>
 
-                <div className="col-xl-3 d-none d-xl-block">
-                  <div className="da-header-cta-btn d-flex align-items-center justify-content-end" style={{ gap: 10 }}>
+                <div className="col-xl-4 d-none d-xl-block">
+                  <div className="da-header-cta-btn d-flex align-items-center justify-content-end" style={{ gap: 10, flexWrap: "nowrap" }}>
                     <Link
                       href="/aileadmanagement"
                       target="_blank"
@@ -55,14 +55,15 @@ const HeaderThree = () => {
                         color: "#ffffff",
                         fontWeight: 700,
                         fontSize: 13,
-                        padding: "10px 20px",
+                        padding: "10px 18px",
                         borderRadius: 8,
                         textDecoration: "none",
                         border: "1.5px solid #0d0d0d",
                         transition: "all 0.22s ease",
                         whiteSpace: "nowrap",
                         letterSpacing: "0.2px",
-                        lineHeight: "1.4",
+                        lineHeight: 1,
+                        flexShrink: 0,
                       }}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.background = "#bd2120";
@@ -81,15 +82,20 @@ const HeaderThree = () => {
                       className="tp-grd-btn"
                       style={{
                         fontSize: 13,
-                        padding: "10px 20px",
+                        padding: "10px 18px",
                         borderRadius: 8,
-                        lineHeight: "1.4",
+                        lineHeight: 1,
                         textTransform: "none",
                         letterSpacing: "0.2px",
+                        whiteSpace: "nowrap",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 8,
+                        flexShrink: 0,
                       }}
                     >
                       Get Instant Call
-                      <span className="ml-10">
+                      <span style={{ display: "inline-flex", alignItems: "center", position: "relative", width: 14, height: 14 }}>
                         <i className="fal fa-long-arrow-right"></i>
                         <i className="fal fa-long-arrow-right"></i>
                       </span>

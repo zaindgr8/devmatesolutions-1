@@ -20,8 +20,40 @@ const RESPONSE_OPTIONS = [
   { key: "nextday", label: "Next day" },
 ];
 
+const getSuggestedPackage = (leadCount) => {
+  if (leadCount <= 80) {
+    return {
+      name: "Speed-to-Lead",
+      price: "AED 2,490 / mo",
+      badge: "Best Fit for Your Volume",
+      reason: "Optimized for boutique teams (3–10 agents) handling up to 1,000 monthly conversations.",
+    };
+  } else if (leadCount <= 220) {
+    return {
+      name: "Pipeline",
+      price: "AED 4,900 / mo",
+      badge: "Recommended for Your Volume",
+      reason: "Covers 10–40 agents with inbound voice, full portal sync, and 4,000 monthly conversations.",
+    };
+  } else if (leadCount <= 420) {
+    return {
+      name: "Brokerage Command",
+      price: "AED 9,900 / mo",
+      badge: "High-Volume Powerhouse",
+      reason: "Full multi-channel triage, closed-deal attribution, and 12,000 conversations for 40–100 agents.",
+    };
+  } else {
+    return {
+      name: "Developer / Master Broker",
+      price: "From AED 25,000 / mo",
+      badge: "Enterprise Launch Grade",
+      reason: "Unlimited conversation capacity, project launch triage, and automated sub-broker distribution.",
+    };
+  }
+};
+
 // ─── Lead Leak Calculator ─────────────────────────────────────────
-function LeadLeakCalculator({ onCtaClick }) {
+function LeadLeakCalculator({ onCtaClick, onSuggestTier }) {
   const [mode, setMode] = useState("basic"); // "basic" | "advanced"
 
   // Shared inputs
@@ -34,6 +66,15 @@ function LeadLeakCalculator({ onCtaClick }) {
   const [portalSpend, setPortalSpend] = useState(15000);
 
   const calcRef = useRef(null);
+
+  // Suggested Package
+  const suggestedPackage = getSuggestedPackage(leads);
+
+  useEffect(() => {
+    if (onSuggestTier) {
+      onSuggestTier(suggestedPackage.name);
+    }
+  }, [leads, onSuggestTier]);
 
   // ── Core calculations (shared) ──
   const leakRate = RESPONSE_LEAK[responseTime];
@@ -126,6 +167,34 @@ function LeadLeakCalculator({ onCtaClick }) {
         <p className="ailm-calc-stat-sub" style={{ color: "#374151" }}>
           AI replies in <strong style={{ color: "#bd2120" }}>&lt; 60 seconds</strong> · 24/7 — on WhatsApp &amp; web.
         </p>
+      </div>
+
+      {/* Suggested Package recommendation card */}
+      <div className="ailm-calc-suggested-pkg">
+        <div className="ailm-calc-suggested-header">
+          <span className="ailm-calc-suggested-badge">
+            <i className="fal fa-sparkles" style={{ marginRight: 5 }}></i>
+            Recommended Package
+          </span>
+          <a
+            href="#pricing"
+            className="ailm-calc-suggested-link"
+            onClick={(e) => {
+              e.preventDefault();
+              const el = document.getElementById("pricing");
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            Compare all tiers <i className="fal fa-arrow-down" style={{ fontSize: 11 }}></i>
+          </a>
+        </div>
+        <div className="ailm-calc-suggested-body">
+          <div className="ailm-calc-suggested-tier-info">
+            <h4 className="ailm-calc-suggested-name">{suggestedPackage.name}</h4>
+            <span className="ailm-calc-suggested-price">{suggestedPackage.price}</span>
+          </div>
+          <p className="ailm-calc-suggested-reason">{suggestedPackage.reason}</p>
+        </div>
       </div>
 
       {/* Advanced extras */}
@@ -392,6 +461,7 @@ const faqs = [
 export default function AILeadManagement() {
   const [showModal, setShowModal] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
+  const [suggestedTier, setSuggestedTier] = useState("Pipeline");
 
   return (
     <>
@@ -460,7 +530,10 @@ export default function AILeadManagement() {
         </section>
 
         {/* ─── LEAD LEAK CALCULATOR ─── */}
-        <LeadLeakCalculator onCtaClick={() => setShowModal(true)} />
+        <LeadLeakCalculator
+          onCtaClick={() => setShowModal(true)}
+          onSuggestTier={setSuggestedTier}
+        />
 
         {/* ─── PROBLEM: WHERE DEALS LEAK ─── */}
         <section className="ailm-section ailm-section--light">
@@ -649,35 +722,50 @@ export default function AILeadManagement() {
               <p className="ailm-section-sub ailm-sub--light">A custom build of this scope costs AED 80,000–250,000 in Dubai. This is delivered as a managed product, live in two weeks.</p>
             </div>
             <div className="ailm-pricing-grid">
-              {pricingTiers.map((tier, i) => (
-                <div className={`ailm-pricing-card ${tier.highlight ? "ailm-pricing-card--featured" : ""}`} key={i}>
-                  {tier.badge && <span className="ailm-pricing-badge">{tier.badge}</span>}
-                  <h3 className="ailm-pricing-name">{tier.name}</h3>
-                  <p className="ailm-pricing-best">{tier.bestFor}</p>
-                  <div className="ailm-pricing-price">
-                    <span className="ailm-pricing-amount">{tier.monthly}</span>
-                    <span className="ailm-pricing-period">/ month</span>
-                  </div>
-                  <div className="ailm-pricing-setup">Setup: {tier.setup}</div>
-                  <ul className="ailm-pricing-features">
-                    <li><i className="fal fa-check"></i> {tier.channels}</li>
-                    <li><i className="fal fa-check"></i> {tier.voice}</li>
-                    <li><i className="fal fa-check"></i> {tier.conversations} conversations</li>
-                    <li><i className="fal fa-check"></i> Languages: {tier.languages}</li>
-                    <li><i className="fal fa-check"></i> Lead scoring: {tier.leadScoring}</li>
-                    <li><i className="fal fa-check"></i> CRM: {tier.crm}</li>
-                    <li><i className="fal fa-check"></i> Compliance: {tier.compliance}</li>
-                  </ul>
-                  <button
-                    className={`ailm-pricing-cta ${tier.highlight ? "ailm-pricing-cta--featured" : ""}`}
-                    id={`pricing-cta-${tier.name.replace(/\s+/g, "-").toLowerCase()}`}
-                    onClick={() => setShowModal(true)}
+              {pricingTiers.map((tier, i) => {
+                const isSuggested = tier.name === suggestedTier;
+                const isFeatured = isSuggested || (tier.highlight && !suggestedTier);
+
+                return (
+                  <div
+                    id={`pricing-card-${tier.name.toLowerCase().replace(/[^a-z0-9]/g, "-")}`}
+                    className={`ailm-pricing-card ${isFeatured ? "ailm-pricing-card--featured" : ""} ${isSuggested ? "ailm-pricing-card--suggested" : ""}`}
+                    key={i}
                   >
-                    Get Started
-                    <i className="fal fa-long-arrow-right ml-2"></i>
-                  </button>
-                </div>
-              ))}
+                    {isSuggested ? (
+                      <span className="ailm-pricing-badge ailm-pricing-badge--suggested">
+                        🎯 Recommended for You
+                      </span>
+                    ) : (
+                      tier.badge && <span className="ailm-pricing-badge">{tier.badge}</span>
+                    )}
+                    <h3 className="ailm-pricing-name">{tier.name}</h3>
+                    <p className="ailm-pricing-best">{tier.bestFor}</p>
+                    <div className="ailm-pricing-price">
+                      <span className="ailm-pricing-amount">{tier.monthly}</span>
+                      <span className="ailm-pricing-period">/ month</span>
+                    </div>
+                    <div className="ailm-pricing-setup">Setup: {tier.setup}</div>
+                    <ul className="ailm-pricing-features">
+                      <li><i className="fal fa-check"></i> {tier.channels}</li>
+                      <li><i className="fal fa-check"></i> {tier.voice}</li>
+                      <li><i className="fal fa-check"></i> {tier.conversations} conversations</li>
+                      <li><i className="fal fa-check"></i> Languages: {tier.languages}</li>
+                      <li><i className="fal fa-check"></i> Lead scoring: {tier.leadScoring}</li>
+                      <li><i className="fal fa-check"></i> CRM: {tier.crm}</li>
+                      <li><i className="fal fa-check"></i> Compliance: {tier.compliance}</li>
+                    </ul>
+                    <button
+                      className={`ailm-pricing-cta ${isFeatured ? "ailm-pricing-cta--featured" : ""}`}
+                      id={`pricing-cta-${tier.name.replace(/\s+/g, "-").toLowerCase()}`}
+                      onClick={() => setShowModal(true)}
+                    >
+                      Get Started
+                      <i className="fal fa-long-arrow-right ml-2"></i>
+                    </button>
+                  </div>
+                );
+              })}
             </div>
 
             {/* Pilot offer */}
