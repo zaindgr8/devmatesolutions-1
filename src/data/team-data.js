@@ -2,7 +2,7 @@ const team_data = [
   {
     id: 1,
     img: "/assets/img/team/ahmed-alkindi.png",
-    name: "Ahmed Yahya Al Kindi",
+    name: "Ahmed Al Kindi",
     title: "Partner in Oman",
     delay: ".3s",
     link: "https://www.linkedin.com/in/ahmedyahyak/",

@@ -42,10 +42,51 @@ const HeaderThree = () => {
                 </div>
 
                 <div className="col-xl-3 d-none d-xl-block">
-                  <div className="da-header-cta-btn d-flex align-items-center justify-content-end">
+                  <div className="da-header-cta-btn d-flex align-items-center justify-content-end" style={{ gap: 10 }}>
+                    <Link
+                      href="/aileadmanagement"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 6,
+                        background: "#0d0d0d",
+                        color: "#ffffff",
+                        fontWeight: 700,
+                        fontSize: 13,
+                        padding: "10px 20px",
+                        borderRadius: 8,
+                        textDecoration: "none",
+                        border: "1.5px solid #0d0d0d",
+                        transition: "all 0.22s ease",
+                        whiteSpace: "nowrap",
+                        letterSpacing: "0.2px",
+                        lineHeight: "1.4",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = "#bd2120";
+                        e.currentTarget.style.borderColor = "#bd2120";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = "#0d0d0d";
+                        e.currentTarget.style.borderColor = "#0d0d0d";
+                      }}
+                    >
+                      <i className="fal fa-robot" style={{ fontSize: 12 }}></i>
+                      AI Lead Management
+                    </Link>
                     <button
                       onClick={() => setShowModal(true)}
                       className="tp-grd-btn"
+                      style={{
+                        fontSize: 13,
+                        padding: "10px 20px",
+                        borderRadius: 8,
+                        lineHeight: "1.4",
+                        textTransform: "none",
+                        letterSpacing: "0.2px",
+                      }}
                     >
                       Get Instant Call
                       <span className="ml-10">
@@ -53,17 +94,6 @@ const HeaderThree = () => {
                         <i className="fal fa-long-arrow-right"></i>
                       </span>
                     </button>
-                    {/* <p className="mt-10 mb-0">
-                      or send an
-                      <b>
-                        <a
-                          className="ml-2"
-                          href="mailto:contact@devmatesolutions.com"
-                        >
-                          <i className="fal fa-envelope ml-1"></i> EMAIL
-                        </a>
-                      </b>
-                    </p> */}
                   </div>
                 </div>
 

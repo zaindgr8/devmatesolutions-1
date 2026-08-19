@@ -53,7 +53,7 @@ const HeroBanner = () => {
 
               {/* Subtext */}
               <p className="dm-hero-subtext wow tpfadeUp" data-wow-delay=".2s">
-                We engineer competitive software, AI solutions, and digital campaigns for startups and global enterprises — from Dubai to New York.
+                We engineer competitive software, AI solutions, and digital campaigns for startups and global enterprises — Across the Globe.
               </p>
 
               {/* CTAs */}

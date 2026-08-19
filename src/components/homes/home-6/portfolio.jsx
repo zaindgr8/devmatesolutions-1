@@ -985,7 +985,7 @@ const Portfolio = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleFormChange}
-                      placeholder="+971 50 000 0000"
+                      placeholder="+971542968754"
                     />
                   </div>
                   <div className="dm-modal-field">

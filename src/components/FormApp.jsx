@@ -17,18 +17,37 @@ const FormApp = () => {
     const email = form.email.value;
     const country = form.country.value;
     const contact = form.contact.value;
+
+    // Detect source page for the notification email
+    const source =
+      typeof window !== "undefined"
+        ? window.location.pathname === "/aileadmanagement"
+          ? "AI Lead Management Page"
+          : `Website (${window.location.pathname})`
+        : "Website";
+
     try {
+      // 1. Send to Make.com webhook (primary CRM flow)
       const res = await fetch(
         "https://hook.eu2.make.com/1zy2xcx4j4twvg8f1gbjqbcxlstd2r6v",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, country, contact }),
+          body: JSON.stringify({ name, email, country, contact, source }),
         }
       );
+
       if (res.ok) {
         setSuccess(true);
         form.reset();
+
+        // 2. Fire lead notification email (non-blocking — don't await)
+        fetch("/api/send-lead-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, country, contact, source }),
+        }).catch((err) => console.warn("Lead email notification failed:", err));
+
       } else {
         setError(true);
       }
