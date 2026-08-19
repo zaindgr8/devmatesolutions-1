@@ -22,7 +22,15 @@ const About = () => {
 
   return (
     <>
-      {showModal && <FormModal />}
+      {showModal && (
+        <FormModal
+          isOpen={showModal}
+          onClose={() => setShowModal(false)}
+          title="Get Instant Call"
+          subtitle="Fill in your details — receive a call from DevMate Solutions within 60 seconds"
+          triggerCall={true}
+        />
+      )}
 
       <div className="dm-about-section">
         <div className="container">
@@ -103,9 +111,21 @@ const About = () => {
                       <i className="fal fa-long-arrow-right"></i>
                     </span>
                   </button>
-                  <Link href="/services" className="dm-about-secondary-link">
-                    View All Services <i className="fal fa-long-arrow-right"></i>
-                  </Link>
+                  <a
+                    href="#ceo"
+                    className="dm-about-secondary-link"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const el = document.getElementById("ceo");
+                      if (el) {
+                        el.scrollIntoView({ behavior: "smooth" });
+                      } else {
+                        window.location.href = "/#ceo";
+                      }
+                    }}
+                  >
+                    Book 1:1 Session <i className="fal fa-long-arrow-right"></i>
+                  </a>
                 </div>
 
               </div>

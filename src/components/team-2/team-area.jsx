@@ -25,8 +25,15 @@ const TeamArea = () => {
               .map((item, i) => (
               <div key={i} className="col-md-6 col-lg-4 col-xl-3">
                 <div className="ca-team-item mb-30 wow tpfadeUp">
-                  <div className="ca-team-item__img ca-team-item-after w-img mb-35 fix">
-                    <img src={item.img} alt={item.name} />
+                  <div
+                    className="ca-team-item__img ca-team-item-after w-img mb-25 fix"
+                    style={{ width: "100%", aspectRatio: "1 / 1.15", overflow: "hidden", borderRadius: "12px", background: "#18181b" }}
+                  >
+                    <img
+                      src={item.img}
+                      alt={item.name}
+                      style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
+                    />
                     <div className="ca-team-item__img-social">
                       <a href="#">
                         <i className="fab fa-facebook-f"></i>

@@ -11,7 +11,7 @@ const PRODUCTS = [
     id: "session-1on1",
     label: "1:1 Strategy Session",
     description: "Direct strategy session with Zain Ul Abideen",
-    amount: 299,
+    amount: 599,
     icon: "💡",
   },
   {

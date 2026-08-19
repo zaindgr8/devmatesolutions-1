@@ -129,7 +129,13 @@ const Sidebar = ({isActive, setIsActive}) => {
 
             {/* Modal - same as desktop */}
             {showModal && (
-              <FormModal isOpen={showModal} onClose={() => setShowModal(false)} />
+              <FormModal
+                isOpen={showModal}
+                onClose={() => setShowModal(false)}
+                title="Get Instant Call"
+                subtitle="Fill in your details — receive a call from DevMate Solutions within 60 seconds"
+                triggerCall={true}
+              />
             )}
 
             {/* <div className="tp-offcanvas__bottom mt-80 d-none d-lg-block">

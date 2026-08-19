@@ -25,10 +25,10 @@ const OurTeam = () => {
 
           <div className="row">
             {(() => {
-              const visibleMembers = team_data.slice(3, 18);
+              const visibleMembers = team_data.slice(3);
               const reordered = [
                 ...visibleMembers.slice(-5),
-                ...visibleMembers.slice(0, 10),
+                ...visibleMembers.slice(0, -5),
               ];
               return reordered;
             })().map((item, i) => (
@@ -37,8 +37,15 @@ const OurTeam = () => {
                   className="ca-team-item mb-30 wow tpfadeUp"
                   data-wow-delay=".5s"
                 >
-                  <div className=" w-img mb-35 fix">
-                    <img src={item.img} alt="" />
+                  <div
+                    className="w-img mb-25 fix"
+                    style={{ width: "100%", aspectRatio: "1 / 1.15", overflow: "hidden", borderRadius: "12px", background: "#18181b" }}
+                  >
+                    <img
+                      src={item.img}
+                      alt={item.name}
+                      style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
+                    />
                     {/* <div className="ca-team-item__img-social">
                                     <a href="#"><i className="fab fa-facebook-f"></i></a>
                                     <a href="#"><i className="fab fa-twitter"></i></a>

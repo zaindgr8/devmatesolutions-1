@@ -42,7 +42,7 @@ export default function RefundPolicyPage() {
                     making a purchase.
                   </p>
 
-                  <h4 className="tp-inner-pt-section__title mb-30">1. Strategy Sessions (1:1 with Zain Ul Abideen — $299)</h4>
+                  <h4 className="tp-inner-pt-section__title mb-30">1. Strategy Sessions (1:1 with Zain Ul Abideen — $599)</h4>
                   <p className="mb-20">
                     <strong>Full refund:</strong> You may cancel and receive a full refund up to{" "}
                     <strong>48 hours before the scheduled session</strong>. To cancel, email{" "}

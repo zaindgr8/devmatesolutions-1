@@ -10,7 +10,7 @@ const SITE = process.env.NEXT_PUBLIC_SITE_URL;   // https://www.devmatesolutions
 
 // Server-side price list — never trust an amount sent from the browser.
 const PRODUCTS = {
-  "session-1on1":   { amount: 299,  label: "1:1 Strategy Session with Zain Ul Abideen" },
+  "session-1on1":   { amount: 599,  label: "1:1 Strategy Session with Zain Ul Abideen" },
   "deposit-seo":    { amount: 750,  label: "SEO Retainer — Initial Deposit" },
   "deposit-web":    { amount: 1500, label: "Web Development — Project Deposit" },
   "invoice-custom": { amount: 0,    label: "DevMate Solutions — Invoice Payment" },

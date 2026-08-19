@@ -3,7 +3,7 @@ const service_data = [
   // service data home 2
   {
     id: 1,
-    link: "/service-3",
+    link: "/ourservices",
     img: "/assets/img/services/icon/it-service-1.png",
     title: "Web Development",
     des: (
@@ -15,7 +15,7 @@ const service_data = [
   },
   {
     id: 2,
-    link: "/service-3",
+    link: "/ourservices",
     img: "/assets/img/services/icon/it-service-2.png",
     title: "App Development",
     des: (
@@ -27,7 +27,7 @@ const service_data = [
   },
   {
     id: 3,
-    link: "/service-3",
+    link: "/ourservices",
     img: "/assets/img/services/icon/it-service-3.png",
     title: "Social Media Marketing",
     des: (

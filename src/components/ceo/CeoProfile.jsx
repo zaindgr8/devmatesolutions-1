@@ -64,7 +64,7 @@ const CeoProfile = () => {
                 <p className="text-lg text-gray-500 dark:text-gray-400">
                   As a forward-thinking company, we are relentlessly working on
                   AI and innovation to stay ahead. With our Vision 2030, we
-                  aspire to become a tech giant and lead the tech industry.
+                  aspire to become a unicorn and lead the tech industry.
                 </p>
 
                 <div className="discovery-box p-25 bg-white dark:bg-[#18181b] rounded-xl shadow-lg border border-gray-100 dark:border-gray-800">

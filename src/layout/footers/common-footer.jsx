@@ -31,11 +31,11 @@ const footer_links = [
     title: "Services",
     col: "col-xl-2",
     links: [
-      { title: "Business Consultancy", link: "/service-3" },
-      { title: "Web Development", link: "/service-3" },
-      { title: "UI & UX Design", link: "/service-3" },
-      { title: "SEO Optimization", link: "/service-3" },
-      { title: "Digital Marketing", link: "/service-3" },
+      { title: "Business Consultancy", link: "/ourservices" },
+      { title: "Web Development", link: "/ourservices" },
+      { title: "UI & UX Design", link: "/ourservices" },
+      { title: "SEO Optimization", link: "/ourservices" },
+      { title: "Digital Marketing", link: "/ourservices" },
     ],
   },
 ];

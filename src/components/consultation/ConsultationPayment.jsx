@@ -358,22 +358,30 @@ const CSS = `
 
   /* ── Ziina variant (card / Apple Pay) ── */
   .dm-ziina-btn {
-    background: #059669;
-    box-shadow: 0 8px 28px rgba(5,150,105,0.3);
+    background: #bd2120;
+    color: #ffffff;
+    box-shadow: 0 8px 24px rgba(189,33,32,0.25);
   }
   .dm-ziina-btn:hover {
-    background: #047857;
-    box-shadow: 0 16px 40px rgba(5,150,105,0.22);
+    background: #9e1a1a;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(189,33,32,0.35);
   }
 
-  /* ── NOWPayments variant (crypto) ── */
+  /* ── NOWPayments variant (crypto / card) ── */
   .dm-crypto-btn {
-    background: #6D28D9;
-    box-shadow: 0 8px 28px rgba(109,40,217,0.3);
+    background: #0d0d0d;
+    color: #ffffff;
+    border: 1.5px solid #0d0d0d;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
   }
   .dm-crypto-btn:hover {
-    background: #5B21B6;
-    box-shadow: 0 16px 40px rgba(109,40,217,0.22);
+    background: #bd2120;
+    border-color: #bd2120;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(189,33,32,0.25);
   }
 
   /* ── Trigger button (free — outline) ── */
@@ -655,7 +663,7 @@ const ConsultationPayment = ({ mode = "buttons" }) => {
                 <strong>Name:</strong> {bookedData.name}<br />
                 <strong>Email:</strong> {bookedData.email}<br />
                 <strong>Phone:</strong> {bookedData.phone}<br />
-                <strong>Amount Paid:</strong> $299 USD<br /><br />
+                <strong>Amount Paid:</strong> $599 USD<br /><br />
                 We'll contact you to confirm the <strong>exact date &amp; time</strong> of your session.
               </div>
             )}
@@ -668,7 +676,7 @@ const ConsultationPayment = ({ mode = "buttons" }) => {
       <div className="dm-modal-body">
         {/* Price badge */}
         <div className="dm-price-badge">
-          <span className="dm-price-badge-amount">$299</span>
+          <span className="dm-price-badge-amount">$599</span>
           <div className="dm-price-badge-info">
             <span className="dm-price-badge-label">per session</span>
             <span className="dm-price-badge-highlight">1:1 with CEO — Zain Ul Abideen</span>
@@ -760,7 +768,7 @@ const ConsultationPayment = ({ mode = "buttons" }) => {
             ) : (
               <>
                 Proceed to Pay
-                <span className="dm-submit-btn-price">— $299 USD</span>
+                <span className="dm-submit-btn-price">— $599 USD</span>
                 <i className="fal fa-long-arrow-right" />
               </>
             )}
@@ -788,7 +796,7 @@ const ConsultationPayment = ({ mode = "buttons" }) => {
           {/* ── Payment gateway choice ── */}
           <div style={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%" }}>
             <span style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.5px", color: "#888", textTransform: "uppercase" }}>
-              Book Your 1:1 Session — $299
+              Book Your 1:1 Session — $599
             </span>
             <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
               {/* Ziina — card / Apple Pay / local wallets */}
@@ -812,39 +820,6 @@ const ConsultationPayment = ({ mode = "buttons" }) => {
                 NOWPayments — Card / Crypto
               </a>
             </div>
-          </div>
-
-          {/* Crypto & Fiat accepted badge */}
-          <div style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            marginTop: "10px",
-            padding: "8px 14px",
-            background: "rgba(0,0,0,0.06)",
-            borderRadius: "10px",
-            width: "fit-content",
-            fontSize: "12px",
-            color: "#555",
-            fontWeight: 600,
-            letterSpacing: "0.3px",
-          }}>
-            <span>Fiat On-Ramp & Crypto:</span>
-            {["💳", "₿", "Ξ", "₮"].map((sym, i) => (
-              <span key={i} style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "24px",
-                height: "24px",
-                borderRadius: "50%",
-                background: ["#2563EB","#F7931A","#627EEA","#26A17B"][i],
-                color: "#fff",
-                fontSize: "11px",
-                fontWeight: 700,
-              }}>{sym}</span>
-            ))}
-            <span style={{ color: "#888", fontWeight: 400 }}>Card, USD & 300+ Cryptos via NOWPayments</span>
           </div>
 
           {/* Free team meeting */}

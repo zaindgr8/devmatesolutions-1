@@ -1,5 +1,5 @@
 // Ziina Payment API Route
-// Creates a payment intent for $299 USD — 1:1 CEO Consultation Session
+// Creates a payment intent for $599 USD — 1:1 CEO Consultation Session
 // Accepts form data (name, email, phone, reason) from request body
 
 export default async function handler(req, res) {
@@ -22,8 +22,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    // $299 USD = 29900 cents
-    const amount = 29900;
+    // $599 USD = 59900 cents
+    const amount = 59900;
 
     // Get the base URL for redirects
     const protocol = req.headers['x-forwarded-proto'] || 'http';

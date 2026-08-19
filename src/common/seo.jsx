@@ -54,7 +54,7 @@ const SEO = ({ pageTitle }) => {
       {
         "@type": "SiteNavigationElement",
         name: "Services",
-        url: `${baseUrl}/service-3`,
+        url: `${baseUrl}/ourservices`,
       },
       {
         "@type": "SiteNavigationElement",

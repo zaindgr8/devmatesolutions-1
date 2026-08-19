@@ -20,7 +20,7 @@ const CeoPage = () => {
       <HeaderThree />
       <BreadcrumbArea
         acive_menu="Book Meeting"
-        title="Book 1:1 Discovery Session (299$)"
+        title="Book 1:1 Discovery Session (599$)"
       />
       <main className="ceo-page-main bg-white">
         {/* 1. Hero Section (The Hook) */}

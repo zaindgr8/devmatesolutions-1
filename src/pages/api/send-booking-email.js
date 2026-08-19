@@ -2,7 +2,7 @@ import { Resend } from 'resend';
 
 // API Route: Send booking confirmation emails via Resend
 // Sends to: (1) the user who booked, (2) contact@devmatesolutions.com
-// meetingType: 'ceo' (paid $299) | 'team' (free)
+// meetingType: 'ceo' (paid $599) | 'team' (free)
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -68,7 +68,7 @@ export default async function handler(req, res) {
               <p style="margin:0;font-size:15px;color:#4b5563;line-height:1.7;">
                 Hi <strong>${name}</strong>, thank you for booking a
                 ${isTeam ? 'meeting with the <strong>DevMate Team</strong>' : '1:1 Discovery Session with <strong>Zain Ul Abideen Baloch</strong>, CEO &amp; Founder of DevMate Solutions'}.
-                ${isTeam ? 'This is a <strong>free consultation</strong> — no payment required.' : 'Your payment of <strong>$299 USD</strong> has been received.'}
+                ${isTeam ? 'This is a <strong>free consultation</strong> — no payment required.' : 'Your payment of <strong>$599 USD</strong> has been received.'}
               </p>
             </td>
           </tr>
@@ -156,7 +156,7 @@ export default async function handler(req, res) {
                 <tr>
                   <td style="padding:10px 0;">
                     <span style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#9ca3af;">${isTeam ? 'Session Type' : 'Amount Paid'}</span><br/>
-                    <span style="font-size:15px;color:#0d0d0d;font-weight:600;">${isTeam ? 'Free Team Meeting' : '$299 USD — 1:1 CEO Discovery Session'}</span>
+                    <span style="font-size:15px;color:#0d0d0d;font-weight:600;">${isTeam ? 'Free Team Meeting' : '$599 USD — 1:1 CEO Discovery Session'}</span>
                   </td>
                 </tr>
               </table>
@@ -247,7 +247,7 @@ export default async function handler(req, res) {
                     ${isTeam ? 'Session Type' : 'Amount Paid'}
                   </td>
                   <td style="padding:12px 16px;font-size:15px;font-weight:700;color:#16a34a;border-top:1px solid #f0f0f0;">
-                    ${isTeam ? 'Free Team Meeting' : '$299 USD ✓'}
+                    ${isTeam ? 'Free Team Meeting' : '$599 USD ✓'}
                   </td>
                 </tr>
               </table>

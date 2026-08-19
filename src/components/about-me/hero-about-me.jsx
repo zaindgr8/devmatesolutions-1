@@ -45,7 +45,7 @@ const HeroAboutMe = () => {
                   and achieving our goals with dedication. We take pride in partnering with industry
                   leaders to shape the future. As a forward-thinking company, we are relentlessly
                   working on AI and innovation to stay ahead. With our Vision 2030, we aspire to
-                  become a tech giant, create hundreds of jobs, and lead the tech industry.
+                  become a UNICORN, create jobs, and lead the tech industry.
                   Join us on our journey toward excellence!
                 </p>
                 <div className="dm-ceo-highlight">

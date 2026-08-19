@@ -111,7 +111,7 @@ const FooterThree = () => {
               <div className="col-xl-2 col-lg-2 col-md-6">
                 <h3 className="dm-footer-widget-title">Quick Links</h3>
                 <ul className="dm-footer-links">
-                  <li><Link href="/service-3">Services</Link></li>
+                  <li><Link href="/ourservices">Services</Link></li>
                   <li><Link href="/our-team">Our Team</Link></li>
                   <li><Link href="/#startups-helped-build">Portfolio</Link></li>
                   <li><Link href="/job">Careers</Link></li>

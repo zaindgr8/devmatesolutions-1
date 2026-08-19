@@ -11,7 +11,7 @@ const menu_data = [
     mega_menu: false,
     has_dropdown: true,
     title: "Services",
-    link: "/service-3",
+    link: "/ourservices",
   },
   // {
   //   id: 3,

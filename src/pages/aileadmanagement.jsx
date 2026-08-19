@@ -234,7 +234,7 @@ function LeadLeakCalculator({ onCtaClick, onSuggestTier }) {
       <div className="container">
         {/* Header */}
         <div className="ailm-calc-header">
-          <p className="ailm-eyebrow">Lead-Leakage Calculator</p>
+          <p className="ailm-eyebrow">Lead Leakage Calculator</p>
           <h2 className="ailm-section-title">What are slow lead replies costing you?</h2>
           <p className="ailm-section-sub">
             Slide in your numbers — see the AED you're leaking every month, and how much AI can recover.
@@ -459,9 +459,82 @@ const faqs = [
 ];
 
 export default function AILeadManagement() {
-  const [showModal, setShowModal] = useState(false);
+  const [modalConfig, setModalConfig] = useState(null);
   const [openFaq, setOpenFaq] = useState(null);
   const [suggestedTier, setSuggestedTier] = useState("Pipeline");
+
+  const openHeroAuditModal = () => {
+    setModalConfig({
+      title: "Get Call For Lead Leak Audit",
+      subtitle: "Fill in your details — receive a call from DevMate Solutions within 60 seconds to discuss your audit",
+      badgeLabel: "LIVE CALL",
+      badgeSub: "Instant 60-Second Lead Audit Call",
+      badgeHighlight: "Speed-to-lead analysis & confidential revenue recovery projection",
+      source: "AI Lead Management — Hero (Call for Lead Leak Audit)",
+      buttonText: "Get Call in 60 Seconds",
+      triggerCall: true,
+    });
+  };
+
+  const openCalcAuditModal = () => {
+    setModalConfig({
+      title: "Claim Your Lead Leak Audit",
+      subtitle: "Fill in your details to receive your customized pipeline recovery plan",
+      badgeLabel: "RECOVERY PLAN",
+      badgeSub: "Based on your calculator estimate",
+      badgeHighlight: "Custom ROI projection and agent setup plan",
+      source: "AI Lead Management — Calculator Result (Audit Claim)",
+      buttonText: "Claim Recovery Plan",
+    });
+  };
+
+  const openBandAuditModal = () => {
+    setModalConfig({
+      title: "Book the Lead Leak Audit — AED 2,500",
+      subtitle: "Full fee is credited in full against setup when you proceed",
+      badgeLabel: "AUDIT",
+      badgeSub: "AED 2,500 Credited to Setup",
+      badgeHighlight: "Live response time measurement & DNCR exposure report",
+      source: "AI Lead Management — Mid-Page CTA Band (Lead Leak Audit)",
+      buttonText: "Book Lead Leak Audit",
+    });
+  };
+
+  const openPricingTierModal = (tier) => {
+    setModalConfig({
+      title: `Get Started with ${tier.name}`,
+      subtitle: `Setup & onboarding for the ${tier.name} tier (${tier.monthly}/mo)`,
+      badgeLabel: tier.name.toUpperCase(),
+      badgeSub: `${tier.monthly} / month`,
+      badgeHighlight: `${tier.conversations} conversations · Setup: ${tier.setup}`,
+      source: `AI Lead Management — Pricing Tier (${tier.name})`,
+      buttonText: `Select ${tier.name} Plan`,
+    });
+  };
+
+  const openPilotModal = () => {
+    setModalConfig({
+      title: "Apply for the 60-Day Pilot",
+      subtitle: "AED 9,500 (setup included) · If we miss agreed target, month 3 is free",
+      badgeLabel: "60-DAY PILOT",
+      badgeSub: "Guaranteed Performance SLA",
+      badgeHighlight: "14-day setup & dedicated pipeline engineer",
+      source: "AI Lead Management — 60-Day Pilot Application",
+      buttonText: "Apply for 60-Day Pilot",
+    });
+  };
+
+  const openFinalAuditModal = () => {
+    setModalConfig({
+      title: "Book the Lead Leak Audit — AED 2,500",
+      subtitle: "Stop losing leads overnight — credited 100% against system setup",
+      badgeLabel: "AUDIT",
+      badgeSub: "AED 2,500 Credited to Setup",
+      badgeHighlight: "Full portal & WhatsApp leak diagnosis",
+      source: "AI Lead Management — Bottom CTA (Lead Leak Audit)",
+      buttonText: "Book Lead Leak Audit",
+    });
+  };
 
   return (
     <>
@@ -475,7 +548,20 @@ export default function AILeadManagement() {
         <meta property="og:description" content="Stop losing leads overnight. Our AI handles the first 15 minutes of every enquiry, 24/7, across Bayut, Property Finder, WhatsApp and more." />
       </Head>
 
-      {showModal && <FormModal isOpen={showModal} onClose={() => setShowModal(false)} />}
+      {modalConfig && (
+        <FormModal
+          isOpen={!!modalConfig}
+          onClose={() => setModalConfig(null)}
+          title={modalConfig.title}
+          subtitle={modalConfig.subtitle}
+          badgeLabel={modalConfig.badgeLabel}
+          badgeSub={modalConfig.badgeSub}
+          badgeHighlight={modalConfig.badgeHighlight}
+          triggerCall={modalConfig.triggerCall}
+          source={modalConfig.source}
+          buttonText={modalConfig.buttonText}
+        />
+      )}
 
       <HeaderThree />
 
@@ -497,8 +583,8 @@ export default function AILeadManagement() {
               An AI Lead Management System built for Dubai brokerages — handles the first 15 minutes of every Bayut, Property Finder, WhatsApp and portal enquiry, around the clock, in Arabic and English.
             </p>
             <div className="ailm-hero-ctas">
-              <button className="ailm-btn-primary" id="hero-get-audit" onClick={() => setShowModal(true)}>
-                Get Your Free Lead Leak Audit
+              <button className="ailm-btn-primary" id="hero-get-audit" onClick={openHeroAuditModal}>
+                Get Call For Lead Leak Audit
                 <i className="fal fa-long-arrow-right ml-2"></i>
               </button>
               <Link href="#pricing" className="ailm-btn-ghost" id="hero-see-pricing">
@@ -531,7 +617,7 @@ export default function AILeadManagement() {
 
         {/* ─── LEAD LEAK CALCULATOR ─── */}
         <LeadLeakCalculator
-          onCtaClick={() => setShowModal(true)}
+          onCtaClick={openCalcAuditModal}
           onSuggestTier={setSuggestedTier}
         />
 
@@ -617,7 +703,7 @@ export default function AILeadManagement() {
                 <h3 className="ailm-cta-band-title">Start with a Lead Leak Audit — AED 2,500</h3>
                 <p className="ailm-cta-band-sub">We measure your live response times, count unanswered enquiries last month, and report your DNCR exposure. The full fee is credited against setup if you proceed.</p>
               </div>
-              <button className="ailm-btn-primary ailm-btn-white" id="band-cta-audit" onClick={() => setShowModal(true)}>
+              <button className="ailm-btn-primary ailm-btn-white" id="band-cta-audit" onClick={openBandAuditModal}>
                 Book the Audit
                 <i className="fal fa-long-arrow-right ml-2"></i>
               </button>
@@ -758,7 +844,7 @@ export default function AILeadManagement() {
                     <button
                       className={`ailm-pricing-cta ${isFeatured ? "ailm-pricing-cta--featured" : ""}`}
                       id={`pricing-cta-${tier.name.replace(/\s+/g, "-").toLowerCase()}`}
-                      onClick={() => setShowModal(true)}
+                      onClick={() => openPricingTierModal(tier)}
                     >
                       Get Started
                       <i className="fal fa-long-arrow-right ml-2"></i>
@@ -775,7 +861,7 @@ export default function AILeadManagement() {
                   <h4 className="ailm-pilot-title">60-Day Pilot — AED 9,500 (setup included)</h4>
                   <p className="ailm-pilot-desc">If we miss the agreed target, month three is free. Annual prepay: 12 months upfront, 2 months free, setup waived. Minimum term: 6 months on monthly plans. All prices in AED, exclusive of 5% VAT.</p>
                 </div>
-                <button className="ailm-btn-primary" id="pilot-cta" onClick={() => setShowModal(true)}>
+                <button className="ailm-btn-primary" id="pilot-cta" onClick={openPilotModal}>
                   Start the Pilot
                 </button>
               </div>
@@ -870,7 +956,7 @@ export default function AILeadManagement() {
               <h2 className="ailm-final-cta-title">The fastest way to know whether this is worth it?</h2>
               <p className="ailm-final-cta-sub">Measure what you are losing right now. The Lead Leak Audit is AED 2,500 — credited in full against setup if you proceed.</p>
               <div className="ailm-final-cta-btns">
-                <button className="ailm-btn-primary ailm-btn-white" id="final-cta-audit" onClick={() => setShowModal(true)}>
+                <button className="ailm-btn-primary ailm-btn-white" id="final-cta-audit" onClick={openFinalAuditModal}>
                   Book the Lead Leak Audit — AED 2,500
                   <i className="fal fa-long-arrow-right ml-2"></i>
                 </button>
