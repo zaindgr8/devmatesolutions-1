@@ -8,6 +8,7 @@ import "@/src/styles/home-3-hero.css";
 import "@/src/styles/hero-about-me.css";
 import "@/src/styles/ai-lead-management.css";
 import ConsultationPayment from "@/src/components/consultation/ConsultationPayment";
+import AILeadPromoModal from "@/src/components/AILeadPromoModal";
 
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
@@ -18,6 +19,7 @@ export default function App({ Component, pageProps }) {
     <>
       <Component {...pageProps} />
       <ConsultationPayment mode="global" />
+      <AILeadPromoModal />
     </>
   );
 }
