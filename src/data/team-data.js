@@ -111,13 +111,13 @@ const team_data = [
     title: "CRM Developer",
     delay: ".6s",
   },
-  {
-    id: 12,
-    img: "/assets/img/team/Biya.png",
-    name: "Biya Khan",
-    title: "Business Developer",
-    delay: ".6s",
-  },
+  // {
+  //   id: 12,
+  //   img: "/assets/img/team/Biya.png",
+  //   name: "Biya Khan",
+  //   title: "Business Developer",
+  //   delay: ".6s",
+  // },
   {
     id: 15,
     img: "/assets/img/team/Noor.jpeg",
@@ -125,13 +125,13 @@ const team_data = [
     title: "Creative Head",
     delay: ".6s",
   },
-  {
-    id: 16,
-    img: "/assets/img/team/alishba.png",
-    name: "Alishba",
-    title: "Figma Designer",
-    delay: ".6s",
-  },
+  // {
+  //   id: 16,
+  //   img: "/assets/img/team/alishba.png",
+  //   name: "Alishba",
+  //   title: "Figma Designer",
+  //   delay: ".6s",
+  // },
   {
     id: 17,
     img: "/assets/img/team/fatima.png",
@@ -147,13 +147,13 @@ const team_data = [
     delay: ".6s",
   },
   // team page  01
-  {
-    id: 4,
-    img: "/assets/img/team/1a.png",
-    name: "Fazal Khan",
-    title: "Full Stack Web Developer",
-    delay: ".3s",
-  },
+  // {
+  //   id: 4,
+  //   img: "/assets/img/team/1a.png",
+  //   name: "Fazal Khan",
+  //   title: "Full Stack Web Developer",
+  //   delay: ".3s",
+  // },
   // {
   //   id: 10,
   //   img: "/assets/img/team/da-team-3.jpg",
