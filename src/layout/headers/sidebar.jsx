@@ -98,33 +98,63 @@ const Sidebar = ({isActive, setIsActive}) => {
               </div>
             </div>
 
-            {/* Get Instant Call - Mobile */}
-            <div style={{ padding: '20px 0 10px 0' }}>
+            {/* Mobile CTA Buttons */}
+            <div style={{ padding: '20px 0 10px 0', display: 'flex', gap: '10px' }}>
+
+              {/* AI Lead Management */}
+              <Link
+                href="/aileadmanagement"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  flex: 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '7px',
+                  background: '#fff',
+                  color: '#0d0d0d',
+                  border: '1.5px solid #d1d5db',
+                  borderRadius: '8px',
+                  padding: '12px 10px',
+                  fontSize: '13px',
+                  fontWeight: '700',
+                  textDecoration: 'none',
+                  letterSpacing: '0.1px',
+                  lineHeight: 1,
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                <i className="fal fa-robot" style={{ fontSize: '13px', color: '#bd2120' }} />
+                AI Leads
+              </Link>
+
+              {/* Get Instant Call */}
               <button
                 onClick={() => setShowModal(true)}
                 style={{
-                  width: '100%',
-                  background: 'linear-gradient(135deg, #e11d48 0%, #be123c 100%)',
+                  flex: 1,
+                  background: '#bd2120',
                   color: '#fff',
-                  border: 'none',
+                  border: '1.5px solid #bd2120',
                   borderRadius: '8px',
-                  padding: '14px 20px',
-                  fontSize: '15px',
+                  padding: '12px 10px',
+                  fontSize: '13px',
                   fontWeight: '700',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '10px',
-                  letterSpacing: '0.5px',
-                  boxShadow: '0 4px 15px rgba(225,29,72,0.35)',
-                  transition: 'all 0.3s ease',
+                  gap: '7px',
+                  letterSpacing: '0.1px',
+                  lineHeight: 1,
+                  whiteSpace: 'nowrap',
                 }}
               >
-                <i className="fal fa-phone" style={{ fontSize: '16px' }}></i>
-                Get Instant Call
-                <i className="fal fa-long-arrow-right" style={{ fontSize: '14px', marginLeft: 'auto' }}></i>
+                <i className="fal fa-phone" style={{ fontSize: '12px' }} />
+                Instant Call
               </button>
+
             </div>
 
             {/* Modal - same as desktop */}

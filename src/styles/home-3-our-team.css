@@ -167,3 +167,67 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(220, 39, 67, 0.35);
 }
+
+/* ── Sub-section layout ── */
+.dm-subsection {
+  margin-bottom: 20px;
+}
+
+.dm-subsection-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+
+.dm-subsection-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #bd2120;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(189, 33, 32, 0.3);
+}
+
+.dm-subsection-title {
+  font-size: clamp(16px, 2vw, 22px);
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.3px;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.dm-subsection-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, #e5e7eb 0%, transparent 100%);
+}
+
+/* ── Divider between sub-sections ── */
+.dm-section-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent 0%, #e5e7eb 30%, #e5e7eb 70%, transparent 100%);
+  margin: 52px 0;
+  position: relative;
+}
+
+.dm-section-divider::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #bd2120;
+  box-shadow: 0 0 0 4px rgba(189, 33, 32, 0.12);
+}

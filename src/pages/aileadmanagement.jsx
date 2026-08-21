@@ -540,6 +540,8 @@ export default function AILeadManagement() {
     <>
       <Head>
         <title>AI Lead Management System for Dubai Real Estate | DevMate Solutions</title>
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="shortcut icon" href="/favicon.png" type="image/png" />
         <meta
           name="description"
           content="Every portal enquiry answered in seconds, qualified in Arabic or English, and booked into an agent's calendar — around the clock. Built for Dubai real estate brokerages."
