@@ -101,32 +101,61 @@ const Sidebar = ({isActive, setIsActive}) => {
             {/* Mobile CTA Buttons */}
             <div style={{ padding: '20px 0 10px 0', display: 'flex', gap: '10px' }}>
 
-              {/* AI Lead Management */}
+              {/* AI Lead Management — sub items */}
               <Link
                 href="/aileadmanagement"
-                target="_blank"
-                rel="noopener noreferrer"
                 style={{
                   flex: 1,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '7px',
+                  flexDirection: 'column',
+                  gap: '3px',
                   background: '#fff',
                   color: '#0d0d0d',
                   border: '1.5px solid #d1d5db',
                   borderRadius: '8px',
-                  padding: '12px 10px',
-                  fontSize: '13px',
+                  padding: '10px 8px',
+                  fontSize: '11px',
                   fontWeight: '700',
                   textDecoration: 'none',
                   letterSpacing: '0.1px',
-                  lineHeight: 1,
+                  lineHeight: 1.2,
                   whiteSpace: 'nowrap',
+                  textAlign: 'center',
                 }}
               >
-                <i className="fal fa-robot" style={{ fontSize: '13px', color: '#bd2120' }} />
-                AI Leads
+                <i className="fal fa-chart-line" style={{ fontSize: '14px', color: '#bd2120' }} />
+                <span>Lead Mgmt</span>
+                <span style={{ fontSize: '10px', fontWeight: 400, color: '#888' }}>Real Estate</span>
+              </Link>
+
+              <Link
+                href="/callagents"
+                style={{
+                  flex: 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexDirection: 'column',
+                  gap: '3px',
+                  background: '#fff',
+                  color: '#0d0d0d',
+                  border: '1.5px solid #d1d5db',
+                  borderRadius: '8px',
+                  padding: '10px 8px',
+                  fontSize: '11px',
+                  fontWeight: '700',
+                  textDecoration: 'none',
+                  letterSpacing: '0.1px',
+                  lineHeight: 1.2,
+                  whiteSpace: 'nowrap',
+                  textAlign: 'center',
+                }}
+              >
+                <i className="fal fa-phone-volume" style={{ fontSize: '14px', color: '#bd2120' }} />
+                <span>Agent Calls</span>
+                <span style={{ fontSize: '10px', fontWeight: 400, color: '#888' }}>Demo</span>
               </Link>
 
               {/* Get Instant Call */}

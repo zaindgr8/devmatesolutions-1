@@ -7,6 +7,7 @@ import "@/src/styles/home-3-about.css";
 import "@/src/styles/home-3-hero.css";
 import "@/src/styles/hero-about-me.css";
 import "@/src/styles/ai-lead-management.css";
+import "@/src/styles/call-agents.css";
 import ConsultationPayment from "@/src/components/consultation/ConsultationPayment";
 import AILeadPromoModal from "@/src/components/AILeadPromoModal";
 

@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "build": {
+    "env": {
+      "NPM_FLAGS": "--no-optional --prefer-offline"
+    }
+  },
+  "functions": {
+    "app/page.js": {
+      "maxDuration": 30
+    }
+  }
+}

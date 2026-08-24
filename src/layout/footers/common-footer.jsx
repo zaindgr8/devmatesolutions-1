@@ -12,6 +12,7 @@ const footer_links = [
       { title: "Our Team", link: "/our-team" },
       { title: "Careers", link: "/job" },
       { title: "FAQ", link: "/faq" },
+      { title: "AI Call Agents", link: "/callagents" },
       { title: "Get In Touch", link: "/contact" },
       { title: "Pay an Invoice →", link: "/pay" },
     ],
