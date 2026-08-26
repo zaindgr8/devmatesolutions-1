@@ -111,7 +111,7 @@ const HeaderThree = () => {
                         >
                           {/* Sub-item 1 */}
                           <Link
-                            href="/aileadmanagement"
+                            href="/aileadmanagementdubairealestate"
                             id="ai-submenu-lead-mgmt"
                             style={{
                               display: "flex",
@@ -148,7 +148,46 @@ const HeaderThree = () => {
                             </span>
                           </Link>
 
-                          {/* Sub-item 2 */}
+                          {/* Sub-item 2: WhatsApp Automation */}
+                          <Link
+                            href="/whatsappautomation"
+                            id="ai-submenu-whatsapp-automation"
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 12,
+                              padding: "13px 16px",
+                              color: "#111111",
+                              textDecoration: "none",
+                              fontSize: 13,
+                              fontWeight: 600,
+                              borderBottom: "1px solid #f3f4f6",
+                              transition: "background 0.15s ease, color 0.15s ease",
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background = "#f0fdf4";
+                              e.currentTarget.style.color = "#15803d";
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background = "transparent";
+                              e.currentTarget.style.color = "#111111";
+                            }}
+                          >
+                            <span style={{
+                              width: 32, height: 32, borderRadius: 8,
+                              background: "rgba(37,211,102,0.15)",
+                              display: "flex", alignItems: "center", justifyContent: "center",
+                              flexShrink: 0,
+                            }}>
+                              <i className="fab fa-whatsapp" style={{ fontSize: 15, color: "#25d366" }}></i>
+                            </span>
+                            <span>
+                              <span style={{ display: "block", lineHeight: 1.2 }}>WhatsApp Automation</span>
+                              <span style={{ display: "block", fontSize: 11, color: "#9ca3af", fontWeight: 400, marginTop: 2 }}>Meta Business API</span>
+                            </span>
+                          </Link>
+
+                          {/* Sub-item 3 */}
                           <Link
                             href="/callagents"
                             id="ai-submenu-call-agents"

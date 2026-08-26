@@ -889,9 +889,9 @@ export default function CallAgentsPage() {
               <button className="cad-btn-primary" id="final-build-agent-btn" onClick={() => setShowBuildModal(true)}>
                 Build My Agent <i className="fal fa-long-arrow-right" style={{ marginLeft: 4 }} />
               </button>
-              <a href="/aileadmanagement" className="cad-btn-ghost cad-btn-ghost--light">
-                <i className="fal fa-chart-line" />
-                AI Lead Management
+              <a href="/aileadmanagementdubairealestate" className="cad-btn-ghost cad-btn-ghost--light">
+                Explore Lead Management System
+                <i className="fal fa-arrow-right" style={{ marginLeft: 6 }}></i>
               </a>
             </div>
             <p className="cad-final-footnote">

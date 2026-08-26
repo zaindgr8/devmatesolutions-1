@@ -7,8 +7,8 @@ const AILeadPromoModal = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // Don't show if already on the /aileadmanagement page
-    if (router.pathname === "/aileadmanagement") {
+    // Don't show if already on the /aileadmanagementdubairealestate page
+    if (router.pathname === "/aileadmanagementdubairealestate" || router.pathname === "/aileadmanagement") {
       return;
     }
 
@@ -21,7 +21,7 @@ const AILeadPromoModal = () => {
     // Trigger popup after exactly 4 seconds
     const timer = setTimeout(() => {
       // Re-verify route before opening
-      if (window.location.pathname !== "/aileadmanagement") {
+      if (window.location.pathname !== "/aileadmanagementdubairealestate" && window.location.pathname !== "/aileadmanagement") {
         setIsOpen(true);
       }
     }, 4000);
@@ -38,7 +38,7 @@ const AILeadPromoModal = () => {
 
   const handleGoToPage = () => {
     handleClose();
-    router.push("/aileadmanagement");
+    router.push("/aileadmanagementdubairealestate");
   };
 
   if (!isOpen) return null;

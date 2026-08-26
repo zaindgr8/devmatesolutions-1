@@ -261,7 +261,7 @@ export default async function handler(req, res) {
                             </a>
                           </td>
                           <td style="padding-left:12px;">
-                            <a href="https://www.devmatesolutions.com/aileadmanagement"
+                            <a href="https://www.devmatesolutions.com/aileadmanagementdubairealestate"
                               style="display:inline-block;background:#ffffff;color:#0d0d0d;border:1px solid #cbd5e1;font-size:13px;font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none;">
                               View System Details &rarr;
                             </a>
