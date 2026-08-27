@@ -268,17 +268,16 @@ const Portfolio = () => {
           border-top-color: #c0392b;
         }
         .dm-venture-logo-wrap {
-          width: 130px;
-          min-width: 130px;
+          width: 110px;
+          min-width: 110px;
           display: flex;
           align-items: center;
           justify-content: center;
-          background: #f8f9fb;
-          border-right: 1px solid #f0f0f0;
-          padding: 20px;
-          transition: background 0.3s ease;
+          background: transparent;
+          border-right: none;
+          padding: 24px 0 24px 24px;
         }
-        .dm-venture-card:hover .dm-venture-logo-wrap { background: #f2f2f5; }
+        .dm-venture-card:hover .dm-venture-logo-wrap { background: transparent; }
         .dm-venture-logo {
           width: 72px; height: 72px;
           object-fit: contain;
