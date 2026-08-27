@@ -66,7 +66,7 @@ const FooterThree = () => {
                     </li>
                   </ul>
                   <div className="dm-footer-socials">
-                    <a href="https://www.linkedin.com/company/devmatesolutions" target="_blank" rel="noopener noreferrer" className="dm-social-badge" title="LinkedIn">
+                    <a href="https://www.linkedin.com/company/144599158" target="_blank" rel="noopener noreferrer" className="dm-social-badge" title="LinkedIn">
                       <FaLinkedinIn />
                     </a>
                     <a href="https://www.facebook.com/devmatesolutions" target="_blank" rel="noopener noreferrer" className="dm-social-badge" title="Facebook">

@@ -78,9 +78,42 @@
 .dm-ceo-title {
   font-size: 14px;
   color: #9ca3af;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.5px;
-  margin-bottom: 24px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.dm-ceo-subtitle-hub {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 500;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.dm-ceo-hub-link {
+  color: #c0392b;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  transition: all 0.2s ease;
+}
+
+.dm-ceo-hub-link i {
+  font-size: 11px;
+  transition: transform 0.2s ease;
+}
+
+.dm-ceo-hub-link:hover {
+  color: #0d0d0d;
+  text-decoration: underline;
+}
+
+.dm-ceo-hub-link:hover i {
+  transform: translate(2px, -2px);
 }
 
 .dm-ceo-divider {

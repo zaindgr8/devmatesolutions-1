@@ -155,6 +155,17 @@ const portfolio_data_two = [
     filter_id: ["all"],
     link: "https://alwalaaoman.com/", // Added a fallback link
   },
+  {
+    id: 15,
+    img: "/assets/img/portfolio/beamasterpiece.png",
+    name: "Be A Masterpiece 🇦🇪",
+    title: "Luxury Fashion & Abayas in UAE 🇦🇪",
+    cls: "design support",
+    delay: ".5s",
+    category: "Website",
+    filter_id: ["all", "design"],
+    link: "https://beamasterpiece.ae/",
+  },
 ];
 
 export default portfolio_data_two;

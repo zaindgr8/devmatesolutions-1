@@ -38,7 +38,12 @@ const HeroAboutMe = () => {
               <div className="dm-ceo-content">
                 <span className="dm-ceo-eyebrow">Message from the CEO</span>
                 <h2 className="dm-ceo-name">Zain Ul Abideen<br />Baloch</h2>
-                <p className="dm-ceo-title">Founder & CEO — DEVMATE SOLUTIONS</p>
+                <p className="dm-ceo-title">
+                  Founder &amp; CEO — DEVMATE SOLUTIONS
+                </p>
+                <p className="dm-ceo-subtitle-hub">
+                  Founder @ <a href="https://aifounderhub.com/" target="_blank" rel="noopener noreferrer" className="dm-ceo-hub-link">AI Founder Hub <i className="fal fa-arrow-up-right"></i></a> — Empowering AI Founders Globally
+                </p>
                 <div className="dm-ceo-divider"></div>
                 <p className="dm-ceo-message">
                   I am honored to lead an exceptional team committed to delivering outstanding services
@@ -60,7 +65,7 @@ const HeroAboutMe = () => {
                 {/* Social links */}
                 <div className="dm-ceo-socials">
                   <span className="dm-ceo-social-label">Follow</span>
-                  <Link href="https://www.linkedin.com/company/devmatesolutions" target="_blank" className="dm-ceo-social-link">
+                  <Link href="https://www.linkedin.com/in/zainulabideenunicorn/" target="_blank" className="dm-ceo-social-link">
                     <i className="fab fa-linkedin-in"></i>
                   </Link>
                   <Link href="https://www.instagram.com/devmate.solutions/" target="_blank" className="dm-ceo-social-link">
