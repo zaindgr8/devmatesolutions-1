@@ -9,7 +9,7 @@ const own_ventures = [
     country: "Global",
     category: "AI Community Platform",
     tagline: "Connecting AI founders, investors & builders across the Globe",
-    logo: "/assets/img/portfolio/AI Founder Hub.png",
+    logo: "/assets/img/portfolio/aifounderhub.png",
     link: "https://aifounderhub.com/",
   },
   {
@@ -19,26 +19,26 @@ const own_ventures = [
     country: "Global",
     category: "Voice AI Technology",
     tagline: "Enterprise-grade voice AI for intelligent customer conversations",
-    logo: "/assets/img/portfolio/RevealAI.png",
+    logo: "/assets/img/portfolio/revealvoice.png",
     link: "https://www.revealvoice.com/",
   },
 ];
 
 // ── Startups We've Helped Build ──────────────────────────────
 const client_ventures = [
-  { id: 1,  title: "Vodafone",            flag: "🇴🇲", country: "Oman",           logo: "/assets/img/portfolio/VodaFone.png",                 link: "https://www.vodafone.om/" },
-  { id: 2,  title: "Shift",               flag: "🇴🇲", country: "Oman",           logo: "/assets/img/portfolio/Shift.png",                    link: "https://hireshift.om/" },
-  { id: 3,  title: "Revio",              flag: "🇶🇦", country: "Qatar",          logo: "/assets/img/portfolio/Revio.png",                    link: "https://shop.revio.me/" },
-  { id: 4,  title: "Maison Serdoun",     flag: "🇦🇪", country: "UAE",            logo: "/assets/img/portfolio/MaisonSerdoun.png",            link: "https://www.maisonserdoun.com/" },
-  { id: 5,  title: "Procope AI",         flag: "🇺🇸", country: "United States",  logo: "/assets/img/portfolio/Procope.png",                  link: "https://www.procope.ai/" },
-  { id: 6,  title: "Finaxe",             flag: "🇬🇧", country: "United Kingdom", logo: "/assets/img/portfolio/Finaxe.png",                   link: "https://finaxe.com/" },
-  { id: 7,  title: "Be A Masterpiece",   flag: "🇦🇪", country: "UAE",            logo: "/assets/img/portfolio/BeAMasterPiece.png",           link: "https://beamasterpiece.ae/" },
-  { id: 8,  title: "KoCoach",            flag: "🇵🇱", country: "Poland",         logo: "/assets/img/portfolio/KO Coach.png",                 link: "https://kocoach.tech/" },
-  { id: 9,  title: "IWantStyle",         flag: "🇬🇧", country: "United Kingdom", logo: "/assets/img/portfolio/IWantStyle.png",               link: "https://kifashion-website.vercel.app/" },
-  { id: 10, title: "HoppSwap",           flag: "🇬🇧", country: "United Kingdom", logo: "/assets/img/portfolio/HopSwap.png",                  link: "https://www.hoppswap.com/" },
-  { id: 11, title: "Alwalaa Real Estate",flag: "🇴🇲", country: "Oman",           logo: "/assets/img/portfolio/Alwala Real Estate Oman.png", link: "https://alwalaaoman.com/" },
-  { id: 12, title: "The Maison EM",      flag: "🇦🇪", country: "UAE",            logo: "/assets/img/portfolio/Maison EM.png",                link: "https://www.themaisonem.com/" },
-  { id: 13, title: "Senioriser",         flag: "🇺🇸", country: "United States",  logo: "/assets/img/portfolio/Seniorisers.png",              link: "https://www.seniorisers.com/" },
+  { id: 1,  title: "Vodafone",            flag: "🇴🇲", country: "Oman",           logo: "/assets/img/portfolio/vodafone.png",                 link: "https://www.vodafone.om/" },
+  { id: 2,  title: "Shift",               flag: "🇴🇲", country: "Oman",           logo: "/assets/img/portfolio/shift.png",                    link: "https://hireshift.om/" },
+  { id: 3,  title: "Revio",              flag: "🇶🇦", country: "Qatar",          logo: "/assets/img/portfolio/revio.png",                    link: "https://shop.revio.me/" },
+  { id: 4,  title: "Maison Serdoun",     flag: "🇦🇪", country: "UAE",            logo: "/assets/img/portfolio/maisonserdoun.png",            link: "https://www.maisonserdoun.com/" },
+  { id: 5,  title: "Procope AI",         flag: "🇺🇸", country: "United States",  logo: "/assets/img/portfolio/procope.png",                  link: "https://www.procope.ai/" },
+  { id: 6,  title: "Finaxe",             flag: "🇬🇧", country: "United Kingdom", logo: "/assets/img/portfolio/finaxe.png",                   link: "https://finaxe.com/" },
+  { id: 7,  title: "Be A Masterpiece",   flag: "🇦🇪", country: "UAE",            logo: "/assets/img/portfolio/beamasterpiece.png",           link: "https://beamasterpiece.ae/" },
+  { id: 8,  title: "KoCoach",            flag: "🇵🇱", country: "Poland",         logo: "/assets/img/portfolio/kocoach.png",                  link: "https://kocoach.tech/" },
+  { id: 9,  title: "IWantStyle",         flag: "🇬🇧", country: "United Kingdom", logo: "/assets/img/portfolio/iwantstyle.png",               link: "https://kifashion-website.vercel.app/" },
+  { id: 10, title: "HoppSwap",           flag: "🇬🇧", country: "United Kingdom", logo: "/assets/img/portfolio/hoppswap.png",                  link: "https://www.hoppswap.com/" },
+  { id: 11, title: "Alwalaa Real Estate",flag: "🇴🇲", country: "Oman",           logo: "/assets/img/portfolio/alwala.png",                   link: "https://alwalaaoman.com/" },
+  { id: 12, title: "The Maison EM",      flag: "🇦🇪", country: "UAE",            logo: "/assets/img/portfolio/maisonem.png",                 link: "https://www.themaisonem.com/" },
+  { id: 13, title: "Senioriser",         flag: "🇺🇸", country: "United States",  logo: "/assets/img/portfolio/senioriser.png",               link: "https://www.seniorisers.com/" },
 ];
 
 // Split into two rows for staggered carousel
