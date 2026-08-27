@@ -657,7 +657,7 @@ const Portfolio = () => {
             {/* Live badge */}
             <div className="dm-marquee-count-badge wow tpfadeUp" data-wow-delay=".1s">
               <span className="badge-dot"></span>
-              {client_ventures.length} active brands &amp; startups worldwide
+              40+ active brands &amp; startups worldwide
             </div>
 
             {/* ── Marquee: Row 1 → Left ── */}
