@@ -559,9 +559,9 @@ export default function CallAgentsPage() {
         <title>AI Call Agent Demos — DevMate Solutions</title>
         <meta name="description" content="Try live AI Call Agent demos for Real Estate, Hotel Booking, Airlines, and more. DevMate builds custom AI voice and call agents for any industry — deployed in 14 days." />
         <meta name="robots" content="noindex, nofollow" />
-        <link rel="icon" href="/favicon.png" type="image/png" />
-        <link rel="shortcut icon" href="/favicon.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/favicon.png" />
+        <link rel="icon" href="/red-logo.png" type="image/png" />
+        <link rel="shortcut icon" href="/red-logo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/red-logo.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />

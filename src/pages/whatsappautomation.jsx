@@ -430,6 +430,9 @@ export default function WhatsAppAutomation() {
     <>
       <Head>
         <title>WhatsApp Automation | AI Lead Management System | DevMate Solutions</title>
+        <link rel="icon" href="/red-logo.png" type="image/png" />
+        <link rel="shortcut icon" href="/red-logo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/red-logo.png" />
         <meta
           name="description"
           content="DevMate Solutions — WhatsApp Business API, AI chatbots, broadcast campaigns & team inbox. Automate your lead management, customer support & sales across every channel. Trusted by businesses across the UAE & Middle East."

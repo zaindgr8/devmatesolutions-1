@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import NavMenu from "./nav-menu";
 import Link from "next/link";
 import useSticky from "./../../../hooks/use-sticky";
@@ -10,6 +10,19 @@ const HeaderThree = () => {
   const [isActive, setIsActive] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showAIMenu, setShowAIMenu] = useState(false);
+  const aiMenuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (aiMenuRef.current && !aiMenuRef.current.contains(event.target)) {
+        setShowAIMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
@@ -52,33 +65,32 @@ const HeaderThree = () => {
                   <div className="da-header-cta-btn d-flex align-items-center justify-content-end" style={{ gap: 10, flexWrap: "nowrap" }}>
                     {/* ── AI Lead Management Dropdown ── */}
                     <div
+                      ref={aiMenuRef}
                       style={{ position: "relative", flexShrink: 0 }}
-                      onMouseEnter={() => setShowAIMenu(true)}
-                      onMouseLeave={() => setShowAIMenu(false)}
                     >
                       {/* Main Button */}
                       <button
                         id="ai-lead-dropdown-btn"
                         type="button"
+                        onClick={() => setShowAIMenu((prev) => !prev)}
                         style={{
                           display: "inline-flex",
                           alignItems: "center",
                           gap: 7,
-                          background: "#0d0d0d",
+                          background: showAIMenu ? "#bd2120" : "#0d0d0d",
                           color: "#ffffff",
                           fontWeight: 700,
                           fontSize: 13,
                           padding: "10px 18px",
                           borderRadius: 8,
-                          border: "1.5px solid #0d0d0d",
+                          border: "1.5px solid",
+                          borderColor: showAIMenu ? "#bd2120" : "#0d0d0d",
                           cursor: "pointer",
                           transition: "all 0.22s ease",
                           whiteSpace: "nowrap",
                           letterSpacing: "0.2px",
                           lineHeight: 1,
                           fontFamily: "inherit",
-                          background: showAIMenu ? "#bd2120" : "#0d0d0d",
-                          borderColor: showAIMenu ? "#bd2120" : "#0d0d0d",
                         }}
                       >
                         <i className="fal fa-robot" style={{ fontSize: 12 }}></i>
@@ -113,6 +125,7 @@ const HeaderThree = () => {
                           <Link
                             href="/aileadmanagementdubairealestate"
                             id="ai-submenu-lead-mgmt"
+                            onClick={() => setShowAIMenu(false)}
                             style={{
                               display: "flex",
                               alignItems: "center",
@@ -152,6 +165,7 @@ const HeaderThree = () => {
                           <Link
                             href="/whatsappautomation"
                             id="ai-submenu-whatsapp-automation"
+                            onClick={() => setShowAIMenu(false)}
                             style={{
                               display: "flex",
                               alignItems: "center",
@@ -165,8 +179,8 @@ const HeaderThree = () => {
                               transition: "background 0.15s ease, color 0.15s ease",
                             }}
                             onMouseEnter={(e) => {
-                              e.currentTarget.style.background = "#f0fdf4";
-                              e.currentTarget.style.color = "#15803d";
+                              e.currentTarget.style.background = "#fef2f2";
+                              e.currentTarget.style.color = "#bd2120";
                             }}
                             onMouseLeave={(e) => {
                               e.currentTarget.style.background = "transparent";
@@ -175,11 +189,11 @@ const HeaderThree = () => {
                           >
                             <span style={{
                               width: 32, height: 32, borderRadius: 8,
-                              background: "rgba(37,211,102,0.15)",
+                              background: "rgba(189,33,32,0.15)",
                               display: "flex", alignItems: "center", justifyContent: "center",
                               flexShrink: 0,
                             }}>
-                              <i className="fab fa-whatsapp" style={{ fontSize: 15, color: "#25d366" }}></i>
+                              <i className="fab fa-whatsapp" style={{ fontSize: 15, color: "#dc2626" }}></i>
                             </span>
                             <span>
                               <span style={{ display: "block", lineHeight: 1.2 }}>WhatsApp Automation</span>
@@ -191,6 +205,7 @@ const HeaderThree = () => {
                           <Link
                             href="/callagents"
                             id="ai-submenu-call-agents"
+                            onClick={() => setShowAIMenu(false)}
                             style={{
                               display: "flex",
                               alignItems: "center",

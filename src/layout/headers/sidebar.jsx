@@ -153,7 +153,7 @@ const Sidebar = ({isActive, setIsActive}) => {
                   textAlign: 'center',
                 }}
               >
-                <i className="fab fa-whatsapp" style={{ fontSize: '14px', color: '#25d366' }} />
+                <i className="fab fa-whatsapp" style={{ fontSize: '14px', color: '#bd2120' }} />
                 <span>WhatsApp</span>
                 <span style={{ fontSize: '10px', fontWeight: 400, color: '#888' }}>Automation</span>
               </Link>

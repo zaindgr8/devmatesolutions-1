@@ -57,7 +57,7 @@ const SubSection = ({ badge, label, members, centered }) => (
 );
 
 const OurTeam = () => (
-  <div className="dm-partners-section">
+  <div className="dm-partners-section" id="regional-partners">
     <div className="container">
 
       {/* Header */}

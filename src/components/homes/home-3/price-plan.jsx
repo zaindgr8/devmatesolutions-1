@@ -54,7 +54,7 @@ import React from "react";
 const PricePlan = () => {
   return (
     <>
-      <div className=" pt-50 pb-90 fix">
+      <div className=" pt-50 pb-90 fix" id="services">
         <div className="container">
           <div className="row">
             <div className="col-12">

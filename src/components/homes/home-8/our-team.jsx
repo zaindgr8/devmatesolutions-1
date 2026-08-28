@@ -25,7 +25,7 @@ const OurTeam = () => {
 
           <div className="row">
             {(() => {
-              const visibleMembers = team_data.slice(3);
+              const visibleMembers = team_data.slice(3).filter((m) => m.name !== "Joshua" && m.id !== 103);
               const reordered = [
                 ...visibleMembers.slice(-5),
                 ...visibleMembers.slice(0, -5),

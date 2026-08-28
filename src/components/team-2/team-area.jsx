@@ -10,6 +10,8 @@ const TeamArea = () => {
           <div className="row">
             {team_data
               .filter((item) => 
+                !item.name.includes("Joshua") &&
+                item.id !== 103 &&
                 !item.name.includes("Jhonson") && 
                 !item.name.includes("Samrat") && 
                 !item.name.includes("Berat") && 

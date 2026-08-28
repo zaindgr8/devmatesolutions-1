@@ -4,17 +4,34 @@ import Tilt from "react-parallax-tilt";
 import FormModal from "../../FormModal";
 
 const features = [
-  { icon: "fal fa-shopping-cart", label: "Headless Ecommerce", sub: "NextJS & Shopify" },
-  { icon: "fal fa-mobile-alt", label: "Mobile Apps", sub: "Android & iOS" },
-  { icon: "fal fa-robot", label: "AI Agents & Automation", sub: "Autonomous systems" },
-  { icon: "fal fa-link", label: "NFTs & Blockchain", sub: "Web3 Tokenization" },
-];
-
-const stats = [
-  { number: "40+", label: "Global Brands" },
-  { number: "25+", label: "Industries" },
-  { number: "6+", label: "Years Active" },
-  { number: "96%", label: "Client Rating" },
+  {
+    icon: "fal fa-chart-line",
+    label: "AI Lead Management",
+    sub: "Autonomous lead capture, scoring & qualification pipelines for Real Estate and all high-ticket niches.",
+    tag: "Omni-Niche",
+    href: "/aileadmanagementdubairealestate",
+  },
+  {
+    icon: "fab fa-whatsapp",
+    label: "WhatsApp AI Automation",
+    sub: "0-second auto-replies, multi-lingual smart chatbots, and automated broadcast nurturing funnels.",
+    tag: "24/7 Engagement",
+    href: "/whatsappautomation",
+  },
+  {
+    icon: "fal fa-phone-volume",
+    label: "AI Voice & Call Agents",
+    sub: "Human-like conversational voice agents for instant sub-60s lead callbacks and appointment bookings.",
+    tag: "<60s Callback",
+    href: "/callagents",
+  },
+  {
+    icon: "fal fa-chess-knight",
+    label: "Strategic CRM & Pipelines",
+    sub: "Seamless CRM integrations, calendar sync, and automated deal-closing workflows engineered to win.",
+    tag: "Endgame Conversion",
+    href: "/aileadmanagementdubairealestate",
+  },
 ];
 
 const About = () => {
@@ -36,9 +53,9 @@ const About = () => {
         <div className="container">
           <div className="row align-items-center">
 
-            {/* ── Left: Image ── */}
+            {/* ── Left: Chess Strategy Visual ── */}
             <div className="col-lg-6 wow tpfadeUp" data-wow-delay=".3s">
-              <div className="dm-about-img-col">
+              <div className="dm-about-img-col dm-about-media">
                 <Tilt
                   tiltMaxAngleX={4}
                   tiltMaxAngleY={4}
@@ -50,10 +67,13 @@ const About = () => {
                     <img src="/assets/img/new/about1.png" alt="DevMate Solutions — Chess strategy visual" />
                   </div>
                 </Tilt>
-                {/* <div className="dm-about-year-badge">
-                  <strong>2019</strong>
-                  <span>Pioneering</span>
-                </div> */}
+                <div className="dm-about-exp-card">
+                  <div className="dm-about-exp-num">&lt;60s</div>
+                  <div className="dm-about-exp-text">
+                    <strong>Instant Response</strong>
+                    <span>Autonomous AI Qualification</span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -61,43 +81,45 @@ const About = () => {
             <div className="col-lg-6 wow tpfadeUp" data-wow-delay=".5s">
               <div className="dm-about-content">
 
-                <span className="dm-about-eyebrow">Pioneering Digital Revolution Since 2019</span>
+                <div className="dm-about-badge-row">
+                  <span className="dm-about-eyebrow">
+                    <i className="fal fa-chess-queen mr-5"></i> Strategic AI Automation
+                  </span>
+                  {/* <span className="dm-about-sub-badge">ALL IN</span> */}
+                </div>
 
                 <h2 className="tp-section__title mb-20">
-                  <b className="text-red-700">Checkmate</b> your<br />
-                  Software & Digital Goals<br />
-                  with <b className="text-red-700">DEVMATE</b>
+                  <b className="text-red-700">Checkmate</b> Your Competition<br />
+                  with <b className="text-red-700">AI Lead Management</b>
                 </h2>
 
-                <p style={{ fontSize: 15, color: '#4b5563', lineHeight: 1.7, marginBottom: 0 }}>
-                  We don't just build software — we engineer competitive advantages. From AI-powered
-                  products to enterprise ecommerce, every solution we deliver is built to win.
+                <p className="dm-about-lead-desc">
+                  In business as in chess, speed, positioning, and strategy win the game. 
+                  We build end-to-end <strong>AI Lead Management Systems</strong> — intelligent WhatsApp automations, 
+                  hyper-realistic voice call agents, and autonomous qualification funnels engineered to turn prospects 
+                  into closed deals 24/7 across every industry.
                 </p>
 
                 {/* Feature grid */}
                 <div className="dm-about-features">
                   {features.map((f, i) => (
-                    <div className="dm-about-feature-card" key={i}>
-                      <div className="dm-about-feature-icon">
-                        <i className={f.icon}></i>
+                    <Link href={f.href} key={i} className="dm-about-feature-card">
+                      <div className="dm-about-feature-top">
+                        <div className="dm-about-feature-icon">
+                          <i className={f.icon}></i>
+                        </div>
+                        <span className="dm-about-feature-pill">{f.tag}</span>
                       </div>
                       <div className="dm-about-feature-text">
-                        <strong>{f.label}</strong>
+                        <div className="dm-about-feature-heading">
+                          <strong>{f.label}</strong>
+                          <i className="fal fa-arrow-up-right dm-about-card-arrow"></i>
+                        </div>
                         <span>{f.sub}</span>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
-
-                {/* Stats strip */}
-                {/* <div className="dm-about-stats">
-                  {stats.map((s, i) => (
-                    <div className="dm-about-stat" key={i}>
-                      <span className="dm-about-stat-num">{s.number}</span>
-                      <span className="dm-about-stat-label">{s.label}</span>
-                    </div>
-                  ))}
-                </div> */}
 
                 {/* CTA */}
                 <div className="dm-about-cta">
@@ -124,7 +146,7 @@ const About = () => {
                       }
                     }}
                   >
-                    Book 1:1 Session <i className="fal fa-long-arrow-right"></i>
+                    Book Meeting <i className="fal fa-long-arrow-right"></i>
                   </a>
                 </div>
 
@@ -139,3 +161,4 @@ const About = () => {
 };
 
 export default About;
+
