@@ -27,10 +27,75 @@ const RESEND_FROM_EMAIL =
   process.env.RESEND_FROM_EMAIL ||
   "DevMate Leads <contact@devmatesolutions.com>";
 
+// ── Rate limiter (in-memory; resets on cold start) ─────────────────────────
+const ipHitMap = new Map(); // ip -> [timestamps]
+const RATE_LIMIT  = 3;       // max submissions
+const WINDOW_MS   = 10 * 60 * 1000; // 10 minutes
+
+function isRateLimited(ip) {
+  const now = Date.now();
+  const hits = (ipHitMap.get(ip) || []).filter((t) => now - t < WINDOW_MS);
+  if (hits.length >= RATE_LIMIT) return true;
+  hits.push(now);
+  ipHitMap.set(ip, hits);
+  return false;
+}
+
+// ── Bot signal detector ────────────────────────────────────────────────────
+function detectBot(body) {
+  const reasons = [];
+
+  // 1. Honeypot filled
+  if (body._hp && body._hp.trim() !== "") {
+    reasons.push("honeypot_filled");
+  }
+
+  // 2. Submitted too fast (< 3 seconds — impossible for a human)
+  const age = Number(body._age);
+  if (!isNaN(age) && age < 3) {
+    reasons.push(`too_fast:${age}s`);
+  }
+
+  // 3. Zero keystrokes with non-empty fields (pure programmatic fill)
+  const kc = Number(body._kc);
+  const hasContent = (body.name || "").length + (body.contact || "").length;
+  if (!isNaN(kc) && kc === 0 && hasContent > 5) {
+    reasons.push("no_keystrokes");
+  }
+
+  // 4. Token missing or malformed (must be "timestamp.hash")
+  const tok = body._tok || "";
+  const tokParts = tok.split(".");
+  if (tokParts.length !== 2 || isNaN(Number(tokParts[0]))) {
+    reasons.push("bad_token");
+  } else {
+    // Token must be < 5 minutes old
+    const tokAge = Date.now() - Number(tokParts[0]);
+    if (tokAge > 5 * 60 * 1000) {
+      reasons.push(`stale_token:${Math.round(tokAge / 1000)}s`);
+    }
+  }
+
+  // 5. Phone entropy: all same digit (e.g. "555555555")
+  const phone = (body.contact || "").replace(/\D/g, "");
+  if (phone.length >= 6 && new Set(phone.split("")).size === 1) {
+    reasons.push("low_entropy_phone");
+  }
+
+  // 6. Name entropy: all same character
+  const name = (body.name || "").replace(/\s/g, "");
+  if (name.length >= 4 && new Set(name.toLowerCase().split("")).size === 1) {
+    reasons.push("low_entropy_name");
+  }
+
+  return reasons;
+}
+
 async function sendEmailNotification(body) {
   const formName = body?.form || "Lead Form";
   const name = body?.name || "N/A";
   const email =
+
     body?.email && body.email.trim() !== "" ? body.email.trim() : "Not provided";
   const countryCode = body?.country ? `+${body.country}` : "";
   const contact = body?.contact
@@ -342,6 +407,31 @@ export default async function handler(req, res) {
 
   try {
     const body = req.body;
+
+    // ── Bot protection ────────────────────────────────────────────────────
+    const clientIp =
+      (req.headers["x-forwarded-for"] || "").split(",")[0].trim() ||
+      req.socket?.remoteAddress ||
+      "unknown";
+
+    // Rate limiting
+    if (isRateLimited(clientIp)) {
+      console.warn(`[BotGuard] Rate limit exceeded for IP: ${clientIp}`);
+      return res.status(200).json({ success: true, botBlocked: true });
+    }
+
+    // Multi-signal bot detection
+    const botSignals = detectBot(body);
+    if (botSignals.length >= 2) {
+      // Require at least 2 signals to block (avoids false positives)
+      console.warn(`[BotGuard] Blocked submission. Signals: ${botSignals.join(", ")} | IP: ${clientIp}`);
+      return res.status(200).json({ success: true, botBlocked: true });
+    }
+    if (botSignals.length === 1) {
+      // Log single-signal suspicious submissions but allow through
+      console.warn(`[BotGuard] Suspicious (1 signal): ${botSignals.join(", ")} | IP: ${clientIp}`);
+    }
+    // ─────────────────────────────────────────────────────────────────────
 
     let targetWebhookUrl = WEBHOOK_URLS[body?.form];
     if (!targetWebhookUrl && body?.language === "Arabic") {

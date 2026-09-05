@@ -1,6 +1,32 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+
+// ── Client-side bot token (lightweight HMAC-like fingerprint) ──────────────
+function generateBotToken(formId) {
+  const ts = Date.now();
+  // Simple XOR-based hash — enough to distinguish deliberate clients from scripts
+  let hash = 0;
+  const raw = `${formId}:${ts}:dm_devmate_2024`;
+  for (let i = 0; i < raw.length; i++) {
+    hash = ((hash << 5) - hash + raw.charCodeAt(i)) | 0;
+  }
+  return `${ts}.${Math.abs(hash).toString(36)}`;
+}
+
+// ── Math CAPTCHA generator ─────────────────────────────────────────────────
+function generateChallenge() {
+  const ops = [
+    { a: Math.floor(Math.random() * 9) + 1, b: Math.floor(Math.random() * 9) + 1, op: "+" },
+    { a: Math.floor(Math.random() * 9) + 5, b: Math.floor(Math.random() * 5) + 1, op: "-" },
+    { a: Math.floor(Math.random() * 5) + 2, b: Math.floor(Math.random() * 5) + 2, op: "×" },
+  ];
+  const picked = ops[Math.floor(Math.random() * ops.length)];
+  const answer = picked.op === "+" ? picked.a + picked.b
+    : picked.op === "-" ? picked.a - picked.b
+    : picked.a * picked.b;
+  return { question: `${picked.a} ${picked.op} ${picked.b}`, answer };
+}
 
 const FormApp = ({
   title = "Get Instant Call",
@@ -25,20 +51,66 @@ const FormApp = ({
   const [submittedData, setSubmittedData] = useState(null);
   const [error, setError] = useState(false);
 
+  // ── Bot-protection state ────────────────────────────────────────────────
+  const formLoadTime = useRef(Date.now());
+  const keydownCount = useRef(0);
+  const [challenge, setChallenge] = useState(() => generateChallenge());
+  const [captchaInput, setCaptchaInput] = useState("");
+  const [captchaError, setCaptchaError] = useState(false);
+  const botToken = useRef(generateBotToken("instant-call"));
+
+  // Reset challenge each time modal opens
+  useEffect(() => {
+    formLoadTime.current = Date.now();
+    keydownCount.current = 0;
+    botToken.current = generateBotToken("instant-call");
+    setChallenge(generateChallenge());
+    setCaptchaInput("");
+    setCaptchaError(false);
+  }, []);
+
+  const trackKeydown = () => { keydownCount.current += 1; };
+
   async function handleSubmit(e) {
     e.preventDefault();
+    setCaptchaError(false);
+
+    // ── Layer 1: Math CAPTCHA check ───────────────────────────────────────
+    const captchaVal = parseInt(captchaInput.trim(), 10);
+    if (isNaN(captchaVal) || captchaVal !== challenge.answer) {
+      setCaptchaError(true);
+      // Refresh question on wrong answer
+      setChallenge(generateChallenge());
+      setCaptchaInput("");
+      return;
+    }
+
     setLoading(true);
     setSuccess(false);
     setError(false);
 
     const form = e.target;
-    const name = form.name.value.trim();
-    const email = form.email.value.trim();
+    const name    = form.name.value.trim();
+    const email   = form.email.value.trim();
     const country = form.country.value;
     const contact = form.contact.value.trim();
-    const query = form.query ? form.query.value.trim() : "";
+    const query   = form.query ? form.query.value.trim() : "";
 
-    // Detect source page for the notification email
+    // ── Layer 2: Honeypot check (client guard — double-checked server-side) ──
+    const honeypot = form.hp_field ? form.hp_field.value : "";
+    if (honeypot) {
+      // Silently fake-succeed to not tip off the bot
+      setSuccess(true);
+      setLoading(false);
+      return;
+    }
+
+    // ── Layer 3: Timing check ────────────────────────────────────────────
+    const formAge = Math.floor((Date.now() - formLoadTime.current) / 1000); // seconds
+
+    // ── Layer 4: Keydown entropy ─────────────────────────────────────────
+    const keyCount = keydownCount.current;
+
     const source =
       customSource ||
       (typeof window !== "undefined"
@@ -47,7 +119,14 @@ const FormApp = ({
           : `Website (${window.location.pathname})`
         : "Website");
 
-    const payload = { name, email, country, contact, query, source };
+    const payload = {
+      name, email, country, contact, query, source,
+      // Anti-bot metadata
+      _hp: honeypot,
+      _age: formAge,
+      _kc: keyCount,
+      _tok: botToken.current,
+    };
 
     try {
       // 1. If this is an Instant Call form, trigger Make.com webhook for the 60s phone call
@@ -59,7 +138,7 @@ const FormApp = ({
         }).catch((err) => console.warn("Make calling webhook error:", err));
       }
 
-      // 2. Direct email submission (sends notification to contact@devmatesolutions.com and user confirmation email)
+      // 2. Direct email submission (sends notification + user confirmation email)
       const res = await fetch("/api/send-lead-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -70,8 +149,16 @@ const FormApp = ({
         setSubmittedData(payload);
         setSuccess(true);
         form.reset();
+        setCaptchaInput("");
+        setChallenge(generateChallenge());
       } else {
-        setError(true);
+        const data = await res.json().catch(() => ({}));
+        if (data?.botBlocked) {
+          // Silently treat as success — don't reveal we detected the bot
+          setSuccess(true);
+        } else {
+          setError(true);
+        }
       }
     } catch {
       setError(true);
@@ -152,6 +239,17 @@ const FormApp = ({
             )}
 
             <form onSubmit={handleSubmit} noValidate>
+              {/* ── Honeypot hidden field (never visible to humans) ── */}
+              <div style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }} aria-hidden="true">
+                <input
+                  type="text"
+                  name="hp_field"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  placeholder="Leave this blank"
+                />
+              </div>
+
               {/* Name */}
               <div className="dm-form-group">
                 <label className="dm-form-label" htmlFor="inq-name">
@@ -165,6 +263,7 @@ const FormApp = ({
                   placeholder="ENTER YOUR FULL NAME"
                   className="dm-form-input"
                   disabled={loading}
+                  onKeyDown={trackKeydown}
                 />
               </div>
 
@@ -181,6 +280,7 @@ const FormApp = ({
                   placeholder="ENTER YOUR EMAIL"
                   className="dm-form-input"
                   disabled={loading}
+                  onKeyDown={trackKeydown}
                 />
               </div>
 
@@ -227,6 +327,7 @@ const FormApp = ({
                     className="dm-form-input"
                     style={{ flex: 1 }}
                     disabled={loading}
+                    onKeyDown={trackKeydown}
                   />
                 </div>
               </div>
@@ -243,7 +344,33 @@ const FormApp = ({
                   className="dm-form-input"
                   style={{ minHeight: "84px", resize: "vertical" }}
                   disabled={loading}
+                  onKeyDown={trackKeydown}
                 />
+              </div>
+
+              {/* ── Math CAPTCHA ── */}
+              <div className="dm-form-group">
+                <label className="dm-form-label" htmlFor="inq-captcha">
+                  Quick Check: What is <strong style={{ color: "#bd2120" }}>{challenge.question}</strong>?{" "}
+                  <span style={{ color: "#bd2120" }}>*</span>
+                </label>
+                <input
+                  id="inq-captcha"
+                  name="captcha"
+                  type="number"
+                  inputMode="numeric"
+                  placeholder="Enter the answer"
+                  className={`dm-form-input${captchaError ? " dm-error" : ""}`}
+                  value={captchaInput}
+                  onChange={(e) => { setCaptchaInput(e.target.value); setCaptchaError(false); }}
+                  disabled={loading}
+                  autoComplete="off"
+                />
+                {captchaError && (
+                  <p style={{ fontSize: "11px", color: "#ef4444", marginTop: "3px", fontWeight: 600 }}>
+                    ✗ Incorrect — please try the new question above.
+                  </p>
+                )}
               </div>
 
               {/* Submit */}
@@ -255,7 +382,7 @@ const FormApp = ({
                   </>
                 ) : (
                   <>
-                    {buttonText}
+                    {finalButtonText}
                     <i className="fal fa-long-arrow-right" />
                   </>
                 )}
@@ -305,7 +432,19 @@ const FormApp = ({
           border-top-color: #fff;
           border-radius: 50%;
           animation: spin 0.6s linear infinite;
+          flex-shrink: 0;
         }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .dm-form-input.dm-error {
+          border-color: #ef4444;
+          box-shadow: 0 0 0 3px rgba(239,68,68,0.07);
+        }
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        input[type=number] { -moz-appearance: textfield; }
       ` }} />
     </div>
   );

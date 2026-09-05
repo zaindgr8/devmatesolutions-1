@@ -3,16 +3,83 @@ import { Resend } from 'resend';
 // API Route: Send lead notification to contact@devmatesolutions.com
 // Called whenever the FormApp (modal) captures a lead
 
+// ── Rate limiter (in-memory; resets on cold start) ─────────────────────────
+const ipHitMap = new Map();
+const RATE_LIMIT = 3;
+const WINDOW_MS  = 10 * 60 * 1000; // 10 minutes
+
+function isRateLimited(ip) {
+  const now  = Date.now();
+  const hits = (ipHitMap.get(ip) || []).filter((t) => now - t < WINDOW_MS);
+  if (hits.length >= RATE_LIMIT) return true;
+  hits.push(now);
+  ipHitMap.set(ip, hits);
+  return false;
+}
+
+// ── Bot signal detector ────────────────────────────────────────────────────
+function detectBot(body) {
+  const reasons = [];
+
+  if (body._hp && body._hp.trim() !== "") reasons.push("honeypot_filled");
+
+  const age = Number(body._age);
+  if (!isNaN(age) && age < 3) reasons.push(`too_fast:${age}s`);
+
+  const kc = Number(body._kc);
+  const hasContent = (body.name || "").length + (body.contact || "").length;
+  if (!isNaN(kc) && kc === 0 && hasContent > 5) reasons.push("no_keystrokes");
+
+  const tok = body._tok || "";
+  const tokParts = tok.split(".");
+  if (tokParts.length !== 2 || isNaN(Number(tokParts[0]))) {
+    reasons.push("bad_token");
+  } else {
+    const tokAge = Date.now() - Number(tokParts[0]);
+    if (tokAge > 5 * 60 * 1000) reasons.push(`stale_token:${Math.round(tokAge / 1000)}s`);
+  }
+
+  const phone = (body.contact || "").replace(/\D/g, "");
+  if (phone.length >= 6 && new Set(phone.split("")).size === 1) reasons.push("low_entropy_phone");
+
+  const name = (body.name || "").replace(/\s/g, "");
+  if (name.length >= 4 && new Set(name.toLowerCase().split("")).size === 1) reasons.push("low_entropy_name");
+
+  return reasons;
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
+
+  // ── Bot protection ──────────────────────────────────────────────────────
+  const clientIp =
+    (req.headers['x-forwarded-for'] || '').split(',')[0].trim() ||
+    req.socket?.remoteAddress ||
+    'unknown';
+
+  if (isRateLimited(clientIp)) {
+    console.warn(`[BotGuard/lead] Rate limit exceeded for IP: ${clientIp}`);
+    return res.status(200).json({ success: true, botBlocked: true });
+  }
+
+  const botSignals = detectBot(req.body);
+  if (botSignals.length >= 2) {
+    console.warn(`[BotGuard/lead] Blocked. Signals: ${botSignals.join(', ')} | IP: ${clientIp}`);
+    return res.status(200).json({ success: true, botBlocked: true });
+  }
+  if (botSignals.length === 1) {
+    console.warn(`[BotGuard/lead] Suspicious (1 signal): ${botSignals.join(', ')} | IP: ${clientIp}`);
+  }
+  // ───────────────────────────────────────────────────────────────────────
 
   const { name, email, country, contact, query, source } = req.body;
 
   if (!contact) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
+
 
   const RESEND_API_KEY = process.env.RESEND_API_KEY;
   if (!RESEND_API_KEY) {

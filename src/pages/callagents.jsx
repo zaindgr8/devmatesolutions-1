@@ -1,5 +1,29 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+
+/* ─── Bot-protection utilities ──────────────────────────────── */
+function generateBotToken(formId) {
+  const ts = Date.now();
+  let hash = 0;
+  const raw = `${formId}:${ts}:dm_devmate_2024`;
+  for (let i = 0; i < raw.length; i++) {
+    hash = ((hash << 5) - hash + raw.charCodeAt(i)) | 0;
+  }
+  return `${ts}.${Math.abs(hash).toString(36)}`;
+}
+
+function generateChallenge() {
+  const ops = [
+    { a: Math.floor(Math.random() * 9) + 1, b: Math.floor(Math.random() * 9) + 1, op: "+" },
+    { a: Math.floor(Math.random() * 9) + 5, b: Math.floor(Math.random() * 5) + 1, op: "-" },
+    { a: Math.floor(Math.random() * 5) + 2, b: Math.floor(Math.random() * 5) + 2, op: "×" },
+  ];
+  const picked = ops[Math.floor(Math.random() * ops.length)];
+  const answer = picked.op === "+" ? picked.a + picked.b
+    : picked.op === "-" ? picked.a - picked.b
+    : picked.a * picked.b;
+  return { question: `${picked.a} ${picked.op} ${picked.b}`, answer };
+}
 import Head from "next/head";
 import HeaderThree from "@/src/layout/headers/header-3";
 import FooterThree from "@/src/layout/footers/footer-3";
@@ -149,6 +173,33 @@ function StatusMessage({ success, error }) {
   return null;
 }
 
+function CaptchaField({ id, challenge, value, onChange, hasError }) {
+  return (
+    <div className="cad-field-group">
+      <label htmlFor={id} className="cad-field-label">
+        Quick check: What is <strong style={{ color: "#bd2120" }}>{challenge.question}</strong>?
+        <span style={{ color: "#bd2120" }}> *</span>
+      </label>
+      <input
+        id={id}
+        type="number"
+        inputMode="numeric"
+        placeholder="Enter the answer"
+        className={`cad-field-input${hasError ? " cad-field-error" : ""}`}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        autoComplete="off"
+        required
+      />
+      {hasError && (
+        <span style={{ fontSize: "11px", color: "#ef4444", marginTop: "3px", fontWeight: 600, display: "block" }}>
+          ✗ Incorrect — a new question has been generated, please try again.
+        </span>
+      )}
+    </div>
+  );
+}
+
 function SubmitButton({ loading }) {
   return (
     <button type="submit" className="cad-submit-btn" disabled={loading}>
@@ -171,27 +222,81 @@ function useForm(formName) {
   const [success, setSuccess] = useState(false);
   const [error, setError]     = useState(false);
 
+  // Bot-protection state
+  const formLoadTime = useRef(Date.now());
+  const keydownCount = useRef(0);
+  const botToken     = useRef(generateBotToken(formName));
+  const [challenge, setChallenge]       = useState(() => generateChallenge());
+  const [captchaInput, setCaptchaInput] = useState("");
+  const [captchaError, setCaptchaError] = useState(false);
+
+  const trackKeydown = () => { keydownCount.current += 1; };
+
+  const resetProtection = () => {
+    formLoadTime.current = Date.now();
+    keydownCount.current = 0;
+    botToken.current = generateBotToken(formName);
+    setChallenge(generateChallenge());
+    setCaptchaInput("");
+    setCaptchaError(false);
+  };
+
   async function handleSubmit(e, payload) {
     e.preventDefault();
+    setCaptchaError(false);
+
+    // Layer 1: Math CAPTCHA
+    const captchaVal = parseInt(captchaInput.trim(), 10);
+    if (isNaN(captchaVal) || captchaVal !== challenge.answer) {
+      setCaptchaError(true);
+      setChallenge(generateChallenge());
+      setCaptchaInput("");
+      return;
+    }
+
+    // Layer 2: Honeypot (silently abort if filled)
+    const honeypot = e.target.hp_field ? e.target.hp_field.value : "";
+    if (honeypot) {
+      setSuccess(true);
+      return;
+    }
+
     setLoading(true); setSuccess(false); setError(false);
+
+    const enrichedPayload = {
+      ...payload,
+      _hp:  honeypot,
+      _age: Math.floor((Date.now() - formLoadTime.current) / 1000),
+      _kc:  keydownCount.current,
+      _tok: botToken.current,
+    };
+
     try {
       const res = await fetch("/api/call-agents-webhook", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(enrichedPayload),
       });
       const result = await res.json();
-      if (res.ok && result.success) { setSuccess(true); e.target.reset(); }
-      else setError(true);
+      if (res.ok && result.success) {
+        setSuccess(true);
+        e.target.reset();
+        setCaptchaInput("");
+        setChallenge(generateChallenge());
+      } else if (result?.botBlocked) {
+        setSuccess(true); // Silent fake-success for bots
+      } else {
+        setError(true);
+      }
     } catch { setError(true); }
     setLoading(false);
   }
 
-  return { loading, success, error, handleSubmit };
+  return { loading, success, error, handleSubmit, challenge, captchaInput, setCaptchaInput, captchaError, trackKeydown };
 }
 
 function RealEstateForm() {
-  const { loading, success, error, handleSubmit } = useForm("Dubai Real Estate");
+  const { loading, success, error, handleSubmit, challenge, captchaInput, setCaptchaInput, captchaError, trackKeydown } = useForm("Dubai Real Estate");
   return (
     <form onSubmit={(e) => handleSubmit(e, {
       form: "Dubai Real Estate",
@@ -200,23 +305,28 @@ function RealEstateForm() {
       country: e.target.country.value,
       contact: e.target.contact.value,
     })} className="cad-form-body">
+      {/* Honeypot */}
+      <div style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }} aria-hidden="true">
+        <input type="text" name="hp_field" tabIndex={-1} autoComplete="off" />
+      </div>
       <div className="cad-form-title-wrap">
         <h3 className="cad-form-title">Dubai Real Estate</h3>
         <div className="cad-form-title-line" />
       </div>
       <div className="cad-fields-stack">
         <FormField id="re-name" label="Full Name">
-          <input id="re-name" type="text" name="name" required placeholder="Enter your name" className="cad-field-input" />
+          <input id="re-name" type="text" name="name" required placeholder="Enter your name" className="cad-field-input" onKeyDown={trackKeydown} />
         </FormField>
         <FormField id="re-email" label="Email Address">
-          <input id="re-email" type="email" name="email" placeholder="Enter your email (optional)" className="cad-field-input" />
+          <input id="re-email" type="email" name="email" placeholder="Enter your email (optional)" className="cad-field-input" onKeyDown={trackKeydown} />
         </FormField>
         <FormField id="re-contact" label="Phone Number">
           <div className="cad-phone-inner">
             <CountrySelect name="country" />
-            <input id="re-contact" type="tel" name="contact" required placeholder="Phone number" className="cad-field-input cad-phone-input" />
+            <input id="re-contact" type="tel" name="contact" required placeholder="Phone number" className="cad-field-input cad-phone-input" onKeyDown={trackKeydown} />
           </div>
         </FormField>
+        <CaptchaField id="re-captcha" challenge={challenge} value={captchaInput} onChange={setCaptchaInput} hasError={captchaError} />
       </div>
       <SubmitButton loading={loading} />
       <StatusMessage success={success} error={error} />
@@ -226,7 +336,7 @@ function RealEstateForm() {
 
 function HotelBookingForm() {
   const [lang, setLang] = useState("english");
-  const { loading, success, error, handleSubmit } = useForm("Hotel Booking DXB");
+  const { loading, success, error, handleSubmit, challenge, captchaInput, setCaptchaInput, captchaError, trackKeydown } = useForm("Hotel Booking DXB");
   const isArabic = lang === "arabic";
   return (
     <form onSubmit={(e) => handleSubmit(e, {
@@ -237,6 +347,10 @@ function HotelBookingForm() {
       country: e.target.country.value,
       contact: e.target.contact.value,
     })} className="cad-form-body">
+      {/* Honeypot */}
+      <div style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }} aria-hidden="true">
+        <input type="text" name="hp_field" tabIndex={-1} autoComplete="off" />
+      </div>
       <div className="cad-sub-nav">
         <button type="button" className={`cad-sub-tab${lang === "english" ? " cad-sub-tab--active" : ""}`} onClick={() => setLang("english")}>English</button>
         <button type="button" className={`cad-sub-tab${lang === "arabic" ? " cad-sub-tab--active" : ""}`} onClick={() => setLang("arabic")}>Arabic / عربي</button>
@@ -247,17 +361,18 @@ function HotelBookingForm() {
       </div>
       <div className="cad-fields-stack">
         <FormField id="hb-name" label={isArabic ? "Name / الاسم" : "Full Name"}>
-          <input id="hb-name" type="text" name="name" required placeholder={isArabic ? "أدخل اسمك" : "Enter your name"} className="cad-field-input" />
+          <input id="hb-name" type="text" name="name" required placeholder={isArabic ? "أدخل اسمك" : "Enter your name"} className="cad-field-input" onKeyDown={trackKeydown} />
         </FormField>
         <FormField id="hb-email" label={isArabic ? "Email / البريد الإلكتروني" : "Email Address"}>
-          <input id="hb-email" type="email" name="email" placeholder={isArabic ? "أدخل بريدك الإلكتروني" : "Enter your email (optional)"} className="cad-field-input" />
+          <input id="hb-email" type="email" name="email" placeholder={isArabic ? "أدخل بريدك الإلكتروني" : "Enter your email (optional)"} className="cad-field-input" onKeyDown={trackKeydown} />
         </FormField>
         <FormField id="hb-contact" label={isArabic ? "Phone / رقم الهاتف" : "Phone Number"}>
           <div className="cad-phone-inner">
             <CountrySelect name="country" />
-            <input id="hb-contact" type="tel" name="contact" required placeholder={isArabic ? "رقم الهاتف" : "Phone number"} className="cad-field-input cad-phone-input" />
+            <input id="hb-contact" type="tel" name="contact" required placeholder={isArabic ? "رقم الهاتف" : "Phone number"} className="cad-field-input cad-phone-input" onKeyDown={trackKeydown} />
           </div>
         </FormField>
+        <CaptchaField id="hb-captcha" challenge={challenge} value={captchaInput} onChange={setCaptchaInput} hasError={captchaError} />
       </div>
       <SubmitButton loading={loading} />
       <StatusMessage success={success} error={error} />
@@ -266,7 +381,7 @@ function HotelBookingForm() {
 }
 
 function EmiratesForm() {
-  const { loading, success, error, handleSubmit } = useForm("Emirates Customer Care");
+  const { loading, success, error, handleSubmit, challenge, captchaInput, setCaptchaInput, captchaError, trackKeydown } = useForm("Emirates Customer Care");
   return (
     <form onSubmit={(e) => handleSubmit(e, {
       form: "Emirates- Customer Care",
@@ -275,23 +390,28 @@ function EmiratesForm() {
       country: e.target.country.value,
       contact: e.target.contact.value,
     })} className="cad-form-body">
+      {/* Honeypot */}
+      <div style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }} aria-hidden="true">
+        <input type="text" name="hp_field" tabIndex={-1} autoComplete="off" />
+      </div>
       <div className="cad-form-title-wrap">
         <h3 className="cad-form-title">Emirates Customer Care</h3>
         <div className="cad-form-title-line" />
       </div>
       <div className="cad-fields-stack">
         <FormField id="ecc-name" label="Full Name">
-          <input id="ecc-name" type="text" name="name" required placeholder="Enter your name" className="cad-field-input" />
+          <input id="ecc-name" type="text" name="name" required placeholder="Enter your name" className="cad-field-input" onKeyDown={trackKeydown} />
         </FormField>
         <FormField id="ecc-email" label="Email Address">
-          <input id="ecc-email" type="email" name="email" placeholder="Enter your email (optional)" className="cad-field-input" />
+          <input id="ecc-email" type="email" name="email" placeholder="Enter your email (optional)" className="cad-field-input" onKeyDown={trackKeydown} />
         </FormField>
         <FormField id="ecc-contact" label="Phone Number">
           <div className="cad-phone-inner">
             <CountrySelect name="country" />
-            <input id="ecc-contact" type="tel" name="contact" required placeholder="Phone number" className="cad-field-input cad-phone-input" />
+            <input id="ecc-contact" type="tel" name="contact" required placeholder="Phone number" className="cad-field-input cad-phone-input" onKeyDown={trackKeydown} />
           </div>
         </FormField>
+        <CaptchaField id="ecc-captcha" challenge={challenge} value={captchaInput} onChange={setCaptchaInput} hasError={captchaError} />
       </div>
       <SubmitButton loading={loading} />
       <StatusMessage success={success} error={error} />
@@ -301,7 +421,7 @@ function EmiratesForm() {
 
 function DubaiFunBrokerForm() {
   const [lang, setLang] = useState("english");
-  const { loading, success, error, handleSubmit } = useForm("Dubai Fun Broker");
+  const { loading, success, error, handleSubmit, challenge, captchaInput, setCaptchaInput, captchaError, trackKeydown } = useForm("Dubai Fun Broker");
   const isRussian = lang === "russian";
   return (
     <form onSubmit={(e) => handleSubmit(e, {
@@ -312,6 +432,10 @@ function DubaiFunBrokerForm() {
       country: e.target.country.value,
       contact: e.target.contact.value,
     })} className="cad-form-body">
+      {/* Honeypot */}
+      <div style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }} aria-hidden="true">
+        <input type="text" name="hp_field" tabIndex={-1} autoComplete="off" />
+      </div>
       <div className="cad-sub-nav">
         <button type="button" className={`cad-sub-tab${lang === "english" ? " cad-sub-tab--active" : ""}`} onClick={() => setLang("english")}>English</button>
         <button type="button" className={`cad-sub-tab${lang === "russian" ? " cad-sub-tab--active" : ""}`} onClick={() => setLang("russian")}>Русский</button>
@@ -322,17 +446,18 @@ function DubaiFunBrokerForm() {
       </div>
       <div className="cad-fields-stack">
         <FormField id="dfb-name" label={isRussian ? "Name / Имя" : "Full Name"}>
-          <input id="dfb-name" type="text" name="name" required placeholder={isRussian ? "Введите имя" : "Enter your name"} className="cad-field-input" />
+          <input id="dfb-name" type="text" name="name" required placeholder={isRussian ? "Введите имя" : "Enter your name"} className="cad-field-input" onKeyDown={trackKeydown} />
         </FormField>
         <FormField id="dfb-email" label={isRussian ? "Email / Эл. почта" : "Email Address"}>
-          <input id="dfb-email" type="email" name="email" placeholder={isRussian ? "Введите email" : "Enter your email (optional)"} className="cad-field-input" />
+          <input id="dfb-email" type="email" name="email" placeholder={isRussian ? "Введите email" : "Enter your email (optional)"} className="cad-field-input" onKeyDown={trackKeydown} />
         </FormField>
         <FormField id="dfb-contact" label={isRussian ? "Phone / Номер" : "Phone Number"}>
           <div className="cad-phone-inner">
             <CountrySelect name="country" defaultValue="7" />
-            <input id="dfb-contact" type="tel" name="contact" required placeholder={isRussian ? "Номер телефона" : "Phone number"} className="cad-field-input cad-phone-input" />
+            <input id="dfb-contact" type="tel" name="contact" required placeholder={isRussian ? "Номер телефона" : "Phone number"} className="cad-field-input cad-phone-input" onKeyDown={trackKeydown} />
           </div>
         </FormField>
+        <CaptchaField id="dfb-captcha" challenge={challenge} value={captchaInput} onChange={setCaptchaInput} hasError={captchaError} />
       </div>
       <SubmitButton loading={loading} />
       <StatusMessage success={success} error={error} />
@@ -346,10 +471,35 @@ function BuildAgentModal({ isOpen, onClose }) {
   const [success, setSuccess] = useState(false);
   const [error, setError]     = useState(false);
 
+  // Bot protection
+  const formLoadTime  = useRef(Date.now());
+  const keydownCount  = useRef(0);
+  const botToken      = useRef(generateBotToken("build-agent"));
+  const [challenge, setChallenge]       = useState(() => generateChallenge());
+  const [captchaInput, setCaptchaInput] = useState("");
+  const [captchaError, setCaptchaError] = useState(false);
+
   if (!isOpen) return null;
+
+  const trackKeydown = () => { keydownCount.current += 1; };
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setCaptchaError(false);
+
+    // Math CAPTCHA check
+    const captchaVal = parseInt(captchaInput.trim(), 10);
+    if (isNaN(captchaVal) || captchaVal !== challenge.answer) {
+      setCaptchaError(true);
+      setChallenge(generateChallenge());
+      setCaptchaInput("");
+      return;
+    }
+
+    // Honeypot check
+    const honeypot = e.target.hp_field ? e.target.hp_field.value : "";
+    if (honeypot) { setSuccess(true); return; }
+
     setLoading(true); setSuccess(false); setError(false);
     const f = e.target;
     const payload = {
@@ -359,6 +509,10 @@ function BuildAgentModal({ isOpen, onClose }) {
       country: f.bma_country.value,
       contact: f.bma_contact.value,
       businessDetails: f.bma_business.value,
+      _hp:  honeypot,
+      _age: Math.floor((Date.now() - formLoadTime.current) / 1000),
+      _kc:  keydownCount.current,
+      _tok: botToken.current,
     };
     try {
       const res = await fetch("/api/call-agents-webhook", {
@@ -367,7 +521,8 @@ function BuildAgentModal({ isOpen, onClose }) {
         body: JSON.stringify(payload),
       });
       const result = await res.json();
-      if (res.ok && result.success) { setSuccess(true); f.reset(); }
+      if (res.ok && result.success) { setSuccess(true); f.reset(); setCaptchaInput(""); setChallenge(generateChallenge()); }
+      else if (result?.botBlocked) { setSuccess(true); }
       else setError(true);
     } catch { setError(true); }
     setLoading(false);
@@ -395,12 +550,17 @@ function BuildAgentModal({ isOpen, onClose }) {
 
         {!success ? (
           <form onSubmit={handleSubmit} className="cad-form-body">
+            {/* Honeypot */}
+            <div style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }} aria-hidden="true">
+              <input type="text" name="hp_field" tabIndex={-1} autoComplete="off" />
+            </div>
             <div className="cad-fields-stack">
               <FormField id="bma-name" label="Full Name">
                 <input
                   id="bma-name" name="bma_name" type="text" required
                   placeholder="Your full name"
                   className="cad-field-input"
+                  onKeyDown={trackKeydown}
                 />
               </FormField>
 
@@ -409,6 +569,7 @@ function BuildAgentModal({ isOpen, onClose }) {
                   id="bma-email" name="bma_email" type="email" required
                   placeholder="your@email.com"
                   className="cad-field-input"
+                  onKeyDown={trackKeydown}
                 />
               </FormField>
 
@@ -419,6 +580,7 @@ function BuildAgentModal({ isOpen, onClose }) {
                     id="bma-contact" name="bma_contact" type="tel" required
                     placeholder="Phone number"
                     className="cad-field-input cad-phone-input"
+                    onKeyDown={trackKeydown}
                   />
                 </div>
               </FormField>
@@ -430,8 +592,11 @@ function BuildAgentModal({ isOpen, onClose }) {
                   className="cad-field-input"
                   rows={4}
                   style={{ resize: "vertical", lineHeight: 1.6 }}
+                  onKeyDown={trackKeydown}
                 />
               </FormField>
+
+              <CaptchaField id="bma-captcha" challenge={challenge} value={captchaInput} onChange={setCaptchaInput} hasError={captchaError} />
             </div>
 
             <button type="submit" className="cad-submit-btn" disabled={loading}>
@@ -448,6 +613,7 @@ function BuildAgentModal({ isOpen, onClose }) {
 
             {error && <div className="cad-status-msg cad-status-error">✗ Something went wrong. Please try again.</div>}
           </form>
+
         ) : (
           <div style={{ textAlign: "center", padding: "16px 0 8px" }}>
             <div style={{

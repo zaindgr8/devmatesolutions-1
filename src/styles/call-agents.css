@@ -586,6 +586,11 @@
 }
 .cad-field-input::placeholder { color: #c4c4c4; }
 .cad-field-input:focus { border-color: #bd2120; background: #ffffff; }
+.cad-field-error { border-color: #ef4444 !important; box-shadow: 0 0 0 3px rgba(239,68,68,0.08); }
+input[type=number].cad-field-input::-webkit-inner-spin-button,
+input[type=number].cad-field-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number].cad-field-input { -moz-appearance: textfield; }
+
 
 /* Phone row */
 .cad-phone-row { display: flex; gap: 10px; align-items: flex-start; flex-direction: column; }
