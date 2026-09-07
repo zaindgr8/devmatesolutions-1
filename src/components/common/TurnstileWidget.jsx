@@ -16,6 +16,7 @@ const TurnstileWidget = forwardRef(function TurnstileWidget(
   const widgetIdRef = useRef(null);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
+  const [showSlowNotice, setShowSlowNotice] = useState(false);
   const [fallbackVerified, setFallbackVerified] = useState(false);
 
   const onVerifyRef = useRef(onVerify);
