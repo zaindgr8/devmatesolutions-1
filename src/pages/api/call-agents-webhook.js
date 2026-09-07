@@ -4,6 +4,9 @@
 // - Sends admin lead notification email via Resend
 // - Sends user sales pitch email via Resend
 
+import { verifyTurnstileToken, checkPhoneCooldown } from "../../lib/verifyCaptcha";
+import { verifyMathChallenge } from "../../lib/mathChallenge";
+
 const WEBHOOK_URLS = {
   "Hotel Booking — DXB": "https://hook.us2.make.com/lvger5j3udmgtz2vy1a4dx1xav0d3v8s",
   "Hotel Booking DXB": "https://hook.us2.make.com/lvger5j3udmgtz2vy1a4dx1xav0d3v8s",
@@ -33,9 +36,12 @@ const RATE_LIMIT  = 3;       // max submissions
 const WINDOW_MS   = 10 * 60 * 1000; // 10 minutes
 
 function isRateLimited(ip) {
+  if (process.env.NODE_ENV === "development" && (ip === "::1" || ip === "127.0.0.1" || ip === "unknown")) {
+    return false;
+  }
   const now = Date.now();
   const hits = (ipHitMap.get(ip) || []).filter((t) => now - t < WINDOW_MS);
-  if (hits.length >= RATE_LIMIT) return true;
+  if (hits.length >= 5) return true;
   hits.push(now);
   ipHitMap.set(ip, hits);
   return false;
@@ -95,14 +101,13 @@ async function sendEmailNotification(body) {
   const formName = body?.form || "Lead Form";
   const name = body?.name || "N/A";
   const email =
-
     body?.email && body.email.trim() !== "" ? body.email.trim() : "Not provided";
   const countryCode = body?.country ? `+${body.country}` : "";
   const contact = body?.contact
     ? `${countryCode} ${body.contact}`.trim()
     : "N/A";
   const language = body?.language || null;
-  const businessDetails = body?.businessDetails || null;
+  const reasonMessage = body?.message || body?.query || body?.businessDetails || null;
   const timestamp = new Date().toLocaleString("en-US", {
     timeZone: "Asia/Dubai",
   });
@@ -141,11 +146,11 @@ async function sendEmailNotification(body) {
             <td style="padding: 12px 8px; color: #0f172a; font-weight: 500; font-size: 14px;">${contact}</td>
           </tr>
           ${
-            businessDetails
+            reasonMessage
               ? `
           <tr style="border-bottom: 1px solid #f1f5f9;">
-            <td style="padding: 12px 8px; color: #64748b; font-weight: 600; font-size: 13px; vertical-align: top;">Business Details</td>
-            <td style="padding: 12px 8px; color: #0f172a; font-weight: 500; font-size: 14px; white-space: pre-wrap;">${businessDetails}</td>
+            <td style="padding: 12px 8px; color: #64748b; font-weight: 600; font-size: 13px; vertical-align: top;">Reason for Call / Message</td>
+            <td style="padding: 12px 8px; color: #0f172a; font-weight: 500; font-size: 14px; white-space: pre-wrap;">${reasonMessage}</td>
           </tr>
           `
               : ""
@@ -417,18 +422,69 @@ export default async function handler(req, res) {
     // Rate limiting
     if (isRateLimited(clientIp)) {
       console.warn(`[BotGuard] Rate limit exceeded for IP: ${clientIp}`);
-      return res.status(200).json({ success: true, botBlocked: true });
+      return res.status(429).json({ success: false, error: "Too many requests. Please try again later." });
+    }
+
+    // Validate all required inputs: Name, Email, Phone, Reason for Call / Message
+    const name = (body?.name || "").trim();
+    if (!name || name.length < 2) {
+      return res.status(400).json({ success: false, error: "Please enter your full name." });
+    }
+
+    const email = (body?.email || "").trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res.status(400).json({ success: false, error: "Please enter a valid email address." });
+    }
+
+    const contact = (body?.contact || "").trim();
+    if (!contact || contact.replace(/\D/g, "").length < 6) {
+      return res.status(400).json({ success: false, error: "Please enter a valid phone number." });
+    }
+
+    const message = (body?.message || body?.query || body?.businessDetails || "").trim();
+    if (!message || message.length < 4) {
+      return res.status(400).json({ success: false, error: "Please provide a reason for the call / message (minimum 4 characters)." });
+    }
+
+    // Phone cooldown check (max 1 call per phone number per 15 minutes)
+    const fullPhone = `${body?.country || ""}${contact}`;
+    const phoneCheck = checkPhoneCooldown(fullPhone);
+    if (!phoneCheck.allowed) {
+      return res.status(429).json({ success: false, error: phoneCheck.reason });
+    }
+
+    // Mandatory Math CAPTCHA verification
+    const mathAnswer = body?.mathAnswer;
+    const mathToken = body?.mathToken;
+    const mathRes = verifyMathChallenge(mathAnswer, mathToken);
+    if (!mathRes.success) {
+      console.warn(`[BotGuard] Blocked: Math challenge failed (${mathRes.reason}) | IP: ${clientIp}`);
+      return res.status(400).json({
+        success: false,
+        error: "Math verification failed. Please enter the correct answer.",
+        reason: mathRes.reason,
+      });
+    }
+
+    // Mandatory Turnstile / Human CAPTCHA verification
+    const captchaToken = body?.captchaToken || body?.turnstileToken || body?._tok_captcha;
+    const captchaRes = await verifyTurnstileToken(captchaToken, clientIp);
+    if (!captchaRes.success) {
+      console.warn(`[BotGuard] Blocked: CAPTCHA verification failed (${captchaRes.reason}) | IP: ${clientIp}`);
+      return res.status(400).json({
+        success: false,
+        error: "Human verification failed. Please complete the security check.",
+        reason: captchaRes.reason,
+      });
     }
 
     // Multi-signal bot detection
     const botSignals = detectBot(body);
     if (botSignals.length >= 2) {
-      // Require at least 2 signals to block (avoids false positives)
       console.warn(`[BotGuard] Blocked submission. Signals: ${botSignals.join(", ")} | IP: ${clientIp}`);
-      return res.status(200).json({ success: true, botBlocked: true });
+      return res.status(400).json({ success: false, error: "Submission flagged by security policy." });
     }
     if (botSignals.length === 1) {
-      // Log single-signal suspicious submissions but allow through
       console.warn(`[BotGuard] Suspicious (1 signal): ${botSignals.join(", ")} | IP: ${clientIp}`);
     }
     // ─────────────────────────────────────────────────────────────────────

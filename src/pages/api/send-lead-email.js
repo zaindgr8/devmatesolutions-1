@@ -1,4 +1,6 @@
 import { Resend } from 'resend';
+import { verifyTurnstileToken, checkPhoneCooldown } from '../../lib/verifyCaptcha';
+import { verifyMathChallenge } from '../../lib/mathChallenge';
 
 // API Route: Send lead notification to contact@devmatesolutions.com
 // Called whenever the FormApp (modal) captures a lead
@@ -9,9 +11,12 @@ const RATE_LIMIT = 3;
 const WINDOW_MS  = 10 * 60 * 1000; // 10 minutes
 
 function isRateLimited(ip) {
+  if (process.env.NODE_ENV === "development" && (ip === "::1" || ip === "127.0.0.1" || ip === "unknown")) {
+    return false;
+  }
   const now  = Date.now();
   const hits = (ipHitMap.get(ip) || []).filter((t) => now - t < WINDOW_MS);
-  if (hits.length >= RATE_LIMIT) return true;
+  if (hits.length >= 5) return true;
   hits.push(now);
   ipHitMap.set(ip, hits);
   return false;
@@ -29,15 +34,6 @@ function detectBot(body) {
   const kc = Number(body._kc);
   const hasContent = (body.name || "").length + (body.contact || "").length;
   if (!isNaN(kc) && kc === 0 && hasContent > 5) reasons.push("no_keystrokes");
-
-  const tok = body._tok || "";
-  const tokParts = tok.split(".");
-  if (tokParts.length !== 2 || isNaN(Number(tokParts[0]))) {
-    reasons.push("bad_token");
-  } else {
-    const tokAge = Date.now() - Number(tokParts[0]);
-    if (tokAge > 5 * 60 * 1000) reasons.push(`stale_token:${Math.round(tokAge / 1000)}s`);
-  }
 
   const phone = (body.contact || "").replace(/\D/g, "");
   if (phone.length >= 6 && new Set(phone.split("")).size === 1) reasons.push("low_entropy_phone");
@@ -61,23 +57,91 @@ export default async function handler(req, res) {
 
   if (isRateLimited(clientIp)) {
     console.warn(`[BotGuard/lead] Rate limit exceeded for IP: ${clientIp}`);
-    return res.status(200).json({ success: true, botBlocked: true });
+    return res.status(429).json({ success: false, error: 'Too many requests. Please try again later.' });
+  }
+
+  const { name, email, country, contact, query, message, mathAnswer, mathToken, source, captchaToken, isCallRequest } = req.body;
+
+  // Validate all required inputs
+  const cleanName = (name || '').trim();
+  if (!cleanName || cleanName.length < 2) {
+    return res.status(400).json({ success: false, error: 'Please enter your full name.' });
+  }
+
+  const cleanEmail = (email || '').trim();
+  if (!cleanEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+    return res.status(400).json({ success: false, error: 'Please enter a valid email address.' });
+  }
+
+  const cleanContact = (contact || '').trim();
+  if (!cleanContact || cleanContact.replace(/\D/g, '').length < 6) {
+    return res.status(400).json({ success: false, error: 'Please enter a valid phone number.' });
+  }
+
+  const callReason = (query || message || '').trim();
+  if (!callReason || callReason.length < 4) {
+    return res.status(400).json({ success: false, error: 'Please provide a reason for the call / query (minimum 4 characters).' });
+  }
+
+  // Phone cooldown check (max 1 call per phone number per 15 minutes)
+  const fullPhone = `${country || ''}${cleanContact}`;
+  const phoneCheck = checkPhoneCooldown(fullPhone);
+  if (!phoneCheck.allowed) {
+    return res.status(429).json({ success: false, error: phoneCheck.reason });
+  }
+
+  // Mandatory Math CAPTCHA verification
+  const mathRes = verifyMathChallenge(mathAnswer, mathToken);
+  if (!mathRes.success) {
+    console.warn(`[BotGuard/lead] Math verification failed: ${mathRes.reason} | IP: ${clientIp}`);
+    return res.status(400).json({
+      success: false,
+      error: 'Math verification failed. Please enter the correct answer.',
+      reason: mathRes.reason,
+    });
+  }
+
+  // Mandatory Turnstile / Human CAPTCHA verification
+  const captchaRes = await verifyTurnstileToken(captchaToken, clientIp);
+  if (!captchaRes.success) {
+    console.warn(`[BotGuard/lead] CAPTCHA failed: ${captchaRes.reason} | IP: ${clientIp}`);
+    return res.status(400).json({
+      success: false,
+      error: 'Human verification failed. Please complete the security check.',
+      reason: captchaRes.reason,
+    });
   }
 
   const botSignals = detectBot(req.body);
   if (botSignals.length >= 2) {
     console.warn(`[BotGuard/lead] Blocked. Signals: ${botSignals.join(', ')} | IP: ${clientIp}`);
-    return res.status(200).json({ success: true, botBlocked: true });
+    return res.status(400).json({ success: false, error: 'Submission flagged by security policy.' });
   }
   if (botSignals.length === 1) {
     console.warn(`[BotGuard/lead] Suspicious (1 signal): ${botSignals.join(', ')} | IP: ${clientIp}`);
   }
   // ───────────────────────────────────────────────────────────────────────
 
-  const { name, email, country, contact, query, source } = req.body;
-
-  if (!contact) {
-    return res.status(400).json({ error: 'Missing required fields' });
+  // Trigger Make.com live calling webhook securely from the server
+  if (isCallRequest) {
+    try {
+      await fetch("https://hook.eu2.make.com/1zy2xcx4j4twvg8f1gbjqbcxlstd2r6v", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          country,
+          contact,
+          query,
+          source,
+          receivedAt: new Date().toISOString(),
+        }),
+      });
+      console.log(`[InstantCall] Make.com webhook triggered securely for ${fullPhone}`);
+    } catch (err) {
+      console.error("[InstantCall] Make.com webhook error:", err);
+    }
   }
 
 

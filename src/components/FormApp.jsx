@@ -1,31 +1,18 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import TurnstileWidget from "./common/TurnstileWidget";
+import { generateMathChallenge } from "../lib/mathChallenge";
 
 // ── Client-side bot token (lightweight HMAC-like fingerprint) ──────────────
 function generateBotToken(formId) {
   const ts = Date.now();
-  // Simple XOR-based hash — enough to distinguish deliberate clients from scripts
   let hash = 0;
   const raw = `${formId}:${ts}:dm_devmate_2024`;
   for (let i = 0; i < raw.length; i++) {
     hash = ((hash << 5) - hash + raw.charCodeAt(i)) | 0;
   }
   return `${ts}.${Math.abs(hash).toString(36)}`;
-}
-
-// ── Math CAPTCHA generator ─────────────────────────────────────────────────
-function generateChallenge() {
-  const ops = [
-    { a: Math.floor(Math.random() * 9) + 1, b: Math.floor(Math.random() * 9) + 1, op: "+" },
-    { a: Math.floor(Math.random() * 9) + 5, b: Math.floor(Math.random() * 5) + 1, op: "-" },
-    { a: Math.floor(Math.random() * 5) + 2, b: Math.floor(Math.random() * 5) + 2, op: "×" },
-  ];
-  const picked = ops[Math.floor(Math.random() * ops.length)];
-  const answer = picked.op === "+" ? picked.a + picked.b
-    : picked.op === "-" ? picked.a - picked.b
-    : picked.a * picked.b;
-  return { question: `${picked.a} ${picked.op} ${picked.b}`, answer };
 }
 
 const FormApp = ({
@@ -50,13 +37,17 @@ const FormApp = ({
   const [success, setSuccess] = useState(false);
   const [submittedData, setSubmittedData] = useState(null);
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  // ── Bot-protection state ────────────────────────────────────────────────
+  // ── Bot-protection & CAPTCHA state ─────────────────────────────────────────
   const formLoadTime = useRef(Date.now());
   const keydownCount = useRef(0);
-  const [challenge, setChallenge] = useState(() => generateChallenge());
-  const [captchaInput, setCaptchaInput] = useState("");
+  const [challenge, setChallenge] = useState(() => generateMathChallenge());
+  const [mathInput, setMathInput] = useState("");
+  const [mathError, setMathError] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState("");
   const [captchaError, setCaptchaError] = useState(false);
+  const turnstileRef = useRef(null);
   const botToken = useRef(generateBotToken("instant-call"));
 
   // Reset challenge each time modal opens
@@ -64,8 +55,10 @@ const FormApp = ({
     formLoadTime.current = Date.now();
     keydownCount.current = 0;
     botToken.current = generateBotToken("instant-call");
-    setChallenge(generateChallenge());
-    setCaptchaInput("");
+    setChallenge(generateMathChallenge());
+    setMathInput("");
+    setMathError(false);
+    setCaptchaToken("");
     setCaptchaError(false);
   }, []);
 
@@ -73,21 +66,10 @@ const FormApp = ({
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setMathError(false);
     setCaptchaError(false);
-
-    // ── Layer 1: Math CAPTCHA check ───────────────────────────────────────
-    const captchaVal = parseInt(captchaInput.trim(), 10);
-    if (isNaN(captchaVal) || captchaVal !== challenge.answer) {
-      setCaptchaError(true);
-      // Refresh question on wrong answer
-      setChallenge(generateChallenge());
-      setCaptchaInput("");
-      return;
-    }
-
-    setLoading(true);
-    setSuccess(false);
     setError(false);
+    setErrorMessage("");
 
     const form = e.target;
     const name    = form.name.value.trim();
@@ -96,19 +78,55 @@ const FormApp = ({
     const contact = form.contact.value.trim();
     const query   = form.query ? form.query.value.trim() : "";
 
-    // ── Layer 2: Honeypot check (client guard — double-checked server-side) ──
+    // ── Validation checks ──
+    if (!name || name.length < 2) {
+      setError(true);
+      setErrorMessage("Please enter your full name.");
+      return;
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError(true);
+      setErrorMessage("Please enter a valid email address.");
+      return;
+    }
+    if (!contact || contact.replace(/\D/g, "").length < 6) {
+      setError(true);
+      setErrorMessage("Please enter a valid phone number.");
+      return;
+    }
+    if (!query || query.length < 4) {
+      setError(true);
+      setErrorMessage("Please provide a message / reason for your call (minimum 4 characters).");
+      return;
+    }
+
+    // ── Math CAPTCHA verification ──
+    const parsedMath = parseInt(mathInput.trim(), 10);
+    if (isNaN(parsedMath) || parsedMath !== challenge.expectedAnswer) {
+      setMathError(true);
+      setChallenge(generateMathChallenge());
+      setMathInput("");
+      return;
+    }
+
+    // ── Turnstile Human verification check ──
+    if (!captchaToken) {
+      setCaptchaError(true);
+      return;
+    }
+
+    setLoading(true);
+    setSuccess(false);
+
+    // ── Honeypot check (silently drop) ──
     const honeypot = form.hp_field ? form.hp_field.value : "";
     if (honeypot) {
-      // Silently fake-succeed to not tip off the bot
       setSuccess(true);
       setLoading(false);
       return;
     }
 
-    // ── Layer 3: Timing check ────────────────────────────────────────────
-    const formAge = Math.floor((Date.now() - formLoadTime.current) / 1000); // seconds
-
-    // ── Layer 4: Keydown entropy ─────────────────────────────────────────
+    const formAge = Math.floor((Date.now() - formLoadTime.current) / 1000);
     const keyCount = keydownCount.current;
 
     const source =
@@ -121,7 +139,10 @@ const FormApp = ({
 
     const payload = {
       name, email, country, contact, query, source,
-      // Anti-bot metadata
+      mathAnswer: mathInput,
+      mathToken: challenge.token,
+      captchaToken,
+      isCallRequest,
       _hp: honeypot,
       _age: formAge,
       _kc: keyCount,
@@ -129,39 +150,38 @@ const FormApp = ({
     };
 
     try {
-      // 1. If this is an Instant Call form, trigger Make.com webhook for the 60s phone call
-      if (isCallRequest) {
-        fetch("https://hook.eu2.make.com/1zy2xcx4j4twvg8f1gbjqbcxlstd2r6v", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        }).catch((err) => console.warn("Make calling webhook error:", err));
-      }
-
-      // 2. Direct email submission (sends notification + user confirmation email)
+      // Direct email & calling submission to secure Next.js API
       const res = await fetch("/api/send-lead-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
-      if (res.ok) {
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.success) {
         setSubmittedData(payload);
         setSuccess(true);
         form.reset();
-        setCaptchaInput("");
-        setChallenge(generateChallenge());
+        setMathInput("");
+        setChallenge(generateMathChallenge());
+        setCaptchaToken("");
+        turnstileRef.current?.reset();
       } else {
-        const data = await res.json().catch(() => ({}));
-        if (data?.botBlocked) {
-          // Silently treat as success — don't reveal we detected the bot
-          setSuccess(true);
-        } else {
-          setError(true);
-        }
+        setError(true);
+        setErrorMessage(data?.error || "Submission failed. Please try again.");
+        setChallenge(generateMathChallenge());
+        setMathInput("");
+        turnstileRef.current?.reset();
+        setCaptchaToken("");
       }
     } catch {
       setError(true);
+      setErrorMessage("Network error occurred. Please try again.");
+      setChallenge(generateMathChallenge());
+      setMathInput("");
+      turnstileRef.current?.reset();
+      setCaptchaToken("");
     }
     setLoading(false);
   }
@@ -234,7 +254,7 @@ const FormApp = ({
             {error && (
               <div className="dm-alert-error">
                 <i className="fal fa-exclamation-circle" style={{ marginTop: 1 }} />
-                Something went wrong. Please check your connection and try again.
+                {errorMessage || "Something went wrong. Please check your connection and try again."}
               </div>
             )}
 
@@ -335,12 +355,13 @@ const FormApp = ({
               {/* Query / Reason */}
               <div className="dm-form-group">
                 <label className="dm-form-label" htmlFor="inq-query">
-                  Reason for Meeting / Your Query
+                  Reason for Call / Message <span style={{ color: "#bd2120" }}>*</span>
                 </label>
                 <textarea
                   id="inq-query"
                   name="query"
-                  placeholder="What would you like to discuss with our team?"
+                  required
+                  placeholder="Tell us what you would like to discuss on this call..."
                   className="dm-form-input"
                   style={{ minHeight: "84px", resize: "vertical" }}
                   disabled={loading}
@@ -350,25 +371,48 @@ const FormApp = ({
 
               {/* ── Math CAPTCHA ── */}
               <div className="dm-form-group">
-                <label className="dm-form-label" htmlFor="inq-captcha">
-                  Quick Check: What is <strong style={{ color: "#bd2120" }}>{challenge.question}</strong>?{" "}
+                <label className="dm-form-label" htmlFor="inq-math">
+                  Math Check: What is <strong style={{ color: "#bd2120" }}>{challenge.question}</strong>?{" "}
                   <span style={{ color: "#bd2120" }}>*</span>
                 </label>
                 <input
-                  id="inq-captcha"
-                  name="captcha"
+                  id="inq-math"
+                  name="mathAnswer"
                   type="number"
                   inputMode="numeric"
-                  placeholder="Enter the answer"
-                  className={`dm-form-input${captchaError ? " dm-error" : ""}`}
-                  value={captchaInput}
-                  onChange={(e) => { setCaptchaInput(e.target.value); setCaptchaError(false); }}
+                  placeholder="Enter the math answer"
+                  className={`dm-form-input${mathError ? " dm-error" : ""}`}
+                  value={mathInput}
+                  onChange={(e) => { setMathInput(e.target.value); setMathError(false); }}
                   disabled={loading}
                   autoComplete="off"
+                  required
+                />
+                {mathError && (
+                  <p style={{ fontSize: "11px", color: "#ef4444", marginTop: "3px", fontWeight: 600 }}>
+                    ✗ Incorrect answer — please solve the new question above.
+                  </p>
+                )}
+              </div>
+
+              {/* ── Human Verification / CAPTCHA ── */}
+              <div className="dm-form-group" style={{ marginBottom: "16px" }}>
+                <label className="dm-form-label" style={{ marginBottom: "6px" }}>
+                  Security Verification <span style={{ color: "#bd2120" }}>*</span>
+                </label>
+                <TurnstileWidget
+                  ref={turnstileRef}
+                  theme="light"
+                  onVerify={(tok) => {
+                    setCaptchaToken(tok);
+                    setCaptchaError(false);
+                  }}
+                  onExpire={() => setCaptchaToken("")}
+                  onError={() => setCaptchaToken("")}
                 />
                 {captchaError && (
-                  <p style={{ fontSize: "11px", color: "#ef4444", marginTop: "3px", fontWeight: 600 }}>
-                    ✗ Incorrect — please try the new question above.
+                  <p style={{ fontSize: "11px", color: "#ef4444", marginTop: "4px", fontWeight: 600 }}>
+                    ✗ Please complete the security verification above.
                   </p>
                 )}
               </div>
