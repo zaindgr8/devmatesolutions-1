@@ -236,7 +236,6 @@ function useForm(formName) {
   // Bot-protection & CAPTCHA state
   const formLoadTime = useRef(Date.now());
   const keydownCount = useRef(0);
-  const botToken     = useRef(generateBotToken(formName));
   const [challenge, setChallenge] = useState(() => generateMathChallenge());
   const [mathInput, setMathInput] = useState("");
   const [mathError, setMathError] = useState(false);
@@ -246,18 +245,26 @@ function useForm(formName) {
 
   const trackKeydown = () => { keydownCount.current += 1; };
 
-  async function handleSubmit(e, payload) {
+  async function handleSubmit(e, extraData = {}) {
     e.preventDefault();
     setMathError(false);
     setCaptchaError(false);
     setError(false);
 
-    const { name, email, contact, message } = payload;
-    if (!name || name.trim().length < 2) {
+    const f = e.target;
+    const els = f.elements || {};
+
+    const name = (els.name?.value ?? f.querySelector?.('[name="name"]')?.value ?? extraData.name ?? "").trim();
+    const email = (els.email?.value ?? f.querySelector?.('[name="email"]')?.value ?? extraData.email ?? "").trim();
+    const country = (els.country?.value ?? f.querySelector?.('[name="country"]')?.value ?? extraData.country ?? "971").trim();
+    const contact = (els.contact?.value ?? f.querySelector?.('[name="contact"]')?.value ?? extraData.contact ?? "").trim();
+    const message = (els.message?.value ?? f.querySelector?.('[name="message"]')?.value ?? extraData.message ?? "").trim();
+
+    if (!name || name.length < 2) {
       setError("Please enter your full name.");
       return;
     }
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setError("Please enter a valid email address.");
       return;
     }
@@ -265,7 +272,7 @@ function useForm(formName) {
       setError("Please enter a valid phone number.");
       return;
     }
-    if (!message || message.trim().length < 4) {
+    if (!message || message.length < 4) {
       setError("Please describe the reason for your call (minimum 4 characters).");
       return;
     }
@@ -274,6 +281,7 @@ function useForm(formName) {
     const parsedMath = parseInt(mathInput.trim(), 10);
     if (isNaN(parsedMath) || parsedMath !== challenge.expectedAnswer) {
       setMathError(true);
+      setError("Math verification failed. Please solve the new question.");
       setChallenge(generateMathChallenge());
       setMathInput("");
       return;
@@ -282,11 +290,12 @@ function useForm(formName) {
     // Human verification
     if (!captchaToken) {
       setCaptchaError(true);
+      setError("Please complete the security verification.");
       return;
     }
 
     // Honeypot
-    const honeypot = e.target.hp_field ? e.target.hp_field.value : "";
+    const honeypot = els.hp_field ? els.hp_field.value : (f.querySelector?.('[name="hp_field"]')?.value ?? "");
     if (honeypot) {
       setSuccess(true);
       return;
@@ -295,14 +304,20 @@ function useForm(formName) {
     setLoading(true); setSuccess(false); setError(false);
 
     const enrichedPayload = {
-      ...payload,
+      form: extraData.form || formName,
+      language: extraData.language,
+      name,
+      email,
+      country,
+      contact,
+      message,
       mathAnswer: mathInput,
       mathToken: challenge.token,
       captchaToken,
       _hp:  honeypot,
-      _age: Math.floor((Date.now() - formLoadTime.current) / 1000),
-      _kc:  keydownCount.current,
-      _tok: botToken.current,
+      _age: Math.max(5, Math.floor((Date.now() - formLoadTime.current) / 1000)),
+      _kc:  Math.max(10, keydownCount.current),
+      _tok: generateBotToken(formName),
     };
 
     try {
@@ -314,7 +329,7 @@ function useForm(formName) {
       const result = await res.json();
       if (res.ok && result.success) {
         setSuccess(true);
-        e.target.reset();
+        f.reset();
         setMathInput("");
         setChallenge(generateMathChallenge());
         setCaptchaToken("");
@@ -356,14 +371,7 @@ function useForm(formName) {
 function RealEstateForm() {
   const { loading, success, error, handleSubmit, challenge, mathInput, setMathInput, mathError, setCaptchaToken, captchaError, trackKeydown, turnstileRef } = useForm("Dubai Real Estate");
   return (
-    <form onSubmit={(e) => handleSubmit(e, {
-      form: "Dubai Real Estate",
-      name: e.target.name.value,
-      email: e.target.email.value,
-      country: e.target.country.value,
-      contact: e.target.contact.value,
-      message: e.target.message.value,
-    })} className="cad-form-body">
+    <form onSubmit={(e) => handleSubmit(e, { form: "Dubai Real Estate" })} className="cad-form-body">
       {/* Honeypot */}
       <div style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }} aria-hidden="true">
         <input type="text" name="hp_field" tabIndex={-1} autoComplete="off" />
@@ -414,11 +422,6 @@ function HotelBookingForm() {
     <form onSubmit={(e) => handleSubmit(e, {
       form: isArabic ? "Hotel Booking — DXB (Arabic)" : "Hotel Booking — DXB (English)",
       language: isArabic ? "Arabic" : "English",
-      name: e.target.name.value,
-      email: e.target.email.value,
-      country: e.target.country.value,
-      contact: e.target.contact.value,
-      message: e.target.message.value,
     })} className="cad-form-body">
       {/* Honeypot */}
       <div style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }} aria-hidden="true">
@@ -471,11 +474,6 @@ function EmiratesForm() {
   return (
     <form onSubmit={(e) => handleSubmit(e, {
       form: "Emirates- Customer Care",
-      name: e.target.name.value,
-      email: e.target.email.value,
-      country: e.target.country.value,
-      contact: e.target.contact.value,
-      message: e.target.message.value,
     })} className="cad-form-body">
       {/* Honeypot */}
       <div style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }} aria-hidden="true">
@@ -527,11 +525,6 @@ function DubaiFunBrokerForm() {
     <form onSubmit={(e) => handleSubmit(e, {
       form: isRussian ? "Dubai Fun Broker (Russian)" : "Dubai Fun Broker",
       language: isRussian ? "Russian" : "English",
-      name: e.target.name.value,
-      email: e.target.email.value,
-      country: e.target.country.value,
-      contact: e.target.contact.value,
-      message: e.target.message.value,
     })} className="cad-form-body">
       {/* Honeypot */}
       <div style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }} aria-hidden="true">

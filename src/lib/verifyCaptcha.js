@@ -133,6 +133,9 @@ export async function verifyTurnstileToken(token, clientIp) {
  */
 export function checkPhoneCooldown(phone) {
   if (!phone) return { allowed: true };
+  if (process.env.NODE_ENV === "development") {
+    return { allowed: true };
+  }
   const cleaned = phone.replace(/\D/g, "");
   if (cleaned.length < 6) return { allowed: true };
 
