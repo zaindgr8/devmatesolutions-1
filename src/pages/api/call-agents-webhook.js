@@ -4,8 +4,7 @@
 // - Sends admin lead notification email via Resend
 // - Sends user sales pitch email via Resend
 
-import { verifyTurnstileToken, checkPhoneCooldown } from "../../lib/verifyCaptcha";
-import { verifyMathChallenge } from "../../lib/mathChallenge";
+import { checkPhoneCooldown } from "../../lib/verifyCaptcha";
 
 const WEBHOOK_URLS = {
   "Hotel Booking — DXB": "https://hook.us2.make.com/lvger5j3udmgtz2vy1a4dx1xav0d3v8s",
@@ -455,30 +454,7 @@ export default async function handler(req, res) {
       return res.status(429).json({ success: false, error: phoneCheck.reason });
     }
 
-    // Mandatory Math CAPTCHA verification
-    const mathAnswer = body?.mathAnswer;
-    const mathToken = body?.mathToken;
-    const mathRes = verifyMathChallenge(mathAnswer, mathToken);
-    if (!mathRes.success) {
-      console.warn(`[BotGuard] Blocked: Math challenge failed (${mathRes.reason}) | IP: ${clientIp}`);
-      return res.status(400).json({
-        success: false,
-        error: "Math verification failed. Please enter the correct answer.",
-        reason: mathRes.reason,
-      });
-    }
 
-    // Mandatory Turnstile / Human CAPTCHA verification
-    const captchaToken = body?.captchaToken || body?.turnstileToken || body?._tok_captcha;
-    const captchaRes = await verifyTurnstileToken(captchaToken, clientIp);
-    if (!captchaRes.success) {
-      console.warn(`[BotGuard] Blocked: CAPTCHA verification failed (${captchaRes.reason}) | IP: ${clientIp}`);
-      return res.status(400).json({
-        success: false,
-        error: "Human verification failed. Please complete the security check.",
-        reason: captchaRes.reason,
-      });
-    }
 
     // Multi-signal bot detection
     const botSignals = detectBot(body);

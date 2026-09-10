@@ -3,8 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Head from "next/head";
 import HeaderThree from "@/src/layout/headers/header-3";
 import FooterThree from "@/src/layout/footers/footer-3";
-import TurnstileWidget from "@/src/components/common/TurnstileWidget";
-import { generateMathChallenge } from "@/src/lib/mathChallenge";
+
 
 /* ─── Bot-protection utilities ──────────────────────────────── */
 function generateBotToken(formId) {
@@ -162,54 +161,7 @@ function StatusMessage({ success, error }) {
   return null;
 }
 
-function MathField({ id, challenge, value, onChange, hasError }) {
-  return (
-    <div className="cad-field-group">
-      <label htmlFor={id} className="cad-field-label">
-        Math Verification: What is <strong style={{ color: "#bd2120" }}>{challenge.question}</strong>?
-        <span style={{ color: "#bd2120" }}> *</span>
-      </label>
-      <input
-        id={id}
-        type="number"
-        inputMode="numeric"
-        placeholder="Enter the answer"
-        className={`cad-field-input${hasError ? " cad-field-error" : ""}`}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        autoComplete="off"
-        required
-      />
-      {hasError && (
-        <span style={{ fontSize: "11px", color: "#ef4444", marginTop: "4px", fontWeight: 600, display: "block" }}>
-          ✗ Incorrect answer — please solve the new question above.
-        </span>
-      )}
-    </div>
-  );
-}
 
-function CaptchaField({ widgetRef, onVerify, onExpire, hasError }) {
-  return (
-    <div className="cad-field-group" style={{ marginBottom: "14px" }}>
-      <label className="cad-field-label">
-        Security Verification <span style={{ color: "#bd2120" }}>*</span>
-      </label>
-      <TurnstileWidget
-        ref={widgetRef}
-        theme="light"
-        onVerify={onVerify}
-        onExpire={onExpire}
-        onError={onExpire}
-      />
-      {hasError && (
-        <span style={{ fontSize: "11px", color: "#ef4444", marginTop: "4px", fontWeight: 600, display: "block" }}>
-          ✗ Please complete the security verification above.
-        </span>
-      )}
-    </div>
-  );
-}
 
 function SubmitButton({ loading }) {
   return (
@@ -233,22 +185,14 @@ function useForm(formName) {
   const [success, setSuccess] = useState(false);
   const [error, setError]     = useState(false);
 
-  // Bot-protection & CAPTCHA state
+  // Bot-protection state
   const formLoadTime = useRef(Date.now());
   const keydownCount = useRef(0);
-  const [challenge, setChallenge] = useState(() => generateMathChallenge());
-  const [mathInput, setMathInput] = useState("");
-  const [mathError, setMathError] = useState(false);
-  const [captchaToken, setCaptchaToken] = useState("");
-  const [captchaError, setCaptchaError] = useState(false);
-  const turnstileRef = useRef(null);
 
   const trackKeydown = () => { keydownCount.current += 1; };
 
   async function handleSubmit(e, extraData = {}) {
     e.preventDefault();
-    setMathError(false);
-    setCaptchaError(false);
     setError(false);
 
     const f = e.target;
@@ -277,23 +221,6 @@ function useForm(formName) {
       return;
     }
 
-    // Math verification check
-    const parsedMath = parseInt(mathInput.trim(), 10);
-    if (isNaN(parsedMath) || parsedMath !== challenge.expectedAnswer) {
-      setMathError(true);
-      setError("Math verification failed. Please solve the new question.");
-      setChallenge(generateMathChallenge());
-      setMathInput("");
-      return;
-    }
-
-    // Human verification
-    if (!captchaToken) {
-      setCaptchaError(true);
-      setError("Please complete the security verification.");
-      return;
-    }
-
     // Honeypot
     const honeypot = els.hp_field ? els.hp_field.value : (f.querySelector?.('[name="hp_field"]')?.value ?? "");
     if (honeypot) {
@@ -311,9 +238,6 @@ function useForm(formName) {
       country,
       contact,
       message,
-      mathAnswer: mathInput,
-      mathToken: challenge.token,
-      captchaToken,
       _hp:  honeypot,
       _age: Math.max(5, Math.floor((Date.now() - formLoadTime.current) / 1000)),
       _kc:  Math.max(10, keydownCount.current),
@@ -330,23 +254,11 @@ function useForm(formName) {
       if (res.ok && result.success) {
         setSuccess(true);
         f.reset();
-        setMathInput("");
-        setChallenge(generateMathChallenge());
-        setCaptchaToken("");
-        turnstileRef.current?.reset();
       } else {
         setError(result?.error || "Submission failed. Please try again.");
-        setChallenge(generateMathChallenge());
-        setMathInput("");
-        turnstileRef.current?.reset();
-        setCaptchaToken("");
       }
     } catch {
       setError("Network connection error. Please try again.");
-      setChallenge(generateMathChallenge());
-      setMathInput("");
-      turnstileRef.current?.reset();
-      setCaptchaToken("");
     }
     setLoading(false);
   }
@@ -356,20 +268,12 @@ function useForm(formName) {
     success,
     error,
     handleSubmit,
-    challenge,
-    mathInput,
-    setMathInput,
-    mathError,
-    captchaToken,
-    setCaptchaToken,
-    captchaError,
     trackKeydown,
-    turnstileRef,
   };
 }
 
 function RealEstateForm() {
-  const { loading, success, error, handleSubmit, challenge, mathInput, setMathInput, mathError, setCaptchaToken, captchaError, trackKeydown, turnstileRef } = useForm("Dubai Real Estate");
+  const { loading, success, error, handleSubmit, trackKeydown } = useForm("Dubai Real Estate");
   return (
     <form onSubmit={(e) => handleSubmit(e, { form: "Dubai Real Estate" })} className="cad-form-body">
       {/* Honeypot */}
@@ -405,8 +309,6 @@ function RealEstateForm() {
             onKeyDown={trackKeydown}
           />
         </FormField>
-        <MathField id="re-math" challenge={challenge} value={mathInput} onChange={setMathInput} hasError={mathError} />
-        <CaptchaField widgetRef={turnstileRef} onVerify={(tok) => setCaptchaToken(tok)} onExpire={() => setCaptchaToken("")} hasError={captchaError} />
       </div>
       <SubmitButton loading={loading} />
       <StatusMessage success={success} error={error} />
@@ -416,7 +318,7 @@ function RealEstateForm() {
 
 function HotelBookingForm() {
   const [lang, setLang] = useState("english");
-  const { loading, success, error, handleSubmit, challenge, mathInput, setMathInput, mathError, setCaptchaToken, captchaError, trackKeydown, turnstileRef } = useForm("Hotel Booking DXB");
+  const { loading, success, error, handleSubmit, trackKeydown } = useForm("Hotel Booking DXB");
   const isArabic = lang === "arabic";
   return (
     <form onSubmit={(e) => handleSubmit(e, {
@@ -460,8 +362,6 @@ function HotelBookingForm() {
             onKeyDown={trackKeydown}
           />
         </FormField>
-        <MathField id="hb-math" challenge={challenge} value={mathInput} onChange={setMathInput} hasError={mathError} />
-        <CaptchaField widgetRef={turnstileRef} onVerify={(tok) => setCaptchaToken(tok)} onExpire={() => setCaptchaToken("")} hasError={captchaError} />
       </div>
       <SubmitButton loading={loading} />
       <StatusMessage success={success} error={error} />
@@ -470,7 +370,7 @@ function HotelBookingForm() {
 }
 
 function EmiratesForm() {
-  const { loading, success, error, handleSubmit, challenge, mathInput, setMathInput, mathError, setCaptchaToken, captchaError, trackKeydown, turnstileRef } = useForm("Emirates Customer Care");
+  const { loading, success, error, handleSubmit, trackKeydown } = useForm("Emirates Customer Care");
   return (
     <form onSubmit={(e) => handleSubmit(e, {
       form: "Emirates- Customer Care",
@@ -508,8 +408,6 @@ function EmiratesForm() {
             onKeyDown={trackKeydown}
           />
         </FormField>
-        <MathField id="ecc-math" challenge={challenge} value={mathInput} onChange={setMathInput} hasError={mathError} />
-        <CaptchaField widgetRef={turnstileRef} onVerify={(tok) => setCaptchaToken(tok)} onExpire={() => setCaptchaToken("")} hasError={captchaError} />
       </div>
       <SubmitButton loading={loading} />
       <StatusMessage success={success} error={error} />
@@ -519,7 +417,7 @@ function EmiratesForm() {
 
 function DubaiFunBrokerForm() {
   const [lang, setLang] = useState("english");
-  const { loading, success, error, handleSubmit, challenge, mathInput, setMathInput, mathError, setCaptchaToken, captchaError, trackKeydown, turnstileRef } = useForm("Dubai Fun Broker");
+  const { loading, success, error, handleSubmit, trackKeydown } = useForm("Dubai Fun Broker");
   const isRussian = lang === "russian";
   return (
     <form onSubmit={(e) => handleSubmit(e, {
@@ -563,8 +461,6 @@ function DubaiFunBrokerForm() {
             onKeyDown={trackKeydown}
           />
         </FormField>
-        <MathField id="dfb-math" challenge={challenge} value={mathInput} onChange={setMathInput} hasError={mathError} />
-        <CaptchaField widgetRef={turnstileRef} onVerify={(tok) => setCaptchaToken(tok)} onExpire={() => setCaptchaToken("")} hasError={captchaError} />
       </div>
       <SubmitButton loading={loading} />
       <StatusMessage success={success} error={error} />
@@ -578,16 +474,10 @@ function BuildAgentModal({ isOpen, onClose }) {
   const [success, setSuccess] = useState(false);
   const [error, setError]     = useState(false);
 
-  // Bot protection & CAPTCHA state
+  // Bot protection state
   const formLoadTime  = useRef(Date.now());
   const keydownCount  = useRef(0);
   const botToken      = useRef(generateBotToken("build-agent"));
-  const [challenge, setChallenge] = useState(() => generateMathChallenge());
-  const [mathInput, setMathInput] = useState("");
-  const [mathError, setMathError] = useState(false);
-  const [captchaToken, setCaptchaToken] = useState("");
-  const [captchaError, setCaptchaError] = useState(false);
-  const turnstileRef  = useRef(null);
 
   if (!isOpen) return null;
 
@@ -595,8 +485,6 @@ function BuildAgentModal({ isOpen, onClose }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setMathError(false);
-    setCaptchaError(false);
     setError(false);
 
     const f = e.target;
@@ -622,21 +510,6 @@ function BuildAgentModal({ isOpen, onClose }) {
       return;
     }
 
-    // Math verification
-    const parsedMath = parseInt(mathInput.trim(), 10);
-    if (isNaN(parsedMath) || parsedMath !== challenge.expectedAnswer) {
-      setMathError(true);
-      setChallenge(generateMathChallenge());
-      setMathInput("");
-      return;
-    }
-
-    // Human verification
-    if (!captchaToken) {
-      setCaptchaError(true);
-      return;
-    }
-
     // Honeypot check
     const honeypot = e.target.hp_field ? e.target.hp_field.value : "";
     if (honeypot) { setSuccess(true); return; }
@@ -650,9 +523,6 @@ function BuildAgentModal({ isOpen, onClose }) {
       contact,
       businessDetails,
       message: businessDetails,
-      mathAnswer: mathInput,
-      mathToken: challenge.token,
-      captchaToken,
       _hp:  honeypot,
       _age: Math.floor((Date.now() - formLoadTime.current) / 1000),
       _kc:  keydownCount.current,
@@ -668,23 +538,11 @@ function BuildAgentModal({ isOpen, onClose }) {
       if (res.ok && result.success) {
         setSuccess(true);
         f.reset();
-        setMathInput("");
-        setChallenge(generateMathChallenge());
-        setCaptchaToken("");
-        turnstileRef.current?.reset();
       } else {
         setError(result?.error || "Submission failed. Please try again.");
-        setChallenge(generateMathChallenge());
-        setMathInput("");
-        turnstileRef.current?.reset();
-        setCaptchaToken("");
       }
     } catch {
       setError("Network error. Please try again.");
-      setChallenge(generateMathChallenge());
-      setMathInput("");
-      turnstileRef.current?.reset();
-      setCaptchaToken("");
     }
     setLoading(false);
   }
@@ -756,9 +614,6 @@ function BuildAgentModal({ isOpen, onClose }) {
                   onKeyDown={trackKeydown}
                 />
               </FormField>
-
-              <MathField id="bma-math" challenge={challenge} value={mathInput} onChange={setMathInput} hasError={mathError} />
-              <CaptchaField widgetRef={turnstileRef} onVerify={(tok) => setCaptchaToken(tok)} onExpire={() => setCaptchaToken("")} hasError={captchaError} />
             </div>
 
             <button type="submit" className="cad-submit-btn" disabled={loading}>
