@@ -17,8 +17,10 @@ const WEBHOOK_URLS = {
   "Emirates- Customer Care": "https://hook.us2.make.com/ni88x21vbju2w7u9mqjy6kwdwm8goi7a",
   "Emirates — Customer Care": "https://hook.us2.make.com/ni88x21vbju2w7u9mqjy6kwdwm8goi7a",
   "Emirates Customer Care": "https://hook.us2.make.com/ni88x21vbju2w7u9mqjy6kwdwm8goi7a",
-  "Dubai Fun Broker": "https://hook.eu2.make.com/meox66njhc6x7cc388ra1qf3qp7ams1m",
+  "Dubai Fun Broker": "https://hook.eu1.make.com/q3qlta7no5t5alsdyv37n76woy2q2527",
+  "Dubai Fun Broker (English)": "https://hook.eu1.make.com/q3qlta7no5t5alsdyv37n76woy2q2527",
   "Dubai Fun Broker (Russian)": "https://hook.eu1.make.com/q3qlta7no5t5alsdyv37n76woy2q2527",
+  "Dubai Fun Broker (RU)": "https://hook.eu1.make.com/q3qlta7no5t5alsdyv37n76woy2q2527",
 };
 
 const DEFAULT_WEBHOOK_URL = "https://hook.eu2.make.com/31ya9oqu7xbzar8jv025ul9k4fxzc9l6";
