@@ -50,6 +50,9 @@ function isRateLimited(ip) {
 
 // ── Bot signal detector ────────────────────────────────────────────────────
 function detectBot(body) {
+  if (process.env.NODE_ENV === "development") {
+    return [];
+  }
   const reasons = [];
 
   // 1. Honeypot filled

@@ -221,13 +221,6 @@ function useForm(formName) {
       return;
     }
 
-    // Honeypot
-    const honeypot = els.hp_field ? els.hp_field.value : (f.querySelector?.('[name="hp_field"]')?.value ?? "");
-    if (honeypot) {
-      setSuccess(true);
-      return;
-    }
-
     setLoading(true); setSuccess(false); setError(false);
 
     const enrichedPayload = {
@@ -238,7 +231,7 @@ function useForm(formName) {
       country,
       contact,
       message,
-      _hp:  honeypot,
+      _hp:  "",
       _age: Math.max(5, Math.floor((Date.now() - formLoadTime.current) / 1000)),
       _kc:  Math.max(10, keydownCount.current),
       _tok: generateBotToken(formName),
@@ -276,10 +269,6 @@ function RealEstateForm() {
   const { loading, success, error, handleSubmit, trackKeydown } = useForm("Dubai Real Estate");
   return (
     <form onSubmit={(e) => handleSubmit(e, { form: "Dubai Real Estate" })} className="cad-form-body">
-      {/* Honeypot */}
-      <div style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }} aria-hidden="true">
-        <input type="text" name="hp_field" tabIndex={-1} autoComplete="off" />
-      </div>
       <div className="cad-form-title-wrap">
         <h3 className="cad-form-title">Dubai Real Estate</h3>
         <div className="cad-form-title-line" />
@@ -325,10 +314,6 @@ function HotelBookingForm() {
       form: isArabic ? "Hotel Booking — DXB (Arabic)" : "Hotel Booking — DXB (English)",
       language: isArabic ? "Arabic" : "English",
     })} className="cad-form-body">
-      {/* Honeypot */}
-      <div style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }} aria-hidden="true">
-        <input type="text" name="hp_field" tabIndex={-1} autoComplete="off" />
-      </div>
       <div className="cad-sub-nav">
         <button type="button" className={`cad-sub-tab${lang === "english" ? " cad-sub-tab--active" : ""}`} onClick={() => setLang("english")}>English</button>
         <button type="button" className={`cad-sub-tab${lang === "arabic" ? " cad-sub-tab--active" : ""}`} onClick={() => setLang("arabic")}>Arabic / عربي</button>
@@ -375,10 +360,6 @@ function EmiratesForm() {
     <form onSubmit={(e) => handleSubmit(e, {
       form: "Emirates- Customer Care",
     })} className="cad-form-body">
-      {/* Honeypot */}
-      <div style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }} aria-hidden="true">
-        <input type="text" name="hp_field" tabIndex={-1} autoComplete="off" />
-      </div>
       <div className="cad-form-title-wrap">
         <h3 className="cad-form-title">Emirates Customer Care</h3>
         <div className="cad-form-title-line" />
@@ -424,10 +405,6 @@ function DubaiFunBrokerForm() {
       form: isRussian ? "Dubai Fun Broker (Russian)" : "Dubai Fun Broker",
       language: isRussian ? "Russian" : "English",
     })} className="cad-form-body">
-      {/* Honeypot */}
-      <div style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }} aria-hidden="true">
-        <input type="text" name="hp_field" tabIndex={-1} autoComplete="off" />
-      </div>
       <div className="cad-sub-nav">
         <button type="button" className={`cad-sub-tab${lang === "english" ? " cad-sub-tab--active" : ""}`} onClick={() => setLang("english")}>English</button>
         <button type="button" className={`cad-sub-tab${lang === "russian" ? " cad-sub-tab--active" : ""}`} onClick={() => setLang("russian")}>Русский</button>
@@ -510,10 +487,6 @@ function BuildAgentModal({ isOpen, onClose }) {
       return;
     }
 
-    // Honeypot check
-    const honeypot = e.target.hp_field ? e.target.hp_field.value : "";
-    if (honeypot) { setSuccess(true); return; }
-
     setLoading(true); setSuccess(false); setError(false);
     const payload = {
       form: "Build My Agent",
@@ -523,7 +496,7 @@ function BuildAgentModal({ isOpen, onClose }) {
       contact,
       businessDetails,
       message: businessDetails,
-      _hp:  honeypot,
+      _hp:  "",
       _age: Math.floor((Date.now() - formLoadTime.current) / 1000),
       _kc:  keydownCount.current,
       _tok: botToken.current,
@@ -569,10 +542,6 @@ function BuildAgentModal({ isOpen, onClose }) {
 
         {!success ? (
           <form onSubmit={handleSubmit} className="cad-form-body">
-            {/* Honeypot */}
-            <div style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }} aria-hidden="true">
-              <input type="text" name="hp_field" tabIndex={-1} autoComplete="off" />
-            </div>
             <div className="cad-fields-stack">
               <FormField id="bma-name" label="Full Name *">
                 <input
