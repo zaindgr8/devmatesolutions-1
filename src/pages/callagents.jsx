@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Head from "next/head";
 import HeaderThree from "@/src/layout/headers/header-3";
 import FooterThree from "@/src/layout/footers/footer-3";
+import { generateMathChallenge } from "@/src/lib/mathChallenge";
 
 
 /* ─── Bot-protection utilities ──────────────────────────────── */
@@ -184,6 +185,9 @@ function useForm(formName) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError]     = useState(false);
+  const [challenge, setChallenge] = useState(() => generateMathChallenge());
+  const [mathInput, setMathInput] = useState("");
+  const [mathError, setMathError] = useState(false);
 
   // Bot-protection state
   const formLoadTime = useRef(Date.now());
@@ -191,9 +195,17 @@ function useForm(formName) {
 
   const trackKeydown = () => { keydownCount.current += 1; };
 
+  // Reset challenge on mount
+  useEffect(() => {
+    setChallenge(generateMathChallenge());
+    setMathInput("");
+    setMathError(false);
+  }, []);
+
   async function handleSubmit(e, extraData = {}) {
     e.preventDefault();
     setError(false);
+    setMathError(false);
 
     const f = e.target;
     const els = f.elements || {};
@@ -203,6 +215,7 @@ function useForm(formName) {
     const country = (els.country?.value ?? f.querySelector?.('[name="country"]')?.value ?? extraData.country ?? "971").trim();
     const contact = (els.contact?.value ?? f.querySelector?.('[name="contact"]')?.value ?? extraData.contact ?? "").trim();
     const message = (els.message?.value ?? f.querySelector?.('[name="message"]')?.value ?? extraData.message ?? "").trim();
+    const inputMathVal = (els.mathAnswer?.value ?? mathInput ?? "").trim();
 
     if (!name || name.length < 2) {
       setError("Please enter your full name.");
@@ -221,6 +234,16 @@ function useForm(formName) {
       return;
     }
 
+    // Math verification check
+    const parsedMath = parseInt(inputMathVal, 10);
+    if (isNaN(parsedMath) || parsedMath !== challenge.expectedAnswer) {
+      setMathError(true);
+      setError("Incorrect math answer. Please solve the question above.");
+      setChallenge(generateMathChallenge());
+      setMathInput("");
+      return;
+    }
+
     setLoading(true); setSuccess(false); setError(false);
 
     const enrichedPayload = {
@@ -231,6 +254,8 @@ function useForm(formName) {
       country,
       contact,
       message,
+      mathAnswer: inputMathVal,
+      mathToken: challenge.token,
       _hp:  "",
       _age: Math.max(5, Math.floor((Date.now() - formLoadTime.current) / 1000)),
       _kc:  Math.max(10, keydownCount.current),
@@ -247,11 +272,18 @@ function useForm(formName) {
       if (res.ok && result.success) {
         setSuccess(true);
         f.reset();
+        setMathInput("");
+        setChallenge(generateMathChallenge());
+        setMathError(false);
       } else {
         setError(result?.error || "Submission failed. Please try again.");
+        setChallenge(generateMathChallenge());
+        setMathInput("");
       }
     } catch {
       setError("Network connection error. Please try again.");
+      setChallenge(generateMathChallenge());
+      setMathInput("");
     }
     setLoading(false);
   }
@@ -262,11 +294,15 @@ function useForm(formName) {
     error,
     handleSubmit,
     trackKeydown,
+    challenge,
+    mathInput,
+    setMathInput,
+    mathError,
   };
 }
 
 function RealEstateForm() {
-  const { loading, success, error, handleSubmit, trackKeydown } = useForm("Dubai Real Estate");
+  const { loading, success, error, handleSubmit, trackKeydown, challenge, mathInput, setMathInput, mathError } = useForm("Dubai Real Estate");
   return (
     <form onSubmit={(e) => handleSubmit(e, { form: "Dubai Real Estate" })} className="cad-form-body">
       <div className="cad-form-title-wrap">
@@ -298,6 +334,21 @@ function RealEstateForm() {
             onKeyDown={trackKeydown}
           />
         </FormField>
+        <FormField id="re-math" label={<span>Security Check: What is <strong style={{ color: "#bd2120" }}>{challenge.question}</strong>? *</span>}>
+          <input
+            id="re-math"
+            type="number"
+            inputMode="numeric"
+            name="mathAnswer"
+            required
+            placeholder="Enter the answer"
+            className={`cad-field-input${mathError ? " dm-error" : ""}`}
+            value={mathInput}
+            onChange={(e) => setMathInput(e.target.value)}
+            autoComplete="off"
+            onKeyDown={trackKeydown}
+          />
+        </FormField>
       </div>
       <SubmitButton loading={loading} />
       <StatusMessage success={success} error={error} />
@@ -307,7 +358,7 @@ function RealEstateForm() {
 
 function HotelBookingForm() {
   const [lang, setLang] = useState("english");
-  const { loading, success, error, handleSubmit, trackKeydown } = useForm("Hotel Booking DXB");
+  const { loading, success, error, handleSubmit, trackKeydown, challenge, mathInput, setMathInput, mathError } = useForm("Hotel Booking DXB");
   const isArabic = lang === "arabic";
   return (
     <form onSubmit={(e) => handleSubmit(e, {
@@ -347,6 +398,21 @@ function HotelBookingForm() {
             onKeyDown={trackKeydown}
           />
         </FormField>
+        <FormField id="hb-math" label={isArabic ? <span>التحقق: ما ناتج <strong style={{ color: "#bd2120" }}>{challenge.question}</strong>؟ *</span> : <span>Security Check: What is <strong style={{ color: "#bd2120" }}>{challenge.question}</strong>? *</span>}>
+          <input
+            id="hb-math"
+            type="number"
+            inputMode="numeric"
+            name="mathAnswer"
+            required
+            placeholder={isArabic ? "أدخل الإجابة" : "Enter the answer"}
+            className={`cad-field-input${mathError ? " dm-error" : ""}`}
+            value={mathInput}
+            onChange={(e) => setMathInput(e.target.value)}
+            autoComplete="off"
+            onKeyDown={trackKeydown}
+          />
+        </FormField>
       </div>
       <SubmitButton loading={loading} />
       <StatusMessage success={success} error={error} />
@@ -355,7 +421,7 @@ function HotelBookingForm() {
 }
 
 function EmiratesForm() {
-  const { loading, success, error, handleSubmit, trackKeydown } = useForm("Emirates Customer Care");
+  const { loading, success, error, handleSubmit, trackKeydown, challenge, mathInput, setMathInput, mathError } = useForm("Emirates Customer Care");
   return (
     <form onSubmit={(e) => handleSubmit(e, {
       form: "Emirates- Customer Care",
@@ -389,6 +455,21 @@ function EmiratesForm() {
             onKeyDown={trackKeydown}
           />
         </FormField>
+        <FormField id="ecc-math" label={<span>Security Check: What is <strong style={{ color: "#bd2120" }}>{challenge.question}</strong>? *</span>}>
+          <input
+            id="ecc-math"
+            type="number"
+            inputMode="numeric"
+            name="mathAnswer"
+            required
+            placeholder="Enter the answer"
+            className={`cad-field-input${mathError ? " dm-error" : ""}`}
+            value={mathInput}
+            onChange={(e) => setMathInput(e.target.value)}
+            autoComplete="off"
+            onKeyDown={trackKeydown}
+          />
+        </FormField>
       </div>
       <SubmitButton loading={loading} />
       <StatusMessage success={success} error={error} />
@@ -398,7 +479,7 @@ function EmiratesForm() {
 
 function DubaiFunBrokerForm() {
   const [lang, setLang] = useState("english");
-  const { loading, success, error, handleSubmit, trackKeydown } = useForm("Dubai Fun Broker");
+  const { loading, success, error, handleSubmit, trackKeydown, challenge, mathInput, setMathInput, mathError } = useForm("Dubai Fun Broker");
   const isRussian = lang === "russian";
   return (
     <form onSubmit={(e) => handleSubmit(e, {
@@ -438,6 +519,21 @@ function DubaiFunBrokerForm() {
             onKeyDown={trackKeydown}
           />
         </FormField>
+        <FormField id="dfb-math" label={isRussian ? <span>Проверка: Сколько будет <strong style={{ color: "#bd2120" }}>{challenge.question}</strong>? *</span> : <span>Security Check: What is <strong style={{ color: "#bd2120" }}>{challenge.question}</strong>? *</span>}>
+          <input
+            id="dfb-math"
+            type="number"
+            inputMode="numeric"
+            name="mathAnswer"
+            required
+            placeholder={isRussian ? "Введите ответ" : "Enter the answer"}
+            className={`cad-field-input${mathError ? " dm-error" : ""}`}
+            value={mathInput}
+            onChange={(e) => setMathInput(e.target.value)}
+            autoComplete="off"
+            onKeyDown={trackKeydown}
+          />
+        </FormField>
       </div>
       <SubmitButton loading={loading} />
       <StatusMessage success={success} error={error} />
@@ -450,11 +546,20 @@ function BuildAgentModal({ isOpen, onClose }) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError]     = useState(false);
+  const [challenge, setChallenge] = useState(() => generateMathChallenge());
+  const [mathInput, setMathInput] = useState("");
 
   // Bot protection state
   const formLoadTime  = useRef(Date.now());
   const keydownCount  = useRef(0);
   const botToken      = useRef(generateBotToken("build-agent"));
+
+  useEffect(() => {
+    if (isOpen) {
+      setChallenge(generateMathChallenge());
+      setMathInput("");
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -469,6 +574,7 @@ function BuildAgentModal({ isOpen, onClose }) {
     const email = f.bma_email.value.trim();
     const contact = f.bma_contact.value.trim();
     const businessDetails = f.bma_business.value.trim();
+    const inputMathVal = (f.bma_math?.value ?? mathInput ?? "").trim();
 
     if (!name || name.length < 2) {
       setError("Please enter your full name.");
@@ -487,6 +593,14 @@ function BuildAgentModal({ isOpen, onClose }) {
       return;
     }
 
+    const parsedMath = parseInt(inputMathVal, 10);
+    if (isNaN(parsedMath) || parsedMath !== challenge.expectedAnswer) {
+      setError("Incorrect math answer. Please solve the question above.");
+      setChallenge(generateMathChallenge());
+      setMathInput("");
+      return;
+    }
+
     setLoading(true); setSuccess(false); setError(false);
     const payload = {
       form: "Build My Agent",
@@ -496,6 +610,8 @@ function BuildAgentModal({ isOpen, onClose }) {
       contact,
       businessDetails,
       message: businessDetails,
+      mathAnswer: inputMathVal,
+      mathToken: challenge.token,
       _hp:  "",
       _age: Math.floor((Date.now() - formLoadTime.current) / 1000),
       _kc:  keydownCount.current,
@@ -511,11 +627,17 @@ function BuildAgentModal({ isOpen, onClose }) {
       if (res.ok && result.success) {
         setSuccess(true);
         f.reset();
+        setMathInput("");
+        setChallenge(generateMathChallenge());
       } else {
         setError(result?.error || "Submission failed. Please try again.");
+        setChallenge(generateMathChallenge());
+        setMathInput("");
       }
     } catch {
       setError("Network error. Please try again.");
+      setChallenge(generateMathChallenge());
+      setMathInput("");
     }
     setLoading(false);
   }
@@ -580,6 +702,22 @@ function BuildAgentModal({ isOpen, onClose }) {
                   className="cad-field-input"
                   rows={4}
                   style={{ resize: "vertical", lineHeight: 1.6 }}
+                  onKeyDown={trackKeydown}
+                />
+              </FormField>
+
+              <FormField id="bma-math" label={<span>Security Check: What is <strong style={{ color: "#bd2120" }}>{challenge.question}</strong>? *</span>}>
+                <input
+                  id="bma-math"
+                  type="number"
+                  inputMode="numeric"
+                  name="bma_math"
+                  required
+                  placeholder="Enter the answer"
+                  className="cad-field-input"
+                  value={mathInput}
+                  onChange={(e) => setMathInput(e.target.value)}
+                  autoComplete="off"
                   onKeyDown={trackKeydown}
                 />
               </FormField>

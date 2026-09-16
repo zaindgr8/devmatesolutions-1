@@ -5,6 +5,7 @@
 // - Sends user sales pitch email via Resend
 
 import { checkPhoneCooldown } from "../../lib/verifyCaptcha";
+import { verifyMathChallenge } from "../../lib/mathChallenge";
 
 const WEBHOOK_URLS = {
   "Hotel Booking — DXB": "https://hook.us2.make.com/lvger5j3udmgtz2vy1a4dx1xav0d3v8s",
@@ -439,6 +440,18 @@ export default async function handler(req, res) {
     }
 
     const fullPhone = `${body?.country || ""}${contact}`;
+    const { mathAnswer, mathToken } = body || {};
+
+    // Mandatory Math CAPTCHA verification to prevent automated bots
+    const mathRes = verifyMathChallenge(mathAnswer, mathToken);
+    if (!mathRes.success) {
+      console.warn(`[BotGuard/call-agents] Math challenge failed: ${mathRes.reason} | IP: ${clientIp}`);
+      return res.status(400).json({
+        success: false,
+        error: "Math verification failed. Please enter the correct answer.",
+        reason: mathRes.reason,
+      });
+    }
 
 
 
