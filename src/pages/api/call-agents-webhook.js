@@ -31,20 +31,8 @@ const RESEND_FROM_EMAIL =
   process.env.RESEND_FROM_EMAIL ||
   "DevMate Leads <contact@devmatesolutions.com>";
 
-// ── Rate limiter (in-memory; resets on cold start) ─────────────────────────
-const ipHitMap = new Map(); // ip -> [timestamps]
-const RATE_LIMIT  = 3;       // max submissions
-const WINDOW_MS   = 10 * 60 * 1000; // 10 minutes
-
-function isRateLimited(ip) {
-  if (process.env.NODE_ENV === "development" && (ip === "::1" || ip === "127.0.0.1" || ip === "unknown")) {
-    return false;
-  }
-  const now = Date.now();
-  const hits = (ipHitMap.get(ip) || []).filter((t) => now - t < WINDOW_MS);
-  if (hits.length >= 5) return true;
-  hits.push(now);
-  ipHitMap.set(ip, hits);
+// ── Rate limiter (disabled - unlimited submissions allowed) ───────────────
+function isRateLimited() {
   return false;
 }
 
@@ -450,12 +438,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ success: false, error: "Please provide a reason for the call / message (minimum 4 characters)." });
     }
 
-    // Phone cooldown check (max 1 call per phone number per 15 minutes)
     const fullPhone = `${body?.country || ""}${contact}`;
-    const phoneCheck = checkPhoneCooldown(fullPhone);
-    if (!phoneCheck.allowed) {
-      return res.status(429).json({ success: false, error: phoneCheck.reason });
-    }
 
 
 

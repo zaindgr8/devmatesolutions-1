@@ -128,29 +128,9 @@ export async function verifyTurnstileToken(token, clientIp) {
 }
 
 /**
- * Checks and records phone cooldown to protect victim numbers from being bombed.
- * Allows at most 1 call submission per phone number every 15 minutes.
+ * Checks and records phone cooldown - RESTRICTIONS REMOVED
+ * Allows unlimited calls with no cooldown or waiting period.
  */
-export function checkPhoneCooldown(phone) {
-  if (!phone) return { allowed: true };
-  if (process.env.NODE_ENV === "development") {
-    return { allowed: true };
-  }
-  const cleaned = phone.replace(/\D/g, "");
-  if (cleaned.length < 6) return { allowed: true };
-
-  cleanupOldEntries();
-  const now = Date.now();
-  const expiresAt = phoneCooldowns.get(cleaned);
-
-  if (expiresAt && now < expiresAt) {
-    const waitMins = Math.ceil((expiresAt - now) / 60000);
-    return {
-      allowed: false,
-      reason: `A call request for this number was recently processed. Please wait ${waitMins} minute(s) before requesting again.`,
-    };
-  }
-
-  phoneCooldowns.set(cleaned, now + PHONE_COOLDOWN_MS);
+export function checkPhoneCooldown() {
   return { allowed: true };
 }
