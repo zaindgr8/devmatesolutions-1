@@ -65,16 +65,13 @@ const HeroAboutMe = () => {
                 {/* Social links */}
                 <div className="dm-ceo-socials">
                   <span className="dm-ceo-social-label">Follow</span>
-                  <Link href="https://www.linkedin.com/in/zainulabideenunicorn/" target="_blank" className="dm-ceo-social-link">
+                  <Link href="https://www.linkedin.com/in/zainulabideenunicorn" target="_blank" rel="noopener noreferrer" className="dm-ceo-social-link" title="LinkedIn">
                     <i className="fab fa-linkedin-in"></i>
                   </Link>
-                  <Link href="https://www.instagram.com/devmate.solutions/" target="_blank" className="dm-ceo-social-link">
+                  <Link href="https://www.instagram.com/zainulabideen.unicorn/" target="_blank" rel="noopener noreferrer" className="dm-ceo-social-link" title="Instagram">
                     <i className="fab fa-instagram"></i>
                   </Link>
-                  <Link href="https://github.com/devmatesolutions" target="_blank" className="dm-ceo-social-link">
-                    <i className="fab fa-github"></i>
-                  </Link>
-                  <Link href="https://www.youtube.com/@devmatesolutions" target="_blank" className="dm-ceo-social-link">
+                  <Link href="https://www.youtube.com/@zainulabideen.unicorn" target="_blank" rel="noopener noreferrer" className="dm-ceo-social-link" title="YouTube">
                     <i className="fab fa-youtube"></i>
                   </Link>
                 </div>

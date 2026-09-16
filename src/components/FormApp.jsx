@@ -191,9 +191,13 @@ const FormApp = ({
       {/* ── Modal Header ── */}
       <div className="dm-modal-header">
         <div className="dm-modal-header-text">
-          <h2 className="dm-modal-title">{success ? "Request Confirmed ✓" : title}</h2>
+          <h2 className="dm-modal-title">
+            {success ? (isCallRequest ? "Call Initiated ✓" : "Request Confirmed ✓") : title}
+          </h2>
           <p className="dm-modal-sub">
-            {success ? "Details sent to your email & call initiated" : subtitle}
+            {success
+              ? (isCallRequest ? "Connecting to your phone number now" : "Details sent to your email")
+              : subtitle}
           </p>
         </div>
         {onClose && (
@@ -208,35 +212,82 @@ const FormApp = ({
         {success ? (
           /* Success Screen */
           <div className="dm-success-wrap">
-            <div className="dm-success-icon">✓</div>
-            <h3 className="dm-success-title">
-              {isCallRequest ? "Call is on its way! 📞" : "Inquiry Received! 🚀"}
-            </h3>
-            <p className="dm-success-sub">
-              Thanks <strong>{submittedData?.name}</strong>!{" "}
-              {isCallRequest
-                ? "You will receive a call from DevMate Solutions on your phone within the next 60 seconds."
-                : "We've received your details."}{" "}
-              A confirmation email has also been sent to <strong>{submittedData?.email}</strong>.
-            </p>
-            {submittedData && (
-              <div className="dm-success-detail">
-                <strong>Name:</strong> {submittedData.name}<br />
-                <strong>Email:</strong> {submittedData.email}<br />
-                <strong>Contact Number:</strong> {submittedData.country} {submittedData.contact}<br />
-                {submittedData.query && (
-                  <><strong>Query / Requirements:</strong> {submittedData.query}<br /></>
+            <div className="dm-calling-pulse-badge">
+              {isCallRequest && <div className="dm-calling-pulse-ring" />}
+              <div className="dm-calling-icon">
+                {isCallRequest ? (
+                  <i className="fal fa-phone-volume" />
+                ) : (
+                  <i className="fal fa-check" />
                 )}
-                <strong>Type:</strong> {submittedData.source}
               </div>
-            )}
+            </div>
+
+            <h3 className="dm-success-title">
+              {isCallRequest ? "We're calling you now! 📞" : "Inquiry Received! 🚀"}
+            </h3>
+
+            <p className="dm-success-sub" style={{ maxWidth: 440, margin: "0 auto 18px" }}>
+              Thanks <strong>{submittedData?.name}</strong>!{" "}
+              {isCallRequest ? (
+                <>
+                  Our priority system is dialing your phone number right now. Please keep your phone nearby and answer when it rings (within <strong>60 seconds</strong>).
+                </>
+              ) : (
+                <>
+                  We have received your details and our team will get in touch with you shortly.
+                </>
+              )}
+            </p>
+
+            {/* Value-added Guidance & Live Status Card */}
+            <div className="dm-success-guidance-card">
+              {isCallRequest ? (
+                <>
+                  <div className="dm-guidance-item">
+                    <span className="dm-guidance-icon call-icon">
+                      <i className="fal fa-phone-alt" />
+                    </span>
+                    <div className="dm-guidance-text">
+                      <strong>Incoming Call from DevMate Solutions</strong>
+                      <span>Please keep your phone unlocked. You will be connected directly with our technical & solutions team.</span>
+                    </div>
+                  </div>
+
+                  {submittedData?.email && (
+                    <div className="dm-guidance-item">
+                      <span className="dm-guidance-icon mail-icon">
+                        <i className="fal fa-envelope-check" />
+                      </span>
+                      <div className="dm-guidance-text">
+                        <strong>Confirmation Dispatched</strong>
+                        <span>A copy of your request and direct priority contact info have been sent to <strong>{submittedData.email}</strong>.</span>
+                      </div>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  <div className="dm-guidance-item">
+                    <span className="dm-guidance-icon mail-icon">
+                      <i className="fal fa-envelope-check" />
+                    </span>
+                    <div className="dm-guidance-text">
+                      <strong>Direct Specialist Review</strong>
+                      <span>Our team is reviewing your requirements and will reach out promptly to <strong>{submittedData?.email}</strong>.</span>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+
             <button
               onClick={onClose}
               className="dm-submit-btn"
-              style={{ marginTop: 24 }}
+              style={{ marginTop: 22, maxWidth: 300, marginLeft: "auto", marginRight: "auto" }}
               type="button"
             >
-              Done
+              {isCallRequest ? "Got It — Ready for Call" : "Done"}
             </button>
           </div>
         ) : (
@@ -489,6 +540,91 @@ const FormApp = ({
           margin: 0;
         }
         input[type=number] { -moz-appearance: textfield; }
+        .dm-calling-pulse-badge {
+          position: relative;
+          width: 64px;
+          height: 64px;
+          margin: 0 auto 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .dm-calling-pulse-ring {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          background: rgba(189, 33, 32, 0.2);
+          animation: dmPulseRing 1.8s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        @keyframes dmPulseRing {
+          0% { transform: scale(0.95); opacity: 0.8; }
+          50% { transform: scale(1.3); opacity: 0.15; }
+          100% { transform: scale(0.95); opacity: 0.8; }
+        }
+        .dm-calling-icon {
+          position: relative;
+          z-index: 1;
+          width: 52px;
+          height: 52px;
+          background: #fef2f2;
+          border: 1.5px solid #fecaca;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 22px;
+          color: #bd2120;
+          box-shadow: 0 4px 12px rgba(189, 33, 32, 0.12);
+        }
+        .dm-success-guidance-card {
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
+          border-radius: 12px;
+          padding: 14px 16px;
+          text-align: left;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          margin: 0 auto;
+          max-width: 440px;
+          box-sizing: border-box;
+        }
+        .dm-guidance-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+        }
+        .dm-guidance-icon {
+          width: 32px;
+          height: 32px;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 14px;
+          flex-shrink: 0;
+          margin-top: 1px;
+        }
+        .dm-guidance-icon.call-icon {
+          background: rgba(189, 33, 32, 0.1);
+          color: #bd2120;
+        }
+        .dm-guidance-icon.mail-icon {
+          background: rgba(16, 185, 129, 0.12);
+          color: #059669;
+        }
+        .dm-guidance-text {
+          font-size: 12.5px;
+          color: #475569;
+          line-height: 1.45;
+        }
+        .dm-guidance-text strong {
+          display: block;
+          color: #0f172a;
+          font-size: 13px;
+          margin-bottom: 2px;
+        }
       ` }} />
     </div>
   );

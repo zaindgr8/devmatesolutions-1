@@ -99,118 +99,137 @@ const Sidebar = ({isActive, setIsActive}) => {
             </div>
 
             {/* Mobile CTA Buttons */}
-            <div style={{ padding: '20px 0 10px 0', display: 'flex', gap: '10px' }}>
+            <div style={{ padding: '20px 0 16px 0', display: 'flex', flexDirection: 'column', gap: '10px' }}>
 
-              {/* AI Lead Management — sub items */}
-              <Link
-                href="/aileadmanagementdubairealestate"
-                style={{
-                  flex: 1,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexDirection: 'column',
-                  gap: '3px',
-                  background: '#fff',
-                  color: '#0d0d0d',
-                  border: '1.5px solid #d1d5db',
-                  borderRadius: '8px',
-                  padding: '10px 6px',
-                  fontSize: '11px',
-                  fontWeight: '700',
-                  textDecoration: 'none',
-                  letterSpacing: '0.1px',
-                  lineHeight: 1.2,
-                  whiteSpace: 'nowrap',
-                  textAlign: 'center',
-                }}
-              >
-                <i className="fal fa-chart-line" style={{ fontSize: '14px', color: '#bd2120' }} />
-                <span>Lead Mgmt</span>
-                <span style={{ fontSize: '10px', fontWeight: 400, color: '#888' }}>Real Estate</span>
-              </Link>
-
-              <Link
-                href="/whatsappautomation"
-                style={{
-                  flex: 1,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexDirection: 'column',
-                  gap: '3px',
-                  background: '#fff',
-                  color: '#0d0d0d',
-                  border: '1.5px solid #d1d5db',
-                  borderRadius: '8px',
-                  padding: '10px 6px',
-                  fontSize: '11px',
-                  fontWeight: '700',
-                  textDecoration: 'none',
-                  letterSpacing: '0.1px',
-                  lineHeight: 1.2,
-                  whiteSpace: 'nowrap',
-                  textAlign: 'center',
-                }}
-              >
-                <i className="fab fa-whatsapp" style={{ fontSize: '14px', color: '#bd2120' }} />
-                <span>WhatsApp</span>
-                <span style={{ fontSize: '10px', fontWeight: 400, color: '#888' }}>Automation</span>
-              </Link>
-
-              <Link
-                href="/callagents"
-                style={{
-                  flex: 1,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexDirection: 'column',
-                  gap: '3px',
-                  background: '#fff',
-                  color: '#0d0d0d',
-                  border: '1.5px solid #d1d5db',
-                  borderRadius: '8px',
-                  padding: '10px 6px',
-                  fontSize: '11px',
-                  fontWeight: '700',
-                  textDecoration: 'none',
-                  letterSpacing: '0.1px',
-                  lineHeight: 1.2,
-                  whiteSpace: 'nowrap',
-                  textAlign: 'center',
-                }}
-              >
-                <i className="fal fa-phone-volume" style={{ fontSize: '14px', color: '#bd2120' }} />
-                <span>Agent Calls</span>
-                <span style={{ fontSize: '10px', fontWeight: 400, color: '#888' }}>Demo</span>
-              </Link>
-
-              {/* Get Instant Call */}
+              {/* Prominent Separate Button: Get Instant Call */}
               <button
-                onClick={() => setShowModal(true)}
+                onClick={() => {
+                  setIsActive(false);
+                  setShowModal(true);
+                }}
                 style={{
-                  flex: 1,
-                  background: '#bd2120',
+                  width: '100%',
+                  background: 'linear-gradient(135deg, #bd2120 0%, #991b1b 100%)',
                   color: '#fff',
-                  border: '1.5px solid #bd2120',
-                  borderRadius: '8px',
-                  padding: '12px 10px',
-                  fontSize: '13px',
+                  border: 'none',
+                  borderRadius: '10px',
+                  padding: '13px 18px',
+                  fontSize: '14px',
                   fontWeight: '700',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '7px',
-                  letterSpacing: '0.1px',
-                  lineHeight: 1,
-                  whiteSpace: 'nowrap',
+                  gap: '10px',
+                  letterSpacing: '0.2px',
+                  boxShadow: '0 4px 14px rgba(189, 33, 32, 0.32)',
+                  transition: 'all 0.2s ease',
                 }}
               >
-                <i className="fal fa-phone" style={{ fontSize: '12px' }} />
-                Instant Call
+                <span style={{
+                  width: '26px',
+                  height: '26px',
+                  borderRadius: '50%',
+                  background: 'rgba(255, 255, 255, 0.22)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '12px',
+                }}>
+                  <i className="fal fa-phone" />
+                </span>
+                <span>Get Instant Call</span>
+                <span style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center' }}>
+                  <i className="fal fa-long-arrow-right" style={{ fontSize: '14px', opacity: 0.9 }} />
+                </span>
               </button>
+
+              {/* Sub items: Lead Mgmt | WhatsApp | Agent Calls */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
+                <Link
+                  href="/aileadmanagementdubairealestate"
+                  onClick={() => setIsActive(false)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'column',
+                    gap: '4px',
+                    background: '#fff',
+                    color: '#0d0d0d',
+                    border: '1.5px solid #e5e7eb',
+                    borderRadius: '8px',
+                    padding: '10px 4px',
+                    fontSize: '11px',
+                    fontWeight: '700',
+                    textDecoration: 'none',
+                    letterSpacing: '0.1px',
+                    lineHeight: 1.2,
+                    textAlign: 'center',
+                    boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+                  }}
+                >
+                  <i className="fal fa-chart-line" style={{ fontSize: '14px', color: '#bd2120' }} />
+                  <span>Lead Mgmt</span>
+                  <span style={{ fontSize: '9.5px', fontWeight: 400, color: '#888' }}>Real Estate</span>
+                </Link>
+
+                <Link
+                  href="/whatsappautomation"
+                  onClick={() => setIsActive(false)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'column',
+                    gap: '4px',
+                    background: '#fff',
+                    color: '#0d0d0d',
+                    border: '1.5px solid #e5e7eb',
+                    borderRadius: '8px',
+                    padding: '10px 4px',
+                    fontSize: '11px',
+                    fontWeight: '700',
+                    textDecoration: 'none',
+                    letterSpacing: '0.1px',
+                    lineHeight: 1.2,
+                    textAlign: 'center',
+                    boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+                  }}
+                >
+                  <i className="fab fa-whatsapp" style={{ fontSize: '14px', color: '#bd2120' }} />
+                  <span>WhatsApp</span>
+                  <span style={{ fontSize: '9.5px', fontWeight: 400, color: '#888' }}>Automation</span>
+                </Link>
+
+                <Link
+                  href="/callagents"
+                  onClick={() => setIsActive(false)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'column',
+                    gap: '4px',
+                    background: '#fff',
+                    color: '#0d0d0d',
+                    border: '1.5px solid #e5e7eb',
+                    borderRadius: '8px',
+                    padding: '10px 4px',
+                    fontSize: '11px',
+                    fontWeight: '700',
+                    textDecoration: 'none',
+                    letterSpacing: '0.1px',
+                    lineHeight: 1.2,
+                    textAlign: 'center',
+                    boxShadow: '0 1px 2px rgba(0,0,0,0.03)',
+                  }}
+                >
+                  <i className="fal fa-phone-volume" style={{ fontSize: '14px', color: '#bd2120' }} />
+                  <span>Agent Calls</span>
+                  <span style={{ fontSize: '9.5px', fontWeight: 400, color: '#888' }}>Demo</span>
+                </Link>
+              </div>
 
             </div>
 
