@@ -458,6 +458,166 @@ const faqs = [
   },
 ];
 
+function HeroDemoCallCard() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(311.4);
+  const audioRef = useRef(null);
+
+  const togglePlay = () => {
+    if (!audioRef.current) return;
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch(err => {
+        console.error("Audio playback error:", err);
+      });
+    }
+  };
+
+  const handleTimeUpdate = () => {
+    if (audioRef.current) {
+      setCurrentTime(audioRef.current.currentTime);
+    }
+  };
+
+  const handleLoadedMetadata = () => {
+    if (audioRef.current && audioRef.current.duration) {
+      setDuration(audioRef.current.duration);
+    }
+  };
+
+  const handleEnded = () => {
+    setIsPlaying(false);
+    setCurrentTime(0);
+  };
+
+  const handleSeek = (e) => {
+    if (!audioRef.current) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const newTime = (clickX / rect.width) * (duration || 311.4);
+    audioRef.current.currentTime = newTime;
+    setCurrentTime(newTime);
+  };
+
+  const jumpTo = (secs) => {
+    if (!audioRef.current) return;
+    audioRef.current.currentTime = secs;
+    setCurrentTime(secs);
+    if (!isPlaying) {
+      audioRef.current.play().then(() => setIsPlaying(true)).catch(console.error);
+    }
+  };
+
+  const fmt = (s) => {
+    if (!s || isNaN(s)) return "0:00";
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return `${m}:${sec < 10 ? "0" : ""}${sec}`;
+  };
+
+  const progressPct = duration > 0 ? (currentTime / duration) * 100 : 0;
+
+  return (
+    <div className="ailm-prominent-call-card">
+      <audio
+        ref={audioRef}
+        preload="metadata"
+        onTimeUpdate={handleTimeUpdate}
+        onLoadedMetadata={handleLoadedMetadata}
+        onEnded={handleEnded}
+      >
+        <source src="/audio/real-estate-demo-call.mp3" type="audio/mpeg" />
+        <source src="/audio/real-estate-demo-call.wav" type="audio/wav" />
+      </audio>
+
+      {/* Minimalist Callout Header */}
+      <div className="ailm-callout-header">
+        <h3 className="ailm-callout-title">
+          Check Full Call Demo: <span className="ailm-red">Closing the Meeting</span>
+        </h3>
+        <p className="ailm-callout-sub">
+          Listen to DevMate's AI voice agent answer an inbound lead instantly, extract budget requirements, resolve buyer questions, and close a confirmed property viewing into the calendar.
+        </p>
+      </div>
+
+      {/* Embedded Live Audio Player & Scrubber */}
+      <div className="ailm-audio-showcase">
+        <div className="ailm-audio-showcase-main">
+          <button
+            type="button"
+            className={`ailm-audio-play-btn-lg ${isPlaying ? "ailm-audio-play-btn-lg--playing" : ""}`}
+            onClick={togglePlay}
+            aria-label={isPlaying ? "Pause Demo Call" : "Play Demo Call"}
+          >
+            {isPlaying ? (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+              </svg>
+            ) : (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style={{ marginLeft: 3 }}>
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            )}
+          </button>
+
+          <div className="ailm-audio-showcase-info">
+            <div className="ailm-audio-showcase-meta">
+              <span className="ailm-audio-showcase-name">
+                <i className="fal fa-waveform-lines" style={{ color: "#ef4444", marginRight: 8 }} />
+                DevMate Real Estate AI Agent — Inbound Lead Call (5:11)
+              </span>
+              <span className="ailm-audio-showcase-timer">
+                {fmt(currentTime)} / {fmt(duration)}
+              </span>
+            </div>
+
+            <div className="ailm-audio-scrubber-wrap" onClick={handleSeek}>
+              <div className="ailm-audio-scrubber-bg">
+                <div
+                  className="ailm-audio-scrubber-fill"
+                  style={{ width: `${progressPct}%` }}
+                >
+                  <span className="ailm-audio-scrubber-thumb" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className={`ailm-audio-equalizer ${isPlaying ? "ailm-audio-equalizer--active" : ""}`}>
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+        </div>
+
+        {/* Chapter Quick-Jumps */}
+        <div className="ailm-audio-chapters">
+          <span className="ailm-audio-chapters-label">Jump to:</span>
+          <button type="button" className="ailm-chapter-btn" onClick={() => jumpTo(0)}>
+            <i className="fal fa-play" /> 0:00 Pickup
+          </button>
+          <button type="button" className="ailm-chapter-btn" onClick={() => jumpTo(75)}>
+            <i className="fal fa-play" /> 1:15 Budget &amp; Area
+          </button>
+          <button type="button" className="ailm-chapter-btn" onClick={() => jumpTo(195)}>
+            <i className="fal fa-play" /> 3:15 Property Match
+          </button>
+          <button type="button" className="ailm-chapter-btn ailm-chapter-btn--highlight" onClick={() => jumpTo(260)}>
+            <i className="fal fa-calendar-check" /> 4:20 Meeting Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function AILeadManagementDubaiRealEstate() {
   const [modalConfig, setModalConfig] = useState(null);
   const [openFaq, setOpenFaq] = useState(null);
@@ -573,48 +733,56 @@ export default function AILeadManagementDubaiRealEstate() {
         {/* ─── HERO ─── */}
         <section className="ailm-hero">
           <div className="container">
-            <div className="ailm-hero-badge">
-              <span className="ailm-hero-dot"></span>
-              Real Estate · AI Lead Management System
+            {/* Top: Grand Centered Hero Header */}
+            <div className="ailm-hero-header-wrap">
+              <div className="ailm-hero-badge">
+                <span className="ailm-hero-dot"></span>
+                Real Estate · AI Lead Management System
+              </div>
+              <h1 className="ailm-hero-headline">
+                Every lead answered in{" "}
+                <span className="ailm-red">seconds.</span>
+                <br />
+                Qualified. Booked. Logged.
+              </h1>
+              <p className="ailm-hero-sub">
+                An AI Lead Management System built for Dubai brokerages — handles the first 15 minutes of every Bayut, Property Finder, WhatsApp and portal enquiry, around the clock, in Arabic and English.
+              </p>
+              <div className="ailm-hero-ctas">
+                <button className="ailm-btn-primary" id="hero-get-audit" onClick={openHeroAuditModal}>
+                  Get Call For Lead Leak Audit
+                  <i className="fal fa-long-arrow-right ml-2"></i>
+                </button>
+                <Link href="#pricing" className="ailm-btn-ghost" id="hero-see-pricing">
+                  See Pricing
+                </Link>
+              </div>
+              <div className="ailm-hero-metrics">
+                <div className="ailm-metric">
+                  <span className="ailm-metric-num">&lt; 60s</span>
+                  <span className="ailm-metric-label">First Response</span>
+                </div>
+                <div className="ailm-metric-divider"></div>
+                <div className="ailm-metric">
+                  <span className="ailm-metric-num">24 / 7</span>
+                  <span className="ailm-metric-label">Coverage</span>
+                </div>
+                <div className="ailm-metric-divider"></div>
+                <div className="ailm-metric">
+                  <span className="ailm-metric-num">AR + EN</span>
+                  <span className="ailm-metric-label">20+ Languages</span>
+                </div>
+                <div className="ailm-metric-divider"></div>
+                <div className="ailm-metric">
+                  <span className="ailm-metric-num">14 Days</span>
+                  <span className="ailm-metric-label">Go Live</span>
+                </div>
+              </div>
             </div>
-            <h1 className="ailm-hero-headline">
-              Every lead answered in{" "}
-              <span className="ailm-red">seconds.</span>
-              <br />
-              Qualified. Booked. Logged.
-            </h1>
-            <p className="ailm-hero-sub">
-              An AI Lead Management System built for Dubai brokerages — handles the first 15 minutes of every Bayut, Property Finder, WhatsApp and portal enquiry, around the clock, in Arabic and English.
-            </p>
-            <div className="ailm-hero-ctas">
-              <button className="ailm-btn-primary" id="hero-get-audit" onClick={openHeroAuditModal}>
-                Get Call For Lead Leak Audit
-                <i className="fal fa-long-arrow-right ml-2"></i>
-              </button>
-              <Link href="#pricing" className="ailm-btn-ghost" id="hero-see-pricing">
-                See Pricing
-              </Link>
-            </div>
-            <div className="ailm-hero-metrics">
-              <div className="ailm-metric">
-                <span className="ailm-metric-num">&lt; 60s</span>
-                <span className="ailm-metric-label">First Response</span>
-              </div>
-              <div className="ailm-metric-divider"></div>
-              <div className="ailm-metric">
-                <span className="ailm-metric-num">24 / 7</span>
-                <span className="ailm-metric-label">Coverage</span>
-              </div>
-              <div className="ailm-metric-divider"></div>
-              <div className="ailm-metric">
-                <span className="ailm-metric-num">AR + EN</span>
-                <span className="ailm-metric-label">20+ Languages</span>
-              </div>
-              <div className="ailm-metric-divider"></div>
-              <div className="ailm-metric">
-                <span className="ailm-metric-num">14 Days</span>
-                <span className="ailm-metric-label">Go Live</span>
-              </div>
+
+            {/* Bottom: Prominent Standalone Demo Call Showcase */}
+            <div className="ailm-hero-demo-standalone">
+              <HeroDemoCallCard />
             </div>
           </div>
         </section>

@@ -180,6 +180,191 @@ function SubmitButton({ loading }) {
   );
 }
 
+/* ─── Hero Demo Audio Player ───────────────────────────────── */
+function CadHeroDemoPlayer() {
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(311.4);
+
+  const togglePlay = () => {
+    if (!audioRef.current) return;
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch(err => {
+        console.error("Audio playback error:", err);
+      });
+    }
+  };
+
+  const handleTimeUpdate = () => {
+    if (audioRef.current) {
+      setCurrentTime(audioRef.current.currentTime);
+    }
+  };
+
+  const handleLoadedMetadata = () => {
+    if (audioRef.current && audioRef.current.duration) {
+      setDuration(audioRef.current.duration);
+    }
+  };
+
+  const handleEnded = () => {
+    setIsPlaying(false);
+    setCurrentTime(0);
+  };
+
+  const handleSeek = (e) => {
+    if (!audioRef.current) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const newTime = (clickX / rect.width) * (duration || 311.4);
+    audioRef.current.currentTime = newTime;
+    setCurrentTime(newTime);
+  };
+
+  const jumpTo = (secs) => {
+    if (!audioRef.current) return;
+    audioRef.current.currentTime = secs;
+    setCurrentTime(secs);
+    if (!isPlaying) {
+      audioRef.current.play().then(() => setIsPlaying(true)).catch(console.error);
+    }
+  };
+
+  const fmt = (s) => {
+    if (!s || isNaN(s)) return "0:00";
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return `${m}:${sec < 10 ? "0" : ""}${sec}`;
+  };
+
+  const progressPct = duration > 0 ? (currentTime / duration) * 100 : 0;
+
+  return (
+    <div className="cad-hero-demo-card">
+      <audio
+        ref={audioRef}
+        preload="metadata"
+        onTimeUpdate={handleTimeUpdate}
+        onLoadedMetadata={handleLoadedMetadata}
+        onEnded={handleEnded}
+      >
+        <source src="/audio/real-estate-demo-call.mp3" type="audio/mpeg" />
+        <source src="/audio/real-estate-demo-call.wav" type="audio/wav" />
+      </audio>
+
+      <div className="cad-hero-demo-header">
+        <div className="cad-hero-demo-avatar">
+          <i className="fal fa-robot" />
+        </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <p className="cad-hero-demo-name">DevMate AI Voice Agent</p>
+          <p className="cad-hero-demo-status">
+            <span className={`cad-hero-demo-status-dot ${isPlaying ? "cad-hero-demo-status-dot--live" : ""}`} />
+            {isPlaying ? "Live Audio Playing · 5:11" : "Online · Ready to play demo"}
+          </p>
+        </div>
+        <span className="cad-hero-live-pill">
+          <i className="fal fa-waveform-lines" /> Live Demo Call
+        </span>
+      </div>
+
+      <div className="cad-demo-callout">
+        <h3 className="cad-demo-callout-title">
+          Check Full Call Demo: <span>Closing the Meeting</span>
+        </h3>
+        <p className="cad-demo-callout-sub">
+          Listen to DevMate's AI voice agent answer an inbound lead instantly, extract budget requirements, resolve buyer questions, and close a confirmed property viewing into the calendar.
+        </p>
+      </div>
+
+      {/* Embedded Live Audio Player & Scrubber */}
+      <div className="cad-audio-showcase">
+        <div className="cad-audio-showcase-main">
+          <button
+            type="button"
+            className={`cad-audio-play-btn ${isPlaying ? "cad-audio-play-btn--playing" : ""}`}
+            onClick={togglePlay}
+            aria-label={isPlaying ? "Pause Demo Call" : "Play Demo Call"}
+          >
+            {isPlaying ? (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+              </svg>
+            ) : (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style={{ marginLeft: 3 }}>
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            )}
+          </button>
+
+          <div className="cad-audio-showcase-info">
+            <div className="cad-audio-showcase-meta">
+              <span className="cad-audio-showcase-name">
+                <i className="fal fa-phone-volume" style={{ color: "#ef4444", marginRight: 7 }} />
+                Real Estate Inbound Lead Call
+              </span>
+              <span className="cad-audio-showcase-timer">
+                {fmt(currentTime)} / {fmt(duration)}
+              </span>
+            </div>
+
+            <div className="cad-audio-scrubber-wrap" onClick={handleSeek}>
+              <div className="cad-audio-scrubber-bg">
+                <div
+                  className="cad-audio-scrubber-fill"
+                  style={{ width: `${progressPct}%` }}
+                >
+                  <span className="cad-audio-scrubber-thumb" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className={`cad-audio-equalizer ${isPlaying ? "cad-audio-equalizer--active" : ""}`}>
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+        </div>
+
+        {/* Chapter Quick-Jumps */}
+        <div className="cad-audio-chapters">
+          <span className="cad-audio-chapters-label">Jump to:</span>
+          <button type="button" className="cad-chapter-btn" onClick={() => jumpTo(0)}>
+            <i className="fal fa-play" /> 0:00 Pickup
+          </button>
+          <button type="button" className="cad-chapter-btn" onClick={() => jumpTo(75)}>
+            <i className="fal fa-play" /> 1:15 Budget &amp; Area
+          </button>
+          <button type="button" className="cad-chapter-btn" onClick={() => jumpTo(195)}>
+            <i className="fal fa-play" /> 3:15 Property Match
+          </button>
+          <button type="button" className="cad-chapter-btn cad-chapter-btn--highlight" onClick={() => jumpTo(260)}>
+            <i className="fal fa-calendar-check" /> 4:20 Meeting Close
+          </button>
+        </div>
+      </div>
+
+      <div className="cad-hero-demo-industries">
+        <span className="cad-industry-pill">🏠 Real Estate</span>
+        <span className="cad-industry-pill">🏨 Hospitality</span>
+        <span className="cad-industry-pill">✈️ Aviation</span>
+        <span className="cad-industry-pill">🏝️ Tourism</span>
+        <span className="cad-industry-pill">🛍️ Retail</span>
+        <span className="cad-industry-pill">🏥 Healthcare</span>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Forms ─────────────────────────────────────────────────── */
 function useForm(formName) {
   const [loading, setLoading] = useState(false);
@@ -910,38 +1095,8 @@ export default function CallAgentsPage() {
                 </div>
               </div>
 
-              {/* Right — chat preview card */}
-              <div className="cad-hero-demo-card">
-                <div className="cad-hero-demo-header">
-                  <div className="cad-hero-demo-avatar">
-                    <i className="fal fa-robot" />
-                  </div>
-                  <div>
-                    <p className="cad-hero-demo-name">DevMate AI Agent</p>
-                    <p className="cad-hero-demo-status">
-                      <span className="cad-hero-demo-status-dot" />
-                      Online · Responding instantly
-                    </p>
-                  </div>
-                </div>
-                <div className="cad-chat-bubble cad-chat-bubble--agent">
-                  Hello! I'm the DevMate AI Call Agent for Dubai Real Estate. May I have your name and phone number to connect you with the right property specialist?
-                </div>
-                <div className="cad-chat-bubble cad-chat-bubble--user">
-                  Hi, I'm Sara. I'm looking for a 2BR apartment in Downtown Dubai, budget around AED 2.5M.
-                </div>
-                <div className="cad-chat-bubble cad-chat-bubble--agent">
-                  Perfect, Sara! I have 3 units in that range with full Burj views. Let me send you the shortlist — what's the best number to reach you?
-                </div>
-                <div className="cad-hero-demo-industries">
-                  <span className="cad-industry-pill">🏠 Real Estate</span>
-                  <span className="cad-industry-pill">🏨 Hospitality</span>
-                  <span className="cad-industry-pill">✈️ Aviation</span>
-                  <span className="cad-industry-pill">🏝️ Tourism</span>
-                  <span className="cad-industry-pill">🛍️ Retail</span>
-                  <span className="cad-industry-pill">🏥 Healthcare</span>
-                </div>
-              </div>
+              {/* Right — Live Demo Call Audio Player */}
+              <CadHeroDemoPlayer />
             </div>
           </div>
         </section>
