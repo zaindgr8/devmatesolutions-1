@@ -1856,5 +1856,303 @@
   }
 }
 
+/* ══════════════════════════════════════════════
+   VIDEO SHOWCASE & AUTHENTICITY BREAKDOWN
+   ══════════════════════════════════════════════ */
+.ailm-video-showcase {
+  background: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #0d0d0d 75%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0 85px;
+}
 
+.ailm-video-showcase .ailm-section-header {
+  margin-bottom: 36px;
+}
 
+.ailm-video-showcase::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(189, 33, 32, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ailm-proof-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(189, 33, 32, 0.12);
+  border: 1px solid rgba(189, 33, 32, 0.35);
+  color: #f87171;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+
+.ailm-proof-badge-dot {
+  width: 8px;
+  height: 8px;
+  background: #ef4444;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25);
+  animation: ailm-pulse 2s ease-in-out infinite;
+}
+
+.ailm-video-container {
+  max-width: 980px;
+  margin: 0 auto 50px;
+  position: relative;
+  z-index: 2;
+}
+
+.ailm-video-frame {
+  background: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 25px 70px -15px rgba(0, 0, 0, 0.9), 0 0 45px -10px rgba(189, 33, 32, 0.25);
+  transition: all 0.3s ease;
+}
+
+.ailm-video-frame:hover {
+  border-color: rgba(189, 33, 32, 0.4);
+  box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.95), 0 0 60px -5px rgba(189, 33, 32, 0.35);
+}
+
+.ailm-video-frame-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  font-size: 12px;
+  color: #9ca3af;
+  gap: 12px;
+}
+
+.ailm-video-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.ailm-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.ailm-dot--red { background: #ef4444; }
+.ailm-dot--yellow { background: #f59e0b; }
+.ailm-dot--green { background: #10b981; }
+
+.ailm-video-header-title {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: #e5e7eb;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+}
+
+.ailm-video-header-badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(189, 33, 32, 0.15);
+  border: 1px solid rgba(189, 33, 32, 0.3);
+  color: #fca5a5;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ailm-video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000000;
+}
+
+.ailm-video-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.ailm-video-frame-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px;
+  background: rgba(255, 255, 255, 0.03);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.ailm-video-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ailm-video-live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #34d399;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.ailm-live-ping {
+  width: 6px;
+  height: 6px;
+  background: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+  animation: ailm-pulse 1.8s infinite;
+}
+
+.ailm-video-footer-meta {
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+.ailm-video-footer-meta strong {
+  color: #ffffff;
+}
+
+.ailm-video-yt-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #e5e7eb;
+  font-weight: 600;
+  font-size: 13px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ailm-video-yt-link:hover {
+  color: #ffffff;
+  background: rgba(189, 33, 32, 0.25);
+  border-color: rgba(189, 33, 32, 0.5);
+  transform: translateY(-1px);
+}
+
+.ailm-video-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.ailm-video-proof-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 22px;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.ailm-video-proof-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(189, 33, 32, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+.ailm-video-proof-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(189, 33, 32, 0.15);
+  border: 1px solid rgba(189, 33, 32, 0.25);
+  color: #f87171;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  margin-bottom: 14px;
+}
+
+.ailm-video-proof-content h4 {
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.ailm-video-proof-content p {
+  font-size: 13px;
+  color: #9ca3af;
+  line-height: 1.55;
+  margin-bottom: 0;
+}
+
+@media (max-width: 991px) {
+  .ailm-video-proof-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .ailm-video-showcase {
+    padding: 70px 0 80px;
+  }
+  .ailm-video-proof-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .ailm-video-header-title {
+    font-size: 12px;
+  }
+  .ailm-video-header-badge {
+    display: none;
+  }
+  .ailm-video-frame-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ailm-video-yt-link {
+    width: 100%;
+    justify-content: center;
+  }
+}

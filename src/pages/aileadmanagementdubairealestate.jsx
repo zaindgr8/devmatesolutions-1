@@ -619,6 +619,122 @@ export default function AILeadManagementDubaiRealEstate() {
           </div>
         </section>
 
+        {/* ─── LIVE SYSTEM BREAKDOWN & AUTHENTICITY VIDEO ─── */}
+        <section className="ailm-section ailm-section--dark ailm-video-showcase" id="system-demo">
+          <div className="container">
+            <div className="ailm-section-header ailm-section-header--dark">
+              <div className="ailm-proof-badge">
+                <span className="ailm-proof-badge-dot"></span>
+                <i className="fab fa-youtube" style={{ color: "#ef4444" }}></i>
+                <span>FOUNDER DEEP-DIVE · ARCHITECTURE BREAKDOWN</span>
+              </div>
+              <h2 className="ailm-section-title ailm-title--light" style={{ marginBottom: 0 }}>
+                See How the AI Sells &amp; Qualifies <br className="d-none d-md-block" />
+                <span className="ailm-red">While You Sleep</span>
+              </h2>
+            </div>
+
+            {/* Video Player Container */}
+            <div className="ailm-video-container">
+              <div className="ailm-video-frame">
+                {/* Top browser/player header */}
+                <div className="ailm-video-frame-header">
+                  <div className="ailm-video-dots">
+                    <span className="ailm-dot ailm-dot--red"></span>
+                    <span className="ailm-dot ailm-dot--yellow"></span>
+                    <span className="ailm-dot ailm-dot--green"></span>
+                  </div>
+                  <div className="ailm-video-header-title">
+                    <i className="fal fa-play-circle" style={{ color: "#ef4444", marginRight: 8 }}></i>
+                    <span>DevMate AI Lead Management System — Live Demo &amp; Architecture</span>
+                  </div>
+                  <div className="ailm-video-header-badge">
+                    <i className="fal fa-clock" style={{ marginRight: 6 }}></i>
+                    <span>Starts @ 03:18 System Demo</span>
+                  </div>
+                </div>
+
+                {/* 16:9 Responsive Video Frame */}
+                <div className="ailm-video-wrapper">
+                  <iframe
+                    src="https://www.youtube-nocookie.com/embed/TG6Sj3RSdnk?start=198&rel=0&modestbranding=1"
+                    title="AI Lead Management System for Dubai Real Estate - Full Breakdown by Zain Ul Abideen"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    className="ailm-video-iframe"
+                  ></iframe>
+                </div>
+
+                {/* Video Sub-bar */}
+                <div className="ailm-video-frame-footer">
+                  <div className="ailm-video-footer-left">
+                    <span className="ailm-video-live-pill">
+                      <span className="ailm-live-ping"></span>
+                      SYSTEM DEMONSTRATION
+                    </span>
+                    <span className="ailm-video-footer-meta">
+                      Queued at <strong>03:18</strong> (Inbound speed-to-lead &amp; qualification engine)
+                    </span>
+                  </div>
+                  <a
+                    href="https://www.youtube.com/watch?v=TG6Sj3RSdnk&t=198s"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ailm-video-yt-link"
+                  >
+                    <span>Watch full video on YouTube</span>
+                    <i className="fal fa-external-link-alt" style={{ marginLeft: 6 }}></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Authenticity Key Takeaways Grid */}
+            <div className="ailm-video-proof-grid">
+              <div className="ailm-video-proof-card">
+                <div className="ailm-video-proof-icon">
+                  <i className="fal fa-bolt"></i>
+                </div>
+                <div className="ailm-video-proof-content">
+                  <h4>Sub-3-Second Inbound</h4>
+                  <p>Engages buyers instantly when enquiries hit WhatsApp, Bayut, or Property Finder — eliminating the 2–6 hour response drop-off.</p>
+                </div>
+              </div>
+
+              <div className="ailm-video-proof-card">
+                <div className="ailm-video-proof-icon">
+                  <i className="fal fa-comments"></i>
+                </div>
+                <div className="ailm-video-proof-content">
+                  <h4>Real Pre-Qualification</h4>
+                  <p>Extracts budget, payment plan preference, and timeline in fluent Arabic or English so closers only spend time on serious buyers.</p>
+                </div>
+              </div>
+
+              <div className="ailm-video-proof-card">
+                <div className="ailm-video-proof-icon">
+                  <i className="fal fa-calendar-check"></i>
+                </div>
+                <div className="ailm-video-proof-content">
+                  <h4>Auto-Booked Viewings</h4>
+                  <p>Integrates directly with broker calendars and CRMs, scheduling viewings while preserving full conversational history.</p>
+                </div>
+              </div>
+
+              <div className="ailm-video-proof-card">
+                <div className="ailm-video-proof-icon">
+                  <i className="fal fa-shield-check"></i>
+                </div>
+                <div className="ailm-video-proof-content">
+                  <h4>Built &amp; Backed in Dubai</h4>
+                  <p>Fully compliant with UAE PDPL and RERA data privacy mandates, backed by a 60-day performance SLA.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
         {/* ─── LEAD LEAK CALCULATOR ─── */}
         <LeadLeakCalculator
           onCtaClick={openCalcAuditModal}
