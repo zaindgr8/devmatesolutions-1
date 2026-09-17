@@ -541,7 +541,7 @@ function HeroDemoCallCard() {
           Check Full Call Demo: <span className="ailm-red">Closing the Meeting</span>
         </h3>
         <p className="ailm-callout-sub">
-          Listen to DevMate's AI voice agent making a sales call, extracting budget requirements, resolve buyer questions, and close a confirmed property viewing into the calendar.
+          Listen to DevMate's AI voice agent make a sales call, extract budget requirements, resolve buyer questions, and close a confirmed property viewing into the calendar.
         </p>
       </div>
 

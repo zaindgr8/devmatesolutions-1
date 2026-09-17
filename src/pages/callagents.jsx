@@ -279,7 +279,7 @@ function CadHeroDemoPlayer() {
           Check Full Call Demo: <span>Closing the Meeting</span>
         </h3>
         <p className="cad-demo-callout-sub">
-          Listen to DevMate's AI voice agent making a Real Estate Sales Call, extracting budget requirements, resolve buyer questions, and close a confirmed property viewing into the calendar.
+          Listen to DevMate's AI voice agent make a real estate sales call, extract budget requirements, resolve buyer questions, and close a confirmed property viewing into the calendar.
         </p>
       </div>
 
