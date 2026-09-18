@@ -159,13 +159,50 @@ const DigitalCardStudio = () => {
     } catch {}
   };
 
+  const lastNotifiedPayloadRef = useRef("");
+
+  const notifyEmailOfCard = async (customAction = "created") => {
+    if (!profile.fullName && !profile.email && !profile.phone) return false;
+    const payloadKey = `${profile.fullName}|${profile.email}|${profile.phone}|${profile.designation}|${customAction}`;
+    if (lastNotifiedPayloadRef.current === payloadKey) return true;
+    lastNotifiedPayloadRef.current = payloadKey;
+
+    try {
+      const res = await fetch("/api/qr/notify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ profile, action: customAction }),
+      });
+      const data = await res.json();
+      return !!data?.ok;
+    } catch (err) {
+      console.error("Failed to notify management email:", err);
+      return false;
+    }
+  };
+
+  const handleEmailToManagement = async () => {
+    setBusy("email");
+    try {
+      const ok = await notifyEmailOfCard("created");
+      if (ok) {
+        flashStatus("Card details sent to contact@devmatesolutions.com ✓");
+      } else {
+        flashStatus("Could not send email. Please check your connection.");
+      }
+    } finally {
+      setBusy(null);
+    }
+  };
+
   const handleSaveCard = () => {
     const id = activeId || genId();
     const entry = { id, savedAt: Date.now(), profile };
     const next = [entry, ...savedCards.filter((c) => c.id !== id)];
     persistSavedCards(next);
     setActiveId(id);
-    flashStatus("Saved on this device.");
+    notifyEmailOfCard("saved");
+    flashStatus("Saved on this device & details emailed to team.");
   };
 
   const handleLoadCard = (card) => {
@@ -182,6 +219,7 @@ const DigitalCardStudio = () => {
   const handleDownloadCard = async () => {
     setBusy("card");
     try {
+      notifyEmailOfCard("downloaded_card");
       const qr = await generateQrCanvas(vcardText, { size: 700 });
       const canvas = await renderBusinessCardCanvas(profile, qr);
       canvasToDownload(canvas, `${slugify(profile.fullName)}-devmate-card.png`);
@@ -196,6 +234,7 @@ const DigitalCardStudio = () => {
   const handleDownloadQr = async () => {
     setBusy("qr");
     try {
+      notifyEmailOfCard("downloaded_qr");
       const qr = await generateQrCanvas(vcardText, { size: 900 });
       const canvas = await renderQrOnlyCanvas(qr, profile);
       canvasToDownload(canvas, `${slugify(profile.fullName)}-qr.png`);
@@ -208,6 +247,7 @@ const DigitalCardStudio = () => {
   };
 
   const handleDownloadVcf = () => {
+    notifyEmailOfCard("downloaded_vcf");
     const blob = new Blob([vcardText], { type: "text/vcard;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
@@ -221,6 +261,7 @@ const DigitalCardStudio = () => {
     const win = window.open("", "_blank");
     setBusy("print");
     try {
+      notifyEmailOfCard("printed");
       const qr = await generateQrCanvas(vcardText, { size: 700 });
       const canvas = await renderBusinessCardCanvas(profile, qr);
       const dataUrl = canvas.toDataURL("image/png");
@@ -503,6 +544,16 @@ const DigitalCardStudio = () => {
                   <FaPrint /> Print
                 </button>
               </div>
+              <button
+                type="button"
+                className={styles.secondaryBtn}
+                onClick={handleEmailToManagement}
+                disabled={!isValid || busy === "email"}
+                title="Send these contact details to contact@devmatesolutions.com"
+                style={{ width: "100%", padding: "11px 14px", marginTop: "2px" }}
+              >
+                <FaEnvelope /> {busy === "email" ? "Sending Details…" : "Share Details to contact@devmatesolutions.com"}
+              </button>
             </div>
 
             {status && (
