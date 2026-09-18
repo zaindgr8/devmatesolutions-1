@@ -13,7 +13,8 @@ const WEBHOOK_URLS = {
   "Hotel Booking — DXB (English)": "https://hook.us2.make.com/lvger5j3udmgtz2vy1a4dx1xav0d3v8s",
   "Hotel Booking — DXB (Arabic)": "https://hook.eu2.make.com/icaj9kajo7gnv33lspcxkvdai8234vcf",
   "Hotel Booking DXB Arabic": "https://hook.eu2.make.com/icaj9kajo7gnv33lspcxkvdai8234vcf",
-  "Dubai Real Estate": "https://hook.eu2.make.com/31ya9oqu7xbzar8jv025ul9k4fxzc9l6",
+  "Dubai Real Estate": "https://hook.eu2.make.com/meox66njhc6x7cc388ra1qf3qp7ams1m",
+  "Real Estate": "https://hook.eu2.make.com/meox66njhc6x7cc388ra1qf3qp7ams1m",
   "Emirates- Customer Care": "https://hook.us2.make.com/ni88x21vbju2w7u9mqjy6kwdwm8goi7a",
   "Emirates — Customer Care": "https://hook.us2.make.com/ni88x21vbju2w7u9mqjy6kwdwm8goi7a",
   "Emirates Customer Care": "https://hook.us2.make.com/ni88x21vbju2w7u9mqjy6kwdwm8goi7a",
@@ -23,7 +24,7 @@ const WEBHOOK_URLS = {
   "Dubai Fun Broker (RU)": "https://hook.eu1.make.com/q3qlta7no5t5alsdyv37n76woy2q2527",
 };
 
-const DEFAULT_WEBHOOK_URL = "https://hook.eu2.make.com/31ya9oqu7xbzar8jv025ul9k4fxzc9l6";
+const DEFAULT_WEBHOOK_URL = "https://hook.eu2.make.com/meox66njhc6x7cc388ra1qf3qp7ams1m";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const PRIMARY_NOTIFICATION_EMAIL =
