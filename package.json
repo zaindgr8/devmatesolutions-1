@@ -16,6 +16,7 @@
     "framer-motion": "^10.1.0",
     "livekit-client": "^2.17.0",
     "next": "^14.0.0",
+    "qrcode": "^1.5.4",
     "react": "^18.2.0",
     "react-18-image-lightbox": "^5.1.4",
     "react-countup": "^6.4.1",
