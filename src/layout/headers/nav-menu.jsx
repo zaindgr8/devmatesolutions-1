@@ -9,7 +9,7 @@ const NavMenu = () => {
         style={{
           display: "flex",
           alignItems: "center",
-          gap: "24px",
+          gap: "clamp(12px, 1.4vw, 22px)",
           listStyle: "none",
           margin: 0,
           padding: 0,
@@ -18,7 +18,16 @@ const NavMenu = () => {
         }}
       >
         {menu_data.map((item, i) => (
-          <li key={i} style={{ display: "inline-block", flexShrink: 0, whiteSpace: "nowrap" }}>
+          <li
+            key={i}
+            style={{
+              display: "inline-block",
+              flexShrink: 0,
+              whiteSpace: "nowrap",
+              margin: 0,
+              marginRight: 0,
+            }}
+          >
             {item.title === "Book Demo" ? (
               <Link
                 href={item.link}
@@ -27,10 +36,11 @@ const NavMenu = () => {
                 style={{
                   backgroundColor: "#000000",
                   color: "#ffffff",
-                  padding: "8px 16px",
-                  borderRadius: "4px",
+                  padding: "7px 14px",
+                  borderRadius: "6px",
                   display: "inline-block",
-                  fontWeight: "500",
+                  fontWeight: "600",
+                  fontSize: "13px",
                   transition: "all 0.3s ease",
                   textDecoration: "none",
                   whiteSpace: "nowrap",
@@ -54,6 +64,9 @@ const NavMenu = () => {
                   display: "inline-block",
                   whiteSpace: "nowrap",
                   lineHeight: 1.2,
+                  fontSize: "13.5px",
+                  fontWeight: "600",
+                  letterSpacing: "0.2px",
                 }}
               >
                 {item.title}
