@@ -8,11 +8,12 @@ const AILeadPromoModal = () => {
 
   useEffect(() => {
     // Don't show if already on the /aileadmanagementdubairealestate page,
-    // or on the internal /qr team tool
+    // or on internal team tools (/qr, /dashboard)
     if (
       router.pathname === "/aileadmanagementdubairealestate" ||
       router.pathname === "/aileadmanagement" ||
-      router.pathname === "/qr"
+      router.pathname === "/qr" ||
+      router.pathname === "/dashboard"
     ) {
       return;
     }
@@ -29,7 +30,8 @@ const AILeadPromoModal = () => {
       if (
         window.location.pathname !== "/aileadmanagementdubairealestate" &&
         window.location.pathname !== "/aileadmanagement" &&
-        window.location.pathname !== "/qr"
+        window.location.pathname !== "/qr" &&
+        window.location.pathname !== "/dashboard"
       ) {
         setIsOpen(true);
       }

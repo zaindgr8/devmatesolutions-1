@@ -9,6 +9,8 @@ import "@/src/styles/hero-about-me.css";
 import "@/src/styles/ai-lead-management.css";
 import "@/src/styles/ai-lead-management-system.css";
 import "@/src/styles/call-agents.css";
+import "@/src/styles/dashboard.css";
+
 import ConsultationPayment from "@/src/components/consultation/ConsultationPayment";
 import AILeadPromoModal from "@/src/components/AILeadPromoModal";
 
