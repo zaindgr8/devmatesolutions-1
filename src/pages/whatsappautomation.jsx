@@ -429,7 +429,7 @@ export default function WhatsAppAutomation() {
   return (
     <>
       <Head>
-        <title>WhatsApp Automation | AI Lead Management System | DevMate Solutions</title>
+        <title>WhatsApp Automation for Business | AI Lead Management | DevMate Solutions</title>
         <link rel="icon" href="/red-logo.png" type="image/png" />
         <link rel="shortcut icon" href="/red-logo.png" type="image/png" />
         <link rel="apple-touch-icon" href="/red-logo.png" />
@@ -437,11 +437,20 @@ export default function WhatsAppAutomation() {
           name="description"
           content="DevMate Solutions — WhatsApp Business API, AI chatbots, broadcast campaigns & team inbox. Automate your lead management, customer support & sales across every channel. Trusted by businesses across the UAE & Middle East."
         />
-        <meta name="robots" content="index, follow" />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        <meta name="keywords" content="WhatsApp automation Dubai, WhatsApp Business API UAE, AI chatbot WhatsApp, WhatsApp lead management, WhatsApp marketing automation, DevMate Solutions" />
         <link rel="canonical" href="https://devmatesolutions.com/whatsappautomation" />
-        <meta property="og:title" content="WhatsApp Automation | AI Lead Management System | DevMate Solutions" />
-        <meta property="og:description" content="Automate WhatsApp Business conversations, qualify leads 24/7, and close more deals with DevMate's WhatsApp Automation platform." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://devmatesolutions.com/whatsappautomation" />
+        <meta property="og:site_name" content="DevMate Solutions" />
+        <meta property="og:title" content="WhatsApp Automation for Business | AI Lead Management | DevMate Solutions" />
+        <meta property="og:description" content="Automate WhatsApp Business conversations, qualify leads 24/7, and close more deals with DevMate's WhatsApp Automation platform." />
+        <meta property="og:image" content="https://devmatesolutions.com/red-logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@devmatesolutions" />
+        <meta name="twitter:title" content="WhatsApp Automation for Business | DevMate Solutions" />
+        <meta name="twitter:description" content="Automate WhatsApp Business conversations, qualify leads 24/7, and close more deals with DevMate's WhatsApp Automation platform." />
+        <meta name="twitter:image" content="https://devmatesolutions.com/red-logo.png" />
       </Head>
 
       <HeaderThree />

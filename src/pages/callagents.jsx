@@ -1031,9 +1031,10 @@ export default function CallAgentsPage() {
   return (
     <>
       <Head>
-        <title>AI Call Agent Demos — DevMate Solutions</title>
+        <title>AI Call Agents & Voice Automation | DevMate Solutions Dubai</title>
         <meta name="description" content="Try live AI Call Agent demos for Real Estate, Hotel Booking, Airlines, and more. DevMate builds custom AI voice and call agents for any industry — deployed in 14 days." />
-        <meta name="robots" content="index, follow" />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        <meta name="keywords" content="AI call agents Dubai, AI voice agents UAE, automated phone calls, AI receptionist, voice AI real estate, DevMate Solutions" />
         <link rel="canonical" href="https://devmatesolutions.com/callagents" />
         <link rel="icon" href="/red-logo.png" type="image/png" />
         <link rel="shortcut icon" href="/red-logo.png" type="image/png" />
@@ -1041,6 +1042,17 @@ export default function CallAgentsPage() {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://devmatesolutions.com/callagents" />
+        <meta property="og:site_name" content="DevMate Solutions" />
+        <meta property="og:title" content="AI Call Agents & Voice Automation | DevMate Solutions Dubai" />
+        <meta property="og:description" content="Try live AI Call Agent demos for Real Estate, Hotel Booking, Airlines, and more. Custom AI voice agents deployed in 14 days." />
+        <meta property="og:image" content="https://devmatesolutions.com/red-logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@devmatesolutions" />
+        <meta name="twitter:title" content="AI Call Agents & Voice Automation | DevMate Solutions" />
+        <meta name="twitter:description" content="Try live AI Call Agent demos for Real Estate, Hotel Booking, Airlines, and more. Custom AI voice agents deployed in 14 days." />
+        <meta name="twitter:image" content="https://devmatesolutions.com/red-logo.png" />
       </Head>
 
       <HeaderThree />

@@ -700,16 +700,27 @@ export default function AILeadManagementDubaiRealEstate() {
     <>
       <Head>
         <title>AI Lead Management System for Dubai Real Estate | DevMate Solutions</title>
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        <meta name="keywords" content="AI lead management Dubai, real estate AI, lead management system UAE, AI chatbot real estate, Property Finder automation, Bayut lead automation, DevMate Solutions" />
         <link rel="icon" href="/red-logo.png" type="image/png" />
         <link rel="shortcut icon" href="/red-logo.png" type="image/png" />
         <link rel="apple-touch-icon" href="/red-logo.png" />
         <link rel="canonical" href="https://devmatesolutions.com/aileadmanagementdubairealestate" />
         <meta
           name="description"
-          content="Every portal enquiry answered in seconds, qualified in Arabic or English, and booked into an agent's calendar — around the clock. Built for Dubai real estate brokerages."
+          content="Every portal enquiry answered in seconds, qualified in Arabic or English, and booked into an agent's calendar — around the clock. Built for Dubai real estate brokerages by DevMate Solutions."
         />
-        <meta property="og:title" content="AI Lead Management System | DevMate Solutions" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://devmatesolutions.com/aileadmanagementdubairealestate" />
+        <meta property="og:site_name" content="DevMate Solutions" />
+        <meta property="og:title" content="AI Lead Management System for Dubai Real Estate | DevMate Solutions" />
         <meta property="og:description" content="Stop losing leads overnight. Our AI handles the first 15 minutes of every enquiry, 24/7, across Bayut, Property Finder, WhatsApp and more." />
+        <meta property="og:image" content="https://devmatesolutions.com/red-logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@devmatesolutions" />
+        <meta name="twitter:title" content="AI Lead Management System for Dubai Real Estate | DevMate Solutions" />
+        <meta name="twitter:description" content="Stop losing leads overnight. Our AI handles the first 15 minutes of every enquiry, 24/7, across Bayut, Property Finder, WhatsApp and more." />
+        <meta name="twitter:image" content="https://devmatesolutions.com/red-logo.png" />
       </Head>
 
       {modalConfig && (
