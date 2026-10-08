@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
+import FormModal from '@/src/components/FormModal';
 
 
 const about_content_2  ={
@@ -16,8 +17,18 @@ const {img, title, description}  = about_content_2
 
 
 const AboutPageAbout = () => {
+    const [showModal, setShowModal] = useState(false);
     return (
       <>
+        {showModal && (
+          <FormModal
+            isOpen={showModal}
+            onClose={() => setShowModal(false)}
+            title="Get Instant Call"
+            subtitle="Fill in your details — receive a call from DevMate Solutions within 60 seconds"
+            triggerCall={true}
+          />
+        )}
         <div className="about-page-about pt-120 pb-90">
           <div className="container">
             <div className="row align-items-md-center">
@@ -38,12 +49,12 @@ const AboutPageAbout = () => {
                     <button
                       onClick={(e) => {
                         e.preventDefault();
-                        window.dispatchEvent(new CustomEvent("open-free-consultation"));
+                        setShowModal(true);
                       }}
                       className="tp-btn"
                       style={{ border: "none" }}
                     >
-                      Book Free Consultation
+                      Get a Call in 5 Seconds
                       <span>
                         <i className="fal fa-long-arrow-right"></i>
                         <i className="fal fa-long-arrow-right"></i>

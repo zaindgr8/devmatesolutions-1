@@ -2,12 +2,23 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Tilt from "react-parallax-tilt";
 import { TypeAnimation } from "react-type-animation";
+import FormModal from "@/src/components/FormModal";
 
 const HeroBanner = () => {
   const [mounted, setMounted] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   useEffect(() => { setMounted(true); }, []);
   return (
     <>
+      {showModal && (
+        <FormModal
+          isOpen={showModal}
+          onClose={() => setShowModal(false)}
+          title="Get Instant Call"
+          subtitle="Fill in your details — receive a call from DevMate Solutions within 60 seconds"
+          triggerCall={true}
+        />
+      )}
       <div className="dm-hero">
         <div className="container">
           <div className="row align-items-center">
@@ -61,12 +72,12 @@ const HeroBanner = () => {
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                    window.dispatchEvent(new CustomEvent("open-free-consultation"));
+                    setShowModal(true);
                   }}
                   className="tp-grd-btn"
                   style={{ border: 'none' }}
                 >
-                  Book Free Consultation
+                  Get a Call in 5 Seconds
                   <span className="ml-10">
                     <i className="fal fa-long-arrow-right"></i>
                     <i className="fal fa-long-arrow-right"></i>

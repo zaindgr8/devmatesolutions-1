@@ -71,7 +71,7 @@ const AboutArea = () => {
                             <div className="ca-about-btn-wrapper d-md-flex align-items-center">
                                 <div className="ca-about-btn-wrapper mr-30 mb-30">
                                     <a href={`tel:${phone}`} className="tp-border-btn-rgb">
-                                        Book Free Consultation
+                                        Get a Call in 5 Seconds
                                         <span>
                                             <i className="fal  fa-long-arrow-right"></i>
                                             <i className="fal  fa-long-arrow-right"></i>

@@ -18,9 +18,14 @@ const HeaderThree = () => {
         setShowAIMenu(false);
       }
     };
+    const handleOpenInstantCall = () => {
+      setShowModal(true);
+    };
     document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("open-instant-call", handleOpenInstantCall);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("open-instant-call", handleOpenInstantCall);
     };
   }, []);
 
