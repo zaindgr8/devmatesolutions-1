@@ -22,6 +22,16 @@ const own_ventures = [
     logo: "/assets/img/portfolio/revealvoice.png",
     link: "https://www.revealvoice.com/",
   },
+  {
+    id: 3,
+    title: "Sixty",
+    flag: "🌐",
+    country: "UAE & USA",
+    category: "AI Speed-to-Lead Agent",
+    tagline: "AI WhatsApp & voice agent that answers every lead in under 60 seconds",
+    logo: "/assets/img/portfolio/sixty.svg",
+    link: "https://sixty.devmatesolutions.com/",
+  },
 ];
 
 // ── Startups We've Helped Build ──────────────────────────────
@@ -43,11 +53,18 @@ const client_ventures = [
 
 // Split into two rows for staggered carousel
 const row1 = client_ventures.slice(0, 7);
-const row2 = client_ventures.slice(6);   // slight overlap for visual density
+const row2 = client_ventures.slice(7);
 
 // ── Venture Card (Our Own — Featured) ────────────────────────
 const VentureCard = ({ item, index }) => (
-  <div className="dm-venture-card wow tpfadeUp" data-wow-delay={`${index * 0.12}s`}>
+  <a
+    href={item.link}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="dm-venture-card wow tpfadeUp"
+    data-wow-delay={`${index * 0.12}s`}
+    aria-label={`Visit ${item.title}`}
+  >
     <div className="dm-venture-card-inner">
       <div className="dm-venture-logo-wrap">
         <img src={item.logo} alt={item.title} className="dm-venture-logo" loading="lazy" />
@@ -58,13 +75,13 @@ const VentureCard = ({ item, index }) => (
         <p className="dm-venture-tagline">{item.tagline}</p>
         <div className="dm-venture-footer">
           <span className="dm-venture-country">{item.flag} {item.country}</span>
-          <a href={item.link} target="_blank" rel="noopener noreferrer" className="dm-venture-link">
+          <span className="dm-venture-link">
             Visit <i className="fal fa-arrow-up-right"></i>
-          </a>
+          </span>
         </div>
       </div>
     </div>
-  </div>
+  </a>
 );
 
 // ── Single Marquee Logo Card ──────────────────────────────────
@@ -164,12 +181,7 @@ const Portfolio = () => {
            SECTION HEADER
         ═══════════════════════════════════════ */
         .dm-port-header { margin-bottom: 60px; }
-        .dm-port-header .tp-section__title {
-          color: #0a0a0a;
-          font-size: 40px;
-          font-weight: 800;
-          line-height: 1.2;
-        }
+        .dm-port-header .tp-section__title { color: #0a0a0a; }
         .dm-port-subtitle {
           font-size: 15.5px;
           color: #6b7280;
@@ -243,83 +255,93 @@ const Portfolio = () => {
         ═══════════════════════════════════════ */
         .dm-ventures-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(3, 1fr);
           gap: 24px;
         }
-        @media (max-width: 768px) { .dm-ventures-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 991px) { .dm-ventures-grid { grid-template-columns: 1fr; gap: 16px; } }
 
-        .dm-venture-card { display: block; text-decoration: none; }
+        .dm-venture-card {
+          display: flex;
+          text-decoration: none;
+          color: inherit;
+        }
+        .dm-venture-card:hover, .dm-venture-card:focus-visible { text-decoration: none; color: inherit; }
+        .dm-venture-card:focus-visible { outline: none; }
         .dm-venture-card-inner {
-          display: flex;
-          align-items: stretch;
-          border: 1px solid #f0f0f0;
-          border-radius: 18px;
-          overflow: hidden;
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-          box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-          background: #ffffff;
-          border-top: 3px solid #c0392b;
-          height: 100%;
-        }
-        .dm-venture-card:hover .dm-venture-card-inner {
-          transform: translateY(-4px);
-          box-shadow: 0 16px 40px rgba(0,0,0,0.1), 0 0 0 1px rgba(192,57,43,0.15);
-          border-color: rgba(192,57,43,0.3);
-          border-top-color: #c0392b;
-        }
-        .dm-venture-logo-wrap {
-          width: 110px;
-          min-width: 110px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: transparent;
-          border-right: none;
-          padding: 24px 0 24px 24px;
-        }
-        .dm-venture-card:hover .dm-venture-logo-wrap { background: transparent; }
-        .dm-venture-logo {
-          width: 72px; height: 72px;
-          object-fit: contain;
-          border-radius: 14px;
-          transition: transform 0.3s ease;
-        }
-        .dm-venture-card:hover .dm-venture-logo { transform: scale(1.08); }
-        .dm-venture-body {
-          flex: 1;
-          padding: 22px 24px;
+          position: relative;
           display: flex;
           flex-direction: column;
-          justify-content: center;
-          gap: 4px;
+          gap: 20px;
+          width: 100%;
+          padding: 28px;
+          border: 1px solid #ececec;
+          border-radius: 18px;
+          overflow: hidden;
+          background: #ffffff;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .dm-venture-card-inner::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 3px;
+          background: #c0392b;
+        }
+        .dm-venture-card:hover .dm-venture-card-inner,
+        .dm-venture-card:focus-visible .dm-venture-card-inner {
+          transform: translateY(-4px);
+          border-color: rgba(192,57,43,0.3);
+          box-shadow: 0 16px 40px rgba(0,0,0,0.08), 0 0 0 1px rgba(192,57,43,0.12);
+        }
+        .dm-venture-logo-wrap {
+          width: 64px; height: 64px;
+          flex-shrink: 0;
+        }
+        .dm-venture-logo {
+          width: 64px; height: 64px;
+          object-fit: contain;
+          border-radius: 14px;
+          display: block;
+          transition: transform 0.3s ease;
+        }
+        .dm-venture-card:hover .dm-venture-logo { transform: scale(1.06); }
+        .dm-venture-body {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
         }
         .dm-venture-category {
-          font-size: 10.5px;
+          font-size: 11px;
           font-weight: 700;
           letter-spacing: 1px;
           text-transform: uppercase;
           color: #c0392b;
         }
         .dm-venture-name {
-          font-size: 20px;
+          font-size: 22px;
           font-weight: 800;
           color: #0a0a0a;
-          margin: 2px 0 6px;
+          margin: 0;
           line-height: 1.2;
         }
         .dm-venture-tagline {
-          font-size: 13px;
+          flex: 1;
+          font-size: 14px;
           color: #6b7280;
-          line-height: 1.5;
-          margin: 0 0 14px;
+          line-height: 1.55;
+          margin: 0 0 18px;
         }
         .dm-venture-footer {
           display: flex;
           align-items: center;
           justify-content: space-between;
+          padding-top: 16px;
+          border-top: 1px solid #f3f4f6;
         }
         .dm-venture-country {
-          font-size: 12.5px;
+          font-size: 13px;
           font-weight: 600;
           color: #9ca3af;
         }
@@ -327,21 +349,30 @@ const Portfolio = () => {
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          font-size: 12.5px;
+          font-size: 13px;
           font-weight: 700;
           color: #0a0a0a;
-          text-decoration: none;
           background: #f3f4f6;
-          padding: 6px 14px;
+          padding: 7px 16px;
           border-radius: 20px;
-          transition: all 0.25s ease;
+          transition: background 0.25s ease, color 0.25s ease;
         }
         .dm-venture-link i { font-size: 10px; transition: transform 0.2s ease; }
-        .dm-venture-card:hover .dm-venture-link {
+        .dm-venture-card:hover .dm-venture-link,
+        .dm-venture-card:focus-visible .dm-venture-link {
           background: #c0392b;
           color: #ffffff;
         }
         .dm-venture-card:hover .dm-venture-link i { transform: translate(2px, -2px); }
+
+        /* Tablet: horizontal card so a single column doesn't feel tall */
+        @media (min-width: 576px) and (max-width: 991px) {
+          .dm-venture-card-inner { flex-direction: row; align-items: flex-start; gap: 24px; }
+        }
+        @media (max-width: 575px) {
+          .dm-venture-card-inner { padding: 22px; gap: 16px; }
+          .dm-venture-logo-wrap, .dm-venture-logo { width: 56px; height: 56px; }
+        }
 
         /* ═══════════════════════════════════════
            STARTUPS — INFINITE MARQUEE CAROUSEL

@@ -101,6 +101,71 @@ const Sidebar = ({isActive, setIsActive}) => {
             {/* Mobile CTA Buttons */}
             <div style={{ padding: '20px 0 16px 0', display: 'flex', flexDirection: 'column', gap: '10px' }}>
 
+              {/* SIXTY & PORTAL Links */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px' }}>
+                <a
+                  href="https://sixty.devmatesolutions.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsActive(false)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px',
+                    background: '#0d0d0d',
+                    color: '#fff',
+                    borderRadius: '8px',
+                    padding: '11px 12px',
+                    fontSize: '12px',
+                    fontWeight: '700',
+                    textDecoration: 'none',
+                    letterSpacing: '0.6px',
+                    textAlign: 'center',
+                    border: '1px solid rgba(255, 255, 255, 0.15)',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
+                  }}
+                >
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#ef4444', boxShadow: '0 0 6px #ef4444' }} />
+                  <span>SIXTY</span>
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ opacity: 0.8 }}>
+                    <path d="M3 9L9 3M9 3H4.5M9 3V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
+                <a
+                  href="https://portal.devmatesolutions.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsActive(false)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px',
+                    background: 'linear-gradient(135deg, #bd2120 0%, #991b1b 100%)',
+                    color: '#fff',
+                    borderRadius: '8px',
+                    padding: '11px 12px',
+                    fontSize: '12px',
+                    fontWeight: '700',
+                    textDecoration: 'none',
+                    letterSpacing: '0.6px',
+                    textAlign: 'center',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    boxShadow: '0 2px 10px rgba(189, 33, 32, 0.28)',
+                  }}
+                >
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.9 }}>
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  </svg>
+                  <span>PORTAL</span>
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ opacity: 0.85 }}>
+                    <path d="M3 9L9 3M9 3H4.5M9 3V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
+              </div>
+
               {/* Prominent Separate Button: Get Instant Call */}
               <button
                 onClick={() => {

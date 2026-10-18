@@ -3,7 +3,7 @@ import { FaWhatsapp } from "react-icons/fa";
 
 const Whatsapp = () => {
   const handleClick = async () => {
-    const phoneNumber = "971542968754"; // Replace with your WhatsApp number
+    const phoneNumber = "17702855755"; // Replace with your WhatsApp number
     const message =
       "Hi there! I'm interested in learning more about DEVMATE Digital Marketing and Software Solutions. Could you please provide me with more details? Thanks!";
     const encodedMessage = encodeURIComponent(message);

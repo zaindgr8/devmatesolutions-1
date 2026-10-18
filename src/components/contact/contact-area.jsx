@@ -7,8 +7,8 @@ const contact_data = [
     id: 1,
     titel: "For General Queries!",
     email: "contact@devmatesolutions.com",
-    phone: "+971542968754",
-    tel: "+971542968754",
+    phone: "+1 (770) 285-5755 - Freya*",
+    tel: "+17702855755",
   },
 ];
 

@@ -369,7 +369,7 @@ export default async function handler(req, res) {
                       <table cellpadding="0" cellspacing="0" style="margin-top:8px;">
                         <tr>
                           <td>
-                            <a href="https://wa.me/971542968754?text=Hi%20DevMate%2C%20I%20just%20booked%20a%20demo%20for%20the%20AI%20Lead%20Management%20System."
+                            <a href="https://wa.me/17702855755?text=Hi%20DevMate%2C%20I%20just%20booked%20a%20demo%20for%20the%20AI%20Lead%20Management%20System."
                               style="display:inline-block;background:#bd2120;color:#ffffff;font-size:13px;font-weight:700;padding:11px 22px;border-radius:8px;text-decoration:none;box-shadow:0 3px 12px rgba(189,33,32,0.25);">
                               💬 WhatsApp Us Directly
                             </a>

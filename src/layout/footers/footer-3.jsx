@@ -62,7 +62,7 @@ const FooterThree = () => {
                     </li>
                     <li className="dm-footer-contact-item">
                       <FaPhoneAlt />
-                      <a href="tel:+971542968754">+971 542968754</a>
+                      <a href="tel:+17702855755">+1 (770) 285-5755 - Freya*</a>
                     </li>
                   </ul>
                   <div className="dm-footer-socials">
@@ -75,7 +75,7 @@ const FooterThree = () => {
                     <a href="https://www.instagram.com/devmatesolutions/" target="_blank" rel="noopener noreferrer" className="dm-social-badge" title="Instagram">
                       <FaInstagram />
                     </a>
-                    <a href="https://wa.me/971542968754" target="_blank" rel="noopener noreferrer" className="dm-social-badge" title="WhatsApp">
+                    <a href="https://wa.me/17702855755" target="_blank" rel="noopener noreferrer" className="dm-social-badge" title="WhatsApp">
                       <FaWhatsapp />
                     </a>
                   </div>

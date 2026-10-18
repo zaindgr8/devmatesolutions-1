@@ -64,7 +64,7 @@ const OurTeam = () => (
       <div style={{ textAlign: "center", marginBottom: 60 }}>
         <p className="dm-partners-eyebrow">We Are Operating Globally</p>
         <h2 className="dm-partners-title wow tpfadeUp">
-          OUR <span style={{ color: "#bd2120" }}>REGIONAL NETWORK</span>
+          Our <span style={{ color: "#bd2120" }}>Regional Network</span>
         </h2>
         <p className="dm-partners-subtitle">
           A worldwide network of trusted regional partners &amp; representatives — extending our reach across continents and cultures.

@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <>
       {/* <FormModal isOpen={showModal} onClose={() => setShowModal(false)} /> */}
-      <Wrapper>
+      <Wrapper voiceAgent>
         <SEO
           pageTitle={"Devmate Solutions — AI-Powered Software Agency in Dubai"}
           pageDescription={"DevMate Solutions is an AI-powered software agency based in Dubai. We build custom AI agents, WhatsApp automation, lead management systems, and enterprise software for startups and global companies."}

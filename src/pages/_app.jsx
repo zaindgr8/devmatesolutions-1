@@ -12,7 +12,7 @@ import "@/src/styles/call-agents.css";
 import "@/src/styles/dashboard.css";
 
 import ConsultationPayment from "@/src/components/consultation/ConsultationPayment";
-import AILeadPromoModal from "@/src/components/AILeadPromoModal";
+// import AILeadPromoModal from "@/src/components/AILeadPromoModal";
 
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }) {
     <>
       <Component {...pageProps} />
       <ConsultationPayment mode="global" />
-      <AILeadPromoModal />
+      {/* <AILeadPromoModal /> */}
     </>
   );
 }

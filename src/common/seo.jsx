@@ -32,7 +32,7 @@ const SEO = ({ pageTitle, pageDescription, pageUrl, pageImage }) => {
     },
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+971-54-2968754",
+      telephone: "+1-770-285-5755",
       contactType: "customer service",
       availableLanguage: ["English", "Arabic"],
     },
