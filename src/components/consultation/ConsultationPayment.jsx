@@ -356,6 +356,37 @@ const CSS = `
   }
   .dm-book-trigger-btn:hover i { transform: rotate(12deg); }
 
+  /* ── Cal.com booking variant (link) ── */
+  .dm-cal-btn,
+  .dm-cal-btn:visited {
+    background: linear-gradient(135deg, #d42a29 0%, #B91C1B 55%, #9e1a1a 100%);
+    color: #ffffff !important;
+    text-decoration: none !important;
+    box-shadow: 0 8px 24px rgba(185,28,27,0.28);
+  }
+  .dm-cal-btn::after {
+    content: "";
+    position: absolute;
+    top: 0; left: -120%;
+    width: 60%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.28), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+  }
+  .dm-cal-btn:hover,
+  .dm-cal-btn:focus-visible {
+    background: linear-gradient(135deg, #B91C1B 0%, #9e1a1a 60%, #7f1515 100%);
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px rgba(185,28,27,0.4);
+  }
+  .dm-cal-btn:hover::after { left: 140%; }
+  .dm-cal-btn:active { transform: translateY(0); box-shadow: 0 6px 18px rgba(185,28,27,0.3); }
+  .dm-cal-btn:focus-visible { outline: 3px solid rgba(185,28,27,0.35); outline-offset: 3px; }
+  .dm-cal-btn i { color: #ffffff; }
+  .dm-cal-btn .dm-cal-arrow { transition: transform 0.25s ease; }
+  .dm-cal-btn:hover .dm-cal-arrow { transform: translateX(4px) rotate(0deg); }
+
   /* ── Ziina variant (card / Apple Pay) ── */
   .dm-ziina-btn {
     background: #bd2120;
@@ -796,10 +827,26 @@ const ConsultationPayment = ({ mode = "buttons" }) => {
           {/* ── Payment gateway choice ── */}
           <div style={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%" }}>
             <span style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.5px", color: "#888", textTransform: "uppercase" }}>
-              Book Your 1:1 Session — $599
+              Book Your 1:1 Session
             </span>
             <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+              {/* Cal.com — book a 1:1 meeting with Zain Ul Abideen */}
+              <a
+                href="https://cal.com/devmate/meet-zain"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="dm-book-trigger-btn dm-cal-btn"
+                style={{ textDecoration: "none" }}
+                title="Book a 1:1 meeting with Zain Ul Abideen on Cal.com"
+              >
+                <i className="fal fa-calendar-alt" />
+                Book Meeting With Zain Ul Abideen
+                <i className="fal fa-long-arrow-right dm-cal-arrow" />
+              </a>
+
+              {/* Payment links temporarily disabled — replaced by Cal.com booking above */}
               {/* Ziina — card / Apple Pay / local wallets */}
+              {/*
               <button
                 className="dm-book-trigger-btn dm-ziina-btn"
                 onClick={() => window.dispatchEvent(new CustomEvent("open-paid-consultation"))}
@@ -808,8 +855,10 @@ const ConsultationPayment = ({ mode = "buttons" }) => {
                 <span style={{ fontSize: "18px", lineHeight: 1 }}>💳</span>
                 Ziina — Card / Apple Pay
               </button>
+              */}
 
               {/* NOWPayments — Fiat On-Ramp & Crypto */}
+              {/*
               <a
                 href="/pay"
                 className="dm-book-trigger-btn dm-crypto-btn"
@@ -819,14 +868,17 @@ const ConsultationPayment = ({ mode = "buttons" }) => {
                 <span style={{ fontSize: "18px", lineHeight: 1 }}>⚡</span>
                 NOWPayments — Card / Crypto
               </a>
+              */}
             </div>
           </div>
 
-          {/* Free team meeting */}
+          {/* Free team meeting — temporarily disabled */}
+          {/*
           <button className="dm-book-free-btn" onClick={() => window.dispatchEvent(new CustomEvent("open-free-consultation"))}>
             <i className="fal fa-users" />
             Book Meeting With Team (FREE)
           </button>
+          */}
         </div>
       )}
 
