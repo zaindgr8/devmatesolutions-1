@@ -84,4 +84,11 @@
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
+  <!-- Zain Ul Abideen Baloch — founder hub page (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/zain-ul-abideen-baloch</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
 </urlset>
