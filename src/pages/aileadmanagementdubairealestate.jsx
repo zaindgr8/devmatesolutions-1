@@ -721,6 +721,20 @@ export default function AILeadManagementDubaiRealEstate() {
         <meta name="twitter:title" content="AI Lead Management System for Dubai Real Estate | DevMate Solutions" />
         <meta name="twitter:description" content="Stop losing leads overnight. Our AI handles the first 15 minutes of every enquiry, 24/7, across Bayut, Property Finder, WhatsApp and more." />
         <meta name="twitter:image" content="https://devmatesolutions.com/red-logo.png" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: faqs.map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              })),
+            }),
+          }}
+        />
       </Head>
 
       {modalConfig && (
