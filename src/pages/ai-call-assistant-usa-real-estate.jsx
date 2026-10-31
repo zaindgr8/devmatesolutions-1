@@ -351,6 +351,15 @@ const AiCallAssistantUsaRealEstate = () => {
             </div>
           </section>
 
+          <section className="ailm-section">
+            <div className="container">
+              <p style={{ textAlign: "center" }}>
+                For the same voice-first approach in dental clinics, see{" "}
+                <Link href="/ai-call-assistant-dental-usa">AI Call Assistant for Dental Clinics USA</Link>.
+              </p>
+            </div>
+          </section>
+
           <section className="ailm-final-cta">
             <div className="container">
               <div className="ailm-final-cta-inner">
