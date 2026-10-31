@@ -4,6 +4,7 @@ import Head from "next/head";
 import HeaderThree from "@/src/layout/headers/header-3";
 import FooterThree from "@/src/layout/footers/footer-3";
 import { generateMathChallenge } from "@/src/lib/mathChallenge";
+import BubblyVoiceWidget from "@/src/components/callagents/BubblyVoiceWidget";
 
 
 /* ─── Bot-protection utilities ──────────────────────────────── */
@@ -1245,6 +1246,29 @@ export default function CallAgentsPage() {
                     </div>
                   ))}
                 </div>
+
+                <div style={{ marginTop: 28 }}>
+                  <a
+                    href="#cad-bubbly-section"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 8,
+                      background: "rgba(189,33,32,0.08)",
+                      border: "1px solid rgba(189,33,32,0.25)",
+                      color: "#bd2120",
+                      padding: "11px 18px",
+                      borderRadius: 10,
+                      fontWeight: 700,
+                      fontSize: 13.5,
+                      textDecoration: "none",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    <i className="fal fa-comment-dots" />
+                    Prefer talking directly? Skip the form &amp; talk to AI &rarr;
+                  </a>
+                </div>
               </div>
 
               {/* Right — form */}
@@ -1330,6 +1354,9 @@ export default function CallAgentsPage() {
             </div>
           </div>
         </section>
+
+        {/* ══ BUBBLY WIDGET: TALK DIRECTLY TO AI (AFTER FORMS FILLING SECTION) ══ */}
+        <BubblyVoiceWidget />
 
         {/* ══ FINAL CTA ══ */}
         <section className="cad-final-cta">
