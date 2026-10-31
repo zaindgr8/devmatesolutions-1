@@ -420,7 +420,8 @@ const ChatbotDubaiRealEstate = () => {
                 For the full system — chat plus voice, portals, and attribution — see{" "}
                 <Link href="/aileadmanagementdubairealestate">AI Lead Management for Dubai Real Estate</Link>,{" "}
                 <Link href="/whatsappautomation">WhatsApp Automation</Link>, and{" "}
-                <Link href="/callagents">AI Call Agents</Link>.
+                <Link href="/callagents">AI Call Agents</Link>, and{" "}
+                <Link href="/ai-agent-dubai-real-estate">AI Agent for Dubai Real Estate</Link>.
               </p>
             </div>
           </section>
