@@ -91,4 +91,20 @@
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
+  <!-- AI Agent for Dubai Real Estate (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/ai-agent-dubai-real-estate</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- AI Call Assistant for Dental Clinics USA (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/ai-call-assistant-dental-usa</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
 </urlset>
+
