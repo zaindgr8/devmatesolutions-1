@@ -1,39 +1,28 @@
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
+/**
+ * POST /api/retell-web-call   { customer_name? }
+ * Creates a Retell web call for the in-browser "talk to Freya" demo and returns what the
+ * Retell Web SDK needs to join it. Freya greets the visitor by the name they typed.
+ */
+import { DEMO_AGENT_ID, cleanName, demoVariables, retell } from "../../lib/retellDemo";
 
-  const apiKey = process.env.RETELL_API_KEY || "key_2da9e1e85942a0ee5c28b6686984";
-  const agentId = req.body?.agent_id || process.env.RETELL_AGENT_ID || "agent_99b7b8c0593b742b4e0aac4bf2";
+export default async function handler(req, res) {
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
+  if (!process.env.RETELL_API_KEY) return res.status(503).json({ error: "The voice demo is offline right now." });
+
+  const name = cleanName(req.body?.customer_name);
+  const callId = `web-${Date.now().toString(36)}`;
 
   try {
-    const response = await fetch("https://api.retellai.com/v3/create-web-call", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        agent_id: agentId,
-        metadata: {
-          source: "devmate_callagents_bubbly_widget",
-          timestamp: Date.now(),
-        },
-      }),
+    const r = await retell("/v3/create-web-call", {
+      agent_id: DEMO_AGENT_ID,
+      metadata: { source: "callagents_web_demo", demo_id: callId },
+      retell_llm_dynamic_variables: demoVariables({ name, callId }),
     });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      console.error("Retell API create-web-call error:", data);
-      return res.status(response.status).json({
-        error: data.message || "Failed to create web call with Retell AI",
-      });
-    }
-
-    return res.status(200).json(data);
-  } catch (error) {
-    console.error("Error creating Retell web call:", error);
-    return res.status(500).json({ error: "Internal server error starting voice call" });
+    if (!r.ok || !r.json.access_token) throw new Error(`${r.status} ${JSON.stringify(r.json).slice(0, 200)}`);
+    const { access_token, call_id, transport, ice_servers } = r.json;
+    return res.status(200).json({ access_token, call_id, transport, ice_servers });
+  } catch (err) {
+    console.error("Retell web call failed:", err.message);
+    return res.status(502).json({ error: "Couldn't start the call. Please try again." });
   }
 }
