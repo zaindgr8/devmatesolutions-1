@@ -106,5 +106,20 @@
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
-</urlset>
 
+  <!-- How Fast Should a Dubai Brokerage Reply (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/how-fast-to-reply-dubai-real-estate-leads</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- AI Call Assistant for Med Spas and Aesthetics Clinics USA (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/ai-call-assistant-aesthetics-usa</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+</urlset>

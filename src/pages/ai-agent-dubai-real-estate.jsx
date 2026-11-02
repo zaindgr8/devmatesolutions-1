@@ -193,7 +193,7 @@ const AgentDubaiRealEstate = () => {
   return (
     <>
       <SEO
-        pageTitle="AI Agent for Dubai Real Estate | DevMate Solutions"
+        pageTitle="AI Agent for Dubai Real Estate"
         pageDescription="AI agent for Dubai real estate brokerages: instant replies, full lead qualification, viewing bookings, follow-up, and CRM logging across Bayut, Property Finder, WhatsApp, and web, in Arabic and English, 24/7."
         pageUrl="/ai-agent-dubai-real-estate"
       />
@@ -395,7 +395,7 @@ const AgentDubaiRealEstate = () => {
                 <Link href="/aileadmanagementdubairealestate">AI Lead Management for Dubai Real Estate</Link>,{" "}
                 <Link href="/ai-chatbot-dubai-real-estate">AI Chatbot for Dubai Real Estate</Link>,{" "}
                 <Link href="/whatsappautomation">WhatsApp Automation</Link>, and{" "}
-                <Link href="/callagents">AI Call Agents</Link>.
+                <Link href="/callagents">AI Call Agents</Link>. Read: <Link href="/how-fast-to-reply-dubai-real-estate-leads">How fast should a brokerage reply to a Bayut / Property Finder lead?</Link>
               </p>
             </div>
           </section>
