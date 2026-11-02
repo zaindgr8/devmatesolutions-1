@@ -303,7 +303,8 @@ const AiCallAssistantAestheticsUsa = () => {
               <p style={{ textAlign: "center", marginTop: 28 }}>
                 For the same voice-first approach in real estate, see{" "}
                 <Link href="/ai-call-assistant-usa-real-estate">AI Call Assistant for US Real Estate</Link>, and in dental clinics, see{" "}
-                <Link href="/ai-call-assistant-dental-usa">AI Call Assistant for Dental Clinics USA</Link>.
+                <Link href="/ai-call-assistant-dental-usa">AI Call Assistant for Dental Clinics USA</Link>. For the cross-niche version, see{" "}
+                <Link href="/ai-lead-response-usa">AI Lead Response USA</Link>.
               </p>
             </div>
           </section>
