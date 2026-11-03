@@ -252,6 +252,7 @@ const DubaiSpeedToLeadArticle = () => {
               </div>
               <p style={{ textAlign: "center", marginTop: 28 }}>
                 The system behind this article:{" "}
+                <Link href="/whatsapp-phone-portal-dubai-real-estate-leads">WhatsApp vs Phone vs Portal: Where Dubai Real Estate Leads Actually Die</Link>,{" "}
                 <Link href="/ai-agent-dubai-real-estate">AI Agent for Dubai Real Estate</Link>,{" "}
                 <Link href="/ai-chatbot-dubai-real-estate">AI Chatbot for Dubai Real Estate</Link>, and{" "}
                 <Link href="/aileadmanagementdubairealestate">AI Lead Management for Dubai Real Estate</Link>.
