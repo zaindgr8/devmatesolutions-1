@@ -137,4 +137,19 @@
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
+  <!-- DNCR, PDPL and RERA Dubai Real Estate (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/dncr-pdpl-rera-dubai-real-estate</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Missed Calls Cost Dental Practice USA (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/missed-calls-cost-dental-practice</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
 </urlset>
