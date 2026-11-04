@@ -2,8 +2,8 @@
 import Link from "next/link";
 import React from "react";
 import SEO from "../common/seo";
-import Footer from "../layout/footers/footer";
-import Header from "../layout/headers/header";
+import Footer from "../layout/footers/footer-3";
+import Header from "../layout/headers/header-3";
 
 const Error = () => {
   return (
