@@ -152,4 +152,20 @@
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
+
+  <!-- After Hours and Weekend Leads Dubai Real Estate (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/after-hours-weekend-leads-dubai-real-estate</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- After-Hours Med Spa Enquiries USA (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/after-hours-med-spa-enquiries-usa</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
 </urlset>
