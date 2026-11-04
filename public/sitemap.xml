@@ -137,4 +137,11 @@
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
+  <!-- Blog hub (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/blog</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
 </urlset>
