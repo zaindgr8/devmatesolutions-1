@@ -10,11 +10,11 @@ const BlogArea = () => {
       <div className="container">
         <div className="dm-home-blog__head">
           <div>
-            <span className="tp-section__subtitle">Our AI research</span>
-            <h2 className="tp-section__title">We study AI daily. You get the edge.</h2>
+            <span className="tp-section__subtitle">DevMate AI Insights</span>
+            <h2 className="tp-section__title">Stay ahead of AI. Not just informed.</h2>
           </div>
           <Link href="/blog" className="dm-home-blog__all">
-            Read all research <FaArrowRight />
+            Read all insights <FaArrowRight />
           </Link>
         </div>
         <ul className="dm-home-blog__list">
