@@ -5,7 +5,7 @@ import Terms from "../components/terms";
 const TermsOfServiceAliasPage = () => {
   return (
     <>
-      <SEO pageTitle={"Terms of Service — DevMate Solutions"} />
+      <SEO pageTitle={"Terms of Service — DevMate Solutions"} pageUrl={"/terms"} />
       <Terms />
     </>
   );
