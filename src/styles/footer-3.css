@@ -40,6 +40,13 @@
   margin-bottom: 20px;
 }
 
+.dm-footer-locations-label {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: #9ca3af;
+  margin-bottom: 12px;
+}
+
 .dm-footer-locations {
   list-style: none;
   padding: 0;

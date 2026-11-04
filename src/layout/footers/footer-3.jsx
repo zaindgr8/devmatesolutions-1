@@ -62,7 +62,7 @@ const FooterThree = () => {
                     </li>
                     <li className="dm-footer-contact-item">
                       <FaPhoneAlt />
-                      <a href="tel:+17702855755">+1 (770) 285-5755 - Freya*</a>
+                      <a href="tel:+17702855755">+1 (770) 285-5755</a>
                     </li>
                   </ul>
                   <div className="dm-footer-socials">
@@ -82,27 +82,22 @@ const FooterThree = () => {
                 </div>
               </div>
 
-              {/* Column 2: Global Locations */}
+              {/* Column 2: Locations */}
               <div className="col-xl-4 col-lg-4 col-md-6">
-                <h3 className="dm-footer-widget-title">Global Offices</h3>
+                <h3 className="dm-footer-widget-title">Locations</h3>
+                <p className="dm-footer-locations-label">Operating In:</p>
                 <ul className="dm-footer-locations">
                   <li className="dm-footer-location-item">
                     <FaMapMarkerAlt />
-                    <div>
-                      <strong className="text-white">UAE:</strong> Business Bay, Dubai
-                    </div>
+                    <div className="text-white">Dubai</div>
                   </li>
                   <li className="dm-footer-location-item">
                     <FaMapMarkerAlt />
-                    <div>
-                      <strong className="text-white">USA:</strong> Atlanta, GA &amp; New York, NY
-                    </div>
+                    <div className="text-white">Muscat</div>
                   </li>
                   <li className="dm-footer-location-item">
                     <FaMapMarkerAlt />
-                    <div>
-                      <strong className="text-white">Oman:</strong> Al Mouj, Muscat
-                    </div>
+                    <div className="text-white">NYC</div>
                   </li>
                 </ul>
               </div>
@@ -149,7 +144,7 @@ const FooterThree = () => {
                 © {new Date().getFullYear()} <strong className="text-white">Devmate Solutions</strong>. All rights reserved.
               </div>
               <div className="col-md-6 text-center text-md-end">
-                <span>Operating Globally · Dubai · New York · Muscat</span>
+                <span>Operating In · Dubai · Muscat · NYC</span>
               </div>
             </div>
           </div>
