@@ -284,7 +284,8 @@ const WhatsappPhonePortalArticle = () => {
                 <p className="ailm-eyebrow">Before you automate</p>
                 <h2 className="ailm-section-title">Speed, with the safeguards kept</h2>
                 <p style={{ fontSize: 17, lineHeight: 1.7, color: "#4b5563", maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
-                  Fast replies across channels still need consent records, Do Not Call Registry screening for outbound contact, a tested opt-out that propagates across every channel, and an audit trail of every contact attempt — built with UAE PDPL and RERA expectations in mind. Your team reviews and signs off the script, the agent's permissions, and the data handling before anything goes live.
+                  Fast replies across channels still need consent records, Do Not Call Registry screening for outbound contact, a tested opt-out that propagates across every channel, and an audit trail of every contact attempt — built with UAE PDPL and RERA expectations in mind. Your team reviews and signs off the script, the agent's permissions, and the data handling before anything goes live. For the three rules behind those safeguards, see{" "}
+                <Link href="/dncr-pdpl-rera-dubai-real-estate">DNCR, PDPL and RERA: the three rules behind automated calls and WhatsApp in Dubai real estate</Link>.
                 </p>
               </div>
             </div>

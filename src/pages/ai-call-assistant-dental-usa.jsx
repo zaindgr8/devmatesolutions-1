@@ -306,6 +306,10 @@ const AiCallAssistantDentalUsa = () => {
                 <Link href="/ai-call-assistant-aesthetics-usa">AI Call Assistant for Med Spas and Aesthetics Clinics USA</Link>. For the cross-niche version, see{" "}
                 <Link href="/ai-lead-response-usa">AI Lead Response USA</Link>.
               </p>
+              <p style={{ textAlign: "center", marginTop: 12 }}>
+                Work out your own number:{" "}
+                <Link href="/missed-calls-cost-dental-practice">What a Missed Call Costs a Dental Practice — and How to Work It Out</Link>.
+              </p>
             </div>
           </section>
 
