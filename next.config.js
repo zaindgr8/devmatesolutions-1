@@ -9,6 +9,9 @@ const nextConfig = {
         destination: "/aileadmanagementdubairealestate",
         permanent: true,
       },
+      // Leftover template pages with placeholder content
+      { source: "/blog-list", destination: "/blog", permanent: true },
+      { source: "/blog-details", destination: "/blog", permanent: true },
     ];
   },
 };

@@ -1,73 +1,70 @@
-import our_blog_data from '@/src/data/our-blog-data';
-import Link from 'next/link';
-import React from 'react';
+import blog_posts, { BLOG_CATEGORIES } from "@/src/data/blog-posts";
+import Link from "next/link";
+import React, { useState } from "react";
+import { FaArrowRight } from "react-icons/fa";
+import BlogCard from "../blog-card";
 
 const BlogArea = () => {
-    return (
-        <>
-           <div className="tp-lasted-blog-grid pt-120 pb-60">
-         <div className="container">
-            <div className="row">
-                {our_blog_data.slice(26, 38).map((item, i)  => 
-                    <div key={i} className="col-xl-4 col-lg-6">
-                  <div className="it-blog tp-lasted-blog mb-30 aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">
-                     <div className="it-blog__thumb w-img">
-                        <div className="fix">
-                           <img src={item.img} alt="them-pure" />
-                        </div>
-                        <div className="it-blog-date">
-                           <span><b>{item.date}</b> {item.month}</span>
-                        </div>
-                     </div>
-                     <div className="it-blog-info white-bg">
-                        <div className="it-blog__meta">
-                           <span><a href="#"><b className="it-blog-cta">{item.category}</b></a></span>
-                           <span><a href="#"> / By <b> {item.category}</b></a> </span>
-                        </div>
-                        <h3 className="it-blog__title mb-50"><Link href="/blog-details">{item.title}</Link></h3>
-                        <div className="tp-seo-full-btn">
-                           <a href="#" className="it-portfolio-item__btn"> Read More
-                              <span className="mt-5">
-                                 <i className="fal fa-long-arrow-right"></i>
-                                 <i className="fal fa-long-arrow-right"></i>
-                              </span>
-                           </a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-                    
-                    )
-                }                
+  const [category, setCategory] = useState("All");
+  const posts = category === "All" ? blog_posts : blog_posts.filter((post) => post.category === category);
+  const [featured, ...rest] = posts;
 
+  return (
+    <>
+      <section className="dm-blog-hero">
+        <div className="container">
+          <nav aria-label="Breadcrumb">
+            <ol className="dm-blog-crumbs">
+              <li><Link href="/">Home</Link></li>
+              <li aria-current="page">Blog</li>
+            </ol>
+          </nav>
+          <h1>AI Automation Blog for Real Estate and Clinics</h1>
+          <p>
+            Practical guides on AI agents, chatbots and call assistants: how to answer every lead
+            fast, qualify it and book the meeting, in Dubai and across the USA.
+          </p>
+        </div>
+      </section>
+
+      <section className="dm-blog-list">
+        <div className="container">
+          <div className="dm-blog-filters" role="group" aria-label="Filter articles by topic">
+            {["All", ...BLOG_CATEGORIES].map((name) => (
+              <button
+                key={name}
+                type="button"
+                className={`dm-blog-filter${category === name ? " is-active" : ""}`}
+                aria-pressed={category === name}
+                onClick={() => setCategory(name)}
+              >
+                {name}
+              </button>
+            ))}
+          </div>
+
+          <div className="dm-blog-featured">
+            <BlogCard post={featured} featured headingLevel="h2" />
+          </div>
+          <div className="dm-post-grid">
+            {rest.map((post) => (
+              <BlogCard key={post.href} post={post} headingLevel="h2" />
+            ))}
+          </div>
+
+          <div className="dm-blog-cta">
+            <div>
+              <h2>Want this working in your business?</h2>
+              <p>Book a free call and we&apos;ll show you where AI can win you more leads.</p>
             </div>
-
-            <div className="basic-pagination mb-60">
-               <nav>
-                  <ul>
-                     <li>
-                        <a href="#"> <i className="fal fa-angle-double-left"></i> </a>
-                     </li>
-                     <li>
-                        <a href="#">1</a>
-                     </li>
-                     <li>
-                        <span className="current">2</span>
-                     </li>
-                     <li>
-                        <a href="#">3</a>
-                     </li>
-                     <li>
-                        <a href="#"> <i className="fal fa-angle-double-right"></i> </a>
-                     </li>
-                  </ul>
-               </nav>
-            </div>
-
-         </div>
-      </div> 
-        </>
-    );
+            <Link href="/#ceo" className="dm-blog-btn">
+              Book a meeting <FaArrowRight />
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 };
 
 export default BlogArea;

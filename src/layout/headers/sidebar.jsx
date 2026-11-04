@@ -10,9 +10,6 @@ const Sidebar = ({isActive, setIsActive}) => {
       <>
         <div className="tp-offcanvas-wrapper">
           <div className={`tp-offcanvas white-bg ${isActive ? "opened" : ""}`}>
-            <div className="offc-top-pattern">
-              <img src="/assets/img/hero/nav-parrten-top.png" alt="" />
-            </div>
             <div className="tp-offcanvas__top tp-border-bottom pb-30 mb-30">
               <div
                 className="tp-offcanvas-close"
@@ -324,9 +321,6 @@ const Sidebar = ({isActive, setIsActive}) => {
               </div>
             </div> */}
 
-            <div className="offc-bottom-pattern">
-              <img src="/assets/img/hero/nav-parrten-botoom.png" alt="" />
-            </div>
           </div>
         </div>
 

@@ -73,6 +73,7 @@ const SEO = ({ pageTitle, pageDescription, pageUrl, pageImage }) => {
       { "@type": "SiteNavigationElement", name: "WhatsApp Automation", url: `${baseUrl}/whatsappautomation` },
       { "@type": "SiteNavigationElement", name: "AI Call Agents", url: `${baseUrl}/callagents` },
       { "@type": "SiteNavigationElement", name: "Team", url: `${baseUrl}/our-team` },
+      { "@type": "SiteNavigationElement", name: "Blog", url: `${baseUrl}/blog` },
       { "@type": "SiteNavigationElement", name: "Careers", url: `${baseUrl}/job` },
     ],
   };

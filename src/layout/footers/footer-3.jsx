@@ -113,6 +113,7 @@ const FooterThree = () => {
                 <ul className="dm-footer-links">
                   <li><Link href="/ourservices">Services</Link></li>
                   <li><Link href="/our-team">Our Team</Link></li>
+                  <li><Link href="/blog">Blog</Link></li>
                   <li><Link href="/#startups-helped-build">Portfolio</Link></li>
                   <li><Link href="/job">Careers</Link></li>
                   <li><Link href="/#ceo">Book 1:1 Session</Link></li>
