@@ -148,9 +148,47 @@
 .dm-blog-btn:hover { color: #fff; background: #991b1b; }
 
 /* Landing page section */
-.dm-home-blog { padding: 96px 0; background: #f9fafb; }
+.dm-home-blog { padding: 96px 0; background: #fff; }
 .dm-home-blog__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 40px; }
 .dm-home-blog__head .tp-section__title { margin: 8px 0 0; }
+.dm-home-blog__head .tp-section__subtitle { display: block; padding: 0; background: none; border: 0; box-shadow: none; }
+.dm-home-blog__all {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+  text-decoration: none;
+}
+.dm-home-blog__all svg { font-size: 12px; color: #bd2120; transition: transform 0.2s ease; }
+.dm-home-blog__all:hover { color: #bd2120; }
+.dm-home-blog__all:hover svg { transform: translateX(4px); }
+.dm-home-blog__list { margin: 0; padding: 0; list-style: none; border-top: 1px solid #e5e7eb; }
+.dm-home-blog__row { border-bottom: 1px solid #e5e7eb; }
+.dm-home-blog__row a {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr) 16px;
+  align-items: center;
+  gap: 24px;
+  padding: 26px 0;
+  color: #111827;
+  text-decoration: none;
+}
+.dm-home-blog__row time { font-size: 14px; color: #6b7280; }
+.dm-home-blog__row h3 {
+  margin: 0;
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.2px;
+  color: inherit;
+  transition: color 0.2s ease;
+}
+.dm-home-blog__row svg { font-size: 14px; color: #9ca3af; transition: transform 0.2s ease, color 0.2s ease; }
+.dm-home-blog__row a:hover h3 { color: #bd2120; }
+.dm-home-blog__row a:hover svg { color: #bd2120; transform: translateX(4px); }
 
 @media (max-width: 991px) {
   .dm-post-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -165,6 +203,8 @@
   .dm-blog-list { padding: 32px 0 64px; }
   .dm-blog-cta { padding: 28px 24px; }
   .dm-blog-cta .dm-blog-btn { width: 100%; }
+  .dm-home-blog__row a { grid-template-columns: minmax(0, 1fr) 16px; gap: 6px 16px; padding: 20px 0; }
+  .dm-home-blog__row time { grid-column: 1 / -1; font-size: 13px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .dm-post, .dm-post__more svg { transition: none; }

@@ -9,7 +9,7 @@ const CATEGORY_ICONS = {
 };
 
 // Fixed locale and time zone, so the server and browser always print the same date.
-const formatDate = (iso) =>
+export const formatDate = (iso) =>
   new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", {
     day: "numeric",
     month: "short",

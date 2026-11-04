@@ -1,4 +1,4 @@
-import BlogCard from "@/src/components/blog-pages/blog-card";
+import { formatDate } from "@/src/components/blog-pages/blog-card";
 import blog_posts from "@/src/data/blog-posts";
 import Link from "next/link";
 import React from "react";
@@ -10,18 +10,24 @@ const BlogArea = () => {
       <div className="container">
         <div className="dm-home-blog__head">
           <div>
-            <span className="tp-section__subtitle">From the blog</span>
-            <h2 className="tp-section__title">Latest AI automation guides</h2>
+            <span className="tp-section__subtitle">Our AI research</span>
+            <h2 className="tp-section__title">We study AI daily. You get the edge.</h2>
           </div>
-          <Link href="/blog" className="dm-blog-btn">
-            View all articles <FaArrowRight />
+          <Link href="/blog" className="dm-home-blog__all">
+            Read all research <FaArrowRight />
           </Link>
         </div>
-        <div className="dm-post-grid">
+        <ul className="dm-home-blog__list">
           {blog_posts.slice(0, 3).map((post) => (
-            <BlogCard key={post.href} post={post} />
+            <li key={post.href} className="dm-home-blog__row">
+              <Link href={post.href}>
+                <time dateTime={post.date}>{formatDate(post.date)}</time>
+                <h3>{post.title}</h3>
+                <FaArrowRight aria-hidden="true" />
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
