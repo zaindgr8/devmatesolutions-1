@@ -288,6 +288,10 @@ const AiLeadResponseUsa = () => {
                 For dental practices:{" "}
                 <Link href="/missed-calls-cost-dental-practice">What a Missed Call Costs a Dental Practice — and How to Work It Out</Link>.
               </p>
+              <p style={{ textAlign: "center", marginTop: 12 }}>
+                For med spas:{" "}
+                <Link href="/after-hours-med-spa-enquiries-usa">After-Hours Enquiries: Why Med Spas Lose Bookings When the Phones Go Unanswered</Link>.
+              </p>
             </div>
           </section>
 
