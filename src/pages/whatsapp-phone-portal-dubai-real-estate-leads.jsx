@@ -191,6 +191,7 @@ const WhatsappPhonePortalArticle = () => {
                   <p style={{ fontSize: 17, lineHeight: 1.7, color: "#4b5563" }}>
                     The channel itself is not the strategy. One pipeline across portal, WhatsApp, and phone — with one record per buyer — is. That is also the companion to our speed-to-lead piece:{" "}
                     <Link href="/how-fast-to-reply-dubai-real-estate-leads">how fast a Dubai brokerage should reply to a Bayut / Property Finder lead</Link> — and to{" "}
+                    <Link href="/after-hours-weekend-leads-dubai-real-estate">after-hours and weekend leads, when the office is closed and buyers are not</Link> — and to{" "}
                     <Link href="/arabic-first-buyers-dubai-real-estate">what changes when a Dubai buyer writes in Arabic first</Link>.
                   </p>
                 </div>

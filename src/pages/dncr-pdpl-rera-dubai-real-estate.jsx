@@ -191,8 +191,9 @@ const DncrPdplReraArticle = () => {
                   </p>
                   <p style={{ fontSize: 17, lineHeight: 1.7, color: "#4b5563" }}>
                     The good news is that the same discipline that keeps a brokerage safe also makes its automation better. Clean consent records mean cleaner lists. One record per buyer means no buyer is chased twice. And a script that never guesses means buyers trust the answers they get. This is the safeguards companion to our channel piece:{" "}
-                    <Link href="/whatsapp-phone-portal-dubai-real-estate-leads">WhatsApp vs phone vs portal — where Dubai real estate leads actually die</Link>, to{" "}
-                    <Link href="/how-fast-to-reply-dubai-real-estate-leads">how fast a Dubai brokerage should reply to a Bayut / Property Finder lead</Link>, and to{" "}
+                    <Link href="/whatsapp-phone-portal-dubai-real-estate-leads">WhatsApp vs phone vs portal — where Dubai real estate leads actually die</Link> — and to{" "}
+                    <Link href="/how-fast-to-reply-dubai-real-estate-leads">how fast a Dubai brokerage should reply to a Bayut / Property Finder lead</Link>, to{" "}
+                    <Link href="/after-hours-weekend-leads-dubai-real-estate">after-hours and weekend leads, when the office is closed and buyers are not</Link>, and to{" "}
                     <Link href="/arabic-first-buyers-dubai-real-estate">what changes when a Dubai buyer writes in Arabic first</Link>.
                   </p>
                 </div>
