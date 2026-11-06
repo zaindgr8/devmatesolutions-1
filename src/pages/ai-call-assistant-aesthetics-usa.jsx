@@ -305,7 +305,8 @@ const AiCallAssistantAestheticsUsa = () => {
                 <Link href="/ai-call-assistant-usa-real-estate">AI Call Assistant for US Real Estate</Link>, and in dental clinics, see{" "}
                 <Link href="/ai-call-assistant-dental-usa">AI Call Assistant for Dental Clinics USA</Link>. For the cross-niche version, see{" "}
                 <Link href="/ai-lead-response-usa">AI Lead Response USA</Link> — and for evening and weekend callers, see{" "}
-                <Link href="/after-hours-med-spa-enquiries-usa">after-hours med spa enquiries</Link>.
+                <Link href="/after-hours-med-spa-enquiries-usa">after-hours med spa enquiries</Link> — and for what a missed call costs, see{" "}
+                <Link href="/missed-calls-cost-med-spa">what a missed call costs a med spa</Link>.
               </p>
             </div>
           </section>
@@ -381,3 +382,4 @@ const AiCallAssistantAestheticsUsa = () => {
 };
 
 export default AiCallAssistantAestheticsUsa;
+
