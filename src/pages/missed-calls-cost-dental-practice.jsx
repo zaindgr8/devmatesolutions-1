@@ -265,7 +265,8 @@ const MissedCallsDentalArticle = () => {
                 <Link href="/ai-call-assistant-dental-usa">AI Call Assistant for Dental Clinics USA</Link>,{" "}
                 <Link href="/ai-lead-response-usa">AI Lead Response USA</Link>,{" "}
                 <Link href="/ai-call-assistant-usa-real-estate">AI Call Assistant for US Real Estate</Link>, and{" "}
-                <Link href="/ai-call-assistant-aesthetics-usa">AI Call Assistant for Med Spas and Aesthetics Clinics USA</Link>.
+                <Link href="/ai-call-assistant-aesthetics-usa">AI Call Assistant for Med Spas and Aesthetics Clinics USA</Link>, and{" "}
+                <Link href="/missed-calls-cost-med-spa">What a Missed Call Costs a Med Spa</Link>.
               </p>
             </div>
           </section>
@@ -322,3 +323,4 @@ const MissedCallsDentalArticle = () => {
 };
 
 export default MissedCallsDentalArticle;
+
