@@ -176,4 +176,20 @@
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
+
+  <!-- From First Reply to Viewing Booked Dubai Real Estate (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/first-reply-to-viewing-booked-dubai-real-estate</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Missed Calls Cost Med Spa USA (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/missed-calls-cost-med-spa</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
 </urlset>
