@@ -359,7 +359,8 @@ const AiCallAssistantUsaRealEstate = () => {
                 <Link href="/ai-call-assistant-aesthetics-usa">AI Call Assistant for Med Spas and Aesthetics Clinics USA</Link>. For the cross-niche version, see{" "}
                 <Link href="/ai-lead-response-usa">AI Lead Response USA</Link>. For when those buyers call after hours, see{" "}
                 <Link href="/after-hours-homebuyer-calls-usa-real-estate">After-Hours Calls from US Homebuyers: Why Evenings and Weekends Decide the Showing</Link>.
-              </p>
+                <Link href="/ai-lead-response-usa">AI Lead Response USA</Link>. For what a missed call costs a real estate team, see{" "}
+                <Link href="/missed-calls-cost-real-estate-usa">What a Missed Call Costs a US Real Estate Team</Link>.              </p>
             </div>
           </section>
 

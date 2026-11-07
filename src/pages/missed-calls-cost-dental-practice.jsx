@@ -267,7 +267,8 @@ const MissedCallsDentalArticle = () => {
                 <Link href="/ai-call-assistant-usa-real-estate">AI Call Assistant for US Real Estate</Link>, and{" "}
                 <Link href="/ai-call-assistant-aesthetics-usa">AI Call Assistant for Med Spas and Aesthetics Clinics USA</Link>, and{" "}
                 <Link href="/missed-calls-cost-med-spa">What a Missed Call Costs a Med Spa</Link>.
-              </p>
+                <Link href="/ai-call-assistant-aesthetics-usa">AI Call Assistant for Med Spas and Aesthetics Clinics USA</Link>, and for real estate, see{" "}
+                <Link href="/missed-calls-cost-real-estate-usa">What a Missed Call Costs a US Real Estate Team</Link>.              </p>
             </div>
           </section>
 

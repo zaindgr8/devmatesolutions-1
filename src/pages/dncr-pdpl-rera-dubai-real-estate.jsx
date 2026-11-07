@@ -194,8 +194,9 @@ const DncrPdplReraArticle = () => {
                     <Link href="/whatsapp-phone-portal-dubai-real-estate-leads">WhatsApp vs phone vs portal — where Dubai real estate leads actually die</Link> — and to{" "}
                     <Link href="/how-fast-to-reply-dubai-real-estate-leads">how fast a Dubai brokerage should reply to a Bayut / Property Finder lead</Link>, to{" "}
                     <Link href="/after-hours-weekend-leads-dubai-real-estate">after-hours and weekend leads, when the office is closed and buyers are not</Link>, to{" "}
-                    <Link href="/arabic-first-buyers-dubai-real-estate">what changes when a Dubai buyer writes in Arabic first</Link>, and to{" "}
-                    <Link href="/first-reply-to-viewing-booked-dubai-real-estate">from first reply to viewing booked, what has to happen after a Dubai buyer enquires</Link>.
+                    <Link href="/arabic-first-buyers-dubai-real-estate">what changes when a Dubai buyer writes in Arabic first</Link>, to{" "}
+                    <Link href="/first-reply-to-viewing-booked-dubai-real-estate">from first reply to viewing booked, what has to happen after a Dubai buyer enquires</Link>, and to{" "}
+                    <Link href="/after-viewing-follow-up-dubai-real-estate">after the viewing, how to follow up without losing the buyer</Link>.
                   </p>
                 </div>
                 <div className="chatbot-reveal">
