@@ -2,9 +2,15 @@
 // Server-side only: the Retell key never reaches the browser.
 
 export const RETELL_API = "https://api.retellai.com";
-export const DEMO_AGENT_ID = process.env.RETELL_AGENT_ID || "agent_99b7b8c0593b742b4e0aac4bf2";
 
-// First name only, letters/spaces/'-. only, so nothing odd gets read out or injected into the prompt.
+// The voice demos on /callagents. Browsers send one of these keys, never an agent ID.
+export const DEMO_AGENTS = {
+  "real-estate": { label: "Real Estate", agentId: process.env.RETELL_AGENT_ID || "agent_31f1d53632ea61ed0360e120d4" },
+  "hotel-booking": { label: "Hotel Booking", agentId: "agent_73e3fc1b236e30f5958598f1d7" },
+  "hotel-booking-ar": { label: "Hotel Booking (Arabic)", agentId: "agent_eab66806bc67d0b53de0ba56fb" },
+};
+
+// Letters/spaces/'-. only, so nothing odd gets read out or injected into the prompt.
 export function cleanName(raw) {
   const name = String(raw || "")
     .normalize("NFKC")
@@ -34,6 +40,16 @@ export function demoVariables({ name, contact = "", callId }) {
     nationality: "",
     first_contact_date: today,
     last_follow_up: "",
+  };
+}
+
+// The hotel agents read these fields instead of the real estate lead fields.
+export function hotelVariables({ name, contact }) {
+  return {
+    customer_name: name || "there",
+    contactNumber: contact,
+    hotel_name: "Devmate Hotel",
+    enquiry_source: "Website demo",
   };
 }
 

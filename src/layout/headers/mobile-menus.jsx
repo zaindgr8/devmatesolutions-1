@@ -29,7 +29,32 @@ const MobileMenus = () => {
           <React.Fragment key={i}>
             {!menu.has_dropdown && (
               <li>
-                {menu.title === "Book Demo" ? (
+                {menu.title === "Book Meeting With CEO" ? (
+                  <Link
+                    href={menu.link}
+                    style={{
+                      backgroundColor: "#B91C1B",
+                      color: "#ffffff",
+                      padding: "8px 16px",
+                      borderRadius: "6px",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "6px",
+                      fontWeight: "700",
+                      textDecoration: "none",
+                      whiteSpace: "nowrap",
+                      fontSize: "13px",
+                    }}
+                  >
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                      <line x1="16" y1="2" x2="16" y2="6"/>
+                      <line x1="8" y1="2" x2="8" y2="6"/>
+                      <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    {menu.title}
+                  </Link>
+                ) : menu.title === "Book Demo" ? (
                   <Link
                     href={menu.link}
                     target="_blank"
@@ -55,7 +80,16 @@ const MobileMenus = () => {
 
             {menu.has_dropdown && !menu.mega_menu && (
               <li className="has-dropdown">
-                <Link href={menu.link}>{menu.title}</Link>
+                <a
+                  href={menu.link}
+                  aria-expanded={navTitle === menu.title}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    openMobileMenu(menu.title);
+                  }}
+                >
+                  {menu.title} {navTitle === menu.title ? "−" : "+"}
+                </a>
                 <ul
                   className="submenu"
                   style={{

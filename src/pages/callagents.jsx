@@ -54,7 +54,6 @@ const COUNTRIES = [
 const PUBLIC_FORMS = [
   { id: "real-estate",            label: "Real Estate" },
   { id: "hotel-booking",          label: "Hotel Booking" },
-  { id: "emirates-customer-care", label: "Emirates Care" },
 ];
 
 const PRIVATE_FORMS = [
@@ -94,22 +93,6 @@ const INDUSTRIES = [
     ],
     langs: ["English", "Arabic"],
     formId: "hotel-booking",
-  },
-  {
-    id: "emirates-customer-care",
-    icon: "fal fa-plane",
-    color: "#0369a1",
-    name: "Emirates Customer Care",
-    tag: "Aviation & Travel",
-    desc: "Scalable AI call support for flight enquiries, loyalty programme questions, baggage claims, and rebooking — handling thousands of simultaneous calls without wait times.",
-    features: [
-      "Flight status & rebooking queries",
-      "Skywards loyalty programme support",
-      "Baggage claim assistance",
-      "Escalation to human agent on demand",
-    ],
-    langs: ["English"],
-    formId: "emirates-customer-care",
   },
   {
     id: "dubai-fun-broker",
@@ -357,7 +340,6 @@ function CadHeroDemoPlayer() {
       <div className="cad-hero-demo-industries">
         <span className="cad-industry-pill">🏠 Real Estate</span>
         <span className="cad-industry-pill">🏨 Hospitality</span>
-        <span className="cad-industry-pill">✈️ Aviation</span>
         <span className="cad-industry-pill">🏝️ Tourism</span>
         <span className="cad-industry-pill">🛍️ Retail</span>
         <span className="cad-industry-pill">🏥 Healthcare</span>
@@ -592,63 +574,6 @@ function HotelBookingForm() {
             name="mathAnswer"
             required
             placeholder={isArabic ? "أدخل الإجابة" : "Enter the answer"}
-            className={`cad-field-input${mathError ? " dm-error" : ""}`}
-            value={mathInput}
-            onChange={(e) => setMathInput(e.target.value)}
-            autoComplete="off"
-            onKeyDown={trackKeydown}
-          />
-        </FormField>
-      </div>
-      <SubmitButton loading={loading} />
-      <StatusMessage success={success} error={error} />
-    </form>
-  );
-}
-
-function EmiratesForm() {
-  const { loading, success, error, handleSubmit, trackKeydown, challenge, mathInput, setMathInput, mathError } = useForm("Emirates Customer Care");
-  return (
-    <form onSubmit={(e) => handleSubmit(e, {
-      form: "Emirates- Customer Care",
-    })} className="cad-form-body">
-      <div className="cad-form-title-wrap">
-        <h3 className="cad-form-title">Emirates Customer Care</h3>
-        <div className="cad-form-title-line" />
-      </div>
-      <div className="cad-fields-stack">
-        <FormField id="ecc-name" label="Full Name *">
-          <input id="ecc-name" type="text" name="name" required placeholder="Enter your full name" className="cad-field-input" onKeyDown={trackKeydown} />
-        </FormField>
-        <FormField id="ecc-email" label="Email Address *">
-          <input id="ecc-email" type="email" name="email" required placeholder="your@email.com" className="cad-field-input" onKeyDown={trackKeydown} />
-        </FormField>
-        <FormField id="ecc-contact" label="Phone Number *">
-          <div className="cad-phone-inner">
-            <CountrySelect name="country" />
-            <input id="ecc-contact" type="tel" name="contact" required placeholder="Phone number" className="cad-field-input cad-phone-input" onKeyDown={trackKeydown} />
-          </div>
-        </FormField>
-        <FormField id="ecc-message" label="Reason for Call / Flight Enquiry Details *">
-          <textarea
-            id="ecc-message"
-            name="message"
-            required
-            rows={3}
-            placeholder="Tell us what you would like assistance with on this call (flight booking, baggage, Skywards)..."
-            className="cad-field-input"
-            style={{ resize: "vertical", lineHeight: 1.5 }}
-            onKeyDown={trackKeydown}
-          />
-        </FormField>
-        <FormField id="ecc-math" label={<span>Security Check: What is <strong style={{ color: "#bd2120" }}>{challenge.question}</strong>? *</span>}>
-          <input
-            id="ecc-math"
-            type="number"
-            inputMode="numeric"
-            name="mathAnswer"
-            required
-            placeholder="Enter the answer"
             className={`cad-field-input${mathError ? " dm-error" : ""}`}
             value={mathInput}
             onChange={(e) => setMathInput(e.target.value)}
@@ -1077,8 +1002,7 @@ export default function CallAgentsPage() {
                 </h1>
                 <p className="cad-hero-sub">
                   We build custom AI call assistants for any industry — real estate, hospitality,
-                  aviation, tourism, and beyond. Each demo below routes to a live Make.com
-                  workflow. Submit a lead and see it in action.
+                  tourism, and beyond. Pick a demo below and talk to a live agent in your browser.
                 </p>
                 <div className="cad-hero-btns">
                   <button className="cad-btn-primary" onClick={scrollToDemo}>
@@ -1146,8 +1070,7 @@ export default function CallAgentsPage() {
               <h2 className="cad-section-title">One platform. Every industry.</h2>
               <p className="cad-section-sub">
                 Each AI agent is custom-trained on your industry's terminology, workflows, and
-                compliance requirements. These live demos connect directly to our Make.com
-                automation infrastructure.
+                compliance requirements. Try a live demo below and talk to the agent yourself.
               </p>
             </div>
             <div className="cad-industry-grid">
@@ -1197,10 +1120,10 @@ export default function CallAgentsPage() {
           <div className="cad-container">
             <div className="cad-section-header">
               <p className="cad-eyebrow">How It Works</p>
-              <h2 className="cad-section-title">From form submit to qualified lead — in seconds.</h2>
+              <h2 className="cad-section-title">From first hello to qualified lead, in seconds.</h2>
               <p className="cad-section-sub">
-                Every demo form below is wired to a live pipeline. Submit a lead and watch
-                the full automation fire in real time.
+                Every demo below is a live agent. Enter your details, tap talk, and hear it
+                work in real time.
               </p>
             </div>
             <div className="cad-steps-grid">
@@ -1215,11 +1138,14 @@ export default function CallAgentsPage() {
           </div>
         </section>
 
-        {/* ══ DEMO FORM ══ */}
-        <section className="cad-demo-section" id="cad-demo">
+        {/* ══ LIVE VOICE DEMOS (replaces the public demo forms) ══ */}
+        <BubblyVoiceWidget demo={activeForm} onDemoChange={setActiveForm} />
+
+        {/* ══ PRIVATE USE-CASES ══ */}
+        <section className="cad-demo-section" id="cad-private-demo" style={{ padding: "24px 0" }}>
           <div className="cad-container">
-            <div className="cad-demo-layout">
-              {/* Left copy */}
+            <div>
+              {/* Left copy: replaced by the voice widget above.
               <div>
                 <p className="cad-eyebrow" style={{ justifyContent: "flex-start" }}>Try It Live</p>
                 <h2 className="cad-demo-left-title">
@@ -1271,7 +1197,8 @@ export default function CallAgentsPage() {
                 </div>
               </div>
 
-              {/* Right — form */}
+              */}
+              {/* Right: private forms only */}
               <div>
                 {/* Private toggle */}
                 <div className="cad-top-bar">
@@ -1294,6 +1221,7 @@ export default function CallAgentsPage() {
                   </button>
                 </div>
 
+                {/* Public demo forms: replaced by the voice widget above.
                 {!mounted ? (
                   <div className="cad-skeleton">
                     <div className="cad-sk-bar cad-sk-bar--short" />
@@ -1318,10 +1246,11 @@ export default function CallAgentsPage() {
                     <div className="cad-form-area">
                       {activeForm === "real-estate"            && <RealEstateForm />}
                       {activeForm === "hotel-booking"          && <HotelBookingForm />}
-                      {activeForm === "emirates-customer-care" && <EmiratesForm />}
                     </div>
                   </div>
                 ) : (
+                */}
+                {mounted && activeSection === "private" && (
                   <div id="cad-private-card" className="cad-form-card">
                     <div className="cad-private-header">
                       <span className="cad-private-badge">
@@ -1354,9 +1283,6 @@ export default function CallAgentsPage() {
             </div>
           </div>
         </section>
-
-        {/* ══ BUBBLY WIDGET: TALK DIRECTLY TO AI (AFTER FORMS FILLING SECTION) ══ */}
-        <BubblyVoiceWidget />
 
         {/* ══ FINAL CTA ══ */}
         <section className="cad-final-cta">

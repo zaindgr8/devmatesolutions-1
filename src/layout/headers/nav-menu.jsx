@@ -1,8 +1,20 @@
 import Link from "next/link";
 import React from "react";
+import { useRouter } from "next/router";
 import menu_data from "./menu-data";
 
 const NavMenu = () => {
+  const router = useRouter();
+
+  const handleCeoClick = (e) => {
+    e.preventDefault();
+    if (router.pathname === "/") {
+      const el = document.getElementById("ceo");
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      router.push("/#ceo");
+    }
+  };
   return (
     <>
       <ul
@@ -20,6 +32,7 @@ const NavMenu = () => {
         {menu_data.map((item, i) => (
           <li
             key={i}
+            className={item.has_dropdown ? "dm-nav-drop" : undefined}
             style={{
               display: "inline-block",
               flexShrink: 0,
@@ -28,7 +41,55 @@ const NavMenu = () => {
               marginRight: 0,
             }}
           >
-            {item.title === "Book Demo" ? (
+            {item.title === "Book Meeting With CEO" ? (
+              <a
+                href="/#ceo"
+                onClick={handleCeoClick}
+                style={{
+                  backgroundColor: "#B91C1B",
+                  color: "#ffffff",
+                  padding: "7px 16px",
+                  borderRadius: "6px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  fontWeight: "700",
+                  fontSize: "12.5px",
+                  letterSpacing: "0.3px",
+                  transition: "all 0.25s ease",
+                  textDecoration: "none",
+                  whiteSpace: "nowrap",
+                  lineHeight: 1.2,
+                  boxShadow: "0 2px 8px rgba(185,28,27,0.30)",
+                  cursor: "pointer",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "#991b1b";
+                  e.currentTarget.style.boxShadow = "0 4px 14px rgba(185,28,27,0.45)";
+                  e.currentTarget.style.transform = "translateY(-1px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "#B91C1B";
+                  e.currentTarget.style.boxShadow = "0 2px 8px rgba(185,28,27,0.30)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                {item.title}
+              </a>
+            ) : item.has_dropdown ? (
+              <button type="button" className="dm-nav-drop__btn" aria-haspopup="true">
+                {item.title}
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M2 4l4 4 4-4" />
+                </svg>
+              </button>
+            ) : item.title === "Book Demo" ? (
               <Link
                 href={item.link}
                 target="_blank"
@@ -73,7 +134,7 @@ const NavMenu = () => {
               </Link>
             )}
             {item.sub_menus && (
-              <ul className="submenu">
+              <ul className="dm-nav-drop__menu">
                 {item.sub_menus.map((sub_item, sub_i) => (
                   <li key={sub_i}>
                     <Link

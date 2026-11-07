@@ -1,9 +1,23 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import { validateDemoLead } from "@/src/lib/demoLead";
 
-// Live Freya demo on /callagents: type your name, tap the orb, talk in the browser.
-// The name goes to the Retell agent as the customer_name dynamic variable, so Freya greets you by it.
-// The Retell key stays on the server (/api/retell-web-call).
+// Live voice demos on /callagents: pick a demo, enter your details, tap the orb, talk in the browser.
+// The name goes to the Retell agent as the customer_name dynamic variable, so it greets you by it.
+// The contact number and email are emailed to the team. The Retell key stays on the server
+// (/api/retell-web-call).
+
+const FIELDS = [
+  { name: "customer_name", type: "text", autoComplete: "name", placeholder: "Name", label: "Your name, so Freya can greet you", maxLength: 40 },
+  { name: "contact", type: "tel", autoComplete: "tel", placeholder: "Contact (+971 50 123 4567)", label: "Contact number with country code, so our team can call you back", maxLength: 24 },
+  { name: "email", type: "email", autoComplete: "email", placeholder: "Email", label: "Email, so our team can contact you", maxLength: 120 },
+];
+
+const DEMOS = [
+  { id: "real-estate", label: "Real Estate" },
+  { id: "hotel-booking", label: "Hotel Booking" },
+  { id: "hotel-booking-ar", label: "Hotel Booking (Arabic)" },
+];
 
 const fmt = (s) => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
 
@@ -26,7 +40,7 @@ const Icon = {
   ),
 };
 
-export default function BubblyVoiceWidget() {
+export default function BubblyVoiceWidget({ demo = "real-estate", onDemoChange }) {
   // idle | connecting | live
   const [phase, setPhase] = useState("idle");
   const [agentTalking, setAgentTalking] = useState(false);
@@ -34,11 +48,13 @@ export default function BubblyVoiceWidget() {
   const [seconds, setSeconds] = useState(0);
   const [caption, setCaption] = useState("");
   const [notice, setNotice] = useState("");
-  const [name, setName] = useState("");
+  const [details, setDetails] = useState({ customer_name: "", contact: "", email: "" });
+  const [errors, setErrors] = useState({});
   const [sectionVisible, setSectionVisible] = useState(true);
 
   const sectionRef = useRef(null);
   const stageRef = useRef(null);
+  const formRef = useRef(null);
   const clientRef = useRef(null);
 
   // Call timer
@@ -67,6 +83,20 @@ export default function BubblyVoiceWidget() {
 
   const setLevel = (lvl) => stageRef.current?.style.setProperty("--lvl", lvl.toFixed(3));
 
+  function update(e) {
+    const { name, value } = e.target;
+    setDetails((d) => ({ ...d, [name]: value }));
+    setErrors((errs) => ({ ...errs, [name]: undefined }));
+  }
+
+  function submit(e) {
+    e.preventDefault();
+    const found = validateDemoLead(details);
+    setErrors(found);
+    if (Object.keys(found).length) return;
+    talkInBrowser();
+  }
+
   async function talkInBrowser() {
     if (phase === "connecting") return;
     if (phase === "live") return endCall();
@@ -80,7 +110,7 @@ export default function BubblyVoiceWidget() {
       const res = await fetch("/api/retell-web-call", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ customer_name: name }),
+        body: JSON.stringify({ demo, ...details }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok || !data.access_token) throw new Error(data.error || "Couldn't start the call.");
@@ -146,10 +176,26 @@ export default function BubblyVoiceWidget() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />
-      <section className="cv" id="cad-bubbly-section" ref={sectionRef}>
+      <section className="cv" id="cad-demo" ref={sectionRef}>
         <div className="cv-wrap">
           <p className="cv-eyebrow">Live demo</p>
           <h2 className="cv-title">Talk to Freya</h2>
+
+          <div className="cv-tabs" role="group" aria-label="Choose a demo">
+            {DEMOS.map((d) => (
+              <button
+                key={d.id}
+                type="button"
+                id={`cad-tab-${d.id}`}
+                className={`cv-tab${demo === d.id ? " on" : ""}`}
+                aria-pressed={demo === d.id}
+                disabled={phase !== "idle"}
+                onClick={() => onDemoChange?.(d.id)}
+              >
+                {d.label}
+              </button>
+            ))}
+          </div>
 
           <div ref={stageRef} className={`cv-stage${agentTalking ? " talking" : ""}`} data-phase={phase}>
             <span className="cv-ring" aria-hidden="true" />
@@ -158,7 +204,7 @@ export default function BubblyVoiceWidget() {
               type="button"
               id="cad-bubbly-talk-button"
               className="cv-orb"
-              onClick={talkInBrowser}
+              onClick={() => (phase === "idle" ? formRef.current?.requestSubmit() : talkInBrowser())}
               disabled={phase === "connecting"}
               aria-label={phase === "live" ? "End call" : "Talk to Freya in your browser"}
             >
@@ -178,7 +224,7 @@ export default function BubblyVoiceWidget() {
 
           {phase === "live" && (
             <>
-              <p className="cv-caption" aria-live="off">{caption}</p>
+              <p className="cv-caption" aria-live="off" dir="auto">{caption}</p>
               <div className="cv-controls">
                 <button type="button" className={`cv-ctrl${muted ? " on" : ""}`} onClick={toggleMute} aria-label={muted ? "Unmute" : "Mute"} title={muted ? "Unmute" : "Mute"}>
                   {muted ? Icon.micOff : Icon.mic}
@@ -191,24 +237,29 @@ export default function BubblyVoiceWidget() {
           )}
 
           {phase === "idle" && (
-            <form className="cv-form" onSubmit={(e) => { e.preventDefault(); talkInBrowser(); }}>
-              <div className="cv-fields">
-                <input
-                  className="cv-input"
-                  type="text"
-                  name="customer_name"
-                  autoComplete="given-name"
-                  placeholder="Your name"
-                  aria-label="Your name, so Freya can greet you"
-                  maxLength={40}
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-                <button className="cv-call" type="submit">
-                  {Icon.mic}
-                  <span>Talk</span>
-                </button>
-              </div>
+            <form className="cv-form" ref={formRef} noValidate onSubmit={submit}>
+              {FIELDS.map((f) => (
+                <div key={f.name}>
+                  <input
+                    className="cv-input"
+                    type={f.type}
+                    name={f.name}
+                    autoComplete={f.autoComplete}
+                    placeholder={f.placeholder}
+                    aria-label={f.label}
+                    aria-invalid={!!errors[f.name]}
+                    aria-describedby={errors[f.name] ? `cv-error-${f.name}` : undefined}
+                    maxLength={f.maxLength}
+                    value={details[f.name]}
+                    onChange={update}
+                  />
+                  {errors[f.name] && <p className="cv-error" id={`cv-error-${f.name}`}>{errors[f.name]}</p>}
+                </div>
+              ))}
+              <button className="cv-call" type="submit">
+                {Icon.mic}
+                <span>Talk</span>
+              </button>
             </form>
           )}
 
@@ -241,7 +292,7 @@ export default function BubblyVoiceWidget() {
 
 const css = `
 .cv {
-  position: relative; overflow: hidden; padding: 110px 0 120px;
+  position: relative; overflow: hidden; padding: 110px 0 120px; scroll-margin-top: 90px;
   background: radial-gradient(60% 55% at 50% 38%, rgba(189,33,32,.22), transparent 70%), #08080a;
   border-top: 1px solid rgba(255,255,255,.06); color: #f4f4f5; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
@@ -253,7 +304,17 @@ const css = `
 }
 .cv-wrap { position: relative; max-width: 640px; margin: 0 auto; padding: 0 20px; display: flex; flex-direction: column; align-items: center; text-align: center; }
 .cv-eyebrow { margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #ff6b6b; }
-.cv-title { margin: 0 0 44px; font-size: clamp(32px, 4.4vw, 48px); font-weight: 800; letter-spacing: -1.5px; line-height: 1.05; color: #fff; }
+.cv-title { margin: 0 0 24px; font-size: clamp(32px, 4.4vw, 48px); font-weight: 800; letter-spacing: -1.5px; line-height: 1.05; color: #fff; }
+
+/* Demo picker */
+.cv-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 36px; }
+.cv-tab { min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.04);
+  color: #d4d4d8; font-size: 14px; font-weight: 600; font-family: inherit; cursor: pointer; transition: background .2s, border-color .2s, color .2s; }
+.cv-tab:hover:not(:disabled) { border-color: rgba(255,255,255,.4); color: #fff; }
+.cv-tab.on { background: #bd2120; border-color: #bd2120; color: #fff; }
+.cv-tab:disabled { cursor: default; opacity: .6; }
+.cv-tab.on:disabled { opacity: 1; }
+.cv-tab:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
 /* Orb */
 .cv-stage { --lvl: 0; position: relative; width: 220px; height: 220px; display: grid; place-items: center; }
@@ -301,15 +362,16 @@ const css = `
 .cv-ctrl--sm { width: 30px; height: 30px; }
 .cv-ctrl--sm svg { width: 14px; height: 14px; }
 
-/* Name (customer_name for the agent) */
-.cv-form { width: 100%; max-width: 420px; margin-top: 34px; }
-.cv-fields { display: flex; align-items: center; gap: 4px; padding: 6px; border-radius: 999px;
-  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
-  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); transition: border-color .2s, box-shadow .2s; }
-.cv-fields:focus-within { border-color: rgba(255,107,107,.5); box-shadow: 0 0 0 4px rgba(189,33,32,.18); }
-.cv-input { flex: 1; min-width: 0; height: 44px; padding: 0 10px 0 18px; border: 0; outline: none; background: transparent; color: #fff; font-size: 15px; font-weight: 500; font-family: inherit; }
+/* Visitor details: the name becomes customer_name for the agent */
+.cv-form { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 420px; margin-top: 30px; }
+.cv-form > div { width: 100%; text-align: left; }
+.cv-error { margin: 6px 0 0 20px; font-size: 13px; line-height: 1.4; color: #fca5a5; }
+.cv-input[aria-invalid="true"] { border-color: #f87171; }
+.cv-input { width: 100%; height: 50px; padding: 0 20px; border-radius: 999px; outline: none; color: #fff; font-size: 15px; font-weight: 500; font-family: inherit;
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); transition: border-color .2s, box-shadow .2s; }
+.cv-input:focus { border-color: rgba(255,107,107,.5); box-shadow: 0 0 0 4px rgba(189,33,32,.18); }
 .cv-input::placeholder { color: #71717a; }
-.cv-call { flex: none; display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 20px; border: 0; border-radius: 999px;
+.cv-call { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 50px; padding: 0 20px; border: 0; border-radius: 999px;
   background: #bd2120; color: #fff; font: 700 14.5px inherit; font-family: inherit; cursor: pointer; white-space: nowrap;
   box-shadow: 0 10px 26px -10px rgba(189,33,32,.9); transition: background .2s, transform .2s; }
 .cv-call svg { width: 16px; height: 16px; }
@@ -334,7 +396,7 @@ const css = `
 
 @media (max-width: 600px) {
   .cv { padding: 84px 0 92px; }
-  .cv-title { margin-bottom: 32px; }
+  .cv-tabs { margin-bottom: 28px; }
   .cv-stage { width: 184px; height: 184px; }
   .cv-orb { width: 128px; height: 128px; }
 }

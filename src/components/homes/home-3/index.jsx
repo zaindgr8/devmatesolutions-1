@@ -15,6 +15,7 @@ import OurTeam from "./our-team";
 import PricePlan from "./price-plan";
 import ProjectArea from "./project-area";
 import ServiceArea from "./service-area";
+import VoiceDemo from "./voice-demo";
 import Testimonial from "./testimonial";
 
 
@@ -58,6 +59,7 @@ const HomeThree = () => {
       <HeaderThree />
       <HeroBanner />
       <FeatureLists />
+      <VoiceDemo />
       <Portfolio />
       <About />
       <Testimonial />
