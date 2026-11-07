@@ -4,6 +4,38 @@ export const BLOG_CATEGORIES = ["Dubai Real Estate", "AI Call Assistants", "AI A
 
 const blog_posts = [
   {
+    href: "/after-viewing-follow-up-dubai-real-estate",
+    title: "After the Viewing: How a Dubai Brokerage Follows Up Without Losing the Buyer",
+    excerpt:
+      "The viewing went well — now what? A same-day follow-up, honest feedback in both directions, and a named next step: a second viewing, an offer, or a clear reason to keep looking.",
+    category: "Dubai Real Estate",
+    date: "2026-11-07",
+  },
+  {
+    href: "/missed-calls-cost-real-estate-usa",
+    title: "What a Missed Call Costs a US Real Estate Team, and How to Work It Out",
+    excerpt:
+      "A missed buyer call is usually a showing booked with the team that answered first. A simple formula for the weekly cost, the three moments calls get missed most, and what an answered call must do instead.",
+    category: "AI Call Assistants",
+    date: "2026-11-07",
+  },
+  {
+    href: "/after-hours-weekend-leads-dubai-real-estate",
+    title: "After Hours and Weekend Leads: Why Dubai Brokerages Lose Enquiries When the Office Closes",
+    excerpt:
+      "Dubai property enquiries arrive in the evening, at weekends, and from other time zones. What an after-hours first reply must contain, how Arabic and English handling changes the outcome, and how to keep every lead in one pipeline.",
+    category: "Dubai Real Estate",
+    date: "2026-11-04",
+  },
+  {
+    href: "/after-hours-med-spa-enquiries-usa",
+    title: "After-Hours Enquiries: Why Med Spas Lose Bookings When the Phones Go Unanswered",
+    excerpt:
+      "Med spa enquiries arrive in the evening, at weekends, and at lunch. What an after-hours answer must do, why a message is not a booking, and how a voice-first assistant turns evening callers into booked consultations.",
+    category: "AI Call Assistants",
+    date: "2026-11-04",
+  },
+  {
     href: "/dncr-pdpl-rera-dubai-real-estate",
     title: "DNCR, PDPL and RERA: The Three Rules Behind Automated Calls and WhatsApp in Dubai Real Estate",
     excerpt:
