@@ -6,7 +6,7 @@ import CeoPage from "../components/ceo/CeoPage";
 const index = () => {
   return (
     <Wrapper>
-      <SEO pageTitle={"Book Meeting - Devmate Solutions"} />
+      <SEO pageTitle={"Book Meeting - Devmate Solutions"} pageUrl={"/book-meeting"} />
       <CeoPage />
     </Wrapper>
   );

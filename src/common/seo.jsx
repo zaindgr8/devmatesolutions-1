@@ -43,21 +43,13 @@ const SEO = ({ pageTitle, pageDescription, pageUrl, pageImage }) => {
     ],
   };
 
-  // WebSite Schema with SearchAction
+  // WebSite Schema
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "DevMate Solutions",
     alternateName: "DEVMATE Solutions",
     url: baseUrl,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${baseUrl}/search?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
   };
 
   // SiteNavigation Schema
