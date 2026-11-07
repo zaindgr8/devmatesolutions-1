@@ -254,6 +254,7 @@ const DubaiSpeedToLeadArticle = () => {
                 The system behind this article:{" "}
                 <Link href="/whatsapp-phone-portal-dubai-real-estate-leads">WhatsApp vs Phone vs Portal: Where Dubai Real Estate Leads Actually Die</Link>,{" "}
                 <Link href="/dncr-pdpl-rera-dubai-real-estate">DNCR, PDPL and RERA: The Three Rules Behind Automated Calls and WhatsApp in Dubai Real Estate</Link>,{" "}
+                <Link href="/first-reply-to-viewing-booked-dubai-real-estate">From First Reply to Viewing Booked: What Has to Happen After a Dubai Buyer Enquires</Link>,{" "}
                 <Link href="/ai-agent-dubai-real-estate">AI Agent for Dubai Real Estate</Link>,{" "}
                 <Link href="/ai-chatbot-dubai-real-estate">AI Chatbot for Dubai Real Estate</Link>, and{" "}
                 <Link href="/aileadmanagementdubairealestate">AI Lead Management for Dubai Real Estate</Link>.
@@ -325,3 +326,4 @@ const DubaiSpeedToLeadArticle = () => {
 };
 
 export default DubaiSpeedToLeadArticle;
+

@@ -4,6 +4,22 @@ export const BLOG_CATEGORIES = ["Dubai Real Estate", "AI Call Assistants", "AI A
 
 const blog_posts = [
   {
+    href: "/first-reply-to-viewing-booked-dubai-real-estate",
+    title: "From First Reply to Viewing Booked: What Has to Happen After a Dubai Buyer Enquires",
+    excerpt:
+      "A fast first reply is only the start: what has to happen between a Dubai buyer's first enquiry and a viewing in the diary — qualification in order, a real slot offered, confirmation and follow-up — across Bayut, Property Finder, WhatsApp and phone, in Arabic and English.",
+    category: "Dubai Real Estate",
+    date: "2026-11-06",
+  },
+  {
+    href: "/missed-calls-cost-med-spa",
+    title: "What a Missed Call Costs a Med Spa, and How to Work It Out",
+    excerpt:
+      "A missed new-client call is usually a client booked elsewhere. A simple formula for working out what missed calls cost a med spa, the three moments they happen most, and what an answered call must do instead.",
+    category: "AI Call Assistants",
+    date: "2026-11-06",
+  },
+  {
     href: "/arabic-first-buyers-dubai-real-estate",
     title: "What Changes When a Dubai Buyer Writes in Arabic First?",
     excerpt:
@@ -18,6 +34,22 @@ const blog_posts = [
       "US homebuyer calls arrive in the evening, at weekends, and from other time zones. What an after-hours answer must do, why a message is not a showing, and how a voice-first assistant turns evening callers into booked showings.",
     category: "AI Call Assistants",
     date: "2026-11-05",
+  },
+  {
+    href: "/after-hours-weekend-leads-dubai-real-estate",
+    title: "After Hours and Weekend Leads: Why Dubai Brokerages Lose Enquiries When the Office Closes",
+    excerpt:
+      "Dubai property enquiries arrive in the evening, at weekends, and from other time zones. What an after-hours first reply must contain, how Arabic and English handling changes the outcome, and how to keep every lead in one pipeline.",
+    category: "Dubai Real Estate",
+    date: "2026-11-04",
+  },
+  {
+    href: "/after-hours-med-spa-enquiries-usa",
+    title: "After-Hours Enquiries: Why Med Spas Lose Bookings When the Phones Go Unanswered",
+    excerpt:
+      "Med spa enquiries arrive in the evening, at weekends, and at lunch. What an after-hours answer must do, why a message is not a booking, and how a voice-first assistant turns evening callers into booked consultations.",
+    category: "AI Call Assistants",
+    date: "2026-11-04",
   },
   {
     href: "/dncr-pdpl-rera-dubai-real-estate",
