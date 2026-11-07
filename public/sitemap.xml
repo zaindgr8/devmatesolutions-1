@@ -181,9 +181,15 @@
   <url>
     <loc>https://devmatesolutions.com/arabic-first-buyers-dubai-real-estate</loc>
     <lastmod>2026-11-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
   <!-- From First Reply to Viewing Booked Dubai Real Estate (new) -->
+  <url>
     <loc>https://devmatesolutions.com/first-reply-to-viewing-booked-dubai-real-estate</loc>
-    <lastmod>2026-11-06</lastmod>    <changefreq>weekly</changefreq>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
 
@@ -191,9 +197,31 @@
   <url>
     <loc>https://devmatesolutions.com/after-hours-homebuyer-calls-usa-real-estate</loc>
     <lastmod>2026-11-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
   <!-- Missed Calls Cost Med Spa USA (new) -->
+  <url>
     <loc>https://devmatesolutions.com/missed-calls-cost-med-spa</loc>
-    <lastmod>2026-11-06</lastmod>    <changefreq>weekly</changefreq>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- After the Viewing Follow-Up Dubai Real Estate (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/after-viewing-follow-up-dubai-real-estate</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Missed Calls Cost Real Estate USA (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/missed-calls-cost-real-estate-usa</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
 </urlset>
