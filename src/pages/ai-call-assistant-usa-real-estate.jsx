@@ -357,7 +357,8 @@ const AiCallAssistantUsaRealEstate = () => {
                 For the same voice-first approach in dental clinics, see{" "}
                 <Link href="/ai-call-assistant-dental-usa">AI Call Assistant for Dental Clinics USA</Link>, and in med spas and aesthetics clinics, see{" "}
                 <Link href="/ai-call-assistant-aesthetics-usa">AI Call Assistant for Med Spas and Aesthetics Clinics USA</Link>. For the cross-niche version, see{" "}
-                <Link href="/ai-lead-response-usa">AI Lead Response USA</Link>.
+                <Link href="/ai-lead-response-usa">AI Lead Response USA</Link>. For what a missed call costs a real estate team, see{" "}
+                <Link href="/missed-calls-cost-real-estate-usa">What a Missed Call Costs a US Real Estate Team</Link>.
               </p>
             </div>
           </section>
