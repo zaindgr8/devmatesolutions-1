@@ -4,6 +4,22 @@ export const BLOG_CATEGORIES = ["Dubai Real Estate", "AI Call Assistants", "AI A
 
 const blog_posts = [
   {
+    href: "/after-viewing-follow-up-dubai-real-estate",
+    title: "After the Viewing: How a Dubai Brokerage Follows Up Without Losing the Buyer",
+    excerpt:
+      "The viewing went well — now what? A same-day follow-up, honest feedback in both directions, and a named next step: a second viewing, an offer, or a clear reason to keep looking.",
+    category: "Dubai Real Estate",
+    date: "2026-11-07",
+  },
+  {
+    href: "/missed-calls-cost-real-estate-usa",
+    title: "What a Missed Call Costs a US Real Estate Team, and How to Work It Out",
+    excerpt:
+      "A missed buyer call is usually a showing booked with the team that answered first. A simple formula for the weekly cost, the three moments calls get missed most, and what an answered call must do instead.",
+    category: "AI Call Assistants",
+    date: "2026-11-07",
+  },
+  {
     href: "/first-reply-to-viewing-booked-dubai-real-estate",
     title: "From First Reply to Viewing Booked: What Has to Happen After a Dubai Buyer Enquires",
     excerpt:
