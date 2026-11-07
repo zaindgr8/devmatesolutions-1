@@ -181,7 +181,9 @@
   <url>
     <loc>https://devmatesolutions.com/arabic-first-buyers-dubai-real-estate</loc>
     <lastmod>2026-11-05</lastmod>
-    <changefreq>weekly</changefreq>
+  <!-- From First Reply to Viewing Booked Dubai Real Estate (new) -->
+    <loc>https://devmatesolutions.com/first-reply-to-viewing-booked-dubai-real-estate</loc>
+    <lastmod>2026-11-06</lastmod>    <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
 
@@ -189,7 +191,9 @@
   <url>
     <loc>https://devmatesolutions.com/after-hours-homebuyer-calls-usa-real-estate</loc>
     <lastmod>2026-11-05</lastmod>
-    <changefreq>weekly</changefreq>
+  <!-- Missed Calls Cost Med Spa USA (new) -->
+    <loc>https://devmatesolutions.com/missed-calls-cost-med-spa</loc>
+    <lastmod>2026-11-06</lastmod>    <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
 </urlset>
