@@ -193,7 +193,8 @@ const DncrPdplReraArticle = () => {
                     The good news is that the same discipline that keeps a brokerage safe also makes its automation better. Clean consent records mean cleaner lists. One record per buyer means no buyer is chased twice. And a script that never guesses means buyers trust the answers they get. This is the safeguards companion to our channel piece:{" "}
                     <Link href="/whatsapp-phone-portal-dubai-real-estate-leads">WhatsApp vs phone vs portal — where Dubai real estate leads actually die</Link> — and to{" "}
                     <Link href="/how-fast-to-reply-dubai-real-estate-leads">how fast a Dubai brokerage should reply to a Bayut / Property Finder lead</Link> — and to{" "}
-                    <Link href="/after-hours-weekend-leads-dubai-real-estate">after-hours and weekend leads, when the office is closed and buyers are not</Link>.
+                    <Link href="/after-hours-weekend-leads-dubai-real-estate">after-hours and weekend leads, when the office is closed and buyers are not</Link> — and to{" "}
+                    <Link href="/after-viewing-follow-up-dubai-real-estate">after the viewing, how to follow up without losing the buyer</Link>.
                   </p>
                 </div>
                 <div className="chatbot-reveal">
