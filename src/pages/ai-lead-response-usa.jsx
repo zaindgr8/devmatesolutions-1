@@ -292,6 +292,10 @@ const AiLeadResponseUsa = () => {
                 For med spas:{" "}
                 <Link href="/after-hours-med-spa-enquiries-usa">After-Hours Enquiries: Why Med Spas Lose Bookings When the Phones Go Unanswered</Link>.
               </p>
+              <p style={{ textAlign: "center", marginTop: 12 }}>
+                For US real estate:{" "}
+                <Link href="/after-hours-homebuyer-calls-usa-real-estate">After-Hours Calls from US Homebuyers: Why Evenings and Weekends Decide the Showing</Link>.
+              </p>
             </div>
           </section>
 

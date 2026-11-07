@@ -176,4 +176,20 @@
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
+
+  <!-- Arabic-First Buyers Dubai Real Estate (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/arabic-first-buyers-dubai-real-estate</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- After-Hours Homebuyer Calls USA Real Estate (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/after-hours-homebuyer-calls-usa-real-estate</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
 </urlset>

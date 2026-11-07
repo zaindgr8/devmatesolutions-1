@@ -4,6 +4,22 @@ export const BLOG_CATEGORIES = ["Dubai Real Estate", "AI Call Assistants", "AI A
 
 const blog_posts = [
   {
+    href: "/arabic-first-buyers-dubai-real-estate",
+    title: "What Changes When a Dubai Buyer Writes in Arabic First?",
+    excerpt:
+      "Many Dubai buyers enquire in Arabic first. What changes when the first reply matches their language, how qualification works in Arabic and English, and why one pipeline matters.",
+    category: "Dubai Real Estate",
+    date: "2026-11-05",
+  },
+  {
+    href: "/after-hours-homebuyer-calls-usa-real-estate",
+    title: "After-Hours Calls from US Homebuyers: Why Evenings and Weekends Decide the Showing",
+    excerpt:
+      "US homebuyer calls arrive in the evening, at weekends, and from other time zones. What an after-hours answer must do, why a message is not a showing, and how a voice-first assistant turns evening callers into booked showings.",
+    category: "AI Call Assistants",
+    date: "2026-11-05",
+  },
+  {
     href: "/dncr-pdpl-rera-dubai-real-estate",
     title: "DNCR, PDPL and RERA: The Three Rules Behind Automated Calls and WhatsApp in Dubai Real Estate",
     excerpt:
