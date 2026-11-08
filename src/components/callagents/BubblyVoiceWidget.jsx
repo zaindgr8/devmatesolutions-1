@@ -40,7 +40,7 @@ const Icon = {
   ),
 };
 
-// demos, agentName, sectionId and floating let the private demos reuse this widget.
+// demos, agentName, sectionId, floating and compact let the private demos reuse this widget.
 export default function BubblyVoiceWidget({
   demo = "real-estate",
   onDemoChange,
@@ -48,6 +48,7 @@ export default function BubblyVoiceWidget({
   agentName = "Freya",
   sectionId = "cad-demo",
   floating = true,
+  compact = false,
 }) {
   // idle | connecting | live
   const [phase, setPhase] = useState("idle");
@@ -184,9 +185,9 @@ export default function BubblyVoiceWidget({
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />
-      <section className="cv" id={sectionId} ref={sectionRef}>
+      <section className={`cv${compact ? " cv--compact" : ""}`} id={sectionId} ref={sectionRef}>
         <div className="cv-wrap">
-          <p className="cv-eyebrow">Live demo</p>
+          {!compact && <p className="cv-eyebrow">Live demo</p>}
           <h2 className="cv-title">Talk to {agentName}</h2>
 
           {demos.length > 1 && (
@@ -404,11 +405,22 @@ const css = `
 @keyframes cv-idle { 0%, 100% { height: 22%; } 50% { height: 42%; } }
 @keyframes cv-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
+/* Compact: sits inside a card, e.g. the private demos */
+.cv--compact { padding: 44px 0 52px; border-top: 0; }
+.cv--compact .cv-title { margin-bottom: 20px; font-size: 26px; letter-spacing: -0.5px; }
+.cv--compact .cv-stage { width: 168px; height: 168px; }
+.cv--compact .cv-orb { width: 116px; height: 116px; }
+.cv--compact .cv-icon svg { width: 32px; height: 32px; }
+.cv--compact .cv-form { margin-top: 22px; }
+
 @media (max-width: 600px) {
   .cv { padding: 84px 0 92px; }
   .cv-tabs { margin-bottom: 28px; }
   .cv-stage { width: 184px; height: 184px; }
   .cv-orb { width: 128px; height: 128px; }
+  .cv--compact { padding: 36px 0 44px; }
+  .cv--compact .cv-stage { width: 152px; height: 152px; }
+  .cv--compact .cv-orb { width: 108px; height: 108px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .cv-ring, .cv-bars i { animation: none !important; }

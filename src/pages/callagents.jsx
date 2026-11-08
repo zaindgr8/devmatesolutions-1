@@ -1275,9 +1275,11 @@ export default function CallAgentsPage() {
                         </button>
                       ))}
                     </nav>
-                    <div className="cad-form-area">
-                      {activePrivateForm === "dubai-fun-broker" && <DubaiFunBrokerForm />}
-                    </div>
+                    {activePrivateForm === "dubai-fun-broker" && (
+                      <div className="cad-form-area">
+                        <DubaiFunBrokerForm />
+                      </div>
+                    )}
                     {activePrivateForm === "al-marmoom" && (
                       <BubblyVoiceWidget
                         demo="al-marmoom"
@@ -1285,6 +1287,7 @@ export default function CallAgentsPage() {
                         agentName="Sara"
                         sectionId="cad-private-voice"
                         floating={false}
+                        compact
                       />
                     )}
                   </div>
