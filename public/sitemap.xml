@@ -224,4 +224,20 @@
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
+
+  <!-- After the Offer Dubai Real Estate (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/after-offer-dubai-real-estate</loc>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- After-Hours Dental Calls USA (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/after-hours-dental-calls-usa</loc>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
 </urlset>
