@@ -195,7 +195,8 @@ const MissedCallsDentalArticle = () => {
                   <p style={{ fontSize: 17, lineHeight: 1.7, color: "#4b5563" }}>
                     The companion to this article is our dental call-assistant page:{" "}
                     <Link href="/ai-call-assistant-dental-usa">AI Call Assistant for Dental Clinics USA</Link> — and the cross-niche version,{" "}
-                    <Link href="/ai-lead-response-usa">AI Lead Response USA</Link>.
+                    <Link href="/ai-lead-response-usa">AI Lead Response USA</Link>. After hours are covered in{" "}
+                    <Link href="/after-hours-dental-calls-usa">after-hours dental calls</Link>.
                   </p>
                 </div>
                 <div className="chatbot-reveal">
@@ -268,7 +269,8 @@ const MissedCallsDentalArticle = () => {
                 <Link href="/ai-call-assistant-aesthetics-usa">AI Call Assistant for Med Spas and Aesthetics Clinics USA</Link>, and{" "}
                 <Link href="/missed-calls-cost-med-spa">What a Missed Call Costs a Med Spa</Link>.
                 <Link href="/ai-call-assistant-aesthetics-usa">AI Call Assistant for Med Spas and Aesthetics Clinics USA</Link>, and for real estate, see{" "}
-                <Link href="/missed-calls-cost-real-estate-usa">What a Missed Call Costs a US Real Estate Team</Link>.              </p>
+                <Link href="/missed-calls-cost-real-estate-usa">What a Missed Call Costs a US Real Estate Team</Link>, and after hours, see{" "}
+                <Link href="/after-hours-dental-calls-usa">After-Hours Dental Calls: What Happens When the Front Desk Goes Home</Link>.              </p>
             </div>
           </section>
 
