@@ -5,7 +5,7 @@
  */
 import { Resend } from "resend";
 import { validateDemoLead } from "../../lib/demoLead";
-import { DEMO_AGENTS, cleanName, demoVariables, hotelVariables, retell } from "../../lib/retellDemo";
+import { DEMO_AGENTS, cleanName, retell, variablesFor } from "../../lib/retellDemo";
 
 const LEADS_TO = "management@devmatesolutions.com";
 
@@ -52,8 +52,7 @@ export default async function handler(req, res) {
   if (Object.keys(errors).length) return res.status(400).json({ error: Object.values(errors)[0], errors });
 
   const demoId = `web-${Date.now().toString(36)}`;
-  const isHotel = req.body.demo !== "real-estate";
-  const variables = isHotel ? hotelVariables({ name, contact }) : demoVariables({ name, contact, callId: demoId });
+  const variables = variablesFor(req.body.demo, { name, contact, email, callId: demoId });
 
   let call = null;
   try {

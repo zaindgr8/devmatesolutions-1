@@ -8,6 +8,8 @@ export const DEMO_AGENTS = {
   "real-estate": { label: "Real Estate", agentId: process.env.RETELL_AGENT_ID || "agent_31f1d53632ea61ed0360e120d4" },
   "hotel-booking": { label: "Hotel Booking", agentId: "agent_73e3fc1b236e30f5958598f1d7" },
   "hotel-booking-ar": { label: "Hotel Booking (Arabic)", agentId: "agent_eab66806bc67d0b53de0ba56fb" },
+  // Private use-case, shown only after the /callagents private login.
+  "al-marmoom": { label: "Al Marmoom (Sara)", agentId: "agent_748e862bc7d2cf3081e7d14a5f" },
 };
 
 // Letters/spaces/'-. only, so nothing odd gets read out or injected into the prompt.
@@ -41,6 +43,13 @@ export function demoVariables({ name, contact = "", callId }) {
     first_contact_date: today,
     last_follow_up: "",
   };
+}
+
+// The variables each demo's agent reads.
+export function variablesFor(demoKey, { name, contact, email, callId }) {
+  if (demoKey === "real-estate") return demoVariables({ name, contact, callId });
+  if (demoKey === "al-marmoom") return { customer_name: name || "there", contact, contactNumber: contact, email };
+  return hotelVariables({ name, contact });
 }
 
 // The hotel agents read these fields instead of the real estate lead fields.

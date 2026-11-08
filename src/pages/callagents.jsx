@@ -58,6 +58,7 @@ const PUBLIC_FORMS = [
 
 const PRIVATE_FORMS = [
   { id: "dubai-fun-broker", label: "Fun Broker" },
+  { id: "al-marmoom", label: "Al Marmoom (Sara)" },
 ];
 
 /* ─── Industry data ─────────────────────────────────────────── */
@@ -1277,6 +1278,15 @@ export default function CallAgentsPage() {
                     <div className="cad-form-area">
                       {activePrivateForm === "dubai-fun-broker" && <DubaiFunBrokerForm />}
                     </div>
+                    {activePrivateForm === "al-marmoom" && (
+                      <BubblyVoiceWidget
+                        demo="al-marmoom"
+                        demos={[{ id: "al-marmoom", label: "Al Marmoom (Sara)" }]}
+                        agentName="Sara"
+                        sectionId="cad-private-voice"
+                        floating={false}
+                      />
+                    )}
                   </div>
                 )}
               </div>

@@ -8,7 +8,7 @@ import { validateDemoLead } from "@/src/lib/demoLead";
 // (/api/retell-web-call).
 
 const FIELDS = [
-  { name: "customer_name", type: "text", autoComplete: "name", placeholder: "Name", label: "Your name, so Freya can greet you", maxLength: 40 },
+  { name: "customer_name", type: "text", autoComplete: "name", placeholder: "Name", label: "Your name, so the agent can greet you", maxLength: 40 },
   { name: "contact", type: "tel", autoComplete: "tel", placeholder: "Contact (+971 50 123 4567)", label: "Contact number with country code, so our team can call you back", maxLength: 24 },
   { name: "email", type: "email", autoComplete: "email", placeholder: "Email", label: "Email, so our team can contact you", maxLength: 120 },
 ];
@@ -40,7 +40,15 @@ const Icon = {
   ),
 };
 
-export default function BubblyVoiceWidget({ demo = "real-estate", onDemoChange }) {
+// demos, agentName, sectionId and floating let the private demos reuse this widget.
+export default function BubblyVoiceWidget({
+  demo = "real-estate",
+  onDemoChange,
+  demos = DEMOS,
+  agentName = "Freya",
+  sectionId = "cad-demo",
+  floating = true,
+}) {
   // idle | connecting | live
   const [phase, setPhase] = useState("idle");
   const [agentTalking, setAgentTalking] = useState(false);
@@ -132,7 +140,7 @@ export default function BubblyVoiceWidget({ demo = "real-estate", onDemoChange }
         for (let i = 0; i < samples.length; i += 16) sum += Math.abs(samples[i]);
         setLevel(Math.min(1, (sum / (samples.length / 16)) * 5));
       });
-      client.on("call_ended", () => finish("Call ended. Thanks for talking to Freya."));
+      client.on("call_ended", () => finish(`Call ended. Thanks for talking to ${agentName}.`));
       client.on("error", () => finish("The call dropped. Please try again."));
 
       await client.startCall({
@@ -144,7 +152,7 @@ export default function BubblyVoiceWidget({ demo = "real-estate", onDemoChange }
       });
     } catch (err) {
       const denied = err?.name === "NotAllowedError" || /permission/i.test(err?.message || "");
-      finish(denied ? "Allow microphone access to talk to Freya." : err?.message || "Couldn't start the call.");
+      finish(denied ? `Allow microphone access to talk to ${agentName}.` : err?.message || "Couldn't start the call.");
     }
   }
 
@@ -158,7 +166,7 @@ export default function BubblyVoiceWidget({ demo = "real-estate", onDemoChange }
 
   function endCall() {
     try { clientRef.current?.stopCall(); } catch { /* already ended */ }
-    finish("Call ended. Thanks for talking to Freya.");
+    finish(`Call ended. Thanks for talking to ${agentName}.`);
   }
 
   function toggleMute() {
@@ -170,32 +178,34 @@ export default function BubblyVoiceWidget({ demo = "real-estate", onDemoChange }
 
   const status =
     phase === "connecting" ? "Connecting…" :
-    phase === "live" ? `${agentTalking ? "Freya" : "Listening"} · ${fmt(seconds)}` :
+    phase === "live" ? `${agentTalking ? agentName : "Listening"} · ${fmt(seconds)}` :
     "Tap to talk";
 
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />
-      <section className="cv" id="cad-demo" ref={sectionRef}>
+      <section className="cv" id={sectionId} ref={sectionRef}>
         <div className="cv-wrap">
           <p className="cv-eyebrow">Live demo</p>
-          <h2 className="cv-title">Talk to Freya</h2>
+          <h2 className="cv-title">Talk to {agentName}</h2>
 
-          <div className="cv-tabs" role="group" aria-label="Choose a demo">
-            {DEMOS.map((d) => (
-              <button
-                key={d.id}
-                type="button"
-                id={`cad-tab-${d.id}`}
-                className={`cv-tab${demo === d.id ? " on" : ""}`}
-                aria-pressed={demo === d.id}
-                disabled={phase !== "idle"}
-                onClick={() => onDemoChange?.(d.id)}
-              >
-                {d.label}
-              </button>
-            ))}
-          </div>
+          {demos.length > 1 && (
+            <div className="cv-tabs" role="group" aria-label="Choose a demo">
+              {demos.map((d) => (
+                <button
+                  key={d.id}
+                  type="button"
+                  id={`cad-tab-${d.id}`}
+                  className={`cv-tab${demo === d.id ? " on" : ""}`}
+                  aria-pressed={demo === d.id}
+                  disabled={phase !== "idle"}
+                  onClick={() => onDemoChange?.(d.id)}
+                >
+                  {d.label}
+                </button>
+              ))}
+            </div>
+          )}
 
           <div ref={stageRef} className={`cv-stage${agentTalking ? " talking" : ""}`} data-phase={phase}>
             <span className="cv-ring" aria-hidden="true" />
@@ -206,7 +216,7 @@ export default function BubblyVoiceWidget({ demo = "real-estate", onDemoChange }
               className="cv-orb"
               onClick={() => (phase === "idle" ? formRef.current?.requestSubmit() : talkInBrowser())}
               disabled={phase === "connecting"}
-              aria-label={phase === "live" ? "End call" : "Talk to Freya in your browser"}
+              aria-label={phase === "live" ? "End call" : `Talk to ${agentName} in your browser`}
             >
               <span className="cv-core" aria-hidden="true">
                 {phase === "live" ? (
@@ -268,18 +278,18 @@ export default function BubblyVoiceWidget({ demo = "real-estate", onDemoChange }
       </section>
 
       {/* Floating orb while the demo is scrolled out of view */}
-      {!sectionVisible && (
+      {floating && !sectionVisible && (
         <div className="cv-float" data-phase={phase}>
           {phase === "live" && (
             <span className="cv-float-pill">
-              <i className="cv-dot" /> Freya <b>{fmt(seconds)}</b>
+              <i className="cv-dot" /> {agentName} <b>{fmt(seconds)}</b>
               <button type="button" className="cv-ctrl cv-ctrl--end cv-ctrl--sm" onClick={endCall} aria-label="End call">{Icon.hang}</button>
             </span>
           )}
           <button
             type="button"
             className="cv-float-orb"
-            aria-label="Go to the Freya demo"
+            aria-label={`Go to the ${agentName} demo`}
             onClick={() => sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "center" })}
           >
             <span className="cv-core">{phase === "live" ? <span className="cv-bars cv-bars--sm"><i /><i /><i /></span> : <span className="cv-icon">{Icon.mic}</span>}</span>
