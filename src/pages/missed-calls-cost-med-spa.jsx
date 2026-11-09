@@ -262,7 +262,8 @@ const MissedCallsMedSpaArticle = () => {
                 <Link href="/ai-call-assistant-aesthetics-usa">AI Call Assistant for Med Spas and Aesthetics Clinics USA</Link>,{" "}
                 <Link href="/ai-lead-response-usa">AI Lead Response USA</Link>,{" "}
                 <Link href="/ai-call-assistant-dental-usa">AI Call Assistant for Dental Clinics USA</Link>, and{" "}
-                <Link href="/after-hours-med-spa-enquiries-usa">After-Hours Med Spa Enquiries</Link>.
+                <Link href="/after-hours-med-spa-enquiries-usa">After-Hours Med Spa Enquiries</Link>, and{" "}
+                <Link href="/after-first-reply-med-spa-usa">After the First Reply: What a Med Spa Does With an After-Hours Enquiry</Link>.
               </p>
             </div>
           </section>
