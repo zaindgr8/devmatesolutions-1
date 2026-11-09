@@ -261,6 +261,7 @@ const AfterHoursMedSpaArticle = () => {
                 See it in practice:{" "}
                 <Link href="/ai-call-assistant-aesthetics-usa">AI Call Assistant for Med Spas and Aesthetics Clinics USA</Link>,{" "}
                 <Link href="/ai-lead-response-usa">AI Lead Response USA</Link>,{" "}
+                <Link href="/after-first-reply-med-spa-usa">After the First Reply: What a Med Spa Does With an After-Hours Enquiry</Link>,{" "}
                 <Link href="/ai-call-assistant-dental-usa">AI Call Assistant for Dental Clinics USA</Link>, and{" "}
                 <Link href="/ai-call-assistant-usa-real-estate">AI Call Assistant for US Real Estate</Link>.
               </p>
