@@ -4,6 +4,22 @@ export const BLOG_CATEGORIES = ["Dubai Real Estate", "AI Call Assistants", "AI A
 
 const blog_posts = [
   {
+    href: "/pre-approved-before-you-view-dubai-real-estate",
+    title: "Pre-Approved Before You View: What a Dubai Buyer Should Have Ready First",
+    excerpt:
+      "The viewing is booked — but is the buyer ready? A realistic budget, the deposit they can actually pay, a timeline, and the documents a lender asks for — and how a brokerage qualifies in order, in Arabic and English, before a Saturday is spent touring the wrong homes.",
+    category: "Dubai Real Estate",
+    date: "2026-11-10",
+  },
+  {
+    href: "/consultation-prep-med-spa-usa",
+    title: "Your Consultation Is Booked. What Should Happen Before the Client Walks In?",
+    excerpt:
+      "The consultation is booked — but booked is not the same as kept. What a med spa should do between the booking and the visit: answer the eligibility questions, send what to bring and what to expect in writing, remind the client, and make rescheduling one step.",
+    category: "AI Call Assistants",
+    date: "2026-11-10",
+  },
+  {
     href: "/after-viewing-follow-up-dubai-real-estate",
     title: "After the Viewing: How a Dubai Brokerage Follows Up Without Losing the Buyer",
     excerpt:
