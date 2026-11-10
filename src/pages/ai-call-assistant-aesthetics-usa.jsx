@@ -306,7 +306,8 @@ const AiCallAssistantAestheticsUsa = () => {
                 <Link href="/ai-call-assistant-dental-usa">AI Call Assistant for Dental Clinics USA</Link>. For the cross-niche version, see{" "}
                 <Link href="/ai-lead-response-usa">AI Lead Response USA</Link> — and for evening and weekend callers, see{" "}
                 <Link href="/after-hours-med-spa-enquiries-usa">after-hours med spa enquiries</Link> — and for what a missed call costs, see{" "}
-                <Link href="/missed-calls-cost-med-spa">what a missed call costs a med spa</Link>.
+                <Link href="/missed-calls-cost-med-spa">what a missed call costs a med spa</Link> — and for the gap between booking and the visit, see{" "}
+                <Link href="/consultation-prep-med-spa-usa">what should happen before the client walks in</Link>.
               </p>
             </div>
           </section>
