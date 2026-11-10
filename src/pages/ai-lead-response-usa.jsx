@@ -290,7 +290,8 @@ const AiLeadResponseUsa = () => {
               </p>
               <p style={{ textAlign: "center", marginTop: 12 }}>
                 For med spas:{" "}
-                <Link href="/after-hours-med-spa-enquiries-usa">After-Hours Enquiries: Why Med Spas Lose Bookings When the Phones Go Unanswered</Link>.
+                <Link href="/after-hours-med-spa-enquiries-usa">After-Hours Enquiries: Why Med Spas Lose Bookings When the Phones Go Unanswered</Link>, and{" "}
+                <Link href="/consultation-prep-med-spa-usa">Your Consultation Is Booked. What Should Happen Before the Client Walks In?</Link>.
               </p>
               <p style={{ textAlign: "center", marginTop: 12 }}>
                 For US real estate:{" "}

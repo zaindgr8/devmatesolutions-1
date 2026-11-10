@@ -261,7 +261,8 @@ const ArabicFirstBuyersArticle = () => {
                 Related reading:{" "}
                 <Link href="/ai-agent-dubai-real-estate">AI Agent for Dubai Real Estate</Link>,{" "}
                 <Link href="/ai-chatbot-dubai-real-estate">AI Chatbot for Dubai Real Estate</Link>,{" "}
-                <Link href="/aileadmanagementdubairealestate">AI Lead Management for Real Estate</Link>, and{" "}
+                <Link href="/aileadmanagementdubairealestate">AI Lead Management for Real Estate</Link>,{" "}
+                <Link href="/pre-approved-before-you-view-dubai-real-estate">Pre-Approved Before You View: What a Dubai Buyer Should Have Ready First</Link>, and{" "}
                 <Link href="/whatsappautomation">WhatsApp Automation</Link>.
               </p>
             </div>
