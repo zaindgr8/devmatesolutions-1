@@ -4,6 +4,22 @@ export const BLOG_CATEGORIES = ["Dubai Real Estate", "AI Call Assistants", "AI A
 
 const blog_posts = [
   {
+    href: "/after-offer-dubai-real-estate",
+    title: "After the Offer: What Has to Happen Before a Dubai Buyer Gets the Keys",
+    excerpt:
+      "The offer is agreed — now what? The offer in writing, the MOU and Form F, the deposit, the NOC, the mortgage and the DLD transfer — and how a brokerage keeps both sides moving without losing the deal.",
+    category: "Dubai Real Estate",
+    date: "2026-11-08",
+  },
+  {
+    href: "/after-hours-dental-calls-usa",
+    title: "After-Hours Dental Calls: What Happens When the Front Desk Goes Home",
+    excerpt:
+      "Dental calls do not stop at 5 p.m. What an after-hours answer must do: take the toothache call seriously, book the new patient, handle the reschedule — and route anything clinical to the team, never guess.",
+    category: "AI Call Assistants",
+    date: "2026-11-08",
+  },
+  {
     href: "/after-viewing-follow-up-dubai-real-estate",
     title: "After the Viewing: How a Dubai Brokerage Follows Up Without Losing the Buyer",
     excerpt:

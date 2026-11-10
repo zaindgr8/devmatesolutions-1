@@ -310,6 +310,10 @@ const AiCallAssistantDentalUsa = () => {
                 Work out your own number:{" "}
                 <Link href="/missed-calls-cost-dental-practice">What a Missed Call Costs a Dental Practice — and How to Work It Out</Link>.
               </p>
+              <p style={{ textAlign: "center", marginTop: 12 }}>
+                After hours:{" "}
+                <Link href="/after-hours-dental-calls-usa">After-Hours Dental Calls: What Happens When the Front Desk Goes Home</Link>.
+              </p>
             </div>
           </section>
 

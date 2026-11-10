@@ -195,6 +195,8 @@ const AfterViewingFollowUpDubaiArticle = () => {
                     <Link href="/after-hours-weekend-leads-dubai-real-estate">after-hours and weekend leads</Link>,{" "}
                     <Link href="/first-reply-to-viewing-booked-dubai-real-estate">from first reply to viewing booked</Link>, and{" "}
                     <Link href="/dncr-pdpl-rera-dubai-real-estate">DNCR, PDPL, and RERA in plain language</Link>.
+                    The next step in the chain is{" "}
+                    <Link href="/after-offer-dubai-real-estate">after the offer</Link>.
                   </p>
                 </div>
                 <div className="chatbot-reveal">
