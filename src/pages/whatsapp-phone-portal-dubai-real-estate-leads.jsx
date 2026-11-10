@@ -275,7 +275,8 @@ const WhatsappPhonePortalArticle = () => {
                 <Link href="/ai-chatbot-dubai-real-estate">AI Chatbot for Dubai Real Estate</Link>,{" "}
                 <Link href="/whatsappautomation">WhatsApp Automation Dubai</Link>,{" "}
                 <Link href="/callagents">AI Call Agents Dubai</Link>, and{" "}
-                <Link href="/aileadmanagementdubairealestate">AI Lead Management for Dubai Real Estate</Link>.
+                <Link href="/aileadmanagementdubairealestate">AI Lead Management for Dubai Real Estate</Link>, and{" "}
+                <Link href="/pre-approved-before-you-view-dubai-real-estate">Pre-Approved Before You View: What a Dubai Buyer Should Have Ready First</Link>.
               </p>
             </div>
           </section>
