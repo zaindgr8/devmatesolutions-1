@@ -198,6 +198,10 @@ const AfterViewingFollowUpDubaiArticle = () => {
                     The next step in the chain is{" "}
                     <Link href="/after-offer-dubai-real-estate">after the offer</Link>.
                   </p>
+                  <p style={{ fontSize: 17, lineHeight: 1.7, color: "#4b5563" }}>
+                    The next step in the chain is{" "}
+                    <Link href="/second-viewing-dubai-real-estate">the second viewing</Link>.
+                  </p>
                 </div>
                 <div className="chatbot-reveal">
                   <div className="speed-answer">

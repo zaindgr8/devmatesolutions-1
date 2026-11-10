@@ -4,6 +4,22 @@ export const BLOG_CATEGORIES = ["Dubai Real Estate", "AI Call Assistants", "AI A
 
 const blog_posts = [
   {
+    href: "/second-viewing-dubai-real-estate",
+    title: "The Second Viewing: What a Dubai Buyer Is Really Checking — and What Your Follow-Up Should Do",
+    excerpt:
+      "The first viewing went well — now what? What a Dubai buyer is really checking on a second viewing: light and noise at a different time of day, service charges, the community after dark — and how a brokerage books it the same day, prepares the answers, and names the next step.",
+    category: "Dubai Real Estate",
+    date: "2026-11-09",
+  },
+  {
+    href: "/after-first-reply-med-spa-usa",
+    title: "After the First Reply: What a Med Spa Does With an After-Hours Enquiry",
+    excerpt:
+      "The enquiry was answered at 9 p.m. — now what? What a med spa must do in the next 24 hours after an after-hours enquiry: confirm the consultation in writing, hold the slot in a real calendar, send a reminder, and make rescheduling easy — so the booking actually happens.",
+    category: "AI Call Assistants",
+    date: "2026-11-09",
+  },
+  {
     href: "/after-offer-dubai-real-estate",
     title: "After the Offer: What Has to Happen Before a Dubai Buyer Gets the Keys",
     excerpt:
