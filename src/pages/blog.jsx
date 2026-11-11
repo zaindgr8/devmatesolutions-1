@@ -6,9 +6,9 @@ import blog_posts from "../data/blog-posts";
 import Wrapper from "../layout/wrapper";
 
 const BASE_URL = "https://devmatesolutions.com";
-const TITLE = "AI Automation Blog for Real Estate and Clinics";
+const TITLE = "AI Around the World — AI News, Tools and Practical Guides | DevMate Solutions";
 const DESCRIPTION =
-  "Guides on AI agents, chatbots and call assistants for Dubai real estate brokerages and US clinics: answer every lead fast, qualify it and book the meeting.";
+  "What is happening in AI around the world, what it means for your business, and how to use it — practical guides on AI agents, chatbots and call assistants for Dubai real estate and US clinics.";
 
 const blogSchema = {
   "@context": "https://schema.org",

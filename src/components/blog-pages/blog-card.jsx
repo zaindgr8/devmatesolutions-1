@@ -1,8 +1,9 @@
 import Link from "next/link";
 import React from "react";
-import { FaArrowRight, FaBuilding, FaCogs, FaPhoneAlt } from "react-icons/fa";
+import { FaArrowRight, FaBuilding, FaCogs, FaGlobe, FaPhoneAlt } from "react-icons/fa";
 
 const CATEGORY_ICONS = {
+  "AI Around the World": FaGlobe,
   "Dubai Real Estate": FaBuilding,
   "AI Call Assistants": FaPhoneAlt,
   "AI Automation": FaCogs,

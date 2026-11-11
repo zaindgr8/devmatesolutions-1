@@ -156,7 +156,7 @@
   <!-- Blog -->
   <url>
     <loc>https://devmatesolutions.com/blog</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -272,7 +272,6 @@
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
-
   <!-- How to Choose an AI Automation Agency in Dubai (new) -->
   <url>
     <loc>https://devmatesolutions.com/choose-ai-automation-agency-dubai</loc>
@@ -285,6 +284,14 @@
   <url>
     <loc>https://devmatesolutions.com/choose-ai-call-assistant-usa</loc>
     <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- AI Around the World (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/ai-around-the-world</loc>
+    <lastmod>2026-11-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
