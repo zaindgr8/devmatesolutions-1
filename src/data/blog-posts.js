@@ -4,6 +4,22 @@ export const BLOG_CATEGORIES = ["Dubai Real Estate", "AI Call Assistants", "AI A
 
 const blog_posts = [
   {
+    href: "/choose-ai-automation-agency-dubai",
+    title: "How to Choose an AI Automation Agency in Dubai",
+    excerpt:
+      "Hiring an AI automation agency in Dubai? The questions to ask before you sign: what a good agency proves on your own leads, how it handles DNCR, PDPL and RERA in plain language, what Arabic and English coverage really means, and the red flags that tell you to walk away.",
+    category: "AI Automation",
+    date: "2026-11-11",
+  },
+  {
+    href: "/choose-ai-call-assistant-usa",
+    title: "How to Choose an AI Call Assistant in the USA",
+    excerpt:
+      "Hiring an AI call assistant for your real estate team, dental practice or med spa? The questions to ask before you sign: what a good provider proves on your own calls, how consent, opt-out and do-not-call screening work, and the red flags that tell you to walk away.",
+    category: "AI Call Assistants",
+    date: "2026-11-11",
+  },
+  {
     href: "/pre-approved-before-you-view-dubai-real-estate",
     title: "Pre-Approved Before You View: What a Dubai Buyer Should Have Ready First",
     excerpt:
