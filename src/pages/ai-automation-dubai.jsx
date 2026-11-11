@@ -290,7 +290,8 @@ const AiAutomationDubai = () => {
                 <Link href="/aileadmanagementdubairealestate">AI Lead Management for Dubai Real Estate</Link>,{" "}
                 <Link href="/ai-chatbot-dubai-real-estate">AI Chatbot for Dubai Real Estate</Link>,{" "}
                 <Link href="/whatsappautomation">WhatsApp Automation</Link>, and{" "}
-                <Link href="/callagents">AI Call Agents</Link>.
+                <Link href="/callagents">AI Call Agents</Link>. For how to choose the right agency, see{" "}
+                <Link href="/choose-ai-automation-agency-dubai">How to Choose an AI Automation Agency in Dubai</Link>.
               </p>
             </div>
           </section>

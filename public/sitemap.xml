@@ -272,4 +272,20 @@
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
+
+  <!-- How to Choose an AI Automation Agency in Dubai (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/choose-ai-automation-agency-dubai</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- How to Choose an AI Call Assistant in the USA (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/choose-ai-call-assistant-usa</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
 </urlset>
