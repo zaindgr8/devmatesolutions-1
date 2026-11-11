@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import HeaderThree from "@/src/layout/headers/header-3";
 import FooterThree from "@/src/layout/footers/footer-3";
 import { generateMathChallenge } from "@/src/lib/mathChallenge";
@@ -59,7 +60,14 @@ const PUBLIC_FORMS = [
 const PRIVATE_FORMS = [
   { id: "dubai-fun-broker", label: "Fun Broker" },
   { id: "al-marmoom", label: "Al Marmoom (Sara)" },
+  { id: "diva-dubai", label: "Diva Dubai (Sara)" },
 ];
+
+// Private tabs that use the voice widget instead of a form. Both agents are named Sara.
+const PRIVATE_VOICE_DEMOS = {
+  "al-marmoom": "Al Marmoom (Sara)",
+  "diva-dubai": "Diva Dubai (Sara)",
+};
 
 /* ─── Industry data ─────────────────────────────────────────── */
 const INDUSTRIES = [
@@ -930,19 +938,51 @@ export default function CallAgentsPage() {
   const [showLoginModal, setShowLoginModal]       = useState(false);
   const [showBuildModal, setShowBuildModal]       = useState(false);
   const [activeSection, setActiveSection]         = useState("public");
+  // Set by a client link like /callagents?demo=diva-dubai: only that private demo is shown.
+  const [linkedDemo, setLinkedDemo]               = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
     if (typeof window !== "undefined") {
-      if (sessionStorage.getItem("devmate_private_auth") === "true") setIsAuthenticated(true);
+      const authed = sessionStorage.getItem("devmate_private_auth") === "true";
+      if (authed) setIsAuthenticated(true);
+      const linked = new URLSearchParams(window.location.search).get("demo");
+      if (PRIVATE_FORMS.some((f) => f.id === linked)) {
+        setLinkedDemo(linked);
+        setActivePrivateForm(linked);
+        if (authed) openPrivateDemo();
+        else setShowLoginModal(true);
+      }
     }
   }, []);
+
+  function openPrivateDemo() {
+    setActiveSection("private");
+  }
+
+  // A client link scrolls straight to its demo once the private card has rendered. It waits for
+  // router.isReady because Next.js resets the scroll when it fills in the query after hydration.
+  useEffect(() => {
+    if (!linkedDemo || activeSection !== "private" || !router.isReady) return;
+    // Retries briefly: right after load the page can't scroll yet, so the first tries may not move it.
+    let tries = 0;
+    const t = setInterval(() => {
+      const card = document.getElementById("cad-private-card");
+      // "instant" overrides the site's smooth scrolling, which can stall while the page is still loading.
+      card?.scrollIntoView({ block: "start", behavior: "instant" });
+      const top = card?.getBoundingClientRect().top ?? 0;
+      if (++tries >= 12 || (top >= 0 && top < 300)) clearInterval(t);
+    }, 300);
+    return () => clearInterval(t);
+  }, [linkedDemo, activeSection, router.isReady]);
 
   function handleLoginSuccess() {
     setIsAuthenticated(true);
     if (typeof window !== "undefined") sessionStorage.setItem("devmate_private_auth", "true");
     setShowLoginModal(false);
-    setActiveSection("private");
+    if (linkedDemo) openPrivateDemo();
+    else setActiveSection("private");
   }
 
   function handleSignOut() {
@@ -1252,7 +1292,7 @@ export default function CallAgentsPage() {
                 ) : (
                 */}
                 {mounted && activeSection === "private" && (
-                  <div id="cad-private-card" className="cad-form-card">
+                  <div id="cad-private-card" className="cad-form-card" style={{ scrollMarginTop: 110 }}>
                     <div className="cad-private-header">
                       <span className="cad-private-badge">
                         <svg className="cad-lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -1265,7 +1305,7 @@ export default function CallAgentsPage() {
                       </button>
                     </div>
                     <nav className="cad-form-nav" aria-label="Select private demo">
-                      {PRIVATE_FORMS.map((f) => (
+                      {(linkedDemo ? PRIVATE_FORMS.filter((f) => f.id === linkedDemo) : PRIVATE_FORMS).map((f) => (
                         <button key={f.id} type="button"
                           id={`cad-private-tab-${f.id}`}
                           className={`cad-nav-tab${activePrivateForm === f.id ? " cad-nav-tab--active" : ""}`}
@@ -1280,10 +1320,11 @@ export default function CallAgentsPage() {
                         <DubaiFunBrokerForm />
                       </div>
                     )}
-                    {activePrivateForm === "al-marmoom" && (
+                    {PRIVATE_VOICE_DEMOS[activePrivateForm] && (
                       <BubblyVoiceWidget
-                        demo="al-marmoom"
-                        demos={[{ id: "al-marmoom", label: "Al Marmoom (Sara)" }]}
+                        key={activePrivateForm}
+                        demo={activePrivateForm}
+                        demos={[{ id: activePrivateForm, label: PRIVATE_VOICE_DEMOS[activePrivateForm] }]}
                         agentName="Sara"
                         sectionId="cad-private-voice"
                         floating={false}

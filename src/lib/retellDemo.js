@@ -10,6 +10,7 @@ export const DEMO_AGENTS = {
   "hotel-booking-ar": { label: "Hotel Booking (Arabic)", agentId: "agent_eab66806bc67d0b53de0ba56fb" },
   // Private use-case, shown only after the /callagents private login.
   "al-marmoom": { label: "Al Marmoom (Sara)", agentId: "agent_748e862bc7d2cf3081e7d14a5f" },
+  "diva-dubai": { label: "Diva Dubai (Sara)", agentId: "agent_85ca774f3018ecb366d532ecdb" },
 };
 
 // Letters/spaces/'-. only, so nothing odd gets read out or injected into the prompt.
@@ -48,7 +49,7 @@ export function demoVariables({ name, contact = "", callId }) {
 // The variables each demo's agent reads.
 export function variablesFor(demoKey, { name, contact, email, callId }) {
   if (demoKey === "real-estate") return demoVariables({ name, contact, callId });
-  if (demoKey === "al-marmoom") return { customer_name: name || "there", contact, contactNumber: contact, email };
+  if (demoKey === "al-marmoom" || demoKey === "diva-dubai") return { customer_name: name || "there", contact, contactNumber: contact, email };
   return hotelVariables({ name, contact });
 }
 
