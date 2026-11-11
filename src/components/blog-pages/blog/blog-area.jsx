@@ -19,10 +19,17 @@ const BlogArea = () => {
               <li aria-current="page">Blog</li>
             </ol>
           </nav>
-          <h1>AI Automation Blog for Real Estate and Clinics</h1>
+          <h1>AI Around the World</h1>
           <p>
-            Practical guides on AI agents, chatbots and call assistants: how to answer every lead
-            fast, qualify it and book the meeting, in Dubai and across the USA.
+            What is happening in AI, what it means for your business, and how to use it. We follow
+            the models, tools and moves from around the world — and turn them into practical guides
+            on AI agents, chatbots and call assistants that answer every lead fast, qualify it and
+            book the meeting, in Dubai and across the USA.
+          </p>
+          <p>
+            Every week, AI moves somewhere in the world. We track it, test it on real business
+            problems, and write down what actually matters — no hype, no jargon, just what to do
+            with it.
           </p>
         </div>
       </section>

@@ -1,6 +1,6 @@
 // Real articles and guides on the site, newest first. Add new posts at the top:
 // the /blog page, the landing page section and the blog schema all read from here.
-export const BLOG_CATEGORIES = ["Dubai Real Estate", "AI Call Assistants", "AI Automation"];
+export const BLOG_CATEGORIES = ["AI Around the World", "Dubai Real Estate", "AI Call Assistants", "AI Automation"];
 
 const blog_posts = [
   {
@@ -18,6 +18,14 @@ const blog_posts = [
       "Hiring an AI call assistant for your real estate team, dental practice or med spa? The questions to ask before you sign: what a good provider proves on your own calls, how consent, opt-out and do-not-call screening work, and the red flags that tell you to walk away.",
     category: "AI Call Assistants",
     date: "2026-11-11",
+  },
+  {
+    href: "/ai-around-the-world",
+    title: "AI Around the World: What This Week's AI News Means for a Business That Answers Its Customers",
+    excerpt:
+      "Claude's 1,000-agent experiment built a working operating system in eight days, Meta launched a tiny model for high-volume agent work, Google shipped new AI chips, and NVIDIA taught robots by watching humans — plus the honest number: most AI spending still shows no return. What each move means for your business, and what to do with it.",
+    category: "AI Around the World",
+    date: "2026-11-10",
   },
   {
     href: "/pre-approved-before-you-view-dubai-real-estate",
