@@ -295,4 +295,19 @@
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
+  <!-- Viewing Day Checklist Dubai Real Estate (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/viewing-day-checklist-dubai-real-estate</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- New Patient Prep Dental USA (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/new-patient-prep-dental-usa</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
 </urlset>

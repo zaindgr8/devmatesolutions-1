@@ -269,6 +269,7 @@ const AfterViewingFollowUpDubaiArticle = () => {
                 Related reading:{" "}
                 <Link href="/ai-agent-dubai-real-estate">AI Agent for Dubai Real Estate</Link>,{" "}
                 <Link href="/ai-chatbot-dubai-real-estate">AI Chatbot for Dubai Real Estate</Link>,{" "}
+                <Link href="/viewing-day-checklist-dubai-real-estate">Viewing Day in Dubai: The Checklist a Buyer Should Run Before They Say Yes</Link>,{" "}
                 <Link href="/aileadmanagementdubairealestate">AI Lead Management for Real Estate</Link>, and{" "}
                 <Link href="/whatsappautomation">WhatsApp Automation</Link>.
               </p>
