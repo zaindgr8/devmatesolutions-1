@@ -270,7 +270,8 @@ const MissedCallsDentalArticle = () => {
                 <Link href="/missed-calls-cost-med-spa">What a Missed Call Costs a Med Spa</Link>.
                 <Link href="/ai-call-assistant-aesthetics-usa">AI Call Assistant for Med Spas and Aesthetics Clinics USA</Link>, and for real estate, see{" "}
                 <Link href="/missed-calls-cost-real-estate-usa">What a Missed Call Costs a US Real Estate Team</Link>, and after hours, see{" "}
-                <Link href="/after-hours-dental-calls-usa">After-Hours Dental Calls: What Happens When the Front Desk Goes Home</Link>.              </p>
+                <Link href="/after-hours-dental-calls-usa">After-Hours Dental Calls: What Happens When the Front Desk Goes Home</Link>, and once the appointment is booked, see{" "}
+                <Link href="/new-patient-prep-dental-usa">Your First Dental Visit Is Booked. What Should Happen Before You Sit in the Chair?</Link>.              </p>
             </div>
           </section>
 

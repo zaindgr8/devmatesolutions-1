@@ -314,6 +314,10 @@ const AiCallAssistantDentalUsa = () => {
                 After hours:{" "}
                 <Link href="/after-hours-dental-calls-usa">After-Hours Dental Calls: What Happens When the Front Desk Goes Home</Link>.
               </p>
+              <p style={{ textAlign: "center", marginTop: 12 }}>
+                Once the appointment is booked:{" "}
+                <Link href="/new-patient-prep-dental-usa">Your First Dental Visit Is Booked. What Should Happen Before You Sit in the Chair?</Link>.
+              </p>
             </div>
           </section>
 

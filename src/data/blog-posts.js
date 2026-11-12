@@ -4,6 +4,22 @@ export const BLOG_CATEGORIES = ["AI Around the World", "Dubai Real Estate", "AI 
 
 const blog_posts = [
   {
+    href: "/viewing-day-checklist-dubai-real-estate",
+    title: "Viewing Day in Dubai: The Checklist a Buyer Should Run Before They Say Yes",
+    excerpt:
+      "A Dubai property viewing is the moment a buyer decides — so what should they actually check? The light at the hour they will live there, the noise, the water and the air conditioning, the service charges and the payment terms in writing, and the next step named before they leave.",
+    category: "Dubai Real Estate",
+    date: "2026-11-12",
+  },
+  {
+    href: "/new-patient-prep-dental-usa",
+    title: "Your First Dental Visit Is Booked. What Should Happen Before You Sit in the Chair?",
+    excerpt:
+      "The first dental visit is booked — but booked is not the same as kept. What a dental practice should do between the booking and the visit: confirm in writing, send the forms and insurance details to complete at home, remind the patient, make rescheduling one step, and follow up the same day on a no-show.",
+    category: "AI Call Assistants",
+    date: "2026-11-12",
+  },
+  {
     href: "/choose-ai-automation-agency-dubai",
     title: "How to Choose an AI Automation Agency in Dubai",
     excerpt:
