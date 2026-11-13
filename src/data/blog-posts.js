@@ -4,6 +4,22 @@ export const BLOG_CATEGORIES = ["AI Around the World", "Dubai Real Estate", "AI 
 
 const blog_posts = [
   {
+    href: "/dld-transfer-dubai-real-estate",
+    title: "The DLD Transfer: What Happens on the Day a Dubai Buyer Gets the Keys",
+    excerpt:
+      "The offer is accepted — now the transfer. What happens at the DLD trustee office on transfer day: the NOC, the manager's cheque, the DLD fee, the title deed and the keys — and the three things that delay a transfer by a week.",
+    category: "Dubai Real Estate",
+    date: "2026-11-13",
+  },
+  {
+    href: "/after-consultation-med-spa-usa",
+    title: "After the Consultation: What a Med Spa Should Do Before the Client Decides",
+    excerpt:
+      "The consultation went well — now what? The treatment plan in writing the same day, one well-timed follow-up call, and a first session that takes one step to book — so the client decides with you, not with the next clinic that calls back.",
+    category: "AI Call Assistants",
+    date: "2026-11-13",
+  },
+  {
     href: "/choose-ai-automation-agency-dubai",
     title: "How to Choose an AI Automation Agency in Dubai",
     excerpt:

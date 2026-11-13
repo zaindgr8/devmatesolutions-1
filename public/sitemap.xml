@@ -295,4 +295,19 @@
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
+  <!-- The DLD Transfer (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/dld-transfer-dubai-real-estate</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- After the Consultation: Med Spa USA (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/after-consultation-med-spa-usa</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
 </urlset>
