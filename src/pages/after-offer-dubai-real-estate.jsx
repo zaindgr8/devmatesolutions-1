@@ -260,6 +260,7 @@ const AfterOfferDubaiArticle = () => {
               </div>
               <p style={{ textAlign: "center", marginTop: 28 }}>
                 Related reading:{" "}
+                <Link href="/dld-transfer-dubai-real-estate">The DLD Transfer: What Happens on the Day a Dubai Buyer Gets the Keys</Link>,{" "}
                 <Link href="/ai-agent-dubai-real-estate">AI Agent for Dubai Real Estate</Link>,{" "}
                 <Link href="/ai-chatbot-dubai-real-estate">AI Chatbot for Dubai Real Estate</Link>,{" "}
                 <Link href="/aileadmanagementdubairealestate">AI Lead Management for Real Estate</Link>, and{" "}

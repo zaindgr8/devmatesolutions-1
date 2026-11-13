@@ -260,6 +260,7 @@ const SecondViewingDubaiArticle = () => {
               </div>
               <p style={{ textAlign: "center", marginTop: 28 }}>
                 Related reading:{" "}
+                <Link href="/dld-transfer-dubai-real-estate">The DLD Transfer: What Happens on the Day a Dubai Buyer Gets the Keys</Link>,{" "}
                 <Link href="/after-viewing-follow-up-dubai-real-estate">After the Viewing: How a Dubai Brokerage Follows Up Without Losing the Buyer</Link>,{" "}
                 <Link href="/first-reply-to-viewing-booked-dubai-real-estate">From First Reply to Viewing Booked: What Has to Happen After a Dubai Buyer Enquires</Link>,{" "}
                 <Link href="/ai-agent-dubai-real-estate">AI Agent for Dubai Real Estate</Link>,{" "}

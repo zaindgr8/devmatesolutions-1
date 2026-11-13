@@ -262,8 +262,9 @@ const ConsultationPrepMedSpaUsaArticle = () => {
                 See it in practice:{" "}
                 <Link href="/ai-call-assistant-aesthetics-usa">AI Call Assistant for Med Spas and Aesthetics Clinics USA</Link>,{" "}
                 <Link href="/ai-lead-response-usa">AI Lead Response USA</Link>,{" "}
-                <Link href="/after-hours-med-spa-enquiries-usa">After-Hours Med Spa Enquiries</Link>, and{" "}
-                <Link href="/missed-calls-cost-med-spa">What a Missed Call Costs a Med Spa</Link>.
+                <Link href="/after-hours-med-spa-enquiries-usa">After-Hours Med Spa Enquiries</Link>,{" "}
+                <Link href="/missed-calls-cost-med-spa">What a Missed Call Costs a Med Spa</Link>, and{" "}
+                <Link href="/after-consultation-med-spa-usa">After the Consultation: What a Med Spa Should Do Before the Client Decides</Link>.
               </p>
             </div>
           </section>
