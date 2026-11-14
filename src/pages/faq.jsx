@@ -5,7 +5,7 @@ import FAQ from "../components/faq";
 const index = () => {
   return (
     <>
-      <SEO pageTitle={"Gencio - Faq"} />
+      <SEO pageTitle={"FAQ"} pageUrl={"/faq"} />
       <FAQ />
     </>
   );

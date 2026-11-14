@@ -15,6 +15,7 @@ export default function RefundPolicyPage() {
     <>
       <SEO
         pageTitle="Refund Policy — DevMate Solutions"
+        pageUrl="/refund-policy"
         description={`Refund and cancellation policy for ${TRADING}. Understand how we handle refunds for strategy sessions, SEO retainers, and web development projects.`}
       />
       <HeaderThree />

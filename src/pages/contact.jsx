@@ -5,7 +5,7 @@ import Contact from "../components/contact";
 const index = () => {
   return (
     <>
-      <SEO pageTitle={"DEVMATE - Digital Marketing & Software Solutions"} />
+      <SEO pageTitle={"DEVMATE - Digital Marketing & Software Solutions"} pageUrl={"/contact"} />
       <Contact />
     </>
   );

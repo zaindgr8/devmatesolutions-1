@@ -5,7 +5,7 @@ import PrivacyPolicy from "../components/privacy-policy";
 const index = () => {
   return (
     <>
-      <SEO pageTitle={"Privacy Policy — DevMate Solutions"} />
+      <SEO pageTitle={"Privacy Policy — DevMate Solutions"} pageUrl={"/privacy-policy"} />
       <PrivacyPolicy />
 
       
