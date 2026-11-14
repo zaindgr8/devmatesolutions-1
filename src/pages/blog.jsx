@@ -6,9 +6,9 @@ import blog_posts from "../data/blog-posts";
 import Wrapper from "../layout/wrapper";
 
 const BASE_URL = "https://devmatesolutions.com";
-const TITLE = "AI Around the World — AI News, Tools and Practical Guides | DevMate Solutions";
+const TITLE = "AI Blog: R&D Research, AI Services and AI News";
 const DESCRIPTION =
-  "What is happening in AI around the world, what it means for your business, and how to use it — practical guides on AI agents, chatbots and call assistants for Dubai real estate and US clinics.";
+  "Our blog on AI and our R&D team's research: AI voice and call agents, agentic AI, WhatsApp AI and automation, in Arabic and English, plus the latest AI news, from an AI agency based in Dubai.";
 
 const blogSchema = {
   "@context": "https://schema.org",

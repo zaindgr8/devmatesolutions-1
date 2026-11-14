@@ -4,6 +4,7 @@ import Link from "next/link";
 import useSticky from "./../../../hooks/use-sticky";
 import Sidebar from "@/src/layout/headers/sidebar";
 import FormModal from "@/src/components/FormModal";
+import LatestBlogBanner from "@/src/components/common/LatestBlogBanner";
 
 const HeaderThree = () => {
   const { sticky } = useSticky();
@@ -31,6 +32,7 @@ const HeaderThree = () => {
           triggerCall={true}
         />
       )}
+      <LatestBlogBanner />
       <header>
         <div
           id="header-sticky"

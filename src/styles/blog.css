@@ -95,6 +95,22 @@
   letter-spacing: -1.5px;
   color: #fff;
 }
+.dm-blog-hero .dm-blog-eyebrow { margin: 0 0 12px; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #ff6b6b; }
+.dm-blog-pillars { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.dm-blog-pillars a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.dm-blog-pillars a:hover { color: #fff; background: rgba(189, 33, 32, 0.6); border-color: #bd2120; }
 .dm-blog-hero p { max-width: 680px; margin: 0; font-size: 18px; line-height: 1.65; color: #d1d5db; }
 
 .dm-blog-list { padding: 48px 0 96px; background: #fff; }
@@ -210,4 +226,20 @@
   .dm-post, .dm-post__more svg { transition: none; }
   .dm-post:hover { transform: none; }
   .dm-post:hover .dm-post__more svg { transform: none; }
+}
+
+/* Latest blog announcement bar (above the header on every page) */
+.dm-blog-banner { position: relative; display: flex; align-items: center; justify-content: center; min-height: 40px; padding: 0 48px; color: #fff; background: #0b0b0d; }
+.dm-blog-banner__link { display: inline-flex; align-items: center; gap: 12px; max-width: 100%; padding: 8px 0; font-size: 14px; color: #fff; text-decoration: none; }
+.dm-blog-banner__link:hover { color: #fff; }
+.dm-blog-banner__tag { flex: none; padding: 3px 10px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; background: #bd2120; border-radius: 999px; }
+.dm-blog-banner__title { min-width: 0; overflow: hidden; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.dm-blog-banner__link:hover .dm-blog-banner__title { text-decoration: underline; }
+.dm-blog-banner__arrow { flex: none; font-size: 12px; color: #ff6b6b; transition: transform 0.2s ease; }
+.dm-blog-banner__link:hover .dm-blog-banner__arrow { transform: translateX(4px); }
+.dm-blog-banner__close { position: absolute; right: 8px; top: 50%; display: grid; place-items: center; width: 32px; height: 32px; padding: 0; color: #9ca3af; background: none; border: 0; border-radius: 50%; cursor: pointer; transform: translateY(-50%); }
+.dm-blog-banner__close:hover { color: #fff; background: rgba(255, 255, 255, 0.1); }
+@media (max-width: 767px) {
+  .dm-blog-banner { justify-content: flex-start; padding: 0 44px 0 16px; }
+  .dm-blog-banner__link { gap: 8px; font-size: 13px; }
 }

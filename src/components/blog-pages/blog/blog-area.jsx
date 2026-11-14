@@ -4,6 +4,18 @@ import React, { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import BlogCard from "../blog-card";
 
+// Core service and news pages, linked from the hub so search engines and AI assistants find them.
+const PILLARS = [
+  { href: "/ai-agency-dubai", label: "AI Agency" },
+  { href: "/ai-call-assistant-dubai", label: "AI Voice & Call Agents" },
+  { href: "/agentic-ai-dubai", label: "Agentic AI" },
+  { href: "/whatsappautomation", label: "WhatsApp & Chat AI" },
+  { href: "/ai-automation-dubai", label: "AI Automation" },
+  { href: "/ai-news-dubai", label: "AI News" },
+  { href: "/ai-agent-dubai-real-estate", label: "Real Estate" },
+  { href: "/ai-hospitality-dubai", label: "Hospitality" },
+];
+
 const BlogArea = () => {
   const [category, setCategory] = useState("All");
   const posts = category === "All" ? blog_posts : blog_posts.filter((post) => post.category === category);
@@ -19,18 +31,20 @@ const BlogArea = () => {
               <li aria-current="page">Blog</li>
             </ol>
           </nav>
-          <h1>AI Around the World</h1>
+          <p className="dm-blog-eyebrow">Our AI Blog &amp; R&amp;D Research</p>
+          <h1>AI Research, Services and the News That Matters</h1>
           <p>
-            What is happening in AI, what it means for your business, and how to use it. We follow
-            the models, tools and moves from around the world — and turn them into practical guides
-            on AI agents, chatbots and call assistants that answer every lead fast, qualify it and
-            book the meeting, in Dubai and across the USA.
+            Our blog on AI, written from the research of the DevMate R&amp;D team. We test new AI
+            models, agents and tools on real business problems, then share what works: AI voice and
+            call agents, agentic AI, WhatsApp and chat AI, and AI automation, in Arabic and English.
+            Plus the latest AI news and what it means for real estate, healthcare, hospitality and
+            every business that answers customers.
           </p>
-          <p>
-            Every week, AI moves somewhere in the world. We track it, test it on real business
-            problems, and write down what actually matters — no hype, no jargon, just what to do
-            with it.
-          </p>
+          <nav className="dm-blog-pillars" aria-label="Start here">
+            {PILLARS.map((p) => (
+              <Link key={p.href} href={p.href}>{p.label}</Link>
+            ))}
+          </nav>
         </div>
       </section>
 

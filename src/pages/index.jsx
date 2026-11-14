@@ -14,8 +14,8 @@ const Home = () => {
       {/* <FormModal isOpen={showModal} onClose={() => setShowModal(false)} /> */}
       <Wrapper voiceAgent>
         <SEO
-          pageTitle={"Devmate Solutions — AI-Powered Software Agency in Dubai"}
-          pageDescription={"DevMate Solutions is an AI-powered software agency based in Dubai. We build custom AI agents, WhatsApp automation, lead management systems, and enterprise software for startups and global companies."}
+          pageTitle={"AI Agency in Dubai — AI Call Assistants, Agentic AI & Automation"}
+          pageDescription={"DevMate Solutions is an AI agency in Dubai. We build AI call assistants, agentic AI, WhatsApp AI agents and AI automation in Arabic and English, plus custom software for startups and enterprises."}
           pageUrl={"/"}
         />
         <HomeThree />

@@ -1,8 +1,58 @@
 // Real articles and guides on the site, newest first. Add new posts at the top:
 // the /blog page, the landing page section and the blog schema all read from here.
-export const BLOG_CATEGORIES = ["AI Around the World", "Dubai Real Estate", "AI Call Assistants", "AI Automation"];
+// Filter order on /blog: Dubai AI services in order of demand, then news, industries and global AI news.
+export const BLOG_CATEGORIES = [
+  "AI Services",
+  "AI Call Assistants",
+  "Agentic AI",
+  "AI Automation",
+  "AI News",
+  "Dubai Real Estate",
+  "Hospitality",
+  "AI Around the World",
+];
 
 const blog_posts = [
+  {
+    href: "/ai-agency-dubai",
+    title: "AI Agency in Dubai: The AI Services Businesses Need in 2026",
+    excerpt:
+      "AI call assistants, agentic AI, WhatsApp and website AI agents, and AI automation in Arabic and English: what each service does, which Dubai industries use it, and how to choose an AI partner.",
+    category: "AI Services",
+    date: "2026-11-14",
+  },
+  {
+    href: "/ai-news-dubai",
+    title: "AI News in Dubai and the UAE: Agentic AI Goes Mainstream (November 2026)",
+    excerpt:
+      "The 50% agentic AI target for UAE government, Dubai's agentic AI accelerator, the new Artificial Intelligence and Data Authority, and Dubai banks putting AI into production, with what it means for businesses.",
+    category: "AI News",
+    date: "2026-11-14",
+  },
+  {
+    href: "/agentic-ai-dubai",
+    title: "Agentic AI in Dubai: What AI Agents Do and Where They Pay Off",
+    excerpt:
+      "What AI agents are, how they differ from chatbots, why Dubai is moving government and banking to agentic AI, and which business workflows to hand to an agent first.",
+    category: "Agentic AI",
+    date: "2026-11-14",
+  },
+  {
+    href: "/ai-call-assistant-dubai",
+    title: "AI Call Assistant in Dubai: Answer Every Call in Arabic and English",
+    excerpt:
+      "An AI call assistant that answers every call in seconds, qualifies the caller, books the appointment and logs it to your CRM, for real estate, hotels and clinics in Dubai.",
+    category: "AI Call Assistants",
+    date: "2026-11-14",
+  },
+  {
+    href: "/ai-hospitality-dubai",
+    title: "AI for Hotels and Holiday Homes in Dubai: Every Guest Answered",
+    excerpt:
+      "How Dubai hotels and holiday home operators use AI agents and AI call assistants to take bookings, handle changes and upsell, in Arabic and English, around the clock.",
+    category: "Hospitality",
+    date: "2026-11-14",
+  },
   {
     href: "/choose-ai-automation-agency-dubai",
     title: "How to Choose an AI Automation Agency in Dubai",

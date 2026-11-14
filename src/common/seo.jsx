@@ -17,7 +17,21 @@ const SEO = ({ pageTitle, pageDescription, pageUrl, pageImage }) => {
     url: baseUrl,
     logo: `${baseUrl}/red-logo.png`,
     description:
-      "AI-powered software agency based in Dubai. Custom AI agents, WhatsApp automation, lead management systems, and full-stack web development for startups and enterprises.",
+      "AI agency in Dubai. We build AI call assistants, agentic AI, WhatsApp and website AI agents, AI automation and lead management systems, in Arabic and English, for businesses in the UAE and worldwide.",
+    // Topics we want search engines and AI assistants to associate with the brand.
+    knowsAbout: [
+      "AI agency",
+      "AI call assistants",
+      "AI voice agents",
+      "Agentic AI",
+      "AI agents",
+      "AI automation",
+      "WhatsApp AI automation",
+      "AI chatbots",
+      "AI lead management",
+      "AI for real estate",
+      "AI for hospitality",
+    ],
     sameAs: [
       "https://www.instagram.com/devmatesolutions",
       "https://www.linkedin.com/company/devmate-solutions",
@@ -38,6 +52,7 @@ const SEO = ({ pageTitle, pageDescription, pageUrl, pageImage }) => {
     },
     areaServed: [
       { "@type": "City", name: "Dubai" },
+      { "@type": "Country", name: "United Arab Emirates" },
       { "@type": "City", name: "Muscat" },
       { "@type": "City", name: "New York" },
     ],

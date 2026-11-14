@@ -1,8 +1,12 @@
 import Link from "next/link";
 import React from "react";
-import { FaArrowRight, FaBuilding, FaCogs, FaGlobe, FaPhoneAlt } from "react-icons/fa";
+import { FaArrowRight, FaBuilding, FaCogs, FaConciergeBell, FaGlobe, FaNewspaper, FaPhoneAlt, FaRobot, FaStar } from "react-icons/fa";
 
 const CATEGORY_ICONS = {
+  "AI Services": FaStar,
+  "AI News": FaNewspaper,
+  "Agentic AI": FaRobot,
+  Hospitality: FaConciergeBell,
   "AI Around the World": FaGlobe,
   "Dubai Real Estate": FaBuilding,
   "AI Call Assistants": FaPhoneAlt,
