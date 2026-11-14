@@ -263,7 +263,8 @@ const MissedCallsRealEstateUsaArticle = () => {
                 <Link href="/ai-call-assistant-usa-real-estate">AI Call Assistant for US Real Estate Brokerages</Link>,{" "}
                 <Link href="/ai-lead-response-usa">AI Lead Response USA</Link>, and{" "}
                 <Link href="/missed-calls-cost-dental-practice">What a Missed Call Costs a Dental Practice</Link>, and{" "}
-                <Link href="/missed-calls-cost-med-spa">What a Missed Call Costs a Med Spa</Link>.
+                <Link href="/missed-calls-cost-med-spa">What a Missed Call Costs a Med Spa</Link>, and{" "}
+                <Link href="/after-showing-follow-up-usa-real-estate">After the Showing: What a Real Estate Team Should Do Before the Buyer Moves On</Link>.
               </p>
             </div>
           </section>
