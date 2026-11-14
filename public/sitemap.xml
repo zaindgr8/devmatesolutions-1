@@ -295,4 +295,19 @@
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
+  <!-- Off-Plan Handover in Dubai (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/off-plan-handover-dubai-real-estate</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- After the Showing: USA Real Estate Follow-Up (new) -->
+  <url>
+    <loc>https://devmatesolutions.com/after-showing-follow-up-usa-real-estate</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
 </urlset>

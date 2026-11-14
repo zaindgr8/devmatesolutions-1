@@ -395,7 +395,8 @@ const AgentDubaiRealEstate = () => {
                 <Link href="/aileadmanagementdubairealestate">AI Lead Management for Dubai Real Estate</Link>,{" "}
                 <Link href="/ai-chatbot-dubai-real-estate">AI Chatbot for Dubai Real Estate</Link>,{" "}
                 <Link href="/whatsappautomation">WhatsApp Automation</Link>, and{" "}
-                <Link href="/callagents">AI Call Agents</Link>. Read: <Link href="/how-fast-to-reply-dubai-real-estate-leads">How fast should a brokerage reply to a Bayut / Property Finder lead?</Link>
+                <Link href="/callagents">AI Call Agents</Link>. Read: <Link href="/how-fast-to-reply-dubai-real-estate-leads">How fast should a brokerage reply to a Bayut / Property Finder lead?</Link> and{" "}
+                <Link href="/off-plan-handover-dubai-real-estate">Off-Plan Handover in Dubai: Snagging, the Final Payment and the Title Deed</Link>.
               </p>
             </div>
           </section>

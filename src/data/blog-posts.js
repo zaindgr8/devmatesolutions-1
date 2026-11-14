@@ -4,6 +4,22 @@ export const BLOG_CATEGORIES = ["AI Around the World", "Dubai Real Estate", "AI 
 
 const blog_posts = [
   {
+    href: "/off-plan-handover-dubai-real-estate",
+    title: "Off-Plan Handover in Dubai: Snagging, the Final Payment and the Title Deed",
+    excerpt:
+      "The developer has issued the handover notice — now what? The snagging inspection, the final payment, the DLD fee and Oqood, the title deed and the keys — and the three mistakes that cost a buyer their leverage.",
+    category: "Dubai Real Estate",
+    date: "2026-11-14",
+  },
+  {
+    href: "/after-showing-follow-up-usa-real-estate",
+    title: "After the Showing: What a Real Estate Team Should Do Before the Buyer Moves On",
+    excerpt:
+      "The showing went well — now what? The follow-up call within the hour, the feedback while it is fresh, the second showing or the offer — and the three ways a good showing quietly dies.",
+    category: "AI Call Assistants",
+    date: "2026-11-14",
+  },
+  {
     href: "/choose-ai-automation-agency-dubai",
     title: "How to Choose an AI Automation Agency in Dubai",
     excerpt:
